@@ -1,0 +1,182 @@
+/* My Custom Styles,, These will override the template CSS */
+.customMenuBtn {
+    display: table-cell;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.product-style-15 {
+    background-color: transparent;
+}
+.product-style-15 .product-content {
+    background-color: rgba(0,0,0,0.6);
+}
+.product-style-15 .product-content .title a {
+    color: white;
+}
+.product-style-15 .product-content p {
+    color: white;
+}
+
+#BurgerMenuLoginRegBtns{
+    color: #4726CA;
+}
+#BurgerMenuLoginRegBtns i{
+    display: block;
+}
+
+
+.product-style-7 .product-image .product-item img {
+    max-height: 210px;
+}
+.product-style-14 .product-content .title a {
+    font-size: 18px;
+}
+
+.product-style-17 .product-image {
+    position: relative;
+    width: 100% !important;
+    height: 200px !important;
+    background-size:contain ;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 10px;
+}
+
+.product-style-17 .product-content .main-btn {
+    margin: 15px auto;
+    font-weight: 700;
+    letter-spacing: 0;
+    bottom: 0;
+    right: 15px;
+    position: absolute;
+}
+.product-style-17 .product-content {
+    position: relative;
+    z-index: 5;
+    padding: 20px 20px 25px;
+    height: 200px;
+}
+.product-style-17 .product-content .title a {
+    font-weight: 500;
+    font-size: 1.5vw;
+    line-height: 30px;
+    color: #000;
+    transition: all 0.3s linear;
+    margin-top: 4px;
+}
+#loader-spinner{
+    height: 100%
+}
+
+.err, .suc {
+    display: none;
+}
+.err { color: red;}
+.suc { color: green;}
+
+.inputsLabel{
+    color: #542DED;
+    margin-right: 90%;
+}
+
+.shop-logo-text{
+    text-decoration: none;
+    color: #542DED;
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+.secondary-2-icon, .secondary-2-btn {
+    background-color: #542DED;
+    color: #fff;
+}
+
+
+
+
+
+/*================================ MEDIA QUERIES ======================*/
+@media screen and (min-width: 0px) and (max-width: 992px) {
+    #BurgerMenuLoginRegBtns { display: block; }  /* show it on small screens */
+
+    .product-style-17 .product-content .title a {
+        font-size: 1.7vw;
+    }
+
+
+}
+@media only screen and (min-width: 768px) and (max-width: 991px){
+
+    .product-style-17 .product-content {
+        padding: 20px 15px 25px;
+        height: 200px;
+    }
+}
+@media (max-width: 767px) {
+    .product-style-14 .product-content .title a {
+        font-size: 20px;
+    }
+    .product-style-17 .product-content {
+        padding: 20px 10px 25px;
+        height: 170px;
+    }
+    .product-style-17 .product-content .title a {
+        font-size: 4.5vw;
+    }
+}
+@media screen and (min-width: 992px) {
+    #BurgerMenuLoginRegBtns{ display: none; }   /* hide it elsewhere */
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px){
+    .product-style-17 .product-content .title a {
+        font-size: 1.7vw;
+    }
+    .product-style-7 .product-content .title a {
+        font-size: 1.7vw;
+    }
+
+}
+
+/*======================================================================*/
+/*======================================================================*/
+
+/*=============================BACK TO TOP BUTTON =====================*/
+/*#back-to-top-btn {*/
+/*    display: inline-block;*/
+/*    background-color: #FF9800;*/
+/*    width: 50px;*/
+/*    height: 50px;*/
+/*    text-align: center;*/
+/*    border-radius: 4px;*/
+/*    position: fixed;*/
+/*    bottom: 30px;*/
+/*    right: 30px;*/
+/*    transition: background-color .3s,*/
+/*    opacity .5s, visibility .5s;*/
+/*    opacity: 0;*/
+/*    visibility: hidden;*/
+/*    z-index: 1000;*/
+/*}*/
+/*#back-to-top-btn::after {*/
+/*    content: "\f077";*/
+/*    font-family: FontAwesome;*/
+/*    font-weight: normal;*/
+/*    font-style: normal;*/
+/*    font-size: 2em;*/
+/*    line-height: 50px;*/
+/*    color: #fff;*/
+/*}*/
+/*#back-to-top-btn:hover {*/
+/*    cursor: pointer;*/
+/*    background-color: #333;*/
+/*}*/
+/*#back-to-top-btn:active {*/
+/*    background-color: #555;*/
+/*}*/
+/*#back-to-top-btn.show {*/
+/*    opacity: 1;*/
+/*    visibility: visible;*/
+/*}*/
+/*=====================================================================*/

@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+/* @import "~bootstrap/dist/css/bootstrap.min.css"; */
+@import "./assets/css/bootstrap-5.0.0-beta1.min.css";
+@import "./assets/css/card.css";
+@import "./assets/css/default.css";
+@import "./assets/css/glightbox.min.css";
+@import "./assets/css/materialdesignicons.min.css";
+@import "./assets/css/nice-select.css";
+@import "./assets/css/slick.css";
+@import "./assets/css/style.css";
+@import "./assets/css/tempstyle.css";
+@import "./assets/css/nouislider.min.css";
+@import "./assets/css/tiny-slider.css";
+
