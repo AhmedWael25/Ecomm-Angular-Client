@@ -32,12 +32,9 @@ export class RegisterComponent implements OnInit {
 
   registerCustomer(){
     console.log(this.form.value);
-
-    this.registerCustomerData.name = this.form.value.name;
-    this.registerCustomerData.email = this.form.value.email;
-    this.registerCustomerData.address = this.form.value.address;
-    this.registerCustomerData.phone = this.form.value.phone;
-    this.registerCustomerData.password = this.form.value.password;
+    //TODO patchValue
+    this.registerCustomerData = this.form.value;
+ 
     console.log(this.registerCustomerData);
 
     this._customerService.registerCustomer(this.registerCustomerData).subscribe(
