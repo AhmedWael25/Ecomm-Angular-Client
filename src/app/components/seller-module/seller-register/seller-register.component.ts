@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SellerAuthService } from 'src/app/services/seller-auth.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms'; 
+import { SellerRequest } from './../../../models/seller/SellerRequest';
+
 
 @Component({
   selector: 'app-seller-register',
@@ -9,6 +12,10 @@ import { SellerAuthService } from 'src/app/services/seller-auth.service';
 })
 export class SellerRegisterComponent implements OnInit {
 
+  registerSellerData: SellerRequest = new SellerRequest();
+
+  form: FormGroup;
+
   constructor(private _sellerAuthService: SellerAuthService,
     private _router: Router) { }
 
@@ -16,14 +23,47 @@ export class SellerRegisterComponent implements OnInit {
 
   ngOnInit(): void {
 
-    //TODO ASK ABOUT BEST WAY TO HANDLE THIS
+    this.form = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      address: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]),
+      phone: new FormControl('', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+  
+    })
 
-    // this.isSellerLoggedIn = this._sellerAuthService.loggedIn;
+  }
 
-    // if (this.isSellerLoggedIn) {
-    //   this._router.navigateByUrl("/seller");
-    // }
+  registerSeller(){
+    console.log(this.form.value);
+    this.registerSellerData = this.form.value;
+ 
+    console.log(this.registerSellerData);
 
+    this._sellerAuthService.registerSeller(this.registerSellerData).subscribe(
+      resp => console.log(resp.data)
+    )
+    this._router.navigate([`seller/login`])
+  }
+
+  get name(){
+    return this.form.get('name');
+  }
+
+  get email(){
+    return this.form.get('email');
+  }
+
+  get address(){
+    return this.form.get('address');
+  }
+
+  get phone(){
+    return this.form.get('phone');
+  }
+
+  get password(){
+    return this.form.get('password');
   }
 
 }

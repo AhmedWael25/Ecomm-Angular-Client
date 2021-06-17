@@ -2,6 +2,7 @@ import { CustomerRequest } from './../../../models/customer/CustomerRequest';
 import { CustomerService } from 'src/app/services/customer.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'; 
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class RegisterComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private _customerService:CustomerService) { }
+  constructor(private _customerService:CustomerService,
+    private _router: Router) { }
 
   ngOnInit(): void {
 
@@ -32,7 +34,7 @@ export class RegisterComponent implements OnInit {
 
   registerCustomer(){
     console.log(this.form.value);
-    //TODO patchValue
+
     this.registerCustomerData = this.form.value;
  
     console.log(this.registerCustomerData);
@@ -40,6 +42,8 @@ export class RegisterComponent implements OnInit {
     this._customerService.registerCustomer(this.registerCustomerData).subscribe(
       resp => console.log(resp.data)
     )
+    this._router.navigate([`login`])
+
   }
 
   get name(){
