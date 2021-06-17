@@ -4,7 +4,6 @@
 @import "./assets/css/card.css";
 @import "./assets/css/default.css";
 @import "./assets/css/glightbox.min.css";
-
 @import "./assets/css/nice-select.css";
 @import "./assets/css/slick.css";
 @import "./assets/css/style.css";
@@ -12,7 +11,3 @@
 @import "./assets/css/nouislider.min.css";
 @import "./assets/css/tiny-slider.css";
 
-
-mat-icon{
-    font-family: 'Material Icons' !important;
-    }

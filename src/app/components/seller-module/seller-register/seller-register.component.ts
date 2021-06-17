@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { SellerService } from 'src/app/services/seller.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms'; 
+import { SellerRequest } from './../../../models/seller/SellerRequest';
+import { LoadingService } from 'src/app/loader/loadingService/loading.service';
+
 
 @Component({
   selector: 'app-seller-register',
@@ -9,21 +14,59 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SellerRegisterComponent implements OnInit {
 
-  constructor(private _authService: AuthService,
-    private _router: Router) { }
+  isLoading = this._loader.loading$;
+  registerSellerData: SellerRequest = new SellerRequest();
+
+  form: FormGroup;
+
+  constructor(private _sellerService: SellerService,
+    private _router: Router, private _loader: LoadingService) { }
 
   isSellerLoggedIn: boolean;
 
   ngOnInit(): void {
 
-    //TODO ASK ABOUT BEST WAY TO HANDLE THIS
+    this.form = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      address: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]),
+      phone: new FormControl('', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+  
+    })
 
-    // this.isSellerLoggedIn = this._sellerAuthService.loggedIn;
+  }
 
-    // if (this.isSellerLoggedIn) {
-    //   this._router.navigateByUrl("/seller");
-    // }
+  registerSeller(){
+    console.log(this.form.value);
+    this.registerSellerData = this.form.value;
+ 
+    console.log(this.registerSellerData);
 
+    this._sellerService.registerSeller(this.registerSellerData).subscribe(
+      resp => console.log(resp.data)
+    )
+    this._router.navigate([`seller/login`])
+  }
+
+  get name(){
+    return this.form.get('name');
+  }
+
+  get email(){
+    return this.form.get('email');
+  }
+
+  get address(){
+    return this.form.get('address');
+  }
+
+  get phone(){
+    return this.form.get('phone');
+  }
+
+  get password(){
+    return this.form.get('password');
   }
 
 }

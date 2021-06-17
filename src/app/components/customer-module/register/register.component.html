@@ -6,51 +6,117 @@
                 <div class="col-xl-8 col-lg-10">
 
                     <div class="login-registration-style-1 registration text-center mt-50">
-                        <h1 class="heading-4 font-weight-500 title">Create an Account with</h1>
+                        <!-- <h1 class="heading-4 font-weight-500 title">Create an Account with</h1> -->
+                        <h3 style="color: #542DED;">
+                            <i class="fab fa-playstation"></i>
+                            <i class="fas fa-gamepad"></i>
+                        </h3>
+                        <!-- ================== Spinner =============== -->
+                        <mat-progress-spinner *ngIf="isLoading | async" [mode]="'indeterminate'" ></mat-progress-spinner>
+                        <!-- ================== Spinner =============== -->
+                        <h1 class="heading-4 font-weight-500 title" style="color: #542DED;">Create an Account</h1>
                         <div class="login-registration-form pt-10">
-                            <form action="#">
-                                <div class="single-form form-default form-border text-left">
-                                    <label>Full Name</label>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="form-input">
-                                                <input type="text" placeholder="First Name">
-                                                <i class="mdi mdi-account"></i>
+                            <form [formGroup]="form">
+                                <div class="form-group"> 
+                                    <div class="single-form form-default form-border text-left">
+                                        <b class="inputsLabel">Name</b>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="form-input">
+                                                    <input
+                                                        formControlName="name"
+                                                        class="form-control" type="text" 
+                                                        id="name" name="name" placeholder="Name">
+                                                    <i class="mdi mdi-account" style="color: #542DED;"></i>
+                                                    <div *ngIf="name.touched && name.invalid" class="aletr alert-danger">
+                                                        <div *ngIf="name.errors.required">Name is required!</div>
+                                                        <div *ngIf="name.errors.minlength">Name should be at least {{ name.errors.minlength.requiredLength }} characters !</div>   
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
-                                            <div class="form-input form">
-                                                <input type="text" placeholder="Last Name">
+                                    </div>
+                                </div>
+                               
+                                <div class="form-group">
+                                    <div class="single-form form-default form-border text-left">
+                                        <b class="inputsLabel" >Email</b>
+                                        <div class="form-input">
+                                            <input
+                                                formControlName="email"
+                                                class="form-control" type="text"
+                                                id="email" name="email" placeholder="customer@gmail.com">
+                                            <i class="mdi mdi-email" style="color: #542DED;"></i>
+                                            <div *ngIf="email.touched && email.invalid" class="aletr alert-danger">
+                                                    <div *ngIf="mail.errors.required">Email is required!</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> 
+                                
+                                <div class="form-group">
+                                    <div class="single-form form-default form-border text-left">
+                                        <b class="inputsLabel">Address</b>
+                                        <div class="form-input">
+                                            <input 
+                                                formControlName="address"
+                                                class="form-control" type="text" 
+                                                id="address" name="address" placeholder="Name">
+                                            <i class="mdi mdi-map-marker" style="color: #542DED;"></i>
+                                            <div *ngIf="address.touched && address.invalid" class="aletr alert-danger">
+                                                <div *ngIf="address.errors.required">Address is required!</div>
+                                                <div *ngIf="address.errors.minlength">Address should be at least {{ address.errors.minlength.requiredLength }} characters !</div>   
+                                                <div *ngIf="address.errors.maxLength">Address should be at most {{ address.errors.maxLength.requiredLength }} characters !</div>   
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="single-form form-default form-border text-left">
-                                    <label>Email Address</label>
-                                    <div class="form-input">
-                                        <input type="email" placeholder="user@email.com">
-                                        <i class="mdi mdi-email"></i>
+                                
+                                <div class="form-group">
+                                    <div class="single-form form-default form-border text-left">
+                                        <b class="inputsLabel">Phone</b>
+                                        <div class="form-input">
+                                            <input 
+                                                formControlName="phone"
+                                                class="form-control" type="tel" 
+                                                id="phone" name="phone" placeholder="01xxxxxxxxx">
+                                            <i class="mdi mdi-phone" style="color: #542DED;"></i>
+                                            <div *ngIf="phone.touched && phone.invalid" class="aletr alert-danger">
+                                                <div *ngIf="Phone.errors.required">Phone is required!</div>
+                                                <div *ngIf="phone.errors.minlength">Address should be at least {{ phone.errors.minlength.requiredLength }} numbers !</div>   
+                                                <div *ngIf="phone.errors.maxLength">Address should be at most {{ phone.errors.maxLength.requiredLength }} numbers !</div>  
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="single-form form-default form-border text-left">
-                                    <label>Choose Password</label>
-                                    <div class="form-input">
-                                        <input id="password-3" type="password" placeholder="Password">
-                                        <i class="mdi mdi-lock"></i>
-                                        <span toggle="#password-3" class="mdi mdi-eye-outline toggle-password"></span>
+                                
+                                <div class="form-group">
+                                    <div class="single-form form-default form-border text-left">
+                                        <b class="inputsLabel">Password</b>
+                                        <div class="form-input">
+                                            <input 
+                                                formControlName="password"
+                                                class="form-control" id="password" 
+                                                name="password" type="password" placeholder="Password"
+                                                minlength="8" maxlength="20">
+                                            <i class="mdi mdi-lock" style="color: #542DED;"></i>
+                                            <div *ngIf="password.touched && password.invalid" class="aletr alert-danger">
+                                                <div *ngIf="password.errors.required">Password is required!</div>
+                                                <div *ngIf="password.errors.minlength">Password should be at least {{ password.errors.minlength.requiredLength }} characters !</div>    
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="single-checkbox checkbox-style-3">
-                                    <input type="checkbox" id="login-3">
-                                    <label for="login-3"><span></span> </label>
-                                    <p>I accept the Terrms of Use.</p>
-                                </div>
+                                
                                 <div class="single-form">
-                                    <button class="main-btn primary-btn">Signup</button>
+                                    <button (click)="registerCustomer()" type="button" class="main-btn primary-btn">Register</button>
                                 </div>
                             </form>
                         </div>
-                        <p class="login">Have an account? <a href="#0">Log in</a></p>
+
+                        <div class="d-sm-flex justify-content-between align-items-center">
+                            <p class="login" >Already have an account? <a  [routerLink]="['/login']" >Sign in</a></p>
+                        </div>
                         <p class="account">Or</p>
                         <ul>
                             <li><a href="#0" class="facebook-login-registration"><i class="lni lni-facebook-original"></i> <span>Login with Facebook</span></a></li>

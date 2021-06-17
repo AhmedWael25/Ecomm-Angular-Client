@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
     
     //Call AUth API HERE==========
     this.isLoading = true;
-    this.loginData.username = this.loginForm.value.email;
+    this.loginData.email = this.loginForm.value.email;
     this.loginData.password = this.loginForm.value.password;
     console.log( this.loginForm.value );
     this._authService.attemptLogin(this.loginData);

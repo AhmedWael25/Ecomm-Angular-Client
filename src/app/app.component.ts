@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
+import { LoadingService } from './loader/loadingService/loading.service';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +9,13 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent implements OnInit{
 
-
-  constructor(private _authService:AuthService){}
+  isLoading = this._loader.loading$;
+  constructor(private _authService:AuthService,
+    public _loader: LoadingService){}
 
   ngOnInit(): void {
     this._authService.autoLogin();
   }
   
+
 }
