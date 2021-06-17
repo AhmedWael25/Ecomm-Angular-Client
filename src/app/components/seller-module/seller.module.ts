@@ -12,16 +12,20 @@ import { SellerRegisterComponent } from './seller-register/seller-register.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { LoginComponent } from '../shared/login/login.component';
+import { PreventLoginRegGuard } from 'src/app/guards/prevent-login-register.guard';
 
 const routes: Routes = [
   {
     path:"",
     component:InventoryComponent,
-    canActivate:[SellerAuthGuard],
+    data:{
+      role : "ROLE_SELLER" 
+    },
   },
   {
     path:"login",
-    component:LoginComponent
+    component:LoginComponent,
+    canActivate:[PreventLoginRegGuard],
   },
   {
     path:"register",
@@ -30,17 +34,23 @@ const routes: Routes = [
   {
     path: 'edit-product', 
     component:EditProductComponent,
-    canActivate:[SellerAuthGuard],
+    data:{
+      role : "ROLE_SELLER" 
+    },
   },
   {
     path: 'add-product', 
     component:AddProductComponent,
-    canActivate:[SellerAuthGuard],
+    data:{
+      role : "ROLE_SELLER" 
+    },
   },
   {
     path: 'sold-items', 
-    component:SoldItemsComponent,    
-    canActivate:[SellerAuthGuard],
+    component:SoldItemsComponent,
+    data:{
+      role : "ROLE_SELLER" 
+    },
   }
 ];
 

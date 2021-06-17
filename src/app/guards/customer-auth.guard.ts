@@ -6,15 +6,16 @@ import { AuthService } from '../services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class PreventLoginRegGuard implements CanActivate,CanActivateChild {
+export class CustomerAuthGuard implements CanActivate,CanActivateChild {
 
+    
     constructor(private _authService:AuthService,
         private _router:Router,
         private _activatedRoute:ActivatedRoute){
 
     }
 
-   
+
     canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
 
         return this.canActivate(childRoute, state);
@@ -24,12 +25,25 @@ export class PreventLoginRegGuard implements CanActivate,CanActivateChild {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     
         let isAuthenticated = this._authService.isAuthenticated()
-    
+        let roleConst = route.data.role;
+          
+        console.log( state.url );
+        //Check Authentication
         if( isAuthenticated ){
-            this._router.navigateByUrl("/");
-            return false;
+        // Check Role
+            let userRole = this._authService.user.value.role;
+          
+            if( roleConst === userRole ){
+              return true;
+            }else{
+              this._router.navigateByUrl("/login");
+              return false;
+            }
+            
+        }else{
+          this._router.navigateByUrl("/login");
+          return false;
         }
-        return true;
     
     }
     

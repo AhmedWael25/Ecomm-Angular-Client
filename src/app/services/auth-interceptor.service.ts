@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { take, exhaustMap } from 'rxjs/operators';
 import { ApiResponse } from '../models/api-response';
 import { AuthService } from './auth.service';
+import { UrlHandlingStrategy } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -18,21 +19,15 @@ export class AuthInterceptorService implements HttpInterceptor{
         
         console.log("I INTERCEPTED");
         console.log(req.url);
+
         
-        this._authService.user.pipe( take(1), exhaustMap( user => {
-
-            if(!user){
-                return next.handle(req)
-            }
-
-            console.log(user);
-            const modifiedRequest = req.clone({ headers: new HttpHeaders().set("Authotization", user.token) });
-
-            console.log(user);
+        if(this._authService.user.value != null){
+            const modifiedRequest = req.clone({ headers: new HttpHeaders().set("Authorization", "Bearer "+ this._authService.user.value.token) });
             return next.handle(modifiedRequest);
-        }) )
-
-        return next.handle(req);
+        }else{
+            next.handle(req);
+            return next.handle(req);
+        }
     }
 
 }

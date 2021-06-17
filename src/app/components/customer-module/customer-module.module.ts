@@ -11,6 +11,8 @@ import { OrdersModule } from '../customer-module/orders/orders.module';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from '../shared/login/login.component';
 import { CartComponent } from './cart/cart.component';
+import { PreventLoginRegGuard } from 'src/app/guards/prevent-login-register.guard';
+import { CustomerAuthGuard } from 'src/app/guards/customer-auth.guard';
 
 
 const routes: Routes = [
@@ -21,6 +23,7 @@ const routes: Routes = [
   {
     path:"login",
     component:LoginComponent,
+    canActivate:[PreventLoginRegGuard],
   },
   {
     path:"register",
@@ -34,6 +37,10 @@ const routes: Routes = [
     path:"orders",
     component:OrderHomeComponent,
     loadChildren: () => import('../customer-module/orders/orders.module').then(m => m.OrdersModule),
+    canActivate:[CustomerAuthGuard],
+    data:{
+      role : "ROLE_CUSTOMER",
+    }
   },
   // {
   //   path:"**",

@@ -26,7 +26,7 @@ const routes: Routes = [
     component:SellerHomeComponent,
     // canActivate: [SellerAuthGuard],
     // canActivateChild:[SellerAuthGuard],
-    loadChildren: () => import('./components/seller-module/seller.module').then(m => m.SellerModule),
+    loadChildren: () => import('./components/seller-module/seller.module').then(m => m.SellerModule)
   },
   {
     path:"404",

@@ -23,17 +23,27 @@ export class SellerAuthGuard implements CanActivate,CanActivateChild {
   
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
 
-    return this._authService.isAuthenticated()
-    .then ( (authenticated:boolean) => {
-
-        if(authenticated){
+    
+    let isAuthenticated = this._authService.isAuthenticated()
+    let roleConst = route.data.role;
+      
+    console.log( state.url );
+    //Check Authentication
+    if( isAuthenticated ){
+    // Check Role
+        let userRole = this._authService.user.value.role;
+      
+        if( roleConst === userRole ){
           return true;
         }else{
           this._router.navigateByUrl("/seller/login");
+          return false;
         }
-      }
-    );
-
+        
+    }else{
+      this._router.navigateByUrl("/seller/login");
+      return false;
+    }
 
   }
 //   constructor(private _userService:UserService

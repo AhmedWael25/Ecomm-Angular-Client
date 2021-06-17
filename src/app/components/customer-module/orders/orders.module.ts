@@ -21,7 +21,7 @@ const routes: Routes = [
   declarations: [
     OrderListComponent,
     OrderDetailComponent,
-    OrderHomeComponent
+    OrderHomeComponent,
   ],
   imports: [
     CommonModule,
