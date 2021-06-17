@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { SellerAuthService } from 'src/app/services/seller-auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms'; 
 import { SellerRequest } from './../../../models/seller/SellerRequest';
+import { LoadingService } from 'src/app/loader/loadingService/loading.service';
 
 
 @Component({
@@ -12,12 +13,13 @@ import { SellerRequest } from './../../../models/seller/SellerRequest';
 })
 export class SellerRegisterComponent implements OnInit {
 
+  isLoading = this._loader.loading$;
   registerSellerData: SellerRequest = new SellerRequest();
 
   form: FormGroup;
 
   constructor(private _sellerAuthService: SellerAuthService,
-    private _router: Router) { }
+    private _router: Router, private _loader: LoadingService) { }
 
   isSellerLoggedIn: boolean;
 

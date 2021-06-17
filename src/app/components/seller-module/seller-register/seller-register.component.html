@@ -10,6 +10,10 @@
                             <i class="fab fa-playstation"></i>
                             <i class="fas fa-gamepad"></i>
                         </h3>
+                        <!-- ================== Spinner =============== -->
+                        <mat-progress-spinner *ngIf="isLoading | async" [mode]="'indeterminate'"></mat-progress-spinner>
+                        <!-- ================== Spinner =============== -->
+
                         <h1 class="heading-4 font-weight-500 title" style="color: #542DED;">Create an Account</h1>
                         <div class="login-registration-form pt-10">
                             <form [formGroup]="form">

@@ -7,6 +7,10 @@ import { OrdersModule } from './components/customer-module/orders/orders.module'
 import { SharedModule } from './components/shared/shared.module';
 import { CategoryService } from './services/category.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NetworkInterceptor } from './loader/interceptor/network.interceptor';
+
 
 @NgModule({
   declarations: [
@@ -17,8 +21,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     SharedModule,
     ReactiveFormsModule,
+    MatProgressSpinnerModule,
   ],
-  providers: [CustomerService],
+  providers: [CustomerService, { provide: HTTP_INTERCEPTORS, useClass: NetworkInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

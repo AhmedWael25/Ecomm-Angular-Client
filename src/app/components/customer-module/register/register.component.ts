@@ -1,3 +1,4 @@
+import { LoadingService } from 'src/app/loader/loadingService/loading.service';
 import { CustomerRequest } from './../../../models/customer/CustomerRequest';
 import { CustomerService } from 'src/app/services/customer.service';
 import { Component, OnInit } from '@angular/core';
@@ -11,13 +12,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
+  
+  isLoading = this._loader.loading$;
   registerCustomerData: CustomerRequest = new CustomerRequest();
 
   form: FormGroup;
 
   constructor(private _customerService:CustomerService,
-    private _router: Router) { }
+    private _router: Router, private _loader: LoadingService) { }
 
   ngOnInit(): void {
 
