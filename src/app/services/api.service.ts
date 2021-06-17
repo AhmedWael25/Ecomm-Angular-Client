@@ -17,7 +17,6 @@ export class ApiService {
     return this._httpClient.get<ApiResponse>(url, {headers:headers, params:params});
    }
   
- 
    delete(url:string ,headers?:HttpHeaders, params?:HttpParams):Observable<ApiResponse>{
      return this._httpClient.delete<ApiResponse>(url, {headers:headers, params:params});
     }

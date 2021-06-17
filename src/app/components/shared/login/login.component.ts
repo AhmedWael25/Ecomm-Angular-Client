@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
 
   loginForm:FormGroup;
-  loginData:LoginRequest;
+  loginData:LoginRequest = new LoginRequest();
   isLoading:boolean = false;
   isError:boolean = false;
   errMessage:string = null;
@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
 
   }
 
+
   onSubmit(){
   
     if( !this.loginForm.valid ){
@@ -39,12 +40,18 @@ export class LoginComponent implements OnInit {
     
     //Call AUth API HERE==========
     this.isLoading = true;
+    this.loginData.username = this.loginForm.value.email;
+    this.loginData.password = this.loginForm.value.password;
     console.log( this.loginForm.value );
+    this._authService.attemptLogin(this.loginData);
+
+
     //===========================
 
     this.loginForm.reset();
     this.isLoading = false;
   }
+
 
   getEmail(){
     return this.loginForm.get("email");

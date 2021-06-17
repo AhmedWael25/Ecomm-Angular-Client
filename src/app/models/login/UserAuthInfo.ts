@@ -1,9 +1,17 @@
 export class UserAuthInfo{
 
+    public id:number;
+    private email:string;
+    private role:string;
+    private _jwt:string;
+    private _jwtExpireDate:Date;
+
     constructor(
-        public id:number,
-        private _jwt:string,
-        private _jwtExpireDate:Date
+         id:number,
+         email:string,
+         role:string,
+         _jwt:string,
+         _jwtExpireDate:Date
     ){}
 
     get token(){

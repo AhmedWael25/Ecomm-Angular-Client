@@ -3,9 +3,11 @@
 <section class="login-registration-wrapper pt-50 pb-100">
         <div class="container">
             <div class="row justify-content-center">
+
                 <div class="col-xl-8 col-lg-10 justify-content-center">
+
                     <div class="alert alert-danger" *ngIf="isError">
-                        <p>{{ errMessage }}</p>
+                        <p>Invalid Login Credentials</p>
                     </div>
 
                     <div class="row justify-content-center" *ngIf="isLoading">
@@ -47,10 +49,11 @@
                                         *ngIf="!getPassword().valid && getPassword().touched"
                                         id="emailHelp" class="form-text errMessage">We'll never share your email with anyone else.</small>
                                     </div>
+
                                     <a class="forget" href="#0">Forget Password?</a>
                                     <div class="single-form">
                                         <button
-                                        [disabled]="getEmail().valid && getPassword().valid"
+                                        [disabled]="!getEmail().valid && !getPassword().valid"
                                         class="main-btn primary-btn">
                                         Log in</button>
                                     </div>
