@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, CanActivateChild, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { SellerAuthService } from '../services/seller-auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import { SellerAuthService } from '../services/seller-auth.service';
 export class SellerAuthGuard implements CanActivate,CanActivateChild {
 
 
-  constructor(private _authService:SellerAuthService,
+  constructor(private _authService:AuthService,
               private _router:Router,
               private _activatedRoute:ActivatedRoute){
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../models/api-response';
 
@@ -13,20 +13,20 @@ export class ApiService {
   // createHeader(){
   //   let headers=new HttpHeaders().set('token',this._userService.getToken());
   // }
-   get(url:string):Observable<ApiResponse>{
-    return this._httpClient.get<ApiResponse>(url);
+   get(url:string, headers?:HttpHeaders, params?:HttpParams):Observable<ApiResponse>{
+    return this._httpClient.get<ApiResponse>(url, {headers:headers, params:params});
    }
   
  
-   delete(url:string):Observable<ApiResponse>{
-     return this._httpClient.delete<ApiResponse>(url);
+   delete(url:string ,headers?:HttpHeaders, params?:HttpParams):Observable<ApiResponse>{
+     return this._httpClient.delete<ApiResponse>(url, {headers:headers, params:params});
     }
     
-   post(url:string,obj:any):Observable<ApiResponse>{
-     return this._httpClient.post<ApiResponse>(url,obj);
+   post(url:string,obj:any, headers?:HttpHeaders, params?:HttpParams):Observable<ApiResponse>{
+     return this._httpClient.post<ApiResponse>(url,obj, {headers:headers, params:params});
     }
     
-   put(url:string,obj:any):Observable<ApiResponse>{
-     return this._httpClient.put<ApiResponse>(url,obj);
+   put(url:string,obj:any, headers?:HttpHeaders, params?:HttpParams):Observable<ApiResponse>{
+     return this._httpClient.put<ApiResponse>(url,obj, {headers:headers, params:params});
     }
 }

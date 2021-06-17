@@ -8,12 +8,14 @@ import { MaxLengthPipe } from 'src/app/pipes/max-length.pipe';
 import { AllowCharOnlyDirective } from 'src/app/directives/allow-char-only.directive';
 import { FooterComponent } from './footer/footer.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { LoginComponent } from './login/login.component';
+import { LoaderSpinnerComponent } from './loader-spinner/loader-spinner.component';
 
 
 @NgModule({
   declarations: [
      MenuComponent
-    ,MaxLengthPipe,AllowCharOnlyDirective, FooterComponent, PageNotFoundComponent
+    ,MaxLengthPipe,AllowCharOnlyDirective, FooterComponent, PageNotFoundComponent, LoginComponent, LoaderSpinnerComponent
   ],
   imports: [
   CommonModule,FormsModule,
@@ -21,6 +23,6 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   ],
   exports:[MenuComponent,MaxLengthPipe,FormsModule,
     ReactiveFormsModule,HttpClientModule,AllowCharOnlyDirective,
-  FooterComponent]
+  FooterComponent, LoaderSpinnerComponent]
 })
 export class SharedModule { }

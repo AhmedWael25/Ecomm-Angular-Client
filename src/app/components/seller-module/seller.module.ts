@@ -7,9 +7,11 @@ import { EditProductComponent } from './edit-product/edit-product.component';
 import { OrderListComponent } from '../customer-module/orders/order-list/order-list.component';
 import { SoldItemsComponent } from './sold-items/sold-items.component';
 import { InventoryComponent } from './inventory/inventory.component';
-import { SellerLoginComponent } from './seller-login/seller-login.component';
 import { SellerAuthGuard } from 'src/app/guards/seller-auth.guard';
 import { SellerRegisterComponent } from './seller-register/seller-register.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
+import { LoginComponent } from '../shared/login/login.component';
 
 const routes: Routes = [
   {
@@ -19,7 +21,7 @@ const routes: Routes = [
   },
   {
     path:"login",
-    component:SellerLoginComponent,
+    component:LoginComponent
   },
   {
     path:"register",
@@ -50,12 +52,14 @@ const routes: Routes = [
     EditProductComponent,
     SoldItemsComponent,
     InventoryComponent,
-    SellerLoginComponent,
     SellerRegisterComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    ReactiveFormsModule,
+    FormsModule,
+    SharedModule,
   ]
 })
 export class SellerModule { }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SellerAuthService } from 'src/app/services/seller-auth.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-seller-register',
@@ -9,7 +9,7 @@ import { SellerAuthService } from 'src/app/services/seller-auth.service';
 })
 export class SellerRegisterComponent implements OnInit {
 
-  constructor(private _sellerAuthService: SellerAuthService,
+  constructor(private _authService: AuthService,
     private _router: Router) { }
 
   isSellerLoggedIn: boolean;

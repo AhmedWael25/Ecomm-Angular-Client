@@ -8,8 +8,9 @@ import { Router, RouterModule, Routes } from '@angular/router';
 import { OrderListComponent } from './orders/order-list/order-list.component';
 import { OrderHomeComponent } from './orders/order-home/order-home.component';
 import { OrdersModule } from '../customer-module/orders/orders.module';
-import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from '../shared/login/login.component';
+import { CartComponent } from './cart/cart.component';
 
 
 const routes: Routes = [
@@ -45,8 +46,8 @@ const routes: Routes = [
     ShopComponent,
     CustomerHomeComponent,
     LandingPageComponent,
-    LoginComponent,
     RegisterComponent,
+    CartComponent,
   ],
   imports: [
     CommonModule,
