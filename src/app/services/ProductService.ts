@@ -1,0 +1,42 @@
+import { Injectable } from "@angular/core";
+import { ApiService } from "./api.service";
+import { URLS } from "../url.constants";
+import { Observable } from "rxjs";
+import { ApiResponse } from "../models/api-response";
+import { HttpClient } from "@angular/common/http";
+
+@Injectable({
+    providedIn: 'root'
+})
+export class ProductService {
+
+    private baseUrl = URLS.apiUrl + "/products";
+
+    constructor(private _apiService: ApiService,
+        private _httpClient: HttpClient) {
+    }
+
+    //Get All Products
+    getAllProducts(): Observable<ApiResponse> {
+        return this._apiService.get(this.baseUrl);
+    }
+
+    //GetSpecific product
+    getProductById(id: number): Observable<ApiResponse> {
+        return this._apiService.get(this.baseUrl + "/" + id);
+    }
+
+    //Get All Products
+    getProducts(page: number): Observable<any> {
+        // return this._httpClient.post<ApiResponse>(this.baseUrl, file, );
+        // this._httpClient.get<any>(this.baseUrl , {observe: 'response',params:{"page":page + ""}}).subscribe(
+        //     response => {
+        //         console.log(response);
+        //         // console.log(response.data);
+        //         console.log(response.headers);
+        //     }
+        // );
+        // return null;
+        return this._apiService.get(this.baseUrl + "?page=" + page);
+    }
+}

@@ -1,0 +1,181 @@
+<section class="category-wrapper pt-50">
+    <div class="container">
+        <div class="row">
+
+
+            <div class="col-lg-4">
+
+
+                <div class="filter-style-1">
+                    <div class="filter-title">
+                        <h4 class="title">Filter</h4>
+                    </div>
+                    <div class="filter-btn">
+                        <a class="main-btn primary-btn" [routerLink]="['/shop']">Reset</a>
+                    </div>
+                </div>
+
+                <div class="filter-style-2">
+                    <div class="filter-title">
+                        <a class="title" data-bs-toggle="collapse" href="#pricingOne" role="button"
+                            aria-expanded="false">Pricing Range</a>
+                    </div>
+                    <div class="collapse show" id="pricingOne">
+                        <div class="price-range">
+                            <div class="price-amount">
+                                <div class="amount-input">
+                                    <label>Minimum Price</label>
+                                    <input type="text" id="minAmount">
+                                </div>
+                                <div class="amount-input">
+                                    <label>Maximum Price</label>
+                                    <input type="text" id="maxAmount">
+                                </div>
+                            </div>
+                            <div id="slider-range" class="slider-range"></div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="filter-style-8">
+                    <div class="filter-title">
+                        <a class="title" data-bs-toggle="collapse" href="#category" role="button"
+                            aria-expanded="false">Categories</a>
+                    </div>
+                    <div class="collapse show" id="category">
+                        <div class="filter-category">
+                            <ul class="category-list">
+                                <li><a href="#" data-bs-toggle="collapse" data-bs-target="#collapseOne">Oculus</a>
+                                    <ul id="collapseOne" class="sub-category collapse" data-parent="#category">
+                                        <li>
+                                            <input type="checkbox" id="platform-1">
+                                            <label for="platform-1">
+                                                <p style="margin-left: 10px;"> Oculus </p>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="platform-1">
+                                            <label for="platform-1">
+                                                <p style="margin-left: 10px;"> Oculus </p>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a class="collapsed" href="#" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseTwo">PlayStation 4</a>
+                                    <ul id="collapseTwo" class="sub-category collapse" data-parent="#category">
+                                        <li>
+                                            <input type="checkbox" id="platform-1">
+                                            <label for="platform-1">
+                                                <p style="margin-left: 10px;"> Oculus </p>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="platform-1">
+                                            <label for="platform-1">
+                                                <p style="margin-left: 10px;"> Oculus </p>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a class="collapsed" href="#" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseThree">SteamVR</a>
+                                    <ul id="collapseThree" class="sub-category collapse" data-parent="#category">
+                                        <li>
+                                            <input type="checkbox" id="platform-1">
+                                            <label for="platform-1">
+                                                <p style="margin-left: 10px;"> Oculus </p>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="platform-1">
+                                            <label for="platform-1">
+                                                <p style="margin-left: 10px;"> Oculus </p>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a class="collapsed" href="#" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseFour">Google Daydream</a>
+                                    <ul id="collapseFour" class="sub-category collapse" data-parent="#category">
+                                        <li>
+                                            <input type="checkbox" id="platform-1">
+                                            <label for="platform-1">
+                                                <p style="margin-left: 10px;"> Oculus </p>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="platform-1">
+                                            <label for="platform-1">
+                                                <p style="margin-left: 10px;"> Oculus </p>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a class="collapsed" href="#" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseFive">Nintendo Labo</a>
+                                    <ul id="collapseFive" class="sub-category collapse" data-parent="#category">
+                                        <li>
+                                            <input type="checkbox" id="platform-1">
+                                            <label for="platform-1">
+                                                <p style="margin-left: 10px;"> Oculus </p>
+                                            </label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="platform-1">
+                                            <label for="platform-1">
+                                                <p style="margin-left: 10px;"> Oculus </p>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <div class="col-lg-8">
+
+                <!--====== Product Style 6 Part Start ======-->
+                <section class="product-wrapper pt-70">
+                    <div class="container">
+                        <div class="row ">
+                            <div class="col-lg-4 col-sm-6"
+                                *ngFor="let product of products | paginate: {itemsPerPage: count, currentPage: p}">
+                                <div class="product-style-6 mt-30">
+                                    <div class="product-image">
+                                        <div class="product-item active">
+                                            <img src={{product.productImg}} alt="product">
+                                        </div>
+                                        <a class="add-wishlist" href="#0">
+                                            <i class="mdi mdi-heart"></i>
+                                        </a>
+                                    </div>
+                                    <div class="product-content">
+                                        <h4 class="title"><a
+                                                [routerLink]="['/shop', product.id]">{{product.productName}}</a></h4>
+                                        <p>Reference 1102</p>
+                                        <a href="#0" class="main-btn secondary-1-btn"> <img
+                                                src="assets/images/icon-svg/cart-4.svg" alt=""> Add to Cart</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Including the pagination control.-->
+                    <div class="text-right">
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>

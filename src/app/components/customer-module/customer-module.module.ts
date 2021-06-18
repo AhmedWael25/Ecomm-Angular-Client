@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ShopComponent } from './shop/shop.component';
 import { CustomerHomeComponent } from './customer-home/customer-home.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SharedModule } from '../shared/shared.module';
@@ -10,12 +9,13 @@ import { OrderHomeComponent } from './orders/order-home/order-home.component';
 import { OrdersModule } from '../customer-module/orders/orders.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { ProductHomeComponent } from './shop/product-home/product-home.component';
 
 
 const routes: Routes = [
   {
     path:"",
-    component:LandingPageComponent
+    component:LandingPageComponent,
   },
   {
     path:"login",
@@ -27,7 +27,8 @@ const routes: Routes = [
   },
   {
     path:"shop",
-    component:ShopComponent,
+    component:ProductHomeComponent,
+    loadChildren: () => import('../customer-module/shop/shop.module').then(m => m.ShopModule),
   },
   {
     path:"orders",
@@ -42,7 +43,6 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    ShopComponent,
     CustomerHomeComponent,
     LandingPageComponent,
     LoginComponent,
