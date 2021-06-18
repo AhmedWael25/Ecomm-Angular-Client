@@ -16,16 +16,16 @@ export class ApiService {
    get(url:string):Observable<ApiResponse>{
     return this._httpClient.get<ApiResponse>(url);
    }
-  
- 
+
+
    delete(url:string):Observable<ApiResponse>{
      return this._httpClient.delete<ApiResponse>(url);
     }
-    
+
    post(url:string,obj:any):Observable<ApiResponse>{
      return this._httpClient.post<ApiResponse>(url,obj);
     }
-    
+
    put(url:string,obj:any):Observable<ApiResponse>{
      return this._httpClient.put<ApiResponse>(url,obj);
     }

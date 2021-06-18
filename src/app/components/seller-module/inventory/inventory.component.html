@@ -1,1 +1,44 @@
 <p>inventory works!</p>
+<!-- mat-table [dataSource] ="products" -->
+<div class="card  align-items-center justify-content-center"  >
+
+  <div class="card-header" >
+    Inventory
+  </div>
+  <div class="card-body col-lg 3 col-md-3  col-sm-12 col-xs-12 " >
+    <table  class="table table-striped table-hover">
+      <thead>
+        <th>Image</th>
+        <th>ID</th>
+        <th>Name</th>
+        <!-- <th>Description</th> -->
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Sale</th>
+        <!-- <th>Subcategory ID</th> -->
+        <th>Subcategory</th>
+        <th>Controll</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products ">
+          <td><img [src]=" product.img " width="40px" height="40px" /> </td>
+          <td>{{ product.id }}</td>
+          <td>{{ product.name }} </td>
+          <!-- <td>{{ product.description }} </td> -->
+          <td>{{ product.price }} </td>
+          <td>{{ product.quantity }} </td>
+          <td>{{ product.onSale }} </td>
+          <!-- <td>{{ product.subcategoryId }} </td> -->
+          <td>{{ product.subcategoryName }} </td>
+          <td><span></span><button [click]="onEditClicked(product.id)" ><span [innerHtml]="editIcon"></span></button>
+            <button [click]="onDeleteClicked(product.id)" ><span [innerHtml]="deleteIcon"></span></button><span></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-header" >
+    <page-controller [page]="1" [size]="1" (change)="refresh()"></page-controller>>
+  </div>
+</div>
+

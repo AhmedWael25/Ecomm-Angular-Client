@@ -20,19 +20,20 @@ export class SellerAuthGuard implements CanActivate,CanActivateChild {
    return this.canActivate(childRoute, state);
 
   }
-  
+
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
 
-    return this._authService.isAuthenticated()
-    .then ( (authenticated:boolean) => {
+    // return this._authService.isAuthenticated()
+    // .then ( (authenticated:boolean) => {
 
-        if(authenticated){
-          return true;
-        }else{
-          this._router.navigateByUrl("/seller/login");
-        }
-      }
-    );
+    //     if(authenticated){
+    //       return true;
+    //     }else{
+    //       this._router.navigateByUrl("/seller/login");
+    //     }
+    //   }
+    // );
+    return true;
 
 
   }
@@ -49,6 +50,6 @@ export class SellerAuthGuard implements CanActivate,CanActivateChild {
 //   return logged;
 
 //   }
-  
-  
+
+
 }

@@ -22,7 +22,7 @@ export class OrderDetailComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
 
-    
+
 
 
     this.paramSubscription = this._activatedRoute.params.subscribe(  params => {

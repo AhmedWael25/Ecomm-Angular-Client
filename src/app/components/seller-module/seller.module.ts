@@ -1,3 +1,4 @@
+import { PageControllerComponent } from './../shared/page-controller/page-controller.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SellerHomeComponent } from './seller-home/seller-home.component';
@@ -10,6 +11,8 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { SellerLoginComponent } from './seller-login/seller-login.component';
 import { SellerAuthGuard } from 'src/app/guards/seller-auth.guard';
 import { SellerRegisterComponent } from './seller-register/seller-register.component';
+// import {MatTableModule} from '@angular/material/table';
+import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
   {
@@ -26,18 +29,23 @@ const routes: Routes = [
     component:SellerRegisterComponent,
   },
   {
-    path: 'edit-product', 
+    path: 'edit-product',
     component:EditProductComponent,
     canActivate:[SellerAuthGuard],
   },
   {
-    path: 'add-product', 
+    path: 'add-product',
     component:AddProductComponent,
     canActivate:[SellerAuthGuard],
   },
   {
-    path: 'sold-items', 
-    component:SoldItemsComponent,    
+    path: 'sold-items',
+    component:SoldItemsComponent,
+    canActivate:[SellerAuthGuard],
+  },
+  {
+    path:':sellerId',
+    component: InventoryComponent,
     canActivate:[SellerAuthGuard],
   }
 ];
@@ -51,10 +59,12 @@ const routes: Routes = [
     SoldItemsComponent,
     InventoryComponent,
     SellerLoginComponent,
-    SellerRegisterComponent
+    SellerRegisterComponent,
+    PageControllerComponent,
   ],
   imports: [
     CommonModule,
+    SharedModule,
     RouterModule.forChild(routes),
   ]
 })

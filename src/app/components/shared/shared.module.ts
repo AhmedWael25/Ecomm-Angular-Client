@@ -10,17 +10,20 @@ import { FooterComponent } from './footer/footer.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
+
+
+
 @NgModule({
   declarations: [
      MenuComponent
-    ,MaxLengthPipe,AllowCharOnlyDirective, FooterComponent, PageNotFoundComponent
+    ,MaxLengthPipe,AllowCharOnlyDirective, FooterComponent, PageNotFoundComponent,
   ],
   imports: [
   CommonModule,FormsModule,
-    ReactiveFormsModule,RouterModule,HttpClientModule
+    ReactiveFormsModule,RouterModule,HttpClientModule,
   ],
   exports:[MenuComponent,MaxLengthPipe,FormsModule,
     ReactiveFormsModule,HttpClientModule,AllowCharOnlyDirective,
-  FooterComponent]
+  FooterComponent,]
 })
 export class SharedModule { }
