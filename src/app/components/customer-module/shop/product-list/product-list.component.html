@@ -148,8 +148,12 @@
                 <section class="product-wrapper pt-70">
                     <div class="container">
                         <div class="row ">
-                            <div class="col-lg-4 col-sm-6"
-                                *ngFor="let product of products | paginate: {itemsPerPage: count, currentPage: p}">
+                            <div class="col-lg-4 col-sm-6" *ngFor="let product of products 
+                                | paginate 
+                                : {itemsPerPage: size,
+                                currentPage: page,
+                                totalItems: totalElements}">
+
                                 <div class="product-style-6 mt-30">
                                     <div class="product-image">
                                         <div class="product-item active">
@@ -162,7 +166,7 @@
                                     <div class="product-content">
                                         <h4 class="title"><a
                                                 [routerLink]="['/shop', product.id]">{{product.productName}}</a></h4>
-                                        <p>Reference 1102</p>
+                                        <p>{{product.sellerName}}</p>
                                         <a href="#0" class="main-btn secondary-1-btn"> <img
                                                 src="assets/images/icon-svg/cart-4.svg" alt=""> Add to Cart</a>
                                     </div>
@@ -172,7 +176,7 @@
                     </div>
                     <!--Including the pagination control.-->
                     <div class="text-right">
-                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                        <pagination-controls class="pagi" (pageChange)="getProducts((page = $event))"></pagination-controls>
                     </div>
                 </section>
             </div>

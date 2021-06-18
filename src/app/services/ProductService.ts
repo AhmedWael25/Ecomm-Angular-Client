@@ -27,16 +27,14 @@ export class ProductService {
     }
 
     //Get All Products
-    getProducts(page: number): Observable<any> {
-        // return this._httpClient.post<ApiResponse>(this.baseUrl, file, );
-        // this._httpClient.get<any>(this.baseUrl , {observe: 'response',params:{"page":page + ""}}).subscribe(
-        //     response => {
-        //         console.log(response);
-        //         // console.log(response.data);
-        //         console.log(response.headers);
-        //     }
-        // );
-        // return null;
-        return this._apiService.get(this.baseUrl + "?page=" + page);
+    getProducts(page?: number,
+        pageSize?: number,
+        priceMin?: number,
+        priceMax?: number,
+        subCategoriesIds?: Array<any>,
+        name?: string): Observable<any> {
+        
+        return this._apiService.get(
+            this.baseUrl + "?page=" + page + "&pageSize=" + pageSize);
     }
 }

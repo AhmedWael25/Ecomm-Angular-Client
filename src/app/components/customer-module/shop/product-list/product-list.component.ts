@@ -14,27 +14,26 @@ export class ProductListComponent implements OnInit {
   products: Array<Product>;
 
   // Pagination parameters.
-  p: number = 0;
-  count: number = 10;
-  private pages: string;
+  page: number;
+  size: number = 9;
+  totalPages: number;
+  totalElements: number;
 
   ngOnInit(): void {
 
-    this.getProducts();
-    // this._productService.getAllProducts().subscribe(resp => {
-    //   console.log(resp.data);
-    //   this.products = resp.data;
-    // });
+    this.getProducts(1);
+
   }
 
-  getProducts() {
-    this._productService.getProducts(this.p).subscribe(
+  getProducts(page: number) {
+    this.page = page;
+
+    this._productService.getProducts(this.page - 1, this.size).subscribe(
       data => {
         this.products = data.data;
 
-        this.pages = data.headers.get('totalPages');
-        
-        console.log(this.pages);
+        this.totalPages = data.totalPages;
+        this.totalElements = data.totalElements;
       }
     );
   }
