@@ -1,1 +1,103 @@
-<p>cart works!</p>
+    <section class="checkout-wrapper pt-50">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+                    <div class="checkout-style-1 ">
+                        <div class="checkout-table table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="product">Product</th>
+                                        <th class="quantity">Quantity</th>
+                                        <th class="price">Price</th>
+                                        <th class="action">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr *ngFor="let cartItem of cartItems; let i = index">
+                                        <td>
+                                            <div class="product-cart d-flex">
+                                                <div class="product-thumb">
+                                                    <img class="cart-prod-img" src="{{cartItem.img}}" alt="Product">
+                                                </div>
+                                                <div class="product-content media-body">
+                                                    <h5 class="title"><a href="javascript:void(0)">{{cartItem.name}}</a></h5>
+                                                    <span>UG 0123</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="product-quantity d-inline-flex">
+                                                <button id="inc-{{i}}" (click)="decrementItem(i, $event)" type="button" id="sub" class="sub"><i class="fa fa-minus"></i></button>
+                                                <input id="input-{{i}}"  type="number" [(ngModel)]="cartItem.quantity" min="1" max="15">
+                                                <button id="dec-{{i}}" (click)="incrementItem(i,$event)" type="button" id="add" class="add"><i class="fa fa-plus"></i></button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <p class="price">{{cartItem.price | currency:'USD' }}</p>
+                                        </td>
+                                        <td>
+                                            <ul class="action">
+                                                <!-- <li><a class="favorite" href="javascript:void(0)"><i style="color: red;" class="fa fa-heart"></i></a>
+                                                <li><a class="favorite" href="javascript:void(0)"><i style="color: red;" class="fa fa-heart-o"></i></a>
+                                                </li> -->
+                                                <li id="del-{{i}}" (click)="deleteItem(i, $event)">
+                                                    <a class="delete" href="javascript:void(0)">
+                                                        <i  class="fa fa-trash"></i></a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                        <div class="checkout-coupon-total checkout-coupon-total-2 d-flex flex-wrap">
+                            <div class="checkout-coupon">
+                                <span>Apply Coupon to get discount!</span>
+                                <form action="#">
+                                    <div class="single-form form-default d-flex">
+                                        <div class="form-input form">
+                                            <input type="text" placeholder="Coupon Code">
+                                        </div>
+                                        <button class="main-btn primary-btn">Apply</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="checkout-total">
+                                <div class="single-total">
+                                    <p class="value">Subtotal Price:</p>
+                                    <p class="price" [innerText]='cartTotal | currency:"USD"' ></p>
+                                </div>
+                                <div class="single-total">
+                                    <p class="value">Shipping Cost (+):</p>
+                                    <p class="price">$25.50</p>
+                                </div>
+                                <div class="single-total">
+                                    <p class="value">Discount (-):</p>
+                                    <p class="price">$00.00</p>
+                                </div>
+                                <div class="single-total total-payable">
+                                    <p class="value">Total Payable:</p>
+                                    <p class="price" [innerText]='cartTotal+25.5 | currency:"USD"'>0</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="checkout-btn d-sm-flex justify-content-between">
+                            <div class="single-btn">
+                                <a href="javascript:void(0)" [routerLink]="['/shop']" class="main-btn primary-btn-border">continue shopping</a>
+                            </div>
+                            <div class="single-btn">
+                                <a href="javascript:void(0)" [routerLink]="['/checkout']" class="main-btn primary-btn">Checkout now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+

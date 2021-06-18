@@ -11,12 +11,13 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { LoginComponent } from './login/login.component';
 import { LoaderSpinnerComponent } from './loader-spinner/loader-spinner.component';
 import { ProfileComponent } from './profile/profile.component';
+import { RecommendedComponent } from './recommended/recommended.component';
 
 
 @NgModule({
   declarations: [
      MenuComponent
-    ,MaxLengthPipe,AllowCharOnlyDirective, FooterComponent, PageNotFoundComponent, LoginComponent, LoaderSpinnerComponent, ProfileComponent
+    ,MaxLengthPipe,AllowCharOnlyDirective, FooterComponent, PageNotFoundComponent, LoginComponent, LoaderSpinnerComponent, ProfileComponent, RecommendedComponent
   ],
   imports: [
   CommonModule,FormsModule,

@@ -17,7 +17,7 @@ export class ApiService {
     return this._httpClient.get<ApiResponse>(url, {headers:headers, params:params});
    }
   
-   delete(url:string ,headers?:HttpHeaders, params?:HttpParams):Observable<ApiResponse>{
+   delete(url:string ,headers?:HttpHeaders, params?:HttpParams, ):Observable<ApiResponse>{
      return this._httpClient.delete<ApiResponse>(url, {headers:headers, params:params});
     }
     
@@ -27,5 +27,9 @@ export class ApiService {
     
    put(url:string,obj:any, headers?:HttpHeaders, params?:HttpParams):Observable<ApiResponse>{
      return this._httpClient.put<ApiResponse>(url,obj, {headers:headers, params:params});
+    }
+
+    request(url:string, method:string, obj:any,headers?:HttpHeaders, params?:HttpParams,body?:any ):Observable<ApiResponse>{
+      return this._httpClient.request<ApiResponse>(url,obj, {headers:headers, params:params, body:body});
     }
 }

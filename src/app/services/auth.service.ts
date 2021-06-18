@@ -34,20 +34,20 @@ export class AuthService{
 
 
     isCustomer():boolean {
-        if(this.user == null) return false;
+        if(this.user.value == null) return false;
        return  this.user.value.role ===  "ROLE_CUSTOMER" ? true: false;            
     }
     isSeller():boolean{
-        if(this.user == null) return false;
+        if(this.user.value == null) return false;
         return  this.user.value.role ===  "ROLE_SELLER" ? true: false;            
 
     }
     isAdmin():boolean{
-        if(this.user == null) return false;
+        if(this.user.value == null) return false;
         return  this.user.value.role ===  "ROLE_ADMIN" ? true: false;
     }
     getUserId():number{
-        if(this.user == null) return -1;
+        if(this.user.value == null) return -1;
         return this.user.value.id;
     }
 

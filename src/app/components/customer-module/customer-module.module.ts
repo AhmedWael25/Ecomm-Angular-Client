@@ -14,6 +14,7 @@ import { CartComponent } from './cart/cart.component';
 import { PreventLoginRegGuard } from 'src/app/guards/prevent-login-register.guard';
 import { CustomerAuthGuard } from 'src/app/guards/customer-auth.guard';
 import { ProfileComponent } from '../shared/profile/profile.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,10 @@ const routes: Routes = [
     component:RegisterComponent,
   },
   {
+    path:"shop",
+    component:ShopComponent,
+  },
+  {
     path:"profile",
     component:ProfileComponent,
     data:{
@@ -38,8 +43,18 @@ const routes: Routes = [
     }
   },
   {
-    path:"shop",
-    component:ShopComponent,
+    path:"cart",
+    component:CartComponent,
+    data:{
+      role : "ROLE_CUSTOMER",
+    }
+  },
+  {
+    path:"wishlist",
+    component:WishlistComponent,
+    data:{
+      role : "ROLE_CUSTOMER",
+    }
   },
   {
     path:"orders",
@@ -63,6 +78,7 @@ const routes: Routes = [
     LandingPageComponent,
     RegisterComponent,
     CartComponent,
+    WishlistComponent,
   ],
   imports: [
     CommonModule,

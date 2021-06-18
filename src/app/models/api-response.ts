@@ -3,4 +3,6 @@ export class ApiResponse{
     httpStatus:string;
     httpCode:number;
     message:string;
+    totalPages?:number;
+    totalElements?:number;
 }

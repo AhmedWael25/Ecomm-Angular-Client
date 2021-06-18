@@ -19,6 +19,7 @@ import { CustomerService } from './services/customer.service';
 @NgModule({
   declarations: [
     AppComponent,
+
   ],
   imports: [
     BrowserModule,
