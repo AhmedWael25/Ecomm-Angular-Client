@@ -13,6 +13,7 @@ import { LoginComponent } from '../shared/login/login.component';
 import { CartComponent } from './cart/cart.component';
 import { PreventLoginRegGuard } from 'src/app/guards/prevent-login-register.guard';
 import { CustomerAuthGuard } from 'src/app/guards/customer-auth.guard';
+import { ProfileComponent } from '../shared/profile/profile.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,13 @@ const routes: Routes = [
   {
     path:"register",
     component:RegisterComponent,
+  },
+  {
+    path:"profile",
+    component:ProfileComponent,
+    data:{
+      role : "ROLE_CUSTOMER",
+    }
   },
   {
     path:"shop",
