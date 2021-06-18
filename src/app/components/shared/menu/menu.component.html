@@ -48,7 +48,7 @@
                                         <li style="cursor: pointer;" [routerLink]="['/login']" ><a ><i class="fa fa-user"></i>Login</a></li>
                                     </ul>
                                     <li>
-<!--                                                                             
+<!--
                                     <div class="navbar-cart">
                                         <a class="icon-btn primary-icon-text icon-text-btn" href="#0"><img src="assets/images/icon-svg/cart-6.svg" alt="Icon"><span class="icon-text text-style-1">88</span></a>
 
@@ -343,9 +343,9 @@
                                                role="button" data-bs-toggle="dropdown" aria-expanded="false"><i style="color: white;"
                                                     class="fa fa-user"></i></a>
                                             <ul class="dropdown-menu" id="dropdown11">
-                                                <li><a href="#"><i class="fa fa-user"></i> My Profile</a></li>
-                                                <li [routerLink]="['/orders']"><a ><i class="fa fa-sign-out"></i> History</a></li>
-                                                <li (click)="logout()"><a ><i class="fa fa-sign-out"></i> Logout</a></li>
+                                                <li><a [routerLink]="['/profile']"><i class="fa fa-user"></i> My Profile</a></li>
+                                                <li><a [routerLink]="['/orders']"><i class="fa fa-history"></i>History</a></li>
+                                                <li><a (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -432,8 +432,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    
+
+
                                     <!-- navbar cart Ends -->
 
                                 </div>
