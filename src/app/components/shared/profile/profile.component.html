@@ -10,7 +10,10 @@
               </div>
               <div class="profile-author d-sm-flex flex-row-reverse justify-content-between align-items-end">
                 <div class="profile-photo">
-                  <img [src]="_userData.image" alt="Profile Photo">
+                  <img [src]="_userData?.image" (click)=changeImage() alt="Profile Photo">
+                  <input style="display:none"
+                    type="file"  accept="image/png, image/jpeg"
+                    (change)="handle($event)" id="inputImage">
                 </div>
                 <div class="profile-name">
                   <h4 class="name">{{_userData.name}}</h4>
@@ -97,7 +100,7 @@
               </form>
 
             </div>
-            <div class="profile-footer mt-45">
+            <!-- <div class="profile-footer mt-45">
               <div class="profile-title">
                 <h5 class="title">Cards</h5>
                 <a class="profile-link" href="#0">Add Cards</a>
@@ -139,7 +142,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>

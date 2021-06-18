@@ -1,3 +1,4 @@
+import { CustomerData } from './../models/customer/CustomerData';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
 import { URLS } from './../url.constants';
@@ -18,5 +19,11 @@ export class ProfileService {
 
   getCurretCustomerData():Observable<ApiResponse> {
     return this._apiService.get(this.baseUrl+"/"+this._authService.getUserId());
+  }
+  updateCustomerData(customerData:CustomerData):Observable<ApiResponse> {
+    return this._apiService.put(this.baseUrl+"/"+this._authService.getUserId(),customerData);
+  }
+  updateCustomerImage(imageUrl:string):Observable<ApiResponse>{
+    return this._apiService.patch(this.baseUrl+"/"+this._authService.getUserId(),imageUrl);
   }
 }
