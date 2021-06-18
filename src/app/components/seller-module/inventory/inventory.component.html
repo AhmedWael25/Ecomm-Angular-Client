@@ -1,44 +1,69 @@
-<p>inventory works!</p>
-<!-- mat-table [dataSource] ="products" -->
-<div class="card  align-items-center justify-content-center"  >
-
-  <div class="card-header" >
-    Inventory
-  </div>
-  <div class="card-body col-lg 3 col-md-3  col-sm-12 col-xs-12 " >
-    <table  class="table table-striped table-hover">
-      <thead>
-        <th>Image</th>
-        <th>ID</th>
-        <th>Name</th>
-        <!-- <th>Description</th> -->
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Sale</th>
-        <!-- <th>Subcategory ID</th> -->
-        <th>Subcategory</th>
-        <th>Controll</th>
-      </thead>
-      <tbody>
-        <tr *ngFor="let product of products ">
-          <td><img [src]=" product.img " width="40px" height="40px" /> </td>
-          <td>{{ product.id }}</td>
-          <td>{{ product.name }} </td>
-          <!-- <td>{{ product.description }} </td> -->
-          <td>{{ product.price }} </td>
-          <td>{{ product.quantity }} </td>
-          <td>{{ product.onSale }} </td>
-          <!-- <td>{{ product.subcategoryId }} </td> -->
-          <td>{{ product.subcategoryName }} </td>
-          <td><span></span><button [click]="onEditClicked(product.id)" ><span [innerHtml]="editIcon"></span></button>
-            <button [click]="onDeleteClicked(product.id)" ><span [innerHtml]="deleteIcon"></span></button><span></span>
-          </td>
-        </tr>
-      </tbody>
+<h1 class="card-header" style="text-align: center;">
+    Inventory <i class="fas fa-shopping-cart"></i>
+</h1>
+<div class="table-responsive">
+    <table class="table v-middle table-striped table-hover" id="myTable">
+        <thead class="table-dark text-light">
+            <tr class="bg-dark">
+            <th class="border-top-0" style="color: rgb(187, 151, 93)">#</th>
+            <th class="border-top-0" style="color: white">Image</th>
+            <th class="border-top-0" style="color: white">Name</th>
+            <th class="border-top-0" style="color: white">&nbsp; Price</th>
+            <th class="border-top-0" style="color: white">Quantity</th>
+            <th class="border-top-0" style="color: white">Subcategory</th>
+            <th class="border-top-0" style="color: white">Sale</th>
+            <th class="border-top-0" style="color: white" colspan="2">&nbsp;&nbsp;Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products">
+                <td>{{ product.id }}</td>
+                <td>
+                    <div class="d-flex align-items-center m-r-10">
+                        <img class="btn btn-circle d-flex btn-info text-white" style="padding: 1px"
+                            [src]=" product.img " width="80" height="60px" 
+                            class="rounded-circle" alt="product"/>
+                    </div> 
+                </td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <div class="">
+                            <h4 class="m-b-0 font-16">
+                                {{ product.name }} 
+                            </h4>
+                        </div>
+                    </div>
+                </td>
+                <td class="justify-content-center">
+                    <div class="alert alert-success" style="display: table-row;">
+                        {{ product.price | currency:'USD' }}  
+                    </div>
+                </td>
+                <td>
+                    <div class="alert alert-danger" style="display: table-row;">
+                        {{ product.quantity }} 
+                    </div>
+                </td>
+                <td>
+                    <div class="alert alert-primary-variant" style="display: table-row;">
+                        {{ product.subcategoryName }}
+                    </div>
+                </td>
+                <td>
+                    <div class="alert alert-dark" style="display: table-row;">
+                        {{ product.onSale }}
+                    </div>
+                </td>
+                <td>
+                    <button [routerLink]='["product", product.id]'>
+                        <i class="fas fa-edit" style="color: green;"></i>
+                    </button> &nbsp; &nbsp;
+                    <button>
+                        <i class="fas fa-trash-alt" style="color: red;"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
     </table>
-  </div>
-  <div class="card-header" >
-    <page-controller [page]="1" [size]="1" (change)="refresh()"></page-controller>>
-  </div>
 </div>
 

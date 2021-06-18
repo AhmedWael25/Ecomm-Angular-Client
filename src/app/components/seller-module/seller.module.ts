@@ -29,7 +29,7 @@ const routes: Routes = [
     component:SellerRegisterComponent,
   },
   {
-    path: 'edit-product',
+    path: 'product/:id',
     component:EditProductComponent,
     canActivate:[SellerAuthGuard],
   },

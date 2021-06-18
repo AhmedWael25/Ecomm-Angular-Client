@@ -26,18 +26,27 @@ export class InventoryComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.subscription = this._activatedRoute.params.subscribe(params => {
+    this.sellerId = 1;
+    console.log(this.sellerId);
 
-      this.sellerId = params.sellerId;
-      console.log(this.sellerId);
-
-      this._sellerApi.get(this.sellerId,1,1).subscribe(response => {
-        console.log(response);
-        this.products = response.data;
-
-      });
+    this._sellerApi.get(this.sellerId).subscribe(response => {
+      console.log(response);
+      this.products = response.data;
 
     });
+
+    // this.subscription = this._activatedRoute.params.subscribe(params => {
+
+    //   this.sellerId = 1;
+    //   console.log(this.sellerId);
+
+    //   this._sellerApi.get(this.sellerId).subscribe(response => {
+    //     console.log(response);
+    //     this.products = response.data;
+
+    //   });
+
+    // });
 
   }
 
@@ -45,6 +54,7 @@ export class InventoryComponent implements OnInit {
 
     //todo implement this method to perform the action of the selected product to edit screen
     console.log("Product Id "+productId)
+
 
   }
 
