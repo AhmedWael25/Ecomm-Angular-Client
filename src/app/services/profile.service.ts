@@ -1,3 +1,4 @@
+import { CustomerImage } from './../models/customer/CustomerImage';
 import { CustomerData } from './../models/customer/CustomerData';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
@@ -23,7 +24,7 @@ export class ProfileService {
   updateCustomerData(customerData:CustomerData):Observable<ApiResponse> {
     return this._apiService.put(this.baseUrl+"/"+this._authService.getUserId(),customerData);
   }
-  updateCustomerImage(imageUrl:string):Observable<ApiResponse>{
+  updateCustomerImage(imageUrl: CustomerImage):Observable<ApiResponse>{
     return this._apiService.patch(this.baseUrl+"/"+this._authService.getUserId(),imageUrl);
   }
 }

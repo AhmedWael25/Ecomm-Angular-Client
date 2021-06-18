@@ -1,3 +1,4 @@
+import { CustomerImage } from './../../../models/customer/CustomerImage';
 import { UploadService } from './../../../services/upload.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CustomerData } from './../../../models/customer/CustomerData';
@@ -13,6 +14,8 @@ export class ProfileComponent implements OnInit {
   public _userData: CustomerData = new CustomerData();
   public _areFieldsDisabled = true;
   private file: File;
+  public _customerImage: CustomerImage;
+
   form: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     address: new FormControl('', [
@@ -84,7 +87,8 @@ export class ProfileComponent implements OnInit {
       imageFormData.append('file',this.file);
       this._uploadService.uploadFile(imageFormData).subscribe(resp=>{
         console.log(resp);
-        this._profileService.updateCustomerImage(resp.data).subscribe(resp=>{
+        this._customerImage.image = resp.data;
+        this._profileService.updateCustomerImage(this._customerImage).subscribe(resp=>{
           this._userData.image = resp.data;
           console.log("updating image successfully");
           console.log(resp);
