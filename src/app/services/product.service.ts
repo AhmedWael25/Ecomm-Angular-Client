@@ -1,3 +1,4 @@
+import { HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { ApiResponse } from "../models/api-response";
@@ -19,6 +20,7 @@ export class ProductService{
     createProduct(request:addProductRequest):Observable<ApiResponse>{
       return this._apiService.post(this.baseUrl, request);
     }
+
     
 
 }

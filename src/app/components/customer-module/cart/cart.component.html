@@ -22,7 +22,7 @@
                                                     <img class="cart-prod-img" src="{{cartItem.img}}" alt="Product">
                                                 </div>
                                                 <div class="product-content media-body">
-                                                    <h5 class="title"><a href="javascript:void(0)">{{cartItem.name}}</a></h5>
+                                                    <h5 class="title"><a [routerLink]="['/shop',cartItem.productId]" href="javascript:void(0)">{{cartItem.name}}</a></h5>
                                                     <span>UG 0123</span>
                                                 </div>
                                             </div>

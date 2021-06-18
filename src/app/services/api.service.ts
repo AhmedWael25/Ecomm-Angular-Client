@@ -30,6 +30,6 @@ export class ApiService {
     }
 
     request(url:string, method:string, obj:any,headers?:HttpHeaders, params?:HttpParams,body?:any ):Observable<ApiResponse>{
-      return this._httpClient.request<ApiResponse>(url,obj, {headers:headers, params:params, body:body});
+      return this._httpClient.request<ApiResponse>(method, url, {headers:headers, params:params, body:body});
     }
 }
