@@ -14,7 +14,7 @@ export class ProfileComponent implements OnInit {
   public _userData: CustomerData = new CustomerData();
   public _areFieldsDisabled = true;
   private file: File;
-  public _customerImage: CustomerImage;
+  public _customerImage: CustomerImage = new CustomerImage();
 
   form: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -88,10 +88,10 @@ export class ProfileComponent implements OnInit {
       this._uploadService.uploadFile(imageFormData).subscribe(resp=>{
         console.log(resp);
         this._customerImage.image = resp.data;
-        this._profileService.updateCustomerImage(this._customerImage).subscribe(resp=>{
-          this._userData.image = resp.data;
-          console.log("updating image successfully");
+        this._profileService.updateCustomerImage(this._customerImage.image).subscribe(resp=>{
           console.log(resp);
+          this._userData.image = resp.data.image;
+          console.log("updating image successfully");
         });
       });
     }
