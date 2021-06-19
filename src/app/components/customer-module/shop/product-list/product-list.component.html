@@ -24,7 +24,7 @@
                     <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ngx-slider>
 
                     <div class="filter-btn">
-                        <button (click)="getProducts(page)" type="button" class="main-btn primary-btn">Filter</button>
+                        <button (click)="doFilter()" type="button" class="main-btn primary-btn">Filter</button>
                     </div>
 
 
@@ -167,7 +167,7 @@
                     </div>
                     <!--Including the pagination control.-->
                     <div class="text-right">
-                        <pagination-controls class="pagi" (pageChange)="getProducts((page = $event))">
+                        <pagination-controls class="pagi" (pageChange)="setPage((page = $event))"> 
                         </pagination-controls>
                     </div>
                 </section>

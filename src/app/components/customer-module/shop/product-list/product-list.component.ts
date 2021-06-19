@@ -43,19 +43,16 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.getProducts(this.page);
-
     this.page = 1;
     this.minValue = 0;
     this.maxValue = 10000;
     this.minPrice = 0;
     this.maxPrice = 10000;
 
+    this.getProducts();
   }
 
-  getProducts(page: number) {
-    this.page = page;
-
+  getProducts() {
     this._productService.getProducts(this.page - 1, this.size, this.minPrice, this.maxPrice).subscribe(
       data => {
         this.products = data.data;
@@ -64,5 +61,17 @@ export class ProductListComponent implements OnInit {
         this.totalElements = data.totalElements;
       }
     );
+  }
+
+  setPage(page: number) {
+    this.page = page;
+
+    this.getProducts();
+  }
+
+  doFilter() {
+    this.page = 1;
+
+    this.getProducts();
   }
 }
