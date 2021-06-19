@@ -11,7 +11,7 @@
                         <h4 class="title">Filter</h4>
                     </div>
                     <div class="filter-btn">
-                        <a class="main-btn primary-btn" [routerLink]="['/shop']">Reset</a>
+                        <button (click)="ngOnInit()" type="button" class="main-btn primary-btn">Reset</button>
                     </div>
                 </div>
 
@@ -20,20 +20,11 @@
                         <a class="title" data-bs-toggle="collapse" href="#pricingOne" role="button"
                             aria-expanded="false">Pricing Range</a>
                     </div>
-                    <div class="collapse show" id="pricingOne">
-                        <div class="price-range">
-                            <div class="price-amount">
-                                <div class="amount-input">
-                                    <label>Minimum Price</label>
-                                    <input type="text" id="minAmount">
-                                </div>
-                                <div class="amount-input">
-                                    <label>Maximum Price</label>
-                                    <input type="text" id="maxAmount">
-                                </div>
-                            </div>
-                            <div id="slider-range" class="slider-range"></div>
-                        </div>
+
+                    <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ngx-slider>
+
+                    <div class="filter-btn">
+                        <button (click)="getProducts(page)" type="button" class="main-btn primary-btn">Filter</button>
                     </div>
 
 
@@ -176,7 +167,8 @@
                     </div>
                     <!--Including the pagination control.-->
                     <div class="text-right">
-                        <pagination-controls class="pagi" (pageChange)="getProducts((page = $event))"></pagination-controls>
+                        <pagination-controls class="pagi" (pageChange)="getProducts((page = $event))">
+                        </pagination-controls>
                     </div>
                 </section>
             </div>

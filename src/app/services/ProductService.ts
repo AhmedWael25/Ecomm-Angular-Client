@@ -29,12 +29,12 @@ export class ProductService {
     //Get All Products
     getProducts(page?: number,
         pageSize?: number,
-        priceMin?: number,
-        priceMax?: number,
+        minPrice?: number,
+        maxPrice?: number,
         subCategoriesIds?: Array<any>,
         name?: string): Observable<any> {
-        
+
         return this._apiService.get(
-            this.baseUrl + "?page=" + page + "&pageSize=" + pageSize);
+            this.baseUrl + "?page=" + page + "&pageSize=" + pageSize + "&priceMin=" + minPrice + "&priceMax=" + maxPrice);
     }
 }
