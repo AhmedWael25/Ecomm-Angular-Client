@@ -116,6 +116,8 @@ export class CartComponent implements OnInit {
         this.cartItems.splice(index, 1);
       },
       err =>{
+        
+        console.log(err);
         console.log("ERROR");
       },() =>{
         event.target.disabled = false;
