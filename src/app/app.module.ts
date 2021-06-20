@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NetworkInterceptor } from './loader/interceptor/network.interceptor';
 import { CustomerService } from './services/customer.service';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 
 
@@ -29,6 +30,7 @@ import { CustomerService } from './services/customer.service';
     HttpClientModule,
     ReactiveFormsModule,
     MatProgressSpinnerModule,
+    NgxSliderModule,
   ],
   providers: [
     CustomerService,

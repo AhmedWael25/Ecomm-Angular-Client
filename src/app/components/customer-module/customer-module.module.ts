@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ShopComponent } from './shop/shop.component';
 import { CustomerHomeComponent } from './customer-home/customer-home.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SharedModule } from '../shared/shared.module';
@@ -15,12 +14,13 @@ import { PreventLoginRegGuard } from 'src/app/guards/prevent-login-register.guar
 import { CustomerAuthGuard } from 'src/app/guards/customer-auth.guard';
 import { ProfileComponent } from '../shared/profile/profile.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
+import { ProductHomeComponent } from './shop/product-home/product-home.component';
 
 
 const routes: Routes = [
   {
     path:"",
-    component:LandingPageComponent
+    component:LandingPageComponent,
   },
   {
     path:"login",
@@ -33,7 +33,8 @@ const routes: Routes = [
   },
   {
     path:"shop",
-    component:ShopComponent,
+    component:ProductHomeComponent,
+    loadChildren: () => import('../customer-module/shop/shop.module').then(m => m.ShopModule),
   },
   {
     path:"profile",
@@ -73,7 +74,6 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    ShopComponent,
     CustomerHomeComponent,
     LandingPageComponent,
     RegisterComponent,
