@@ -1,3 +1,13 @@
 .filter-style-8 .filter-category .category-list li .sub-category{
     padding-left: 10px;
 }
+
+.product-style-17 .shop-prod-img {
+    position: relative;
+    width: 100% !important;
+    height: 200px !important;
+    background-size:contain ;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 10px;
+}

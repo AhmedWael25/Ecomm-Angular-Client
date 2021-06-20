@@ -40,6 +40,7 @@ export class ProductListComponent implements OnInit {
   minValue: number = 0;
   maxValue: number = 1000;
   name: string;
+  defaultImage: string = "assets/images/product.jpg";
   options: Options = {
     floor: 0,
     ceil: 10000,

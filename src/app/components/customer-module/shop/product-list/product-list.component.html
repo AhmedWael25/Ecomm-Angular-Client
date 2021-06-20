@@ -102,20 +102,18 @@
                                 currentPage: page,
                                 totalItems: totalElements}">
 
-                                <div class="product-style-6 mt-30">
-                                    <div class="product-image">
-                                        <div class="product-item active">
-                                            <img src={{product.productImg}} alt="product">
-                                        </div>
-                                        <a class="add-wishlist" href="#0">
-                                            <i class="mdi mdi-heart"></i>
-                                        </a>
-                                    </div>
+                                <div class="product-style-17 mt-30" style="padding: 5px">
+                                    <img class="product-image shop-prod-img" id="shop-prod-img"
+                                        [src]="product.productImg"
+                                        (error)="product.productImg = '/assets/images/product.jpg'"
+                                        style='background-image: url("${{product.productImg}}")'>
+                                    <a [routerLink]="['/shop', product.id]"></a>
                                     <div class="product-content">
                                         <h4 class="title"><a
                                                 [routerLink]="['/shop', product.id]">{{product.productName}}</a>
                                         </h4>
                                         <p>{{product.sellerName}}</p>
+                                        <p>$ {{product.productPrice}}</p>
                                         <a href="#0" class="main-btn secondary-1-btn"> <img
                                                 src="assets/images/icon-svg/cart-4.svg" alt=""> Add to Cart</a>
                                     </div>
