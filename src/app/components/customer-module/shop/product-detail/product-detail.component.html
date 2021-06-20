@@ -1,5 +1,6 @@
+    <!--======  Product Details Style 6 Part Start ======-->
 
-<section class="product-details-wrapper mt-30 pb-100">
+    <section class="product-details-wrapper mt-30 pb-100">
         <div class="product-details-bg bg_cover" style="background-image: url(assets/images/product-details-bg.jpg);"></div>
         <div class="container">
             <div class="product-details-style-6">
@@ -7,45 +8,38 @@
                     <div class="product-image">
                         <div class="product-image-active tab-content" id="v-pills-tabContent-6">
                             <div class="single-image tab-pane fade show active" id="v-pills-26" role="tabpanel" aria-labelledby="v-pills-26-tab">
-                                <img src={{product.productImg}} alt="image">
+                                <img src="assets/images/product-details-2/product-1.jpg" alt="">
                             </div>
-                            <div class="single-image tab-pane fade" id="v-pills-27"
-                            role="tabpanel" aria-labelledby="v-pills-27-tab"
-                            *ngFor="let image of product.prodImages;let currentIndex=index">
-                                <img src="assets/images/product-details-2/product-2.jpg" alt="assets/images/product.jpg">
+                            <div class="single-image tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-2-tab">
+                                <img src="assets/images/product-details-2/product-2.jpg" alt="">
                             </div>
                             <div class="single-image tab-pane fade" id="v-pills-28" role="tabpanel" aria-labelledby="v-pills-28-tab">
-                                <img src="assets/images/product-details-2/product-3.jpg" alt="image">
+                                <img src="assets/images/product-details-2/product-3.jpg" alt="">
                             </div>
                             <div class="single-image tab-pane fade" id="v-pills-29" role="tabpanel" aria-labelledby="v-pills-29-tab">
-                                <img src="assets/images/product-details-2/product-4.jpg" alt="image">
+                                <img src="assets/images/product-details-2/product-4.jpg" alt="">
                             </div>
                             <div class="single-image tab-pane fade" id="v-pills-30" role="tabpanel" aria-labelledby="v-pills-30-tab">
-                                <img src="assets/images/product-details-2/product-5.jpg" alt="image">
+                                <img src="assets/images/product-details-2/product-5.jpg" alt="">
                             </div>
                         </div>
                     </div>
                     <div class="product-thumb-image">
                         <div class="product-thumb-image-active nav nav-pills" id="v-pills-tab-6" role="tablist" aria-orientation="vertical">
                             <div class="single-thumb active" id="v-pills-26-tab" data-bs-toggle="pill" href="#v-pills-26" role="tab" aria-controls="v-pills-26" aria-selected="true">
-                                <img src={{product.productImg}} alt="image">
+                                <img src="assets/images/product-details-1/thunb-1.jpg" alt="">
                             </div>
-                            <div class="single-thumb" id="v-pills-27-tab" data-bs-toggle="pill" 
-                            href="#v-pills-27" role="tab" aria-controls="v-pills-27" aria-selected="false"
-                            *ngFor="let image of product.prodImages;let currentIndex=index">
-                                <img src={{image}} alt="image">
-                            </div>
-                            <div class="single-thumb" id="v-pills-27-tab" data-bs-toggle="pill" href="#v-pills-27" role="tab" aria-controls="v-pills-27" aria-selected="false">
-                                <img src="assets/images/product-details-1/thunb-2.jpg" alt="image">
+                            <div class="single-thumb" id="v-pills-2-tab" data-bs-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">
+                                <img src="assets/images/product-details-1/thunb-2.jpg" alt="">
                             </div>
                             <div class="single-thumb" id="v-pills-28-tab" data-bs-toggle="pill" href="#v-pills-28" role="tab" aria-controls="v-pills-28" aria-selected="false">
-                                <img src="assets/images/product-details-1/thunb-3.jpg" alt="image">
+                                <img src="assets/images/product-details-1/thunb-3.jpg" alt="">
                             </div>
                             <div class="single-thumb" id="v-pills-29-tab" data-bs-toggle="pill" href="#v-pills-29" role="tab" aria-controls="v-pills-29" aria-selected="false">
-                                <img src="assets/images/product-details-1/thunb-4.jpg" alt="image">
+                                <img src="assets/images/product-details-1/thunb-4.jpg" alt="">
                             </div>
                             <div class="single-thumb" id="v-pills-30-tab" data-bs-toggle="pill" href="#v-pills-30" role="tab" aria-controls="v-pills-30" aria-selected="false">
-                                <img src="assets/images/product-details-1/thunb-5.jpg" alt="image">
+                                <img src="assets/images/product-details-1/thunb-5.jpg" alt="">
                             </div>
                         </div>
                     </div>
@@ -53,53 +47,12 @@
 
                 <div class="product-details-content mt-25">
                     <!-- <p class="sub-title">All-In-One VR</p> -->
-                    <p class="sub-title">{{product.prodImages.length}}</p>
                     <h2 class="title">{{product.productName}}</h2>
 
                     <div class="row">
                         <div class="col-lg-6">
-                            <!-- <div class="product-items flex-wrap mt-25">
-                                <h6 class="item-title">Select Your Oculus: </h6>
-                                <div class="items-wrapper" id="select-item-6">
-                                    <div class="single-item active">
-                                        <div class="items-image">
-                                            <img src="assets/images/product-details-1/product-items-1.jpg" alt="product">
-                                        </div>
-                                    </div>
-                                    <div class="single-item">
-                                        <div class="items-image">
-                                            <img src="assets/images/product-details-1/product-items-2.jpg" alt="product">
-                                        </div>
-                                    </div>
-                                    <div class="single-item">
-                                        <div class="items-image">
-                                            <img src="assets/images/product-details-1/product-items-3.jpg" alt="product">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
 
                             <div class="product-select-wrapper mt-10 flex-wrap">
-                                <!-- <div class="select-item">
-                                    <h6 class="select-title">Select Color: <span>Grey</span></h6>
-                                    <ul class="color-select" id="select-color-6">
-                                        <li class="active" style="background-color: #EFEFEF;"></li>
-                                        <li style="background-color: #FAE5EC;"></li>
-                                        <li style="background-color: #4C4C4C;"></li>
-                                    </ul>
-                                </div>
-                                <div class="select-item">
-                                    <h6 class="select-title">Memory (GB): </h6>
-                                    <div class="size-select">
-                                        <div class="select-position">
-                                            <select>
-                                                <option value="">32gb</option>
-                                                <option value="">64gb</option>
-                                                <option value="">128 gb</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div> -->
                                 <div class="select-item">
                                     <h6 class="select-title">Select Quantity: </h6>
 
@@ -109,22 +62,6 @@
                                         <button type="button" id="add" class="add"><i class="mdi mdi-plus"></i></button>
                                     </div>
                                 </div>
-                                <div class="select-item">
-                                    <h6 class="select-title">Select Shipping Country: <span>+ $ 30 USD</span> </h6>
-                                    <div class="country-select">
-                                        <div class="select-position">
-                                            <select>
-                                                <option value="0">-- Select Country --</option>
-                                                <option value="1">Bangladesh</option>
-                                                <option value="2">India</option>
-                                                <option value="3">Pakistan</option>
-                                                <option value="4">Australia</option>
-                                                <option value="5">Canada</option>
-                                                <option value="6">Spain</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -132,7 +69,7 @@
                                 <div class="product-price">
                                     <h6 class="price-title">Price: </h6>
                                     <p class="sale-price">$ {{product.productPrice}} USD</p>
-                                    <p class="regular-price">$ {{product.productPrice + 30}} USD</p>
+                                    <p class="regular-price">$ {{product.productPrice + 50}} USD</p>
                                 </div>
 
                                 <div class="product-btn">
