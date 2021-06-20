@@ -1,6 +1,9 @@
 import { LabelType, Options } from '@angular-slider/ngx-slider';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Category } from 'src/app/models/Category';
 import { Product } from 'src/app/models/product/Product';
+import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/ProductService';
 
 @Component({
@@ -11,9 +14,21 @@ import { ProductService } from 'src/app/services/ProductService';
 })
 export class ProductListComponent implements OnInit {
 
-  constructor(private _productService: ProductService) { }
+  constructor(private _productService: ProductService,
+    private _categoryService: CategoryService,
+    private _formBuilder: FormBuilder) { }
 
   products: Array<Product>;
+  categories: Array<Category>;
+  checkedSubcategories: Map<number, number> = new Map();
+
+  public change(value: boolean, subcategoryId: number) {
+    if (value) {
+      this.checkedSubcategories.set(subcategoryId, subcategoryId);
+    } else {
+      this.checkedSubcategories.delete(subcategoryId);
+    }
+  }
 
   // Pagination parameters.
   page: number = 1;
@@ -24,9 +39,10 @@ export class ProductListComponent implements OnInit {
   totalElements: number;
   minValue: number = 0;
   maxValue: number = 1000;
+  name: string;
   options: Options = {
     floor: 0,
-    ceil: 1000,
+    ceil: 10000,
     translate: (value: number, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
@@ -50,17 +66,30 @@ export class ProductListComponent implements OnInit {
     this.maxPrice = 10000;
 
     this.getProducts();
+    this.getCategories();
   }
 
   getProducts() {
-    this._productService.getProducts(this.page - 1, this.size, this.minPrice, this.maxPrice).subscribe(
-      data => {
-        this.products = data.data;
+      let subcategories = Array.from(this.checkedSubcategories.keys());
 
-        this.totalPages = data.totalPages;
-        this.totalElements = data.totalElements;
-      }
-    );
+      this._productService.getProducts(this.page - 1, this.size, this.minPrice, this.maxPrice, subcategories, this.name).subscribe(
+        data => {
+          this.products = data.data;
+
+          this.totalPages = data.totalPages;
+          this.totalElements = data.totalElements;
+        }
+      );
+  }
+  
+  checkoutForm = this._formBuilder.group({
+    name: '',
+  });
+
+  onSubmit() {
+    this.name = this.checkoutForm.value.name;
+
+    this.getProducts();
   }
 
   setPage(page: number) {
@@ -73,5 +102,13 @@ export class ProductListComponent implements OnInit {
     this.page = 1;
 
     this.getProducts();
+  }
+
+  getCategories() {
+    this._categoryService.getAll().subscribe(
+      data => {
+        this.categories = data.data;
+      }
+    );
   }
 }

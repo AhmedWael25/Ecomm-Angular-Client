@@ -3,7 +3,7 @@ import { ApiService } from "./api.service";
 import { URLS } from "../url.constants";
 import { Observable } from "rxjs";
 import { ApiResponse } from "../models/api-response";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 
 @Injectable({
     providedIn: 'root'
@@ -34,7 +34,23 @@ export class ProductService {
         subCategoriesIds?: Array<any>,
         name?: string): Observable<any> {
 
-        return this._apiService.get(
-            this.baseUrl + "?page=" + page + "&pageSize=" + pageSize + "&priceMin=" + minPrice + "&priceMax=" + maxPrice);
+            name = name == undefined ? '%' : name;
+
+        let params = new HttpParams();
+        params = new HttpParams()
+            .set('page', String(page))
+            .set('name', name)
+            .append('priceMin', String(minPrice))
+            .append('priceMax', String(maxPrice))
+            .append('pageSize', String(pageSize));
+
+        for (let index = 0; index < subCategoriesIds.length; index++) {
+            let element = subCategoriesIds[index];
+            params = params.append('cat', String(element));
+        }
+
+        console.log(this.baseUrl + "?" + params.toString());
+        
+        return this._apiService.get(this.baseUrl + "?" + params.toString());
     }
 }

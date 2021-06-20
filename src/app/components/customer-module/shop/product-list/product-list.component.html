@@ -6,6 +6,19 @@
             <div class="col-lg-4">
 
 
+                <div class="filter-style-8">
+                    <div class="collapse show" id="category">
+                        <div class="filter-search">
+                            <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+                                <input type="text" placeholder="Search" formControlName="name">
+                                <button class="button" type="submit">
+                                    <i class="lni lni-search-alt"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="filter-style-1">
                     <div class="filter-title">
                         <h4 class="title">Filter</h4>
@@ -40,86 +53,18 @@
                     <div class="collapse show" id="category">
                         <div class="filter-category">
                             <ul class="category-list">
-                                <li><a href="#" data-bs-toggle="collapse" data-bs-target="#collapseOne">Oculus</a>
-                                    <ul id="collapseOne" class="sub-category collapse" data-parent="#category">
-                                        <li>
-                                            <input type="checkbox" id="platform-1">
-                                            <label for="platform-1">
-                                                <p style="margin-left: 10px;"> Oculus </p>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="platform-1">
-                                            <label for="platform-1">
-                                                <p style="margin-left: 10px;"> Oculus </p>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a class="collapsed" href="#" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseTwo">PlayStation 4</a>
+                                <li *ngFor="let category of categories">
+                                    <a class="collapsed" href="#" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseTwo">{{category.name}}</a>
                                     <ul id="collapseTwo" class="sub-category collapse" data-parent="#category">
-                                        <li>
-                                            <input type="checkbox" id="platform-1">
+
+                                        <li *ngFor="let subcategory of category.subCategories">
+                                            <input #saveUserNameCheckBox id="saveUserNameCheckBox" type="checkbox"
+                                                [checked]="subcategory.checked"
+                                                (change)="change(saveUserNameCheckBox.checked, subcategory.id)" />
+
                                             <label for="platform-1">
-                                                <p style="margin-left: 10px;"> Oculus </p>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="platform-1">
-                                            <label for="platform-1">
-                                                <p style="margin-left: 10px;"> Oculus </p>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a class="collapsed" href="#" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseThree">SteamVR</a>
-                                    <ul id="collapseThree" class="sub-category collapse" data-parent="#category">
-                                        <li>
-                                            <input type="checkbox" id="platform-1">
-                                            <label for="platform-1">
-                                                <p style="margin-left: 10px;"> Oculus </p>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="platform-1">
-                                            <label for="platform-1">
-                                                <p style="margin-left: 10px;"> Oculus </p>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a class="collapsed" href="#" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseFour">Google Daydream</a>
-                                    <ul id="collapseFour" class="sub-category collapse" data-parent="#category">
-                                        <li>
-                                            <input type="checkbox" id="platform-1">
-                                            <label for="platform-1">
-                                                <p style="margin-left: 10px;"> Oculus </p>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="platform-1">
-                                            <label for="platform-1">
-                                                <p style="margin-left: 10px;"> Oculus </p>
-                                            </label>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li><a class="collapsed" href="#" data-bs-toggle="collapse"
-                                        data-bs-target="#collapseFive">Nintendo Labo</a>
-                                    <ul id="collapseFive" class="sub-category collapse" data-parent="#category">
-                                        <li>
-                                            <input type="checkbox" id="platform-1">
-                                            <label for="platform-1">
-                                                <p style="margin-left: 10px;"> Oculus </p>
-                                            </label>
-                                        </li>
-                                        <li>
-                                            <input type="checkbox" id="platform-1">
-                                            <label for="platform-1">
-                                                <p style="margin-left: 10px;"> Oculus </p>
+                                                <p style="margin-left: 10px;">{{subcategory.name}}</p>
                                             </label>
                                         </li>
                                     </ul>
@@ -138,7 +83,19 @@
                 <!--====== Product Style 6 Part Start ======-->
                 <section class="product-wrapper pt-70">
                     <div class="container">
-                        <div class="row ">
+                        <ng-template #elseBlock>
+                            <div id="notfound">
+                                <div class="notfound">
+                                    <div class="notfound-404">
+                                        <h1>Oops!</h1>
+                                        <h2>No products found</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+
+                        <div class="row " *ngIf="totalElements != 0; else elseBlock">
+
                             <div class="col-lg-4 col-sm-6" *ngFor="let product of products 
                                 | paginate 
                                 : {itemsPerPage: size,
@@ -156,7 +113,8 @@
                                     </div>
                                     <div class="product-content">
                                         <h4 class="title"><a
-                                                [routerLink]="['/shop', product.id]">{{product.productName}}</a></h4>
+                                                [routerLink]="['/shop', product.id]">{{product.productName}}</a>
+                                        </h4>
                                         <p>{{product.sellerName}}</p>
                                         <a href="#0" class="main-btn secondary-1-btn"> <img
                                                 src="assets/images/icon-svg/cart-4.svg" alt=""> Add to Cart</a>
@@ -166,8 +124,8 @@
                         </div>
                     </div>
                     <!--Including the pagination control.-->
-                    <div class="text-right">
-                        <pagination-controls class="pagi" (pageChange)="setPage((page = $event))"> 
+                    <div class="text-right" *ngIf="totalElements != 0;">
+                        <pagination-controls class="pagi" (pageChange)="setPage((page = $event))">
                         </pagination-controls>
                     </div>
                 </section>
