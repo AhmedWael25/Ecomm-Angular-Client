@@ -1,0 +1,46 @@
+/*
+.slick-slider {
+    width: 90%;
+    margin: auto;
+    /* background: #000;
+  }
+  
+  .nav-btn {
+    height: 50px;
+    position: absolute;
+    width: 50px;
+    cursor: pointer;
+    top: 100px !important; 
+  }
+  
+  .prev-slide.slick-disabled,
+  .next-slide.slick-disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  
+  .prev-slide {
+    background: url("https://img.icons8.com/material/24/000000/navigation-pane.png") no-repeat scroll 0 0;
+    left: -33px;
+  }
+  
+  .next-slide {
+    background: url("https://img.icons8.com/material/24/000000/navigation-pane.png") no-repeat scroll 100px 100px;
+    right: -33px;
+  }
+  
+  .prev-slide:hover {
+    background-position: 0px -53px;
+  }
+  
+  .next-slide:hover {
+    background-position: -24px -53px;
+  }
+
+  */
+
+  ngb-rating {
+    font-size: 100px;
+    color:brown;
+    background: rgba(23, 221, 16, 0.815);
+  }

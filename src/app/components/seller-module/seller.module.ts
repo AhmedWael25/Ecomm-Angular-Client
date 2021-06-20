@@ -1,3 +1,4 @@
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { PageControllerComponent } from './../shared/page-controller/page-controller.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,6 +14,7 @@ import { SellerAuthGuard } from 'src/app/guards/seller-auth.guard';
 import { SellerRegisterComponent } from './seller-register/seller-register.component';
 // import {MatTableModule} from '@angular/material/table';
 import { SharedModule } from '../shared/shared.module';
+import { RatingModule } from 'ng-starrating';
 
 const routes: Routes = [
   {
@@ -29,7 +31,7 @@ const routes: Routes = [
     component:SellerRegisterComponent,
   },
   {
-    path: 'product/:id',
+    path: 'products/:productId',
     component:EditProductComponent,
     canActivate:[SellerAuthGuard],
   },
@@ -66,6 +68,8 @@ const routes: Routes = [
     CommonModule,
     SharedModule,
     RouterModule.forChild(routes),
+    SlickCarouselModule,
+    RatingModule,
   ]
 })
 export class SellerModule { }
