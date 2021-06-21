@@ -10,10 +10,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BooleanTargetPipe } from './pipes/boolean-target.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
+    // BooleanTargetPipe,
   ],
   imports: [
     BrowserModule,

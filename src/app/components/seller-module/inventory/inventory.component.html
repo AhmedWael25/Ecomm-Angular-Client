@@ -35,28 +35,20 @@
                     </div>
                 </td>
                 <td class="justify-content-center">
-                    <div class="alert alert-success" style="display: table-row;">
-                        {{ product.price | currency:'USD' }}  
-                    </div>
+                    {{product.price | currency:'USD'}}  
                 </td>
                 <td>
-                    <div class="alert alert-danger" style="display: table-row;">
-                        {{ product.quantity }} 
-                    </div>
+                    {{product.quantity}} 
                 </td>
                 <td>
-                    <div class="alert alert-primary-variant" style="display: table-row;">
-                        {{ product.subcategoryName }}
-                    </div>
+                    {{product.subcategoryName}}
                 </td>
                 <td>
-                    <div class="alert alert-dark" style="display: table-row;">
-                        {{ product.onSale }}
-                    </div>
+                    {{product.onSale  | booleanTarget}}
                 </td>
                 <td>
                     <button [routerLink]='["products", product.id]'>
-                        <i class="fas fa-edit" style="color: green;"></i>
+                        <i class="fas fa-edit"></i>
                     </button> &nbsp; &nbsp;
                     <button>
                         <i class="fas fa-trash-alt" style="color: red;"></i>

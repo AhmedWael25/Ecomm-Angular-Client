@@ -15,6 +15,7 @@ import { SellerRegisterComponent } from './seller-register/seller-register.compo
 // import {MatTableModule} from '@angular/material/table';
 import { SharedModule } from '../shared/shared.module';
 import { RatingModule } from 'ng-starrating';
+import { BooleanTargetPipe } from 'src/app/pipes/boolean-target.pipe';
 
 const routes: Routes = [
   {
@@ -63,6 +64,7 @@ const routes: Routes = [
     SellerLoginComponent,
     SellerRegisterComponent,
     PageControllerComponent,
+    BooleanTargetPipe,
   ],
   imports: [
     CommonModule,

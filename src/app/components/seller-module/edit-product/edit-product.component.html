@@ -118,7 +118,6 @@
                         <div class="form-group">
                             <label class="col-md-12" style="color: white">Name</label>
                             <div class="col-md-12">
-                                <label>{{ productDetails.sellerProduct.productName }}</label>
                                 <input type="text" formControlName="productName" [value]='productDetails.sellerProduct.productName'
                                 class="form-control form-control-line" [readonly]='isFieldEnabled()'>
                             </div>
@@ -155,13 +154,15 @@
                                 [readonly]='isFieldEnabled()'>{{productDetails.sellerProduct.productDescription}}</textarea>
                             </div>
                         </div>
+
                         <div class="form-group" style="text-align: center">
                             <div class="d-grid gap-2 d-md-block">
                                 <button type="button" (click)="onClickEdit()" [disabled]="!isFieldEnabled()"
-                                class="btn btn-danger upgrade-btn text-white align-items-center">
+                                    class="btn btn-danger upgrade-btn text-white align-items-center">
                                     <i class="fas fa-edit"></i> &nbsp;
                                     <span class="hide-menu m-l-4">Edit Product</span>
                                 </button>&nbsp; &nbsp; &nbsp;
+
                                 <button type="button" (click)="onClickSave()" [disabled]="isFieldEnabled()"
                                     class="btn btn-info upgrade-btn text-white align-items-center" >
                                     <i class="fas fa-save"></i> &nbsp;
@@ -175,7 +176,6 @@
                                 updated successfully
                                 <i class="fas fa-check-square"></i>
                             </h4>
-
                         </span>
                         <span id="updateFailed" class="suc" style=" display: none; color: red; text-align: center">
                             <h4>
