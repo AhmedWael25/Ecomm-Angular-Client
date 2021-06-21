@@ -30,7 +30,6 @@ export class InventoryComponent implements OnInit {
       this._sellerApi.getInventory(this.sellerId).subscribe(response => {
         console.log(response);
         this.products = response.data;
-
       });
       
   }

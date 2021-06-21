@@ -1,3 +1,4 @@
+import { SellerProductRequest } from './../models/seller/SellerProductRequest';
 import { Observable } from 'rxjs';
 import { URLS } from './../url.constants';
 import { ApiResponse } from './../models/api-response';
@@ -26,4 +27,8 @@ export class SellerService {
     return this._apiService.get(this.baseUrl + "/products/" + productId);
   }
 
+ updateProduct(sellerProductRequest: SellerProductRequest):Observable<ApiResponse>{
+   console.log("Id is " + sellerProductRequest.id);
+    return this._apiService.put(this.baseUrl + "/products/" + sellerProductRequest.id, sellerProductRequest);
+  }
 }
