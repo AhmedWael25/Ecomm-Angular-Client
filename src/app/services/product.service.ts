@@ -61,6 +61,8 @@ export class ProductService{
       return this._apiService.get(this.baseUrl + "?" + params.toString());
   }
 
-    
+  getReviews(id :number) : Observable<ApiResponse> {
+    return this._apiService.get(this.baseUrl + "/" + id + "/reviews");
+  }
 
 }
