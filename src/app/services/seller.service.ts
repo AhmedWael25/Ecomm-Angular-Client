@@ -17,7 +17,7 @@ export class SellerService {
 
   get(sellerId:number,page:number,size:number):Observable<ApiResponse>{
 
-    return this._apiService.get(this.baseUrl+"/"+sellerId+"/procucts?page="+page+"&size="+size);
+    return this._apiService.get(this.baseUrl+"/"+sellerId+"/products?page="+page+"&size="+size);
 
 
 
