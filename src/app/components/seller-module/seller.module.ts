@@ -1,3 +1,4 @@
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { PageControllerComponent } from './../shared/page-controller/page-controller.component';
 import { NgModule } from '@angular/core';
@@ -72,6 +73,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SlickCarouselModule,
     RatingModule,
-  ]
+    ToastrModule.forRoot(),
+  ],
+  providers: [ToastrService],
 })
 export class SellerModule { }

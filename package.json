@@ -36,6 +36,7 @@
     "ng-starrating": "^1.0.20",
     "ng-zorro-antd": "^11.4.2",
     "ngx-slick-carousel": "^0.5.1",
+    "ngx-toastr": "^14.0.0",
     "rxjs": "~6.6.0",
     "slick-carousel": "^1.8.1",
     "tslib": "^2.0.0",

@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { SellerProductRequest } from './../../../models/seller/SellerProductRequest';
 import { SellerProductDetail } from './../../../models/seller/seller.product.datail';
 import { ActivatedRoute } from '@angular/router';
@@ -32,7 +33,7 @@ export class EditProductComponent implements OnInit {
     "infinite": true
   };
 
-  constructor(private _sellerApi:SellerService , private _activatedRoute:ActivatedRoute) {
+  constructor(private _sellerApi:SellerService , private _activatedRoute:ActivatedRoute, private _toastService: ToastrService) {
   }
 
   ngOnInit(): void {
@@ -70,12 +71,10 @@ export class EditProductComponent implements OnInit {
   }
 
   onClickEdit(){
-    // this.form.disable();
     this.isinputEnable = !this.isinputEnable;
   }
 
   onClickSave(){
-    // this.form.enable();
 
     let sellerProductRequest: SellerProductRequest = this.form.value;
     sellerProductRequest.id = this.productDetails.sellerProduct.id;
@@ -94,6 +93,11 @@ export class EditProductComponent implements OnInit {
     });
 
     this.isinputEnable = !this.isinputEnable;
+  }
+  
+
+  onSuccess(){
+    return this._toastService.success("testtt", "woww");
   }
 
 }
