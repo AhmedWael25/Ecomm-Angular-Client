@@ -1,3 +1,4 @@
+import { ToastrService, ToastrModule } from 'ngx-toastr';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -21,10 +22,13 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   ],
   imports: [
   CommonModule,FormsModule,
-    ReactiveFormsModule,RouterModule,HttpClientModule,SlickCarouselModule,
+    ReactiveFormsModule,RouterModule,HttpClientModule,SlickCarouselModule, 
+    ToastrModule.forRoot(),
   ],
   exports:[MenuComponent,MaxLengthPipe,FormsModule,
     ReactiveFormsModule,HttpClientModule,AllowCharOnlyDirective,
-  FooterComponent,]
+  FooterComponent,],
+  providers: [ToastrService],
+
 })
 export class SharedModule { }

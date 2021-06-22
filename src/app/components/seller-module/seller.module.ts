@@ -73,8 +73,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     SlickCarouselModule,
     RatingModule,
-    ToastrModule.forRoot(),
   ],
-  providers: [ToastrService],
 })
 export class SellerModule { }

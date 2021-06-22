@@ -1,4 +1,3 @@
-import { ToastrService } from 'ngx-toastr';
 import { SellerProductRequest } from './../../../models/seller/SellerProductRequest';
 import { SellerProductDetail } from './../../../models/seller/seller.product.datail';
 import { ActivatedRoute } from '@angular/router';
@@ -6,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { SellerService } from './../../../services/seller.service';
 import { Subscription } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NotificationService } from 'src/app/services/notification.service';
 
 
 @Component({
@@ -33,13 +33,11 @@ export class EditProductComponent implements OnInit {
     "infinite": true
   };
 
-  constructor(private _sellerApi:SellerService , private _activatedRoute:ActivatedRoute, private _toastService: ToastrService) {
+  constructor(private _sellerApi:SellerService , private _activatedRoute:ActivatedRoute, private _notificationService: NotificationService) {
   }
 
   ngOnInit(): void {
 
-     
-  
     this.subscription = this._activatedRoute.params.subscribe(params => {
 
       this.productId = params.productId;
@@ -62,8 +60,6 @@ export class EditProductComponent implements OnInit {
   
     });
 
-   
-
   }
 
   isFieldEnabled(){
@@ -83,21 +79,24 @@ export class EditProductComponent implements OnInit {
     this._sellerApi.updateProduct(sellerProductRequest).subscribe(response => {
       console.log(response);
       
-      if(sellerProductRequest == response.data){
-        // createNotification("success");
+      if(sellerProductRequest != response.data){
+        this.onUpdatedSuccess();
       }
       else{
-        // createNotification("success");
+        this.onUpdatedError();
       }
-
     });
 
     this.isinputEnable = !this.isinputEnable;
   }
   
 
-  onSuccess(){
-    return this._toastService.success("testtt", "woww");
+  onUpdatedSuccess(){
+    return this._notificationService.onSuccess('WoOoW .. product is updated', 3000, "topRight");
+  }
+
+  onUpdatedError(){
+    return this._notificationService.onError('Sad .. failed to update product!', 3000, "bottomRight");
   }
 
 }
