@@ -1,1 +1,61 @@
-<p>inventory works!</p>
+<h1 class="card-header" style="text-align: center; background-color: #262d35; color: white;">
+    Inventory <i class="fas fa-shopping-cart"></i>
+</h1>
+<div class="table-responsive">
+    <table class="table v-middle table-striped table-hover" id="myTable">
+        <thead class="table-dark text-light">
+            <tr class="bg-dark">
+            <th class="border-top-0" style="color: rgb(187, 151, 93)">#</th>
+            <th class="border-top-0" style="color: white">Image</th>
+            <th class="border-top-0" style="color: white">Name</th>
+            <th class="border-top-0" style="color: white">&nbsp; Price</th>
+            <th class="border-top-0" style="color: white">Quantity</th>
+            <th class="border-top-0" style="color: white">Subcategory</th>
+            <th class="border-top-0" style="color: white">Sale</th>
+            <th class="border-top-0" style="color: white" colspan="2">&nbsp;&nbsp;Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products">
+                <td>{{ product.id }}</td>
+                <td>
+                    <div class="d-flex align-items-center m-r-10">
+                        <img class="btn btn-circle d-flex btn-info text-white" style="padding: 1px"
+                            [src]="product.img" width="80" height="60px" 
+                            class="rounded-circle" alt="product"/>
+                    </div> 
+                </td>
+                <td>
+                    <div class="d-flex align-items-center">
+                        <div class="">
+                            <h4 class="m-b-0 font-16">
+                                {{ product.name }} 
+                            </h4>
+                        </div>
+                    </div>
+                </td>
+                <td class="justify-content-center">
+                    {{product.price | currency:'USD'}}  
+                </td>
+                <td>
+                    {{product.quantity}} 
+                </td>
+                <td>
+                    {{product.subcategoryName}}
+                </td>
+                <td>
+                    {{product.onSale  | booleanTarget}}
+                </td>
+                <td>
+                    <button [routerLink]='["products", product.id]'>
+                        <i class="fas fa-edit"></i>
+                    </button> &nbsp; &nbsp;
+                    <button>
+                        <i class="fas fa-trash-alt" style="color: red;"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

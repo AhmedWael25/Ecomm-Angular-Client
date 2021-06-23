@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-/* @import "~bootstrap/dist/css/bootstrap.min.css"; */
+@import "~bootstrap/dist/css/bootstrap.min.css";
 @import "./assets/css/bootstrap-5.0.0-beta1.min.css";
 @import "./assets/css/card.css";
 @import "./assets/css/default.css";
@@ -10,4 +10,8 @@
 @import "./assets/css/tempstyle.css";
 @import "./assets/css/nouislider.min.css";
 @import "./assets/css/tiny-slider.css";
+@import "./assets/css/custom.css";
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

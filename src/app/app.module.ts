@@ -1,5 +1,6 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { NgModule, OnInit } from '@angular/core';
+// import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,13 +10,15 @@ import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { AuthService } from './services/auth.service';
 import { CategoryService } from './services/category.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NetworkInterceptor } from './loader/interceptor/network.interceptor';
 import { CustomerService } from './services/customer.service';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
-
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BooleanTargetPipe } from './pipes/boolean-target.pipe';
 
 @NgModule({
   declarations: [
@@ -26,11 +29,13 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule,
     NgxSliderModule,
+    BrowserAnimationsModule,
+    FontAwesomeModule,
+    SlickCarouselModule,
+    NgbModule,
   ],
   providers: [
     CustomerService,

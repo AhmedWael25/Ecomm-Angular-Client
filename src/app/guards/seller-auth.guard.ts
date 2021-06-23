@@ -20,7 +20,7 @@ export class SellerAuthGuard implements CanActivate,CanActivateChild {
    return this.canActivate(childRoute, state);
 
   }
-  
+
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
 
     
@@ -46,19 +46,6 @@ export class SellerAuthGuard implements CanActivate,CanActivateChild {
     }
 
   }
-//   constructor(private _userService:UserService
-//     ,private _router:Router
-//     ){}
-//   canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean{
-//    return this.canActivate();
-//   }
-//   canActivate():boolean{
-//   let logged= this._userService.isLogged();
-// if(!logged)
-// this._router.navigateByUrl('/user/login');
-//   return logged;
 
-//   }
-  
-  
+
 }

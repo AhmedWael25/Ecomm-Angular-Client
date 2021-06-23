@@ -1,3 +1,5 @@
+import { ToastrService, ToastrModule } from 'ngx-toastr';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -15,6 +17,9 @@ import { RecommendedComponent } from './recommended/recommended.component';
 import { LogoutComponent } from './logout/logout.component';
 
 
+
+
+
 @NgModule({
   declarations: [
      MenuComponent
@@ -22,10 +27,13 @@ import { LogoutComponent } from './logout/logout.component';
   ],
   imports: [
   CommonModule,FormsModule,
-    ReactiveFormsModule,RouterModule,HttpClientModule
+    ReactiveFormsModule,RouterModule,HttpClientModule, 
+    ToastrModule.forRoot(),SlickCarouselModule,
   ],
   exports:[MenuComponent,MaxLengthPipe,FormsModule,
     ReactiveFormsModule,HttpClientModule,AllowCharOnlyDirective,
-  FooterComponent, LoaderSpinnerComponent]
+  FooterComponent, LoaderSpinnerComponent,],
+  providers: [ToastrService],
+
 })
 export class SharedModule { }

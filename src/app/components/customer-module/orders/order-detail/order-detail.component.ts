@@ -24,7 +24,6 @@ export class OrderDetailComponent implements OnInit, OnDestroy {
 
     this.orderDetail.orderItems = [];   
 
-
     this.paramSubscription = this._activatedRoute.params.subscribe(  params => {
 
      this.orderId =  params.orderId;

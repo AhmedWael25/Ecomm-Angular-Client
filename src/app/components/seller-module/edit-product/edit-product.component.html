@@ -1,1 +1,207 @@
-<p>edit-product works!</p>
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <!-- Row -->
+    <h1 class="card-header" style="text-align: center; background-color: #262d35; color: white;">
+        Inventory item {{ productDetails.sellerProduct.id }}
+        <i class="fas fa-dolly-flatbed"></i>
+    </h1>
+    <div class="row">
+            <div>
+                <hr>
+            </div>
+            <div class="col-lg-5 col-xlg-4 col-md-5">
+                <div class="card">
+                    <h3 class="card-header" style="text-align: center; background-color: #262d35; color: white;">
+                        Product {{ productDetails.sellerProduct.id }}
+                        Album
+                        <i class="fas fa-images"></i>
+                    </h3>
+                    <div class="card-body">
+                        <div class="carousel" data-flickity='{ "wrapAround": "true", "autoPlay": true, "imagesLoaded": true}'>
+                            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+                                <div ngxSlickItem *ngFor="let image of productDetails.sellerProduct.prodImages" class="slide">
+                                    <img [src]= 'image'>
+                                </div>
+                            </ngx-slick-carousel>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <hr>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h1>Rating</h1>
+                        <div style="text-align: center;">
+                            <star-rating value="5" checkedcolor="red" uncheckedcolor="black" size=25px; readonly="true"></star-rating>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <div class="col-lg-7 col-xlg-4 col-md-5">
+            <div class="card">
+                <h3 class="card-header" style="text-align: center; background-color: #262d35; color: white;">
+                    Product {{ productDetails.sellerProduct.id }}
+                    Details
+                    <i class="fas fa-shopping-cart"></i>
+                </h3><br>
+                <div class="card-body">
+                    
+                    <div class="m-t-30" style="text-align: center;">
+                        <img [src]='productDetails.sellerProduct.productImg' class="rounded-circle" width="150" height="100" />
+                        <h4 class="card-title m-t-10">
+                        </h4>
+                        <div class="row text-center justify-content-md-center">
+                            <div class="col-4">
+                                <a href="javascript:void(0)" class="link">
+                                    <i class="icon-people"></i>
+                                    <span class="font-weight-bold">
+                                        <i class="fas fa-battery-three-quarters" style="color: #262d35;"></i>
+                                        Quantity: {{ productDetails.sellerProduct.productQuantity }}
+                                    </span>
+                                </a>
+                            </div>
+
+                            <div class="col-4">
+                                <a href="javascript:void(0)" class="link">
+                                    <i class="icon-picture"></i>
+                                    <span class="font-weight-bolder">
+                                        <i class="fas fa-dollar-sign" style="color: green;"></i>
+                                        Price:  {{ productDetails.sellerProduct.productPrice | currency:'USD' }}
+                                    </span>
+                                </a>
+                            </div>
+
+                            <div class="col-4">
+                                <a href="javascript:void(0)" class="link">
+                                    <i class="icon-picture"></i>
+                                    <span class="font-weight-bold">
+                                        <i class="fas fa-heartbeat" style="color: red;"></i> 
+                                        Favourite:  {{ productDetails.wishListCounter }} times
+                                    </span>
+                                </a>
+                            </div>
+
+                            <div class="col-4">
+                                <a href="javascript:void(0)" class="link">
+                                    <i class="icon-picture"></i>
+                                    <span class="font-weight-bold">
+                                        <i class="fas fa-funnel-dollar" style="color: brown;"></i>
+                                        Sold:  {{ productDetails.soldCounter }} times
+                                    </span>
+                                </a>
+                            </div>
+
+                            <div class="col-4">
+                                <a href="javascript:void(0)" class="link">
+                                    <i class="icon-picture"></i>
+                                    <span class="font-weight-bold">
+                                        <i class="fas fa-star" style="color: gold;"></i>
+                                        Rating:  {{ productDetails.averageRating }} Star
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <hr>
+            </div>
+            <div class="card" style="background-color: #262d35">
+                <div class="card-body">
+                    <form [formGroup]="form" class="form-horizontal form-material mx-2">
+
+                        <div class="form-group">
+                            <label class="col-md-12" style="color: white">Name</label>
+                            <div class="col-md-12">
+                                <input type="text" formControlName="productName" [value]='productDetails.sellerProduct.productName'
+                                class="form-control form-control-line" [readonly]='isFieldEnabled()'>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-12" style="color: white">Price</label>
+                            <div class="col-md-12">
+                                <input type="text" formControlName="productPrice" [value]='productDetails.sellerProduct.productPrice | currency:"USD":true'
+                                    class="form-control form-control-line" [readonly]='isFieldEnabled()' >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-12" style="color: white">Quantity</label>
+                            <div class="col-md-12">
+                                <input type="text" [readonly]='isFieldEnabled()' formControlName="productQuantity" [value]='productDetails.sellerProduct.productQuantity'
+                                class="form-control form-control-line">
+                            </div>
+                        </div>
+
+                        <!-- <div class="form-group">
+                            <label class="col-md-12" style="color: white">SubCategory</label>
+                            <div class="col-md-12">
+                                <input type="text" [value]='productDetails.sellerProduct.subCategoryName' id="subCategoryInputId"
+                                class="form-control form-control-line" disabled>
+                            </div>
+                        </div> -->
+
+                        <div class="form-group">
+                            <label class="col-md-12" style="color: white">Description</label>
+                            <div class="col-md-12">
+                                <textarea rows="5" class="form-control" formControlName="description" style="resize: none"
+                                [readonly]='isFieldEnabled()'>{{productDetails.sellerProduct.productDescription}}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="text-align: center">
+                            <div class="d-grid gap-2 d-md-block">
+                                <button type="button" (click)="onClickEdit()" [disabled]="!isFieldEnabled()"
+                                    class="btn btn-danger upgrade-btn text-white align-items-center">
+                                    <i class="fas fa-edit"></i> &nbsp;
+                                    <span class="hide-menu m-l-4">Edit Product</span>
+                                </button>&nbsp; &nbsp; &nbsp;
+
+                                <button type="button" (click)="onClickSave()" [disabled]="isFieldEnabled()"
+                                    class="btn btn-info upgrade-btn text-white align-items-center" >
+                                    <i class="fas fa-save"></i> &nbsp;
+                                    <span class="hide-menu m-l-4">Save Product</span>
+                                </button>
+                            </div>
+                        </div>
+                        <span id="updateSuccess" class="suc" style=" display: none; color: green; text-align: center">
+                            <h4>
+                                Product {{ productDetails.sellerProduct.productName }}
+                                updated successfully
+                                <i class="fas fa-check-square"></i>
+                            </h4>
+                        </span>
+                        <span id="updateFailed" class="suc" style=" display: none; color: red; text-align: center">
+                            <h4>
+                                Failed to update Product 
+                                <i class="fas fa-times-circle"></i>
+                            </h4>
+                        </span>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+   
+
+        <div class="col-lg-7 col-xlg-8 col-md-7">
+           
+        </div>
+        <br>
+        <!-- <div style="text-align: center; color: #262d35">
+            <h1>
+                <i class="fab fa-playstation"></i>
+                <i class="fas fa-gamepad"></i>
+                <span class="logo-text">UnityStore</span>
+            </h1>
+        </div> -->
+    </div>
+</div>
+
+

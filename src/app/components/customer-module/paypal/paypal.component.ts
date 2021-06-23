@@ -1,4 +1,3 @@
-import { coerceStringArray } from '@angular/cdk/coercion';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartItem } from 'src/app/models/cart/CartItem';

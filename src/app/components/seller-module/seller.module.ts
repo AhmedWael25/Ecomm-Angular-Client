@@ -1,3 +1,6 @@
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { PageControllerComponent } from './../shared/page-controller/page-controller.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SellerHomeComponent } from './seller-home/seller-home.component';
@@ -10,9 +13,12 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { SellerAuthGuard } from 'src/app/guards/seller-auth.guard';
 import { SellerRegisterComponent } from './seller-register/seller-register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from '../shared/shared.module';
 import { LoginComponent } from '../shared/login/login.component';
 import { PreventLoginRegGuard } from 'src/app/guards/prevent-login-register.guard';
+// import {MatTableModule} from '@angular/material/table';
+import { SharedModule } from '../shared/shared.module';
+import { RatingModule } from 'ng-starrating';
+import { BooleanTargetPipe } from 'src/app/pipes/boolean-target.pipe';
 
 const routes: Routes = [
   {
@@ -32,14 +38,14 @@ const routes: Routes = [
     component:SellerRegisterComponent,
   },
   {
-    path: 'edit-product', 
+    path: 'products/:productId',
     component:EditProductComponent,
     data:{
       role : "ROLE_SELLER" 
     },
   },
   {
-    path: 'add-product', 
+    path: 'add-product',
     component:AddProductComponent,
     data:{
       role : "ROLE_SELLER" 
@@ -51,6 +57,11 @@ const routes: Routes = [
     data:{
       role : "ROLE_SELLER" 
     },
+  },
+  {
+    path:':sellerId',
+    component: InventoryComponent,
+    canActivate:[SellerAuthGuard],
   }
 ];
 
@@ -62,7 +73,10 @@ const routes: Routes = [
     EditProductComponent,
     SoldItemsComponent,
     InventoryComponent,
-    SellerRegisterComponent
+    SellerRegisterComponent,
+    SellerRegisterComponent,
+    PageControllerComponent,
+    BooleanTargetPipe,
   ],
   imports: [
     CommonModule,
@@ -71,6 +85,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     FormsModule,
     SharedModule,
-  ]
+    SlickCarouselModule,
+    RatingModule,
+  ],
 })
 export class SellerModule { }
