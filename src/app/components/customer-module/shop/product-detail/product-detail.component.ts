@@ -13,6 +13,17 @@ export class ProductDetailComponent implements OnInit {
   pageTitle: string = 'Product Detail';
   product:Product;
 
+  slideConfig = {
+    "slidesToShow": 1,
+    "slidesToScroll": 1,
+    "autoplay": true,
+    "autoplaySpeed": 1000,
+    "nextArrow": "<div class='nav-btn next-slide'></div>",
+    "prevArrow": "<div class='nav-btn prev-slide'></div>",
+    // "dots": true,
+    "infinite": true
+  };
+
   constructor(
     private _productService: ProductService,
     private _activatedRoute: ActivatedRoute) { }
@@ -23,6 +34,7 @@ export class ProductDetailComponent implements OnInit {
   
         this._productService.getProductById(id).subscribe(response => {
           this.product = response.data;
+          this.product.prodImages.push(this.product.productImg);
         });
       });
     }

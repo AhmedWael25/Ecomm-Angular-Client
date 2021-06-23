@@ -8,8 +8,8 @@ import { ProductReviewComponent } from './product-review/product-review.componen
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoaderSpinnerComponent } from '../../shared/loader-spinner/loader-spinner.component';
 import { SharedModule } from '../../shared/shared.module';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 const routes: Routes = [
   {
@@ -35,6 +35,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     NgxPaginationModule,
     NgxSliderModule,
+    SlickCarouselModule,
     FormsModule,
     ReactiveFormsModule,
     SharedModule,

@@ -95,6 +95,7 @@ export class ProductListComponent implements OnInit {
         data => {
           this.products = data.data;
 
+          console.log(this.products);
           this.totalPages = data.totalPages;
           this.totalElements = data.totalElements;
         }
