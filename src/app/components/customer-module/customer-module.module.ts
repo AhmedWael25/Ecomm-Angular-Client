@@ -15,6 +15,8 @@ import { CustomerAuthGuard } from 'src/app/guards/customer-auth.guard';
 import { ProfileComponent } from '../shared/profile/profile.component';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { ProductHomeComponent } from './shop/product-home/product-home.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { PaypalComponent } from './paypal/paypal.component';
 
 
 const routes: Routes = [
@@ -39,13 +41,23 @@ const routes: Routes = [
   {
     path:"profile",
     component:ProfileComponent,
+    canActivate:[CustomerAuthGuard],
     data:{
       role : "ROLE_CUSTOMER",
     }
   },
   {
+    path:"checkout",
+    component:CheckoutComponent,
+    canActivate:[CustomerAuthGuard],
+    data:{
+      role : "ROLE_CUSTOMER",
+    },
+  },
+  {
     path:"cart",
     component:CartComponent,
+    canActivate:[CustomerAuthGuard],
     data:{
       role : "ROLE_CUSTOMER",
     }
@@ -53,6 +65,7 @@ const routes: Routes = [
   {
     path:"wishlist",
     component:WishlistComponent,
+    canActivate:[CustomerAuthGuard],
     data:{
       role : "ROLE_CUSTOMER",
     }
@@ -79,6 +92,8 @@ const routes: Routes = [
     RegisterComponent,
     CartComponent,
     WishlistComponent,
+    CheckoutComponent,
+    PaypalComponent,
   ],
   imports: [
     CommonModule,

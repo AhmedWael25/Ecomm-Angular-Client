@@ -12,12 +12,13 @@ import { LoginComponent } from './login/login.component';
 import { LoaderSpinnerComponent } from './loader-spinner/loader-spinner.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RecommendedComponent } from './recommended/recommended.component';
+import { LogoutComponent } from './logout/logout.component';
 
 
 @NgModule({
   declarations: [
      MenuComponent
-    ,MaxLengthPipe,AllowCharOnlyDirective, FooterComponent, PageNotFoundComponent, LoginComponent, LoaderSpinnerComponent, ProfileComponent, RecommendedComponent
+    ,MaxLengthPipe,AllowCharOnlyDirective, FooterComponent, PageNotFoundComponent, LoginComponent, LoaderSpinnerComponent, ProfileComponent, RecommendedComponent, LogoutComponent
   ],
   imports: [
   CommonModule,FormsModule,

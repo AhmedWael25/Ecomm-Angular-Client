@@ -12,12 +12,17 @@ export class OrderListComponent implements OnInit {
   constructor(private _customerOrderService:CustomerService) { }
 
    orders:Array<CustomerOrder>;
+   isLoading:boolean = false;
 
   ngOnInit(): void {
 
-    this._customerOrderService.getCustomerOrders(2).subscribe( resp => {
-      
+    this.isLoading = true;
+    this._customerOrderService.getCustomerOrders().subscribe( resp => {
       this.orders = resp.data;
+    },
+    err => {},
+    () => {
+      this.isLoading = false;
     });
 
   }

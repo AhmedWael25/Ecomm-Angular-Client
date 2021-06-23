@@ -3,7 +3,12 @@
     <section class="order-history-wrapper pt-90 pb-100">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-9">
+
+                <div class="col-lg-9" *ngIf="isLoading">
+                    <app-spinner></app-spinner>
+                </div>
+
+                <div class="col-lg-9" *ngIf="!isLoading">
                     <div class="history-title">
                         <h4 class="heading-4 font-weight-500 title">Order History</h4>
                         <p class="paragraph-small">Your all the orders</p>

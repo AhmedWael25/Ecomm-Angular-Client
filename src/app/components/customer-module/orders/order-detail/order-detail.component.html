@@ -68,7 +68,7 @@
                                     </div>
                                     <div class="sub-total">
                                         <p class="value">Shipping Cost (+):</p>
-                                        <p class="price">{{25.50 | currency:'USD' }}</p>
+                                        <p class="price">{{00.00 | currency:'USD' }}</p>
                                     </div>
                                     <!-- <div class="sub-total">
                                         <p class="value">Discount (-):</p>
@@ -77,7 +77,7 @@
                                 </div>
                                 <div class="payable-total">
                                     <p class="value">Total Payable:</p>
-                                    <p class="price">{{ calculateOrderTotal()+25.50 | currency:'USD' }}</p>
+                                    <p class="price">{{ calculateOrderTotal()+00.00 | currency:'USD' }}</p>
                                 </div>
                             </div>
                         </div>
@@ -159,9 +159,9 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="order-btn pt-20">
-                                <a href="#0" class="main-btn primary-btn-text">Write a Review</a>
-                                <a href="#0" class="main-btn primary-btn-text">Buy again</a>
-                                <a href="#0" class="main-btn error-btn-text">Cancel order</a>
+                                <!-- <a href="#0" class="main-btn primary-btn-text">Write a Review</a> -->
+                                <a href="javascript:void(0)" [routerLink]="['/shop']" class="main-btn primary-btn-text"> Continue Shopping</a>
+                                <!-- <a href="#0" class="main-btn error-btn-text">Cancel order</a> -->
                             </div>
                         </div>
                     </div>

@@ -17,7 +17,12 @@ export class CustomerService{
     }
 
     //Get All Customer Orders
-    getCustomerOrders(customerId:number):Observable<ApiResponse>{
+    getCustomerOrders():Observable<ApiResponse>{
+        // let customerId = this._authService.getUserId();
+        //TODO REMOVE
+        let customerId = 2;
+        // if( customerId <= 0 ) return;
+        // cartItemRequest.customerId = customerId;
         return this._apiService.get( this.baseUrl+"/"+customerId+"/orders" );
     }
 

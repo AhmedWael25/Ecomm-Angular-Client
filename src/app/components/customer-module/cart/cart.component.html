@@ -1,7 +1,28 @@
     <section class="checkout-wrapper pt-50">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-9">
+
+                <div class="col-lg-9 justify-content-center mb-20   " *ngIf="isCartError">
+                    <div class="alert alert-danger" role="alert">
+
+                        <p>Something Went Wrong</p>
+
+                        <p *ngFor="let item of cartErrData" > Product : {{item.name}}, has {{item.quantity}} Only In Stock!  </p>
+                      </div>
+                </div>
+                
+
+                <div class="col-lg-9 justify-content-center" *ngIf="cartItems.length == 0">
+                    <div class="alert alert-primary" role="alert">
+                        You Have No Items in Your Cart !.
+
+                        <div class="row justify-content-center mt-20" >
+                            <a href="javascript:void(0)" [routerLink]="['/shop']" class="main-btn primary-btn-border">continue shopping</a>
+                        </div>
+                      </div>
+                </div>
+
+                <div class="col-lg-9" *ngIf="cartItems.length > 0">
                     <div class="checkout-style-1 ">
                         <div class="checkout-table table-responsive">
                             <table class="table">
@@ -74,7 +95,7 @@
                                 </div>
                                 <div class="single-total">
                                     <p class="value">Shipping Cost (+):</p>
-                                    <p class="price">$25.50</p>
+                                    <p class="price">$00.00</p>
                                 </div>
                                 <div class="single-total">
                                     <p class="value">Discount (-):</p>
@@ -82,7 +103,7 @@
                                 </div>
                                 <div class="single-total total-payable">
                                     <p class="value">Total Payable:</p>
-                                    <p class="price" [innerText]='cartTotal+25.5 | currency:"USD"'>0</p>
+                                    <p class="price" [innerText]='cartTotal+00.00 | currency:"USD"'>0</p>
                                 </div>
                             </div>
                         </div>
@@ -92,7 +113,7 @@
                                 <a href="javascript:void(0)" [routerLink]="['/shop']" class="main-btn primary-btn-border">continue shopping</a>
                             </div>
                             <div class="single-btn">
-                                <a href="javascript:void(0)" [routerLink]="['/checkout']" class="main-btn primary-btn">Checkout now</a>
+                                <a href="javascript:void(0)"  (click)="checkout()" class="main-btn primary-btn">Checkout now</a>
                             </div>
                         </div>
                     </div>
