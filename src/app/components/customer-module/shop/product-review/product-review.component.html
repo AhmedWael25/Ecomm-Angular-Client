@@ -1,168 +1,117 @@
-    <!--====== Reviews Part Start ======-->
+<!--====== Reviews Part Start ======-->
 
-    <section class="reviews-wrapper pt-100 pb-100 ">
-        <div class="container">
-            <div class="reviews-style">
-                <div class="reviews-menu">
-                    <ul class="nav">
-                        <li><a href="#0">Details</a></li>
-                        <li><a class="active" href="#0">Reviews</a></li>
-                    </ul>
-                </div>
+<section class="reviews-wrapper pt-100 pb-100 ">
+    <div class="container">
+        <div class="reviews-style">
+            <div class="reviews-menu">
+                <ul class="nav">
+                    <li><a href="#0">Details</a></li>
+                    <li><a class="active" href="#0">Reviews</a></li>
+                </ul>
+            </div>
 
-                <div class="reviews-title">
-                    <h4 class="title">Customer Reviews (38)</h4>
-                </div>
+            <div class="reviews-title">
+                <h4 class="title">Customer Reviews ({{totalElements}})</h4>
+            </div>
 
-                <div class="reviews-rating-wrapper flex-wrap">
-                    <div class="reviews-rating-star">
-                        <p class="rating-review"><i class="mdi mdi-star"></i> <span>4.5</span> of 5</p>
+            <div class="reviews-rating-wrapper flex-wrap">
+                <div class="reviews-rating-star">
+                    <p class="rating-review"><i class="mdi mdi-star"></i> <span>4.5</span> of 5</p>
 
-                        <div class="reviews-rating-bar">
-                            <div class="single-reviews-rating-bar">
-                                <p class="value">5 Starts</p>
-                                <div class="rating-bar-inner">
-                                    <div class="bar-inner" style="width: 60%;"></div>
-                                </div>
-                                <p class="percent">60%</p>
+                    <div class="reviews-rating-bar" *ngFor="let rate of ratingPercentages; let i=index">
+                        <div class="single-reviews-rating-bar">
+                            <p class="value">{{i + 1}} Starts</p>
+                            <div class="rating-bar-inner">
+                                <div class="bar-inner" [style.width]="rate + '%'"></div>
                             </div>
-                        </div>
-                        <div class="reviews-rating-bar">
-                            <div class="single-reviews-rating-bar">
-                                <p class="value">4 Starts</p>
-                                <div class="rating-bar-inner">
-                                    <div class="bar-inner" style="width: 20%;"></div>
-                                </div>
-                                <p class="percent">20%</p>
-                            </div>
-                        </div>
-                        <div class="reviews-rating-bar">
-                            <div class="single-reviews-rating-bar">
-                                <p class="value">3 Starts</p>
-                                <div class="rating-bar-inner">
-                                    <div class="bar-inner" style="width: 10%;"></div>
-                                </div>
-                                <p class="percent">10%</p>
-                            </div>
-                        </div>
-                        <div class="reviews-rating-bar">
-                            <div class="single-reviews-rating-bar">
-                                <p class="value">2 Starts</p>
-                                <div class="rating-bar-inner">
-                                    <div class="bar-inner" style="width: 5%;"></div>
-                                </div>
-                                <p class="percent">05%</p>
-                            </div>
-                        </div>
-                        <div class="reviews-rating-bar">
-                            <div class="single-reviews-rating-bar">
-                                <p class="value">1 Starts</p>
-                                <div class="rating-bar-inner">
-                                    <div class="bar-inner" style="width: 0;"></div>
-                                </div>
-                                <p class="percent">0%</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="reviews-rating-form">
-                        <div class="rating-star">
-                            <p>Click on star to review</p>
-                            <ul id="stars" class="stars">
-                                <li class="star" data-value='1'><i class="mdi mdi-star"></i></li>
-                                <li class="star" data-value='2'><i class="mdi mdi-star"></i></li>
-                                <li class="star" data-value='3'><i class="mdi mdi-star"></i></li>
-                                <li class="star" data-value='4'><i class="mdi mdi-star"></i></li>
-                                <li class="star" data-value='5'><i class="mdi mdi-star"></i></li>
-                            </ul>
-                        </div>
-                        <div class="rating-form">
-                            <form action="#">
-                                <div class="single-form form-default">
-                                    <label>Write your Review</label>
-                                    <div class="form-input">
-                                        <textarea placeholder="Your review here"></textarea>
-                                        <i class="mdi mdi-message-text-outline"></i>
-                                    </div>
-                                </div>
-                                <div class="single-rating-form flex-wrap">
-                                    <div class="rating-form-file">
-                                        <div class="file">
-                                            <input type="file" id="file-1">
-                                            <label for="file-1"><i class="mdi mdi-camera"></i></label>
-                                        </div>
-                                        <div class="file">
-                                            <input type="file" id="file-1">
-                                            <label for="file-1"><i class="mdi mdi-attachment"></i></label>
-                                        </div>
-                                    </div>
-                                    <div class="rating-form-btn">
-                                        <button class="main-btn primary-btn">write a Review</button>
-                                    </div>
-                                </div>
-                            </form>
+                            <p class="percent">{{rate}}%</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="reviews-comment">
-                    <ul class="comment-items">
-                        <li>
-                            <div class="single-review-comment">
-                                <div class="comment-user-info">
-                                    <div class="comment-author">
-                                        <img src="assets/images/review/author-1.jpg" alt="">
-                                    </div>
-                                    <div class="comment-content">
-                                        <h6 class="name">User Name</h6>
-
-                                        <p>
-                                            <i class="mdi mdi-star"></i>
-                                            <span class="rating"><strong>4</strong> of 5</span>
-                                            <span class="date">20 Nov 2019 22:01</span>
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="comment-user-text">
-                                    <p>Good headphones. The sound is clear. AND the bottoms repyat and top ring. Currently are really not taken. For me quiet. With my Beats of course can not be compared. But for the money and definitely recommend. The one
-                                        who took happy as an elephant. Product as advertised, looks good Quality, sound is not the best but because of cost-benefit ratio it seems very good to me, recommended the seller .</p>
-                                    <ul class="comment-meta">
-                                        <li><i class="mdi mdi-thumb-up"></i> <span>31</span></li>
-                                        <li><a href="#0">Like</a></li>
-                                        <li><a href="#0">Replay</a></li>
-                                    </ul>
+                <div class="reviews-rating-form">
+                    <div class="rating-star">
+                        <p>Click on star to review</p>
+                        <ul id="stars" class="stars">
+                            <li class="star" data-value='1'><i class="mdi mdi-star"></i></li>
+                            <li class="star" data-value='2'><i class="mdi mdi-star"></i></li>
+                            <li class="star" data-value='3'><i class="mdi mdi-star"></i></li>
+                            <li class="star" data-value='4'><i class="mdi mdi-star"></i></li>
+                            <li class="star" data-value='5'><i class="mdi mdi-star"></i></li>
+                        </ul>
+                    </div>
+                    <div class="rating-form">
+                        <form action="#">
+                            <div class="single-form form-default">
+                                <label>Write your Review</label>
+                                <div class="form-input">
+                                    <textarea placeholder="Your review here"></textarea>
+                                    <i class="mdi mdi-message-text-outline"></i>
                                 </div>
                             </div>
-                        </li>
-                        <li>
-                            <div class="single-review-comment">
-                                <div class="comment-user-info">
-                                    <div class="comment-author">
-                                        <img src="assets/images/review/author-4.jpg" alt="">
+                            <div class="single-rating-form flex-wrap">
+                                <div class="rating-form-file">
+                                    <div class="file">
+                                        <input type="file" id="file-1">
+                                        <label for="file-1"><i class="mdi mdi-camera"></i></label>
                                     </div>
-                                    <div class="comment-content">
-                                        <h6 class="name">User Name</h6>
-
-                                        <p>
-                                            <i class="mdi mdi-star"></i>
-                                            <span class="rating"><strong>4</strong> of 5</span>
-                                            <span class="date">20 Nov 2019 22:01</span>
-                                        </p>
+                                    <div class="file">
+                                        <input type="file" id="file-1">
+                                        <label for="file-1"><i class="mdi mdi-attachment"></i></label>
                                     </div>
                                 </div>
-                                <div class="comment-user-text">
-                                    <p>Good headphones. The sound is clear. AND the bottoms repyat and top ring. Currently are really not taken. For me quiet. With my Beats of course can not be compared. But for the money and definitely recommend. The one
-                                        who took happy as an elephant. Product as advertised, looks good Quality, sound is not the best but because of cost-benefit ratio it seems very good to me, recommended the seller .</p>
-                                    <ul class="comment-meta">
-                                        <li><i class="mdi mdi-thumb-up"></i> <span>31</span></li>
-                                        <li><a href="#0">Like</a></li>
-                                        <li><a href="#0">Replay</a></li>
-                                    </ul>
+                                <div class="rating-form-btn">
+                                    <button class="main-btn primary-btn">write a Review</button>
                                 </div>
                             </div>
-                        </li>
-                    </ul>
+                        </form>
+                    </div>
                 </div>
             </div>
+
+            <div class="reviews-comment">
+                <ul class="comment-items">
+                    <li>
+                        <div class="single-review-comment" *ngFor="let review of reviews | paginate: {itemsPerPage: 2,
+                            currentPage: p,
+                            totalItems: this.totalElements}">
+                            <div class="comment-user-info">
+                                <div class="comment-author">
+                                    <img src="assets/images/review/author-1.jpg" alt="">
+                                </div>
+                                <div class="comment-content">
+                                    <h6 class="name">{{review.userName}}</h6>
+
+                                    <p>
+                                        <i class="mdi mdi-star"></i>
+                                        <span class="rating"><strong
+                                                *ngFor="let item of [].constructor(review.rating); let i = index">
+                                                <i class="fa fa-star" aria-hidden="true" ></i></strong> of 5
+                                        </span>
+                                        <span class="date">{{review.createdDate | date:'medium'}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="comment-user-text">
+                                <p>{{review.reviewText}}</p>
+                                <ul class="comment-meta">
+                                </ul>
+                            </div>
+                        </div>
+                    </li>
+                    <pagination-controls 
+                         [maxSize]="maxSize"
+                         [directionLinks]="directionLinks"
+                         [autoHide]="autoHide"
+                         [responsive]="responsive"
+                         [previousLabel]="labels.previousLabel"
+                         [nextLabel]="labels.nextLabel"
+                         [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+                         [screenReaderPageLabel]="labels.screenReaderPageLabel"
+                         [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+                         (pageChange)="onPageChange($event)"></pagination-controls>
+                </ul>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
