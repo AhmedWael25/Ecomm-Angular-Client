@@ -1,4 +1,9 @@
+import { CustomerDetails } from './../../../models/customer/CustomerDetails';
+import { CustomerData } from './../../../models/customer/CustomerData';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
   selector: 'app-customer-details',
@@ -7,9 +12,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerDetailsComponent implements OnInit {
 
-  constructor() { }
+  customerId: number;
+  subscription: Subscription;
+  customerDetails : CustomerDetails;
+  
+  constructor(private _adminService:AdminService, private _activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
+
+    this.subscription = this._activatedRoute.params.subscribe(params => {
+
+      this.customerId = params.customerId;
+
+      this._adminService.getCustomerDetails(this.customerId).subscribe(response => {
+        console.log(response);
+        this.customerDetails = response.data;
+        console.log("customer details is : " + JSON.stringify(this.customerDetails));
+      });
+    });
+
   }
 
 }
