@@ -28,11 +28,11 @@ import { LogoutComponent } from './logout/logout.component';
   imports: [
   CommonModule,FormsModule,
     ReactiveFormsModule,RouterModule,HttpClientModule, 
-    ToastrModule.forRoot(),SlickCarouselModule,
+    ToastrModule.forRoot(),SlickCarouselModule
   ],
   exports:[MenuComponent,MaxLengthPipe,FormsModule,
     ReactiveFormsModule,HttpClientModule,AllowCharOnlyDirective,
-  FooterComponent, LoaderSpinnerComponent,],
+  FooterComponent, LoaderSpinnerComponent,SlickCarouselModule],
   providers: [ToastrService],
 
 })

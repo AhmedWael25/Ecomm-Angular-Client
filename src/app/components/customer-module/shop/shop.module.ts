@@ -9,7 +9,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
+// import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 const routes: Routes = [
   {
@@ -35,7 +35,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     NgxPaginationModule,
     NgxSliderModule,
-    SlickCarouselModule,
     FormsModule,
     ReactiveFormsModule,
     SharedModule,

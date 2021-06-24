@@ -1,11 +1,12 @@
-import { SellerProductRequest } from './../../../models/seller/SellerProductRequest';
-import { SellerProductDetail } from './../../../models/seller/seller.product.datail';
+
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { SellerService } from './../../../services/seller.service';
 import { Subscription } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { SellerProductDetail } from 'src/app/models/seller/seller.product.datail';
 import { NotificationService } from 'src/app/services/notification.service';
+import { SellerProductRequest } from 'src/app/models/seller/SellerProductRequest';
 
 
 @Component({

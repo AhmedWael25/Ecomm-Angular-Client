@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminHomeComponent } from './components/admin-module/admin-home/admin-home.component';
 import { CustomerHomeComponent } from './components/customer-module/customer-home/customer-home.component';
 import { OrderDetailComponent } from './components/customer-module/orders/order-detail/order-detail.component';
 import { OrderHomeComponent } from './components/customer-module/orders/order-home/order-home.component';
@@ -27,6 +28,13 @@ const routes: Routes = [
     // canActivate: [SellerAuthGuard],
     // canActivateChild:[SellerAuthGuard],
     loadChildren: () => import('./components/seller-module/seller.module').then(m => m.SellerModule)
+  },
+  {
+    path: 'admin', 
+    component:AdminHomeComponent,
+    // canActivate: [SellerAuthGuard],
+    // canActivateChild:[SellerAuthGuard],
+    loadChildren: () => import('./components/admin-module/admin-module.module').then(m => m.AdminModule)
   },
   {
     path:"404",

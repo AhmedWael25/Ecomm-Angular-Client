@@ -1,5 +1,5 @@
 import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
+// import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { PageControllerComponent } from './../shared/page-controller/page-controller.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -85,7 +85,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     FormsModule,
     SharedModule,
-    SlickCarouselModule,
+
     RatingModule,
   ],
 })
