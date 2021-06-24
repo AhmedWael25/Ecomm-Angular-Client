@@ -15,6 +15,7 @@ import { LoaderSpinnerComponent } from './loader-spinner/loader-spinner.componen
 import { ProfileComponent } from './profile/profile.component';
 import { RecommendedComponent } from './recommended/recommended.component';
 import { LogoutComponent } from './logout/logout.component';
+import { LineChartComponent } from './line-chart/line-chart.component';
 
 
 
@@ -23,7 +24,7 @@ import { LogoutComponent } from './logout/logout.component';
 @NgModule({
   declarations: [
      MenuComponent
-    ,MaxLengthPipe,AllowCharOnlyDirective, FooterComponent, PageNotFoundComponent, LoginComponent, LoaderSpinnerComponent, ProfileComponent, RecommendedComponent, LogoutComponent
+    ,MaxLengthPipe,AllowCharOnlyDirective, FooterComponent, PageNotFoundComponent, LoginComponent, LoaderSpinnerComponent, ProfileComponent, RecommendedComponent, LogoutComponent, LineChartComponent
   ],
   imports: [
   CommonModule,FormsModule,
@@ -32,7 +33,7 @@ import { LogoutComponent } from './logout/logout.component';
   ],
   exports:[MenuComponent,MaxLengthPipe,FormsModule,
     ReactiveFormsModule,HttpClientModule,AllowCharOnlyDirective,
-  FooterComponent, LoaderSpinnerComponent,SlickCarouselModule],
+  FooterComponent, LoaderSpinnerComponent,SlickCarouselModule, LineChartComponent],
   providers: [ToastrService],
 
 })
