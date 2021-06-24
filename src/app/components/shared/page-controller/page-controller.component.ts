@@ -54,29 +54,19 @@ export class PageControllerComponent implements OnInit {
 
   }
 
-  increaseSize():void{
-    ++this.size;
-    this.change.emit(
-      {
-        page : this.page ,
-        size : this.size
-      }
-    );
-  }
 
-  decreaseSize():void{
 
-    if(this.size > 1){
-      --this.size;
-    }else{
+  updateSize(value: string) {
+      let val = +value;
+      this.size = val ;
+      console.log(val);
 
-    }
-    this.change.emit(
-      {
-        page : this.page ,
-        size : this.size
-      }
-    );
+      this.change.emit(
+        {
+          page : this.page ,
+          size : this.size
+        }
+      );
   }
 
 }
