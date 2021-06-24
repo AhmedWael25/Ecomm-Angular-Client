@@ -57,12 +57,12 @@ h2 a {
 }
 
 .container {
-  /* text-align: left; */
-  /* overflow: hidden; */
-  /* width: 80%; */
-  /* margin: 0 auto; */
-  /* display: table; */
-  /* padding: 0 0 8em 0; */
+  text-align: left;
+  overflow: hidden;
+  width: 80%;
+  margin: 0 auto;
+  display: table;
+  padding: 0 0 8em 0;
 }
 
 .container td,
@@ -91,7 +91,7 @@ h2 a {
   color: #fb667a;
 }
 
-.container tr:hover {
+/* .container tr:hover {
   background-color: #464a52;
   -webkit-box-shadow: 0 6px 6px -6px #0e1119;
   -moz-box-shadow: 0 6px 6px -6px #0e1119;
@@ -111,7 +111,7 @@ h2 a {
   transition-duration: 0.4s;
   transition-property: all;
   transition-timing-function: line;
-}
+} */
 
 @media (max-width: 800px) {
   .container td:nth-child(6),

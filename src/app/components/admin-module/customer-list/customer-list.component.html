@@ -18,25 +18,25 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let customer of customers" style="color: white">
-                            <td style="margin-right: 10%; color: white">{{customer.id}}</td>
-
-                            <td>
-                                <div class="d-flex align-items-center m-r-10">
-                                    <img class="btn btn-circle d-flex btn-info text-white" style="padding: 1px"
-                                        [src]="customer.image" width="80" height="60px" 
-                                        class="rounded-circle" alt="seller"/>
-                                </div> 
-                            </td>
-
-                            <td>{{customer.name}}</td>
-
-                            <td>{{customer.email}}</td>
-
-                            <td>{{customer.phone}}</td>
-
-                            <td>{{customer.regDate | date}}</td>
-                        </tr>
+                            <tr *ngFor="let customer of customers" style="color: white">
+                                <td style="margin-right: 10%; color: white">{{customer.id}}</td>
+    
+                                <td>
+                                    <div class="d-flex align-items-center m-r-10">
+                                        <img class="btn btn-circle d-flex btn-info text-white" style="padding: 1px"
+                                            [src]="customer.image" width="60px" height="60px" 
+                                            class="rounded-circle" alt="seller"/>
+                                    </div> 
+                                </td>
+    
+                                <td>{{customer.name}}</td>
+    
+                                <td>{{customer.email}}</td>
+    
+                                <td>{{customer.phone}}</td>
+    
+                                <td>{{customer.regDate | date}}</td>
+                            </tr>                       
                     </tbody>
                 </table>
             </div>

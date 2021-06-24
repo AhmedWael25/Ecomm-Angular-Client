@@ -18,17 +18,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let seller of sellers" style="color: white">
-                            <td style="margin-right: 10%; color: white">{{seller.id}}</td>
+                        <tr *ngFor="let seller of sellers" style="color: white" [routerLink]='["/admin/sellers", seller.id]'>
 
+                            <td style="margin-right: 10%; color: white">{{seller.id}}</td>
                             <td>
                                 <div class="d-flex align-items-center m-r-10">
                                     <img class="btn btn-circle d-flex btn-info text-white" style="padding: 1px"
-                                        [src]="seller.image" width="80" height="60px" 
+                                        [src]="seller.image" width="60px" height="60px" 
                                         class="rounded-circle" alt="seller"/>
                                 </div> 
                             </td>
-
                             <td>{{seller.name}}</td>
 
                             <td>{{seller.email}}</td>
