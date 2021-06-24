@@ -20,8 +20,6 @@ const routes: Routes = [
   }
 ];
 
-
-
 @NgModule({
   declarations: [
     AdminHomeComponent,

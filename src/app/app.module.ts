@@ -24,7 +24,6 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 @NgModule({
   declarations: [
     AppComponent,
-
   ],
   imports: [
     BrowserModule,
