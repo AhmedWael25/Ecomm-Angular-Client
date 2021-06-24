@@ -1,8 +1,31 @@
-<span>
-  <button (click)="decreasePage()" > `<` </button>
-  {{page}}
-  <button (click)="increasePage()" > `>` </button>
-  <button (click)= "decreaseSize()">decrease</button>
-  {{size}}
-  <button (click)= "increaseSize()">increase</button>
-</span>
+
+<div class="container-fluid ">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-6 col-lg-3">
+      <span>
+        Page:
+        <button (click)="decreasePage()" class="btn btn-defualt btn-sm" > << </button>
+        {{page+1}}
+        <button (click)="increasePage()" class="btn btn-defualt btn-sm" > >> </button>
+      </span>
+    </div>
+    <div class="col-md-6 col-lg-3">
+      <div class="d-flex justiy-content-center">
+
+        <label class="row-md-3 col-lg-6">
+         Page Size:
+        </label>
+
+        <select class="form-select form-select-sm row-md-3 col-lg-3" (change)="updateSize(pageSize.value)" #pageSize>
+          <option selected value="10" >10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+        </select>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+

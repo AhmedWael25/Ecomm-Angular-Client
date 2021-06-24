@@ -21,24 +21,24 @@
                 <td>
                     <div class="d-flex align-items-center m-r-10">
                         <img class="btn btn-circle d-flex btn-info text-white" style="padding: 1px"
-                            [src]="product.img" width="80" height="60px" 
+                            [src]="product.img" width="80" height="60px"
                             class="rounded-circle" alt="product"/>
-                    </div> 
+                    </div>
                 </td>
                 <td>
                     <div class="d-flex align-items-center">
                         <div class="">
                             <h4 class="m-b-0 font-16">
-                                {{ product.name }} 
+                                {{ product.name }}
                             </h4>
                         </div>
                     </div>
                 </td>
                 <td class="justify-content-center">
-                    {{product.price | currency:'USD'}}  
+                    {{product.price | currency:'USD'}}
                 </td>
                 <td>
-                    {{product.quantity}} 
+                    {{product.quantity}}
                 </td>
                 <td>
                     {{product.subcategoryName}}
@@ -58,4 +58,8 @@
         </tbody>
     </table>
 </div>
+<div class="container-fluid card-footer">
+  <page-controller [page]="0" [size]="10" (change)="onPageControllerChange($event)"> </page-controller>
+</div>
+
 

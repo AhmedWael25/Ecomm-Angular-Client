@@ -25,7 +25,7 @@ const routes: Routes = [
     path:"",
     component:InventoryComponent,
     data:{
-      role : "ROLE_SELLER" 
+      role : "ROLE_SELLER"
     },
   },
   {
@@ -41,27 +41,27 @@ const routes: Routes = [
     path: 'products/:productId',
     component:EditProductComponent,
     data:{
-      role : "ROLE_SELLER" 
+      role : "ROLE_SELLER"
     },
   },
   {
     path: 'add-product',
     component:AddProductComponent,
     data:{
-      role : "ROLE_SELLER" 
+      role : "ROLE_SELLER"
     },
   },
   {
-    path: 'sold-items', 
+    path: 'sold-items',
     component:SoldItemsComponent,
     data:{
-      role : "ROLE_SELLER" 
+      role : "ROLE_SELLER"
     },
   },
   {
     path:':sellerId',
     component: InventoryComponent,
-    canActivate:[SellerAuthGuard],
+    // canActivate:[SellerAuthGuard],
   }
 ];
 
