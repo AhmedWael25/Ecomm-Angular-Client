@@ -20,4 +20,8 @@ export class AdminService {
   getAllCustomers():Observable<ApiResponse>{
     return this._apiService.get(URLS.apiUrl + "/customers");
   }
+
+  getSellerDetails(sellerId:number):Observable<ApiResponse>{
+    return this._apiService.get(URLS.apiUrl + "/seller/" + sellerId);
+  }
 }

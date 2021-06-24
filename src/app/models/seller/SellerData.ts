@@ -12,4 +12,6 @@ export class SellerData{
     regDate:string;
     deleted: boolean;
     emailVerified: boolean;
+    soldItemsCount: number;
+    productsCount: number;
 }

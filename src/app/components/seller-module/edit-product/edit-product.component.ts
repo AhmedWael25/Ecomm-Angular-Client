@@ -37,7 +37,7 @@ export class EditProductComponent implements OnInit {
     "infinite": true
   };
 
-  constructor(private _sellerApi:SellerService , private _activatedRoute:ActivatedRoute, private _notificationService: NotificationService) {
+  constructor(private _sellerApi:SellerService, private _activatedRoute:ActivatedRoute, private _notificationService: NotificationService) {
   }
 
   ngOnInit(): void {
