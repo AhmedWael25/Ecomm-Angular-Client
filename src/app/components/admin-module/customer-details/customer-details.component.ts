@@ -14,9 +14,9 @@ export class CustomerDetailsComponent implements OnInit {
 
   customerId: number;
   subscription: Subscription;
-  customerDetails : CustomerDetails;
-  
-  constructor(private _adminService:AdminService, private _activatedRoute:ActivatedRoute) { }
+  customerDetails: CustomerDetails;
+
+  constructor(private _adminService: AdminService, private _activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
 
@@ -28,9 +28,24 @@ export class CustomerDetailsComponent implements OnInit {
         console.log(response);
         this.customerDetails = response.data;
         console.log("customer details is : " + JSON.stringify(this.customerDetails));
+
       });
     });
 
+  }
+
+  getOrdersSize() {
+    return this.customerDetails.orderDtoList.length;
+  }
+
+  countProductsBought() {
+    let counter = 0;
+    this.customerDetails.orderDtoList.forEach(element => {
+      element.orderItems.forEach(ele => {
+        counter += ele.quantity;
+      });
+    });
+    return counter;
   }
 
 }
