@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ProductReview } from 'src/app/models/product/ProductReview';
+import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -27,7 +28,8 @@ export class ProductReviewComponent implements OnInit {
     screenReaderCurrentLabel: `You're on page`
   };
 
-  constructor(private _productService: ProductService) {
+  constructor(private _productService: ProductService,
+    private _authService: AuthService) {
   }
 
   @Input() id: number;
@@ -50,7 +52,28 @@ export class ProductReviewComponent implements OnInit {
       }
     );
   }
+  
   onPageChange(event) {
     this.p = event;
+  }
+
+  addReview(text: string) {
+    let productReview: ProductReview = new ProductReview();
+
+    productReview.productId = this.id;
+    productReview.reviewText = text;
+    productReview.createdDate = new Date();
+    productReview.userId = this._authService.getUserId();
+
+    console.log(text);
+    console.log(productReview);
+    console.log(this.id);
+    console.log(productReview.userId);
+
+    this._productService.addReview(this.id, productReview).subscribe(
+      data => {
+        console.log(data);
+      }
+    )
   }
 }
