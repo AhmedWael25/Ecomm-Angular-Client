@@ -92,7 +92,7 @@ const routes: Routes = [
     FormsModule,
     SharedModule,
     RatingModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
   ],
 })
 export class SellerModule { }

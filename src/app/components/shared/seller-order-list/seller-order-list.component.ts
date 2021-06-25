@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SellerOrder } from 'src/app/models/seller/SellerOrder';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-seller-order-list',
@@ -11,7 +12,7 @@ export class SellerOrderListComponent implements OnInit {
 
   @Input("data") orderlist:SellerOrder[];
 
-  constructor() { }
+  constructor( private _authService:AuthService) { }
 
   ngOnInit(): void {
   }
@@ -24,6 +25,14 @@ export class SellerOrderListComponent implements OnInit {
       sum += e.price * e.quantity;
     })
     return sum;
+  }
+
+  isSeller(){
+    this._authService.isSeller();
+  }
+
+  isAdmin(){
+    this._authService.isAdmin();
   }
 
 

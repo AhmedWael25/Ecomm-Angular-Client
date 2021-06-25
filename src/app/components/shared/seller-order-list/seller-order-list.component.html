@@ -6,7 +6,7 @@
                         <h5 class="order-id">Order ID: {{order.id}}</h5>
                         <p class=""> OrderedOn: {{order.date}} </p>
                         <ul class="order-meta" *ngFor="let prod of order.items">
-                            <li  [routerLink]="['/seller/products',prod.id]">
+                            <li  [routerLink]="['products',prod.id]">
                                 <a class="product" href="javascript:void(0)">{{ prod.name}} </a> 
                                 <span style="padding: 0px 10px;" class="product"> {{ (prod.price | currency:'USD') + " X " +prod.quantity}}</span>                   
                             </li>
@@ -25,11 +25,7 @@
                     </div>
                 </div>
                 
-
                 <hr>
-            
-            
-            
             </div>
 
 
