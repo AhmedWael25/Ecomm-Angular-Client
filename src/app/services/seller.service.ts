@@ -22,13 +22,18 @@ export class SellerService {
               private _authService:AuthService) {
   }
 
-  registerSeller(seller: SellerRequest): Observable<ApiResponse> {
-    return this._apiService.post(this.baseUrl, seller);
+
+  getInventory(sellerId:number,page:number,size:number):Observable<ApiResponse>{
+    return this._apiService.get(this.baseUrl+"/"+sellerId+"/products?page="+page+"&size="+size);
   }
 
-  getInventory(sellerId: number): Observable<ApiResponse> {
-    return this._apiService.get(this.baseUrl + "/" + sellerId + "/products");
-  }
+  registerSeller(seller:SellerRequest):Observable<ApiResponse>{
+        return this._apiService.post(this.baseUrl, seller);
+    }
+
+  // getInventory(sellerId:number):Observable<ApiResponse>{
+  //   return this._apiService.get(this.baseUrl+"/"+sellerId+"/products");
+  // }
 
   getProductDetail(productId: number): Observable<ApiResponse> {
     return this._apiService.get(this.baseUrl + "/products/" + productId);

@@ -28,7 +28,7 @@ const routes: Routes = [
     component:SellerChartComponent,
     canActivate:[SellerAuthGuard],
     data:{
-      role : "ROLE_SELLER" 
+      role : "ROLE_SELLER"
     },
   },
   {
@@ -49,7 +49,7 @@ const routes: Routes = [
     component:EditProductComponent,
     canActivate:[SellerAuthGuard],
     data:{
-      role : "ROLE_SELLER" 
+      role : "ROLE_SELLER"
     },
   },
   {
@@ -57,15 +57,15 @@ const routes: Routes = [
     component:AddProductComponent,
     canActivate:[SellerAuthGuard],
     data:{
-      role : "ROLE_SELLER" 
+      role : "ROLE_SELLER"
     },
   },
   {
-    path: 'sold-items', 
+    path: 'sold-items',
     component:SoldItemsComponent,
     canActivate:[SellerAuthGuard],
     data:{
-      role : "ROLE_SELLER" 
+      role : "ROLE_SELLER"
     },
   },
 ];
