@@ -20,6 +20,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BooleanTargetPipe } from './pipes/boolean-target.pipe';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { DatePipe } from '@angular/common';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -38,11 +40,14 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     // SlickCarouselModule,
     SlickCarouselModule,
     NgbModule,
+    MatSlideToggleModule,
   ],
   providers: [
     CustomerService,
     {provide: HTTP_INTERCEPTORS, useClass:AuthInterceptorService, multi:true},
-    { provide: HTTP_INTERCEPTORS, useClass: NetworkInterceptor, multi: true }],
+    { provide: HTTP_INTERCEPTORS, useClass: NetworkInterceptor, multi: true },
+    DatePipe
+  ],
   
   bootstrap: [AppComponent]
 })

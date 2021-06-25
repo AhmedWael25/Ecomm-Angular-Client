@@ -65,4 +65,9 @@ export class ProductService{
     return this._apiService.get(this.baseUrl + "/" + id + "/reviews");
   }
 
+
+  getProdSoldData(prodId:number){
+    return this._apiService.get( this.baseUrl + "/" + prodId + "/prodsSoldData" );
+  }
+
 }

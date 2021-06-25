@@ -1,0 +1,99 @@
+<div class="container">
+    <div class="row justify-content-center" *ngIf="isLoading">
+        <app-spinner></app-spinner>
+    </div>
+
+    <div class="row justify-content-center" *ngIf="!isLoading">
+        <div class="col-lg-6">
+            <app-pie-chart [label]="'Qty Sold:'" [data]="pieChartData" [title]="'Amount Of Products Sold'" ></app-pie-chart>
+        </div>
+        <div class="col-lg-6">
+            <app-line-chart [label]="'Profit $'" [data]="lineChartData" [title]="'Profits Vs Time'"></app-line-chart>
+        </div>
+    </div>
+</div> 
+
+<hr>
+
+<div class="container">
+
+    <div class="row justify-content-center" *ngIf="isLoading">
+        <app-spinner></app-spinner>
+    </div>
+
+    <div class="row justify-content-center" *ngIf="!isLoading" style="text-align: center;">
+       
+
+        <h3>My Orders</h3>
+        
+        <div class="profile-footer mt-45">
+            <div class="profile-title">
+                <h5 class="title" style="color: rgb(19, 19, 182)">
+                    History
+                    <i class="fas fa-chart-bar"></i>
+                </h5>
+            </div>
+            <div class="profile-card-info">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6">
+                        <div class="single-card-info d-flex">
+                            <div class="card-icon">
+                                <img src="assets/images/shopping-cart.png" alt="Card">
+                            </div>
+                            <div class="card-info media-body">
+                                <h4 _ngcontent-mej-c137="" class="d-flex justify-content-between align-items-center mb-3">
+                                    <span  class="ui-button-text-icon-secondary"># Product bought</span>
+                                    <span  class="badge bg-primary-3 rounded-pill">{{totalProductsBought(orderlist)}}</span>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <div class="single-card-info d-flex">
+                            <div class="card-icon">
+                                <img src="assets/images/order.png" alt="Card">
+                            </div>
+                            <div class="card-info media-body">
+                                <h4 _ngcontent-mej-c137="" class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="ui-button-text-icon-secondary">Profit</span>
+                                    <span class="badge bg-primary-3 rounded-pill">{{ totalProfit(orderlist) | currency:"USD"  }}</span>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <hr>
+                <div class="col-lg-8" *ngFor="let order of orderlist">
+                    <div class="single-order"  style="text-align: left;">
+                        <h5 class="order-id">Order ID: {{order.id}}</h5>
+                        <p class=""> OrderedOn: {{order.date}} </p>
+                        <ul class="order-meta" *ngFor="let prod of order.items">
+                            <li  [routerLink]="['/seller/products',prod.id]">
+                                <a class="product" href="javascript:void(0)">{{ prod.name}} </a> 
+                                <span style="padding: 0px 10px;" class="product"> {{ prod.price + " X " +prod.quantity}}</span>                   
+                            </li>
+                        </ul>
+                        <div class="single-progress-bar-horizontal shipped">
+                            <div class="progress-text">
+                                <p>Ready</p>
+                            </div>
+                            <div class="progress-bar-inner">
+                                <div class="bar-inner">
+                                    <div class="progress-horizontal"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <span style="color: white;" class="order-price badge bg-primary-3 rounded-pill">{{orderTotal(order) | currency:'USD'}}</span>
+                    </div>
+                </div>
+                
+
+                <hr>
+            </div>
+        </div>
+
+    </div>
+
+</div>

@@ -26,7 +26,14 @@ export class PreventLoginRegGuard implements CanActivate,CanActivateChild {
         let isAuthenticated = this._authService.isAuthenticated()
     
         if( isAuthenticated ){
-            this._router.navigateByUrl("/");
+
+            if( this._authService.isCustomer() ){
+                this._router.navigateByUrl("/");
+            }else if(this._authService.isSeller()){
+                this._router.navigateByUrl("/seller");
+            }else{
+                this._router.navigateByUrl("/admin");
+            }
             return false;
         }
         return true;

@@ -244,13 +244,25 @@
                                         <li><a href="javascript:void(0)">Home & Garden <i class="fa fa-chevron-right" aria-hidden="true"></i></a></li>
 
                                         <!-- TODO Hidee/Unhide according to Width -->
-                                        <li  *ngIf="isAuthenticated" [routerLink]="['/cart']">
+                                        <li  *ngIf="isAuthenticated && isCustomer()" [routerLink]="['/cart']">
                                             <a href="javascript:void(0)">
                                                 Cart <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                             </a>
                                         </li>
 
-                                        <li *ngIf="!isAuthenticated"  [routerLink]="['/login']">
+                                        <li  *ngIf="isAuthenticated && isSeller()" [routerLink]="['/seller']">
+                                            <a href="javascript:void(0)">
+                                                To DashBoard <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                            </a>
+                                        </li>
+
+                                        <li  *ngIf="isAuthenticated && isAdmin()" [routerLink]="['/admin']">
+                                            <a href="javascript:void(0)">
+                                                To DashBoard <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                            </a>
+                                        </li>
+
+                                        <li *ngIf="!isAuthenticated && isCustomer()"  [routerLink]="['/login']">
                                             <a href="javascript:void(0)">
                                                 Login <i class="fa fa-user-circle" aria-hidden="true"></i>
 
@@ -360,15 +372,19 @@
                                 <div class="navbar-search-cart d-none d-lg-flex justify-content-end">
 
                                     <div id ="userMenu" *ngIf="isAuthenticated">
-                                        <div class="navbar-user dropdown">
+
+
+                                        <div class="navbar-user dropdown" *ngIf="isAuthenticated">
 
                                             <a class="icon-btn primary-icon-text icon-text-btn" href="#dropdown11"
                                                role="button" data-bs-toggle="dropdown" aria-expanded="false"><i style="color: white;"
                                                     class="fa fa-user"></i></a>
                                             <ul class="dropdown-menu" id="dropdown11">
-                                                <li><a [routerLink]="['/profile']"><i class="fa fa-user"></i> My Profile</a></li>
-                                                <li><a [routerLink]="['/orders']"><i class="fa fa-history"></i>History</a></li>
-                                                <li><a (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a></li>
+                                                <li><a *ngIf="isCustomer()" [routerLink]="['/profile']"><i class="fa fa-user"></i> My Profile</a></li>
+                                                <li><a *ngIf="isCustomer()" [routerLink]="['/orders']"><i class="fa fa-history"></i>History</a></li>
+                                                <li><a *ngIf="isSeller()" [routerLink]="['/seller']"><i class="fa fa-user"></i>Dashboard</a></li>
+                                                <li><a *ngIf="isAdmin()" [routerLink]="['/admin']"><i class="fa fa-user"></i>Dashboard</a></li>
+                                                <li><a  (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -397,7 +413,7 @@
                                     <!-- navbar search Ends -->
                                     <!-- navbar cart start -->
 
-                                    <div class="navbar-cart" *ngIf="isAuthenticated">
+                                    <div class="navbar-cart" *ngIf="isAuthenticated && isCustomer()">
                                         <a class="icon-btn primary-icon-text icon-text-btn" [routerLink]="['/cart']">
                                             <img src="assets/images/icon-svg/cart-6.svg" alt="Icon">
                                             <!-- <span class="icon-text text-style-1">88</span> -->

@@ -7,7 +7,7 @@
                 <div class="col-xl-8 col-lg-10 justify-content-center">
 
                     <div class="alert alert-danger" *ngIf="isError">
-                        <p>Invalid Login Credentials</p>
+                        <p  [innerText]="errMessage"></p>
                     </div>
 
                     <div class="row justify-content-center" *ngIf="isLoading">
@@ -15,7 +15,7 @@
                     </div>
 
                 
-                    <div class="login-registration-style-3 mt-50"  *ngIf="!isLoading">
+                    <div class="login-registration-style-3 mt-20"  *ngIf="!isLoading">
                         <h4 class="heading-4 font-weight-500 title">Login to your account</h4>
                         <p class="paragraph-small font-weight-300 mt-15">Login to your account for a faster checkout.</p>
                         <div class="row">
@@ -50,7 +50,7 @@
                                         id="emailHelp" class="form-text errMessage">We'll never share your email with anyone else.</small>
                                     </div>
 
-                                    <a class="forget" href="#0">Forget Password?</a>
+                                    <a class="forget" href="javascrip:void(0)">Forget Password?</a>
                                     <div class="single-form">
                                         <button
                                         [disabled]="!getEmail().valid && !getPassword().valid"
@@ -63,13 +63,13 @@
                             <div class="col-md-5">
                                 <p class="account">Login with Social Account</p>
                                 <ul>
-                                    <li><a href="#0" class="facebook-login-registration"><i class="lni lni-facebook-original"></i> <span>Login with Facebook</span></a></li>
-                                    <li><a href="#0" class="google-login-registration"><img src="assets/images/google-logo.svg" alt=""> <span>Login with Google</span></a></li>
+                                    <li><a href="javascrip:void(0)" class="facebook-login-registration"><i class="lni lni-facebook-original"></i> <span>Login with Facebook</span></a></li>
+                                    <li><a href="javascrip:void(0)" class="google-login-registration"><img src="assets/images/google-logo.svg" alt=""> <span>Login with Google</span></a></li>
                                 </ul>
                                 <p class="login">No account? <a routerLink="/register" >Sign up</a></p>
                                 <p class="account mt-20">Continue as a Guest?</p>
                                 <div class="single-form">
-                                    <a href="#0" class="main-btn primary-btn-border">Continue</a>
+                                    <a href="javascrip:void(0)" class="main-btn primary-btn-border">Continue</a>
                                 </div>
                             </div>
                         </div>

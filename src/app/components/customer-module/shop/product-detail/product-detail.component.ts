@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CartItemRequest } from 'src/app/models/cart/CartItemRequest';
 import { Product } from 'src/app/models/product/Product';
+import { CartService } from 'src/app/services/cart.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { ProductService } from 'src/app/services/product.service';
+import { WishListService } from 'src/app/services/wishlist.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -26,7 +30,10 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(
     private _productService: ProductService,
-    private _activatedRoute: ActivatedRoute) { }
+    private _activatedRoute: ActivatedRoute,
+    private _notificationService:NotificationService,
+    private _cartService:CartService,
+    private _wishlistService:WishListService) { }
 
     ngOnInit(): void {
       this._activatedRoute.paramMap.subscribe(params => {
@@ -38,4 +45,27 @@ export class ProductDetailComponent implements OnInit {
         });
       });
     }
+
+    addToCart( event){
+      let prodId:number = this.product.id;
+  
+      let request:CartItemRequest = new CartItemRequest();
+      request.productId = prodId;
+      request.quantity = 1;
+  
+      this._cartService.addCartItem(request).subscribe(
+        resp => {
+          this._notificationService.onSuccess(resp.message, 3000,"topRight");
+        },
+        err => {
+          let errMsg = err.error.message;
+          this._notificationService.onError(errMsg, 3000,"topRight");
+        },
+      )
+    }
+
+    addToWishlist(event){
+
+    }
+
 }

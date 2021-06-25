@@ -8,7 +8,7 @@ export class NotificationService {
 
   constructor(private _toastService: ToastrService) { }
 
-  setPosition(position: string){
+  private  _setPosition(position: string){
     switch(position){
       case "topRight": {
         return "toast-top-right";
@@ -28,35 +28,35 @@ export class NotificationService {
   onSuccess(message: string, timeOut: number, position: string){
     return this._toastService.success(message, "Successfully", {
       timeOut: timeOut,
-      positionClass: this.setPosition(position),
+      positionClass: this._setPosition(position),
     });
   }
 
   onError(message: string, timeOut: number, position: string){
     return this._toastService.error(message, "Error", {
       timeOut: timeOut,
-      positionClass: this.setPosition(position),
+      positionClass: this._setPosition(position),
     });
   }
 
   onWarning(message: string, timeOut: number, position: string){
     return this._toastService.warning(message, "Warning", {
       timeOut: timeOut,
-      positionClass: this.setPosition(position),
+      positionClass: this._setPosition(position),
     });
   }
 
   onInfo(message: string, timeOut: number, position: string){
     return this._toastService.info(message, "Information", {
       timeOut: timeOut,
-      positionClass: this.setPosition(position),
+      positionClass: this._setPosition(position),
     });
   }
 
   onShow(message: string, timeOut: number, position: string){
     return this._toastService.show(message, "Show", {
       timeOut: timeOut,
-      positionClass: this.setPosition(position),
+      positionClass: this._setPosition(position),
     });
   }
 

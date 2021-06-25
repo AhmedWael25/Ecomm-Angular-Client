@@ -51,7 +51,7 @@
                 <div class="card-body">
                     
                     <div class="m-t-30" style="text-align: center;">
-                        <img [src]='productDetails.sellerProduct.productImg' class="rounded-circle" width="150" height="100" />
+                        <img [src]='productDetails.sellerProduct.productImg' class="rounded-circle" width="100" height="100" />
                         <h4 class="card-title m-t-10">
                         </h4>
                         <div class="row text-center justify-content-md-center">
@@ -104,6 +104,10 @@
                                     </span>
                                 </a>
                             </div>
+                        </div>
+                        <div>
+                            <!-- <span style="margin-right: 10px;">On Sale:</span> -->
+                            <mat-slide-toggle (change)="toggleSale($event)" [checked]="isOnSale" >On Sale</mat-slide-toggle>
                         </div>
                     </div>
                 </div>
@@ -206,4 +210,22 @@
 
 
 
-<app-line-chart  [data]="null"></app-line-chart>
+<hr>
+<div class="container justify-content-center mb-20 mt-20" style="text-align: center;">
+    <h3>Charts</h3>
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <div *ngIf="isChartLoading">
+                <app-spinner></app-spinner>
+            </div>
+            <div *ngIf="!isChartLoading">
+                <app-line-chart [label]="'# of Prods. Sold'"  [data]="chartData" [title]="'Number of products Sold Vs Time'"></app-line-chart>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class ="mt-20"></div>
+

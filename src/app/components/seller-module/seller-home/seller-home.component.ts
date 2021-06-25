@@ -1,5 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { SoldItems } from 'src/app/models/seller/SoldItems';
 import { AuthService } from 'src/app/services/auth.service';
+import { SellerService } from 'src/app/services/seller.service';
 
 @Component({
   selector: 'app-seller-home',
@@ -8,14 +11,18 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class SellerHomeComponent implements OnInit {
 
-  constructor(private _authService:AuthService) { }
 
+  constructor(private _authService:AuthService,
+              private _sellerService:SellerService,
+              private _datePipe:DatePipe) { }
   ngOnInit(): void {
+
+
   }
+
 
 
   logout(){
     this._authService.logout();
   }
-
 }

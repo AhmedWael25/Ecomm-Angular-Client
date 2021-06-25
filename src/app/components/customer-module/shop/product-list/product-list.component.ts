@@ -1,10 +1,15 @@
 import { LabelType, Options } from '@angular-slider/ngx-slider';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { CartItemRequest } from 'src/app/models/cart/CartItemRequest';
 import { Category } from 'src/app/models/Category';
 import { Product } from 'src/app/models/product/Product';
+import { Wishlist } from 'src/app/models/wishlist/Wishlist';
+import { CartService } from 'src/app/services/cart.service';
 import { CategoryService } from 'src/app/services/category.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { ProductService } from 'src/app/services/product.service';
+import { WishListService } from 'src/app/services/wishlist.service';
 
 @Component({
   selector: 'app-product-list',
@@ -16,7 +21,10 @@ export class ProductListComponent implements OnInit {
 
   constructor(private _productService: ProductService,
     private _categoryService: CategoryService,
-    private _formBuilder: FormBuilder) { }
+    private _formBuilder: FormBuilder,
+    private _cartService:CartService,
+    private _wishlistService:WishListService,
+    private _notificationService:NotificationService) { }
 
   products: Array<Product>;
   categories: Array<Category>;
@@ -142,4 +150,30 @@ export class ProductListComponent implements OnInit {
       }
     );
   }
+
+
+
+  addToCart(index, event){
+    let prod:Product =  this.products[index];
+    let prodId:number = prod.id;
+    console.log(prod, prodId);
+
+    let request:CartItemRequest = new CartItemRequest();
+    request.productId = prodId;
+    request.quantity = 1;
+
+    this._cartService.addCartItem(request).subscribe(
+      resp => {
+        
+        this._notificationService.onSuccess(resp.message, 3000,"topRight");
+      },
+      err => {
+        let errMsg = err.error.message;
+        this._notificationService.onError(errMsg, 3000,"topRight");
+        console.log(err);
+      },
+    )
+  }
+
+
 }

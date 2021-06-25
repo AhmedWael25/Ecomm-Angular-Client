@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Cart } from 'src/app/models/cart/Cart';
 import { CartItem } from 'src/app/models/cart/CartItem';
 import { CartItemRequest } from 'src/app/models/cart/CartItemRequest';
 import { CartService } from 'src/app/services/cart.service';
 import { CheckoutService } from 'src/app/services/checkout.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { CheckoutComponent } from '../checkout/checkout.component';
 
 @Component({
@@ -24,7 +25,9 @@ export class CartComponent implements OnInit {
 
   constructor(private _cartService:CartService,
               private _checkoutService:CheckoutService,
-              private _router:Router) { }
+              private _router:Router,
+              private _notificationService:NotificationService,
+              private _activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
     this._cartService.getCartItems().subscribe(resp => {
@@ -37,7 +40,17 @@ export class CartComponent implements OnInit {
     err =>{
       
     });
-    
+
+    this._activatedRoute.queryParams.subscribe( 
+      params =>{
+        console.log(params)
+          let temp = params.error
+          console.log(temp);
+          if(temp == ""){
+            console.log("D5LT");
+            this.checkout();
+          }
+      });
   }
 
   calculateTotal(){
@@ -69,9 +82,11 @@ export class CartComponent implements OnInit {
     this._cartService.updateCartItem(updatedItem).subscribe( 
       resp =>{
         cartItem.quantity = resp.data.quantity;
+        this._notificationService.onSuccess(resp.message, 1000, "topRight");
       },
       err =>{
         cartItem.quantity--;
+        this._notificationService.onError(err.error.message, 2000, "topRight");
       },() =>{
         event.target.disabled = false;
         this.calculateTotal();
@@ -98,9 +113,11 @@ export class CartComponent implements OnInit {
     this._cartService.updateCartItem(updatedItem).subscribe( 
       resp =>{
         cartItem.quantity = resp.data.quantity;
+        this._notificationService.onSuccess(resp.message, 1000, "topRight");
       },
       err =>{
         cartItem.quantity++;
+        this._notificationService.onError(err.error.message, 2000, "topRight");
       },() =>{
         event.target.disabled = false;
         this.calculateTotal();
@@ -122,11 +139,10 @@ export class CartComponent implements OnInit {
     this._cartService.deleteCartItem(updatedItem).subscribe( 
       resp =>{
         this.cartItems.splice(index, 1);
+        this._notificationService.onSuccess(resp.message, 1000, "topRight");
       },
       err =>{
-        
-        console.log(err);
-        console.log("ERROR");
+        this._notificationService.onError(err.error.message, 1000, "topRight");
       },() =>{
         event.target.disabled = false;
         this.calculateTotal();
@@ -138,8 +154,6 @@ export class CartComponent implements OnInit {
     //Check Validity of Cart If All Good
     //Redirect to Checkout Page:
     //IF not Display Err To User.
-    
-    // this._router.navigateByUrl("checkout");
     this.isCartError = false;
     this.cartErrData = [];
     this._checkoutService.validateCheckout().subscribe(

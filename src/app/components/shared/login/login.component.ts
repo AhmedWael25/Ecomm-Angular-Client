@@ -1,6 +1,7 @@
 import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginRequest } from 'src/app/models/login/loginRequest';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -15,9 +16,10 @@ export class LoginComponent implements OnInit {
   loginData:LoginRequest = new LoginRequest();
   isLoading:boolean = false;
   isError:boolean = false;
-  errMessage:string = null;
+  errMessage:string = "";
 
-  constructor(private _authService:AuthService) { 
+  constructor(private _authService:AuthService,
+              private _router:Router) { 
 
   }
 
@@ -32,9 +34,12 @@ export class LoginComponent implements OnInit {
   }
 
 
-  onSubmit(){
+  async onSubmit(){
+    this.isError = false;
   
     if( !this.loginForm.valid ){
+      this.isError = true;
+      this.errMessage = "Form Is Invalid";
       return;
     }
     
@@ -42,10 +47,36 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
     this.loginData.email = this.loginForm.value.email;
     this.loginData.password = this.loginForm.value.password;
-    console.log( this.loginForm.value );
-    this._authService.attemptLogin(this.loginData);
 
+    let LoggedIn:boolean = false;
+    await this._authService.attemptLogin(this.loginData)
+   .then((resp) =>{
+     LoggedIn = resp;
+   });
 
+   await new Promise(f => setTimeout(f, 200));
+
+    // console.log("in Auth"+ isAuth);
+    if(LoggedIn){
+      
+      if(this._authService.isCustomer()){
+        this._router.navigateByUrl("/");
+      }
+      if(this._authService.isAdmin()){
+        this._router.navigateByUrl("/admin");
+      }
+      if(this._authService.isSeller()){
+        this._router.navigateByUrl("/seller");
+      }
+    }else{
+      console.log("sdsd");
+      this.errMessage = "Invalid Login Credentials";
+      this.isError = true;
+    }
+
+   
+
+    
     //===========================
 
     this.loginForm.reset();

@@ -7,6 +7,7 @@ import { OrderHomeComponent } from './components/customer-module/orders/order-ho
 import { OrderListComponent } from './components/customer-module/orders/order-list/order-list.component';
 import { OrdersModule } from './components/customer-module/orders/orders.module';
 import { SellerHomeComponent } from './components/seller-module/seller-home/seller-home.component';
+import { LogoutComponent } from './components/shared/logout/logout.component';
 import { PageNotFoundComponent } from './components/shared/page-not-found/page-not-found.component';
 import { SellerAuthGuard } from './guards/seller-auth.guard';
 
@@ -16,11 +17,6 @@ const routes: Routes = [
     path: '', 
     component:CustomerHomeComponent,
     loadChildren: () => import('./components/customer-module/customer-module.module').then(m => m.CustomerModule),
-
-    // children:[
-    //   {path: "", component:OrderListComponent},
-    //   { path: ":orderId", component:OrderDetailComponent }
-    // ]
   },
   {
     path: 'seller', 
@@ -35,6 +31,10 @@ const routes: Routes = [
     // canActivate: [SellerAuthGuard],
     // canActivateChild:[SellerAuthGuard],
     loadChildren: () => import('./components/admin-module/admin-module.module').then(m => m.AdminModule)
+  },
+  {
+    path:"logout",
+    component:LogoutComponent,
   },
   {
     path:"404",

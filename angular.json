@@ -27,6 +27,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css",
@@ -45,7 +46,9 @@
               "src/assets/js/main.js",
               "node_modules/@fortawesome/fontawesome-free/js/all.js",
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/slick-carousel/slick/slick.min.js"
+              "node_modules/slick-carousel/slick/slick.min.js",
+              "src/assets/js/sockjs.min.js",
+              "src/assets/js/stomp.min.js"
             ]
           },
           "configurations": {
@@ -108,6 +111,7 @@
             ],
             "styles": [
 
+              "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
               "src/styles.css"
             ],
             "scripts": []

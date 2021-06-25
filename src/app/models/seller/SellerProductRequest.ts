@@ -5,5 +5,6 @@ export class SellerProductRequest {
   productPrice: number;
   productDescription: string;
   productQuantity: number;
+  onSale?:boolean;
  
 }

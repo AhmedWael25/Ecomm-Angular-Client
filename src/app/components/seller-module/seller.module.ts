@@ -19,27 +19,35 @@ import { PreventLoginRegGuard } from 'src/app/guards/prevent-login-register.guar
 import { SharedModule } from '../shared/shared.module';
 import { RatingModule } from 'ng-starrating';
 import { BooleanTargetPipe } from 'src/app/pipes/boolean-target.pipe';
+import { SellerChartComponent } from './seller-chart/seller-chart.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 const routes: Routes = [
   {
     path:"",
-    component:InventoryComponent,
+    component:SellerChartComponent,
+    canActivate:[SellerAuthGuard],
     data:{
       role : "ROLE_SELLER" 
     },
   },
   {
-    path:"login",
-    component:LoginComponent,
-    canActivate:[PreventLoginRegGuard],
+    path:"inventory",
+    component:InventoryComponent,
+    canActivate:[SellerAuthGuard],
+    data:{
+      role : "ROLE_SELLER" 
+    },
   },
   {
     path:"register",
     component:SellerRegisterComponent,
+    canActivate:[PreventLoginRegGuard],
   },
   {
     path: 'products/:productId',
     component:EditProductComponent,
+    canActivate:[SellerAuthGuard],
     data:{
       role : "ROLE_SELLER" 
     },
@@ -47,6 +55,7 @@ const routes: Routes = [
   {
     path: 'add-product',
     component:AddProductComponent,
+    canActivate:[SellerAuthGuard],
     data:{
       role : "ROLE_SELLER" 
     },
@@ -54,15 +63,11 @@ const routes: Routes = [
   {
     path: 'sold-items', 
     component:SoldItemsComponent,
+    canActivate:[SellerAuthGuard],
     data:{
       role : "ROLE_SELLER" 
     },
   },
-  {
-    path:':sellerId',
-    component: InventoryComponent,
-    canActivate:[SellerAuthGuard],
-  }
 ];
 
 
@@ -77,6 +82,7 @@ const routes: Routes = [
     SellerRegisterComponent,
     PageControllerComponent,
     BooleanTargetPipe,
+    SellerChartComponent,
   ],
   imports: [
     CommonModule,
@@ -85,8 +91,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     FormsModule,
     SharedModule,
-
     RatingModule,
+    MatSlideToggleModule
   ],
 })
 export class SellerModule { }

@@ -103,7 +103,7 @@
                                 | paginate 
                                 : {itemsPerPage: size,
                                 currentPage: page,
-                                totalItems: totalElements}">
+                                totalItems: totalElements} ; let i = index">
 
                                 <div class="product-style-17 mb-20 mt-15" style="padding: 5px">
 
@@ -118,7 +118,7 @@
                                         </h4>
                                         <p>{{product.sellerName}}</p>
                                         <p>{{product.productPrice | currency:'USD'}}</p>
-                                        <a href="#0" class="main-btn secondary-1-btn"> <img
+                                        <a href="javascript:void(0)" (click)="addToCart(i, $event)" class="main-btn secondary-1-btn"> <img
                                                 src="assets/images/icon-svg/cart-4.svg" alt=""> Add to Cart</a>
                                     </div>
                                 </div>

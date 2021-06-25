@@ -17,6 +17,7 @@ import { WishlistComponent } from './wishlist/wishlist.component';
 import { ProductHomeComponent } from './shop/product-home/product-home.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { PaypalComponent } from './paypal/paypal.component';
+import { CheckoutProtectionGuard } from 'src/app/guards/checkout-protection.guard';
 
 
 const routes: Routes = [
@@ -32,11 +33,15 @@ const routes: Routes = [
   {
     path:"register",
     component:RegisterComponent,
+    canActivate:[PreventLoginRegGuard],
   },
   {
     path:"shop",
     component:ProductHomeComponent,
     loadChildren: () => import('../customer-module/shop/shop.module').then(m => m.ShopModule),
+    data:{
+      role : "ROLE_CUSTOMER",
+    },
   },
   {
     path:"profile",
@@ -49,7 +54,7 @@ const routes: Routes = [
   {
     path:"checkout",
     component:CheckoutComponent,
-    canActivate:[CustomerAuthGuard],
+    canActivate:[CustomerAuthGuard, CheckoutProtectionGuard],
     data:{
       role : "ROLE_CUSTOMER",
     },
@@ -79,10 +84,6 @@ const routes: Routes = [
       role : "ROLE_CUSTOMER",
     }
   },
-  // {
-  //   path:"**",
-  //   component:LandingPageComponent
-  // },
 ];
 
 @NgModule({

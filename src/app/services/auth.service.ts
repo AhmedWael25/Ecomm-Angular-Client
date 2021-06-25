@@ -15,71 +15,92 @@ import { Router } from "@angular/router";
 
 @Injectable({
     providedIn: 'root'
-  })
-export class AuthService{
+})
+export class AuthService {
 
-    private baseUrl = URLS.apiUrl +"/login";
-    private  USER_DATA:string ="userData";
-    private expirationTimer:any;
+    private baseUrl = URLS.apiUrl + "/login";
+    private USER_DATA: string = "userData";
+    private expirationTimer: any;
 
-    constructor(private _apiService:ApiService,
-                private _router:Router){}
+    constructor(private _apiService: ApiService,
+        private _router: Router) { }
 
     //TODO REFACTOR
-    loggedIn:boolean =  false;
+    loggedIn: boolean = false;
     user = new BehaviorSubject<UserAuthInfo>(null);
 
-    sellerId:number  = 1;
-    role:string = "";
+    sellerId: number = 1;
+    role: string = "";
 
 
-    isCustomer():boolean {
-        if(this.user.value == null) return false;
-       return  this.user.value.role ===  "ROLE_CUSTOMER" ? true: false;            
+    isCustomer(): boolean {
+        if (this.user.value == null) return false;
+        return this.user.value.role === "ROLE_CUSTOMER" ? true : false;
     }
-    isSeller():boolean{
-        if(this.user.value == null) return false;
-        return  this.user.value.role ===  "ROLE_SELLER" ? true: false;            
+    isSeller(): boolean {
+        if (this.user.value == null) return false;
+        return this.user.value.role === "ROLE_SELLER" ? true : false;
 
     }
-    isAdmin():boolean{
-        if(this.user.value == null) return false;
-        return  this.user.value.role ===  "ROLE_ADMIN" ? true: false;
+    isAdmin(): boolean {
+        if (this.user.value == null) return false;
+        return this.user.value.role === "ROLE_ADMIN" ? true : false;
     }
-    getUserId():number{
-        if(this.user.value == null) return -1;
+    getUserId(): number {
+        if (this.user.value == null) return -1;
         return this.user.value.id;
     }
 
-    attemptLogin(loginRequest:LoginRequest){
-        
-        this._apiService.post(this.baseUrl, loginRequest).subscribe(
-            resp => {
-                console.log(resp);
-                let authResp:AuthResponse = resp.data;
-                
+     async attemptLogin(loginRequest: LoginRequest):Promise<boolean> {
+         let loggedIn:boolean = false;
 
+    //    await  this._apiService.post(this.baseUrl, loginRequest).toPromise();
+        await this._apiService.post(this.baseUrl, loginRequest).toPromise().then(
+            resp => {
+                loggedIn= true;
+                this.loggedIn = true;
+                let authResp:AuthResponse = resp.data;
                 this.handleAuthentication(authResp);
-               this.loggedIn = true;
-            },
-            err => {
+            })
+            .catch( err => {
+                // console.log("err"+err);
+                loggedIn = false;
                 this.loggedIn = false;
-            },
-            () =>{
-                return this.loggedIn;
-            }
-        );        
+            })
+            .finally( () =>{
+                // console.log("fin"+ this.loggedIn);
+                // console.log("in finaly");
+                return loggedIn;
+            });
+            return loggedIn;
+
+        //  this._apiService.post(this.baseUrl, loginRequest).toPromise.subscribe(
+        //         resp => {
+        //             console.log(resp);
+        //             let authResp:AuthResponse = resp.data;
+
+        //             this.handleAuthentication(authResp);
+        //             this.loggedIn = true;
+        //         },
+        //         err => {
+        //             this.loggedIn = false;
+        //         },
+        //         () =>{
+        //             return this.loggedIn;
+        //         }
+        //     );       
+        //     return this.isAuthenticated(); 
     }
 
 
-    handleAuthentication(authResponse:AuthResponse){
+    handleAuthentication(authResponse: AuthResponse) {
 
         let token = authResponse.jwt;
-        let decodedToken:DecodedToken = this.getDecodedToken(token);
+        let decodedToken: DecodedToken = this.getDecodedToken(token);
 
 
         const expDurationInSeconds = +decodedToken.exp - +decodedToken.iat;
-        const expDate = new Date( new Date().getTime() + expDurationInSeconds*1000 );
+        const expDate = new Date(new Date().getTime() + expDurationInSeconds * 1000);
         const userData = new UserAuthInfo(
             decodedToken.id,
             decodedToken.sub,
@@ -87,71 +108,72 @@ export class AuthService{
             token,
             expDate,
         );
-        
+
         //Emit User -- Log user in our App.
         this.user.next(userData);
         // Auto Logout activation
         this.autoLogout(expDurationInSeconds * 1000);
         // Save in Local Storage
-        localStorage.setItem(this.USER_DATA, JSON.stringify( userData ));
+        localStorage.setItem(this.USER_DATA, JSON.stringify(userData));
+
     }
 
-    autoLogin(){
+    autoLogin() {
 
-        const userData:{id:number,email:string, role:string,_jwt:string, _jwtExpireDate:string} = JSON.parse(localStorage.getItem(this.USER_DATA));
-        
-        if(!userData){
-            return ;
-        } 
-        
-        const loadedUser = new UserAuthInfo(userData.id, userData.email,userData.role,userData._jwt, new Date(userData._jwtExpireDate) );
+        const userData: { id: number, email: string, role: string, _jwt: string, _jwtExpireDate: string } = JSON.parse(localStorage.getItem(this.USER_DATA));
 
-        console.log("loadedUser"+ loadedUser);
+        if (!userData) {
+            return;
+        }
+
+        const loadedUser = new UserAuthInfo(userData.id, userData.email, userData.role, userData._jwt, new Date(userData._jwtExpireDate));
+
+        console.log("loadedUser" + loadedUser);
 
 
-        if(loadedUser.token){
+        if (loadedUser.token) {
             this.user.next(loadedUser);
             const expDate = new Date(userData._jwtExpireDate).getTime() - new Date().getTime();
-            this.autoLogout( expDate );
+            this.autoLogout(expDate);
         }
     }
 
 
-    logout(){
+    logout() {
         this.user.next(null);
-        
+
         //Clear local storage
         localStorage.removeItem(this.USER_DATA);
-        
+
         //Clear timer
-        if(this.expirationTimer ){
+        if (this.expirationTimer) {
             clearTimeout(this.expirationTimer);
         }
         this.expirationTimer = null;
-        
+
         //Navigate:
-        this._router.navigateByUrl("/");
+        this._router.navigateByUrl("/login");
     }
 
-    autoLogout(expirationDuration:number){
+    autoLogout(expirationDuration: number) {
         console.log("expo date :Auto login" + expirationDuration);
         this.expirationTimer = setTimeout(() => {
             this.logout();
-        },expirationDuration);
+        }, expirationDuration);
     }
 
-    getDecodedToken(token:string):any{
+    getDecodedToken(token: string): any {
 
-        try{
+        try {
             return jwt_decode(token);
         }
-        catch(Error){
+        catch (Error) {
             return null;
         }
     }
 
-    isAuthenticated(){
-       return this.user.value != null ? true:false;
+    isAuthenticated() {
+        return this.user.value != null ? true : false;
     }
-    
+
 }

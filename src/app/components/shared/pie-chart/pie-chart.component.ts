@@ -1,18 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Chart, registerables } from 'chart.js';
-
-Chart.register(...registerables);
+import { Chart } from 'chart.js';
 
 @Component({
-  selector: 'app-line-chart',
-  templateUrl: './line-chart.component.html',
-  styleUrls: ['./line-chart.component.css']
+  selector: 'app-pie-chart',
+  templateUrl: './pie-chart.component.html',
+  styleUrls: ['./pie-chart.component.css']
 })
-export class LineChartComponent implements OnInit {
+export class PieChartComponent implements OnInit {
 
-  @Input('data') chartData: Map<string, number> = new Map();
-  @Input('title') title:string = "";
-  @Input('label') label:string= "";
+  @Input('data') chartData:Map<any,any> = new Map();
+  @Input('title') title:string="";
+  @Input('label') label:string = "";
 
   chart: any;
 
@@ -20,12 +18,12 @@ export class LineChartComponent implements OnInit {
 
   ngOnInit(): void {
 
-
     let xAxis = Array.from(this.chartData.values());
     let yAxis = Array.from(this.chartData.keys());
 
-    this.chart = new Chart("myChart", {
-      type: 'bar',
+
+    this.chart = new Chart("myPieChart", {
+      type: 'pie',
       data: {
         labels: yAxis,
         datasets: [{
@@ -63,39 +61,11 @@ export class LineChartComponent implements OnInit {
           },
           title: {
             display: true,
-            text: this.title,
+            text:this.title,
           },
         }
       }
     });
-
-    // var ctx = document.getElementById('myChart');
-    // this.chart = new Chart('myChart',{
-    //   type:'line',
-    //   data: {
-    //     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-    //     datasets: [{
-    //         label: '# of Votes',
-    //         data: [12, 19, 3, 5, 2, 3],
-    //         borderWidth: 1
-    //     }]
-    // },
-    //   options:{
-    //     responsive:true,
-    //     scales:{
-
-    //     },
-    //     plugins:{
-    //       legend:{
-    //         position:'top',
-    //       },
-    //       title:{
-    //         display:true,
-    //         text: "TESTIG",
-    //       },
-    //     }
-    //   }
-    // })
 
   }
 

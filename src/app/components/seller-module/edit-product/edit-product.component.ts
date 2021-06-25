@@ -1,12 +1,17 @@
 
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { SellerService } from './../../../services/seller.service';
 import { Subscription } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SellerProductDetail } from 'src/app/models/seller/seller.product.datail';
 import { NotificationService } from 'src/app/services/notification.service';
 import { SellerProductRequest } from 'src/app/models/seller/SellerProductRequest';
+import { ProductService } from 'src/app/services/product.service';
+import { DatePipe } from '@angular/common';
+import { ProdSoldData } from 'src/app/models/product/ProdSoldData';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+
 
 
 @Component({
@@ -23,6 +28,12 @@ export class EditProductComponent implements OnInit {
   isinputEnable: boolean = true;
   form: FormGroup;
 
+  isChartLoading:boolean = true;
+  chartData:Map<string,number> = new Map();
+
+  isOnSale:boolean;
+  // saleChange:EventEmitter<MatSlideToggleChange>;
+
   slideConfig = {
     "slidesToShow": 1,
     "slidesToScroll": 1,
@@ -34,7 +45,11 @@ export class EditProductComponent implements OnInit {
     "infinite": true
   };
 
-  constructor(private _sellerApi:SellerService , private _activatedRoute:ActivatedRoute, private _notificationService: NotificationService) {
+  constructor(private _sellerApi:SellerService , 
+              private _activatedRoute:ActivatedRoute, 
+              private _notificationService: NotificationService,
+              private _productService:ProductService,
+              private _datePipe:DatePipe) {
   }
 
   ngOnInit(): void {
@@ -47,7 +62,8 @@ export class EditProductComponent implements OnInit {
       this._sellerApi.getProductDetail(this.productId).subscribe(response => {
         console.log(response);
         this.productDetails = response.data;
-
+        // this.isOnSale = true;
+        this.isOnSale = response.data.sellerProduct.onSale;
         this.form = new FormGroup({
           productName: new FormControl(this.productDetails.sellerProduct.productName, [Validators.required, Validators.minLength(3)]),
           productPrice: new FormControl(this.productDetails.sellerProduct.productPrice, [Validators.required, Validators.minLength(1)]),
@@ -60,6 +76,39 @@ export class EditProductComponent implements OnInit {
       console.log(this.productDetails.sellerProduct.productQuantity);
   
     });
+
+    // =====================================================================
+    this.isChartLoading = true;
+    this._productService.getProdSoldData(this.productId).subscribe(
+      resp => {
+        console.log( resp );
+
+
+        let prodSoldData:ProdSoldData[] = resp.data.map( element => {
+          
+          let p = new ProdSoldData();
+          p.orderId = element.orderId;
+          p.soldQuantity = element.soldQuantity;
+          let date = element.soldDate;
+          // let newDate = this._datePipe.transform( new Date(date), "dd-MM-yyyy" );
+          // p.soldDate = new Date(newDate);
+          p.soldDate = new Date(date);
+
+          return p
+        } );
+
+        console.log( prodSoldData );
+        this._generateChartData( prodSoldData);
+       
+      },
+      err => {
+        console.log( err );
+      },
+      () =>{
+        this.isChartLoading = false;
+      },
+    )
+    // =====================================================================
 
   }
 
@@ -98,6 +147,45 @@ export class EditProductComponent implements OnInit {
 
   onUpdatedError(){
     return this._notificationService.onError('Sad .. failed to update product!', 3000, "bottomRight");
+  }
+
+
+  private _generateChartData(data:ProdSoldData[]){
+
+    data.forEach(e => {
+      let date = e.soldDate
+      let newDate = this._datePipe.transform( new Date(date), "dd-MM-yyyy" );
+
+      if( this.chartData.has( newDate ) ){
+        let qty = this.chartData.get( newDate );
+        this.chartData.set(newDate, qty + e.soldQuantity);
+      }else{
+        this.chartData.set(newDate,e.soldQuantity);
+      }
+
+    });
+  } 
+
+  toggleSale(event){
+
+    this.isOnSale = event.checked;
+    
+    console.log(this.isOnSale);
+    
+    let sellerProductRequest: SellerProductRequest = new SellerProductRequest;
+    sellerProductRequest.id = this.productId;
+    sellerProductRequest.onSale = this.isOnSale;
+
+    this._sellerApi.updateProductSale(sellerProductRequest).subscribe(
+      resp => {
+        console.log(resp);
+      },
+      err => {
+        console.log(err);
+      },
+      () => {},
+    );
+
   }
 
 }

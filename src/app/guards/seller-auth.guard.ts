@@ -35,13 +35,13 @@ export class SellerAuthGuard implements CanActivate,CanActivateChild {
       
         if( roleConst === userRole ){
           return true;
-        }else{
-          this._router.navigateByUrl("/seller/login");
+        }else {
+          this._router.navigateByUrl("/logout");
           return false;
         }
-        
+
     }else{
-      this._router.navigateByUrl("/seller/login");
+      this._router.navigateByUrl("/login");
       return false;
     }
 

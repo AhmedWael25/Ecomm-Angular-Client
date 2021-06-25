@@ -32,4 +32,17 @@ export class MenuComponent implements OnInit , OnDestroy{
     this._authService.logout();
   }
 
+  isCustomer(){
+    return this._authService.isCustomer()
+  }
+
+  isAdmin(){
+    return this._authService.isAdmin();
+  }
+
+  isSeller(){
+    return this._authService.isSeller();
+  }
+
 }
+

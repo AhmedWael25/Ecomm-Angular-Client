@@ -7,11 +7,39 @@ import { AuthService } from '../services/auth.service';
   providedIn: 'root'
 })
 export class AdminAuthGuard implements CanActivate,CanActivateChild {
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-        throw new Error('Method not implemented.');
+
+      
+    constructor(private _authService:AuthService,
+        private _router:Router,
+        private _activatedRoute:ActivatedRoute){
+
     }
+  
     canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
         throw new Error('Method not implemented.');
     }
-    
+ 
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+        let isAuthenticated = this._authService.isAuthenticated()
+        let roleConst = route.data.role;
+          
+        console.log( state.url );
+        //Check Authentication
+        if( isAuthenticated ){
+        // Check Role
+            let userRole = this._authService.user.value.role;
+          
+            if( roleConst === userRole ){
+              return true;
+            }else{
+              this._router.navigateByUrl("/logout");
+              return false;
+            }
+            
+        }else{
+          this._router.navigateByUrl("/login");
+          return false;
+        }
+    }
+
 }

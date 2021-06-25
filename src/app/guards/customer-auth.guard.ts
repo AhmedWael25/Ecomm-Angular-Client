@@ -36,9 +36,10 @@ export class CustomerAuthGuard implements CanActivate,CanActivateChild {
             if( roleConst === userRole ){
               return true;
             }else{
-              this._router.navigateByUrl("/login");
+              this._router.navigateByUrl("/logout");
               return false;
             }
+
             
         }else{
           this._router.navigateByUrl("/login");

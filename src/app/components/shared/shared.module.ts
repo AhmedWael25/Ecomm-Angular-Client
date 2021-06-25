@@ -16,6 +16,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { RecommendedComponent } from './recommended/recommended.component';
 import { LogoutComponent } from './logout/logout.component';
 import { LineChartComponent } from './line-chart/line-chart.component';
+import { PieChartComponent } from './pie-chart/pie-chart.component';
 
 
 
@@ -24,7 +25,7 @@ import { LineChartComponent } from './line-chart/line-chart.component';
 @NgModule({
   declarations: [
      MenuComponent
-    ,MaxLengthPipe,AllowCharOnlyDirective, FooterComponent, PageNotFoundComponent, LoginComponent, LoaderSpinnerComponent, ProfileComponent, RecommendedComponent, LogoutComponent, LineChartComponent
+    ,MaxLengthPipe,AllowCharOnlyDirective, FooterComponent, PageNotFoundComponent, LoginComponent, LoaderSpinnerComponent, ProfileComponent, RecommendedComponent, LogoutComponent, LineChartComponent, PieChartComponent
   ],
   imports: [
   CommonModule,FormsModule,
@@ -33,7 +34,7 @@ import { LineChartComponent } from './line-chart/line-chart.component';
   ],
   exports:[MenuComponent,MaxLengthPipe,FormsModule,
     ReactiveFormsModule,HttpClientModule,AllowCharOnlyDirective,
-  FooterComponent, LoaderSpinnerComponent,SlickCarouselModule, LineChartComponent],
+  FooterComponent, LoaderSpinnerComponent,SlickCarouselModule, LineChartComponent, PieChartComponent],
   providers: [ToastrService],
 
 })
