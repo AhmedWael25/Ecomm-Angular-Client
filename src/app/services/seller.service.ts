@@ -46,7 +46,7 @@ export class SellerService {
 
   getSoldItems(){
      let sellerId = this._authService.getUserId();
-    // if( sellerId <= 0 ) return;
+    if( sellerId <= 0 ) return;
     return this._apiService.get(this.baseUrl + "/" + sellerId + "/sold-items");
   }
 

@@ -24,27 +24,27 @@ export class WishListService{
 
 
     getCustomerWishList(){
-        // let customerId = this._authService.getUserId();
-        // if( customerId <= 0 ) return;
+        let customerId = this._authService.getUserId();
+        if( customerId <= 0 ) return;
         return this._apiService.get(  this.baseUrl+"/"+this.customerId+"/wishlist"  )    
     }
 
     addProdToWishlist(request:WishlistProdRequest){
-        // let customerId = this._authService.getUserId();
-        // if( customerId <= 0 ) return;
+      let customerId = this._authService.getUserId();
+      if( customerId <= 0 ) return;
         return this._apiService.post( this.baseUrl+"/"+this.customerId+"/wishlist", request  );
     }
 
     deleteProdFromWishlist(request:WishlistProdRequest){
-       // let customerId = this._authService.getUserId();
-        // if( customerId <= 0 ) return;
-        // cartItemRequest.customerId = customerId;
-        return this._httpClient.request<ApiResponse>("delete", 
-        this.baseUrl+"/"+this.customerId+"/wishlist", 
-           {
-             body:request,
-           }
-       );
+      let customerId = this._authService.getUserId();
+      if( customerId <= 0 ) return;
+      request.customerId = customerId;
+      return this._httpClient.request<ApiResponse>("delete", 
+      this.baseUrl+"/"+this.customerId+"/wishlist", 
+          {
+            body:request,
+          }
+      );
     }
 
 

@@ -22,22 +22,22 @@ export class CartService{
 
 
     getCartItems(){
-        // let customerId = this._authService.getUserId();
-        // if( customerId <= 0 ) return;
+        let customerId = this._authService.getUserId();
+        if( customerId <= 0 ) return;
         return this._apiService.get( this.baseUrl+"/"+this.customerId+"/carts" );
     }
 
     addCartItem(cartItemRequest:CartItemRequest){
-        // let customerId = this._authService.getUserId();
-        // if( customerId <= 0 ) return;
-        // cartItemRequest.customerId = customerId;
+        let customerId = this._authService.getUserId();
+        if( customerId <= 0 ) return;
+        cartItemRequest.customerId = customerId;
         return this._apiService.post( this.baseUrl+"/"+this.customerId+"/carts", cartItemRequest );
     }
 
     deleteCartItem(cartItemRequest:CartItemRequest){
-        // let customerId = this._authService.getUserId();
-        // if( customerId <= 0 ) return;
-        // cartItemRequest.customerId = customerId;
+        let customerId = this._authService.getUserId();
+        if( customerId <= 0 ) return;
+        cartItemRequest.customerId = customerId;
          return this._httpClient.request<ApiResponse>("delete", 
          this.baseUrl+"/"+this.customerId+"/carts", 
             {
@@ -47,9 +47,9 @@ export class CartService{
     }
 
     updateCartItem(cartItemRequest:CartItemRequest){
-        // let customerId = this._authService.getUserId();
-        // if( customerId <= 0 ) return;
-        // cartItemRequest.customerId = customerId;
+        let customerId = this._authService.getUserId();
+        if( customerId <= 0 ) return;
+        cartItemRequest.customerId = customerId;
         return this._apiService.put( this.baseUrl+"/"+this.customerId+"/carts", cartItemRequest );
     }
 

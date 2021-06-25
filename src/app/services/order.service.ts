@@ -21,8 +21,4 @@ export class OrderService{
         return this._apiService.get(this.baseUrl + "/" + orderId);
     }
 
-
-
-
-
 }

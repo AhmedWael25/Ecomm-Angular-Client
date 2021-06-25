@@ -5,6 +5,7 @@ import { URLS } from "../url.constants";
 import { Observable } from "rxjs";
 import { ApiResponse } from "../models/api-response";
 import { CustomerRequest } from "../models/customer/CustomerRequest";
+import { AuthService } from "./auth.service";
 
 @Injectable({
     providedIn: 'root'
@@ -13,37 +14,31 @@ export class CheckoutService{
 
     private baseUrl = URLS.apiUrl+"/customers";
 
-    constructor(private _apiService:ApiService){
+    constructor(private _apiService:ApiService,
+                private _authService:AuthService){
 
     }
 
     //Validate CHeckout
     validateCheckout(){
         //TODO REMOVE
-        let customerId = 2;
-            // let customerId = this._authService.getUserId();
-        // if( customerId <= 0 ) return;
-        // cartItemRequest.customerId = customerId;
+        let customerId = this._authService.getUserId();
+        if( customerId <= 0 ) return;
         return this._apiService.get(this.baseUrl + "/" + customerId + "/checkout");
     }
 
     //Proceed With Payment
     paypalPayment(){
-        //TODO REMOVE THIS
-        let customerId = 2;
         const paymetMethod = {paymentMethod:"PAYPAL"};
-        // let customerId = this._authService.getUserId();
-    // if( customerId <= 0 ) return;
-    // cartItemRequest.customerId = customerId;
+        let customerId = this._authService.getUserId();
+        if( customerId <= 0 ) return;
         return this._apiService.post(this.baseUrl + "/" + customerId + "/payment", paymetMethod);
     }
 
 
     creditPayment(req:any){
-        let customerId = 2;
-        // let customerId = this._authService.getUserId();
-    // if( customerId <= 0 ) return;
-    // cartItemRequest.customerId = customerId;
+        let customerId = this._authService.getUserId();
+        if( customerId <= 0 ) return;
         return this._apiService.post(this.baseUrl + "/" + customerId + "/payment", req);
     }
 
