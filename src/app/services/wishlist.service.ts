@@ -14,7 +14,6 @@ import { AuthService } from "./auth.service";
 export class WishListService{
 
 
-    private customerId:number = 2;
     private baseUrl = URLS.apiUrl+"/customers";
 
 
@@ -26,13 +25,13 @@ export class WishListService{
     getCustomerWishList(){
         let customerId = this._authService.getUserId();
         if( customerId <= 0 ) return;
-        return this._apiService.get(  this.baseUrl+"/"+this.customerId+"/wishlist"  )    
+        return this._apiService.get(  this.baseUrl+"/"+customerId+"/wishlist"  )    
     }
 
     addProdToWishlist(request:WishlistProdRequest){
       let customerId = this._authService.getUserId();
       if( customerId <= 0 ) return;
-        return this._apiService.post( this.baseUrl+"/"+this.customerId+"/wishlist", request  );
+        return this._apiService.post( this.baseUrl+"/"+customerId+"/wishlist", request  );
     }
 
     deleteProdFromWishlist(request:WishlistProdRequest){
@@ -40,7 +39,7 @@ export class WishListService{
       if( customerId <= 0 ) return;
       request.customerId = customerId;
       return this._httpClient.request<ApiResponse>("delete", 
-      this.baseUrl+"/"+this.customerId+"/wishlist", 
+      this.baseUrl+"/"+customerId+"/wishlist", 
           {
             body:request,
           }

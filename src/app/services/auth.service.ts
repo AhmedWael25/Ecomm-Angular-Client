@@ -29,9 +29,6 @@ export class AuthService {
     loggedIn: boolean = false;
     user = new BehaviorSubject<UserAuthInfo>(null);
 
-    sellerId: number = 1;
-    role: string = "";
-
 
     isCustomer(): boolean {
         if (this.user.value == null) return false;

@@ -12,7 +12,6 @@ import { AuthService } from "./auth.service";
   })
 export class CartService{
 
-    private customerId:number = 2;
     private baseUrl = URLS.apiUrl+"/customers";
 
 
@@ -24,14 +23,14 @@ export class CartService{
     getCartItems(){
         let customerId = this._authService.getUserId();
         if( customerId <= 0 ) return;
-        return this._apiService.get( this.baseUrl+"/"+this.customerId+"/carts" );
+        return this._apiService.get( this.baseUrl+"/"+customerId+"/carts" );
     }
 
     addCartItem(cartItemRequest:CartItemRequest){
         let customerId = this._authService.getUserId();
         if( customerId <= 0 ) return;
         cartItemRequest.customerId = customerId;
-        return this._apiService.post( this.baseUrl+"/"+this.customerId+"/carts", cartItemRequest );
+        return this._apiService.post( this.baseUrl+"/"+customerId+"/carts", cartItemRequest );
     }
 
     deleteCartItem(cartItemRequest:CartItemRequest){
@@ -39,7 +38,7 @@ export class CartService{
         if( customerId <= 0 ) return;
         cartItemRequest.customerId = customerId;
          return this._httpClient.request<ApiResponse>("delete", 
-         this.baseUrl+"/"+this.customerId+"/carts", 
+         this.baseUrl+"/"+customerId+"/carts", 
             {
               body:cartItemRequest,
             }
@@ -50,7 +49,7 @@ export class CartService{
         let customerId = this._authService.getUserId();
         if( customerId <= 0 ) return;
         cartItemRequest.customerId = customerId;
-        return this._apiService.put( this.baseUrl+"/"+this.customerId+"/carts", cartItemRequest );
+        return this._apiService.put( this.baseUrl+"/"+customerId+"/carts", cartItemRequest );
     }
 
     

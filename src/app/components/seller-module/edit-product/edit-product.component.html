@@ -22,7 +22,7 @@
                         <div class="carousel" data-flickity='{ "wrapAround": "true", "autoPlay": true, "imagesLoaded": true}'>
                             <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
                                 <div ngxSlickItem *ngFor="let image of productDetails.sellerProduct.prodImages" class="slide">
-                                    <img [src]= 'image'>
+                                    <div style="background-image: url('{{image}}');height: 300px; width: 100%; background-size: contain; background-repeat: no-repeat; background-position: center; " ></div>
                                 </div>
                             </ngx-slick-carousel>
                         </div>
@@ -90,7 +90,7 @@
                                     <i class="icon-picture"></i>
                                     <span class="font-weight-bold">
                                         <i class="fas fa-funnel-dollar" style="color: brown;"></i>
-                                        Sold:  {{ productDetails.soldCounter }} times
+                                        Sold:  {{ productDetails.soldCounter? productDetails.soldCounter : 0  }} times
                                     </span>
                                 </a>
                             </div>
@@ -100,7 +100,7 @@
                                     <i class="icon-picture"></i>
                                     <span class="font-weight-bold">
                                         <i class="fas fa-star" style="color: gold;"></i>
-                                        Rating:  {{ productDetails.averageRating }} Star
+                                        Rating:  {{ productDetails.averageRating? productDetails.averageRating : "-" }} Star
                                     </span>
                                 </a>
                             </div>

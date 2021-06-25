@@ -107,7 +107,7 @@ export class AddProductComponent implements OnInit {
     this.request.productPrice = this.addProductForm.value.price;
     this.request.productQuantity = this.addProductForm.value.quantity;
     this.request.subcategoryId = +this.addProductForm.value.categoryGroup.subcategory;
-    this.request.sellerId = +this._authService.sellerId;
+    this.request.sellerId = +this._authService.getUserId();
 
     const imageFormData = new FormData();
     const catalogFormData = new FormData();

@@ -164,13 +164,11 @@ export class ProductListComponent implements OnInit {
 
     this._cartService.addCartItem(request).subscribe(
       resp => {
-        
         this._notificationService.onSuccess(resp.message, 3000,"topRight");
       },
       err => {
         let errMsg = err.error.message;
         this._notificationService.onError(errMsg, 3000,"topRight");
-        console.log(err);
       },
     )
   }
