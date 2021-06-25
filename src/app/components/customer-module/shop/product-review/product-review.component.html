@@ -45,7 +45,7 @@
                             <div class="single-form form-default">
                                 <label>Write your Review</label>
                                 <div class="form-input">
-                                    <textarea placeholder="Your review here"></textarea>
+                                    <textarea placeholder="Your review here" #reviewText></textarea>
                                     <i class="mdi mdi-message-text-outline"></i>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
                                 <div class="rating-form-btn">
-                                    <button class="main-btn primary-btn">write a Review</button>
+                                    <button class="main-btn primary-btn" (click)="addReview(reviewText.value)">write a Review</button>
                                 </div>
                             </div>
                         </form>
