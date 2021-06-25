@@ -39,13 +39,38 @@ export class CustomerDetailsComponent implements OnInit {
   }
 
   countProductsBought() {
-    let counter = 0;
-    this.customerDetails.orderDtoList.forEach(element => {
-      element.orderItems.forEach(ele => {
-        counter += ele.quantity;
+    let productCounter = 0;
+    this.customerDetails.orderDtoList.forEach(order => {
+      order.orderItems.forEach(item => {
+        productCounter += item.quantity;
       });
     });
-    return counter;
+    return productCounter;
+  }
+
+  getOrderPrice(orderId: number) {
+    var orderPrice = 0;
+    this.customerDetails.orderDtoList.forEach(order => {
+      if(order.id == orderId){
+        order.orderItems.forEach( item => {
+          console.log("price : " + item.unitPrice + "\n quantity : " + item.quantity)
+          orderPrice += item.quantity * item.unitPrice;
+        });
+      }
+    });
+    return orderPrice;
+  }
+
+  getOrderQuantity(orderId: number) {
+    var orderQuantity = 0;
+    this.customerDetails.orderDtoList.forEach(order => {
+      if(order.id == orderId){
+        order.orderItems.forEach( item => {
+          orderQuantity += item.quantity;
+        });
+      }
+    });
+    return orderQuantity;
   }
 
 }
