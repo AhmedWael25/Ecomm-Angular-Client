@@ -1,3 +1,4 @@
+import { Product } from 'src/app/models/product/Product';
 
 import { ActivatedRoute } from '@angular/router';
 import { Component, EventEmitter, OnInit } from '@angular/core';
@@ -33,6 +34,7 @@ export class EditProductComponent implements OnInit {
 
   isOnSale:boolean;
   // saleChange:EventEmitter<MatSlideToggleChange>;
+  productNameValid: string;
 
   slideConfig = {
     "slidesToShow": 1,
@@ -64,6 +66,7 @@ export class EditProductComponent implements OnInit {
         this.productDetails = response.data;
         // this.isOnSale = true;
         this.isOnSale = response.data.sellerProduct.onSale;
+        
         this.form = new FormGroup({
           productName: new FormControl(this.productDetails.sellerProduct.productName, [Validators.required, Validators.minLength(3)]),
           productPrice: new FormControl(this.productDetails.sellerProduct.productPrice, [Validators.required, Validators.minLength(1)]),
@@ -71,6 +74,7 @@ export class EditProductComponent implements OnInit {
           productDescription: new FormControl(this.productDetails.sellerProduct.productDescription, [Validators.required, Validators.minLength(1), Validators.maxLength(100)]),
         });
 
+        this.productNameValid = this.form.getRawValue();
         console.log("################\n  product: " + JSON.stringify(this.productDetails) + " ##################");
       });
       console.log(this.productDetails.sellerProduct.productQuantity);
@@ -82,7 +86,6 @@ export class EditProductComponent implements OnInit {
     this._productService.getProdSoldData(this.productId).subscribe(
       resp => {
         console.log( resp );
-
 
         let prodSoldData:ProdSoldData[] = resp.data.map( element => {
           

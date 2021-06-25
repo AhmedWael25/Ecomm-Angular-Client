@@ -1,1 +1,42 @@
-<p>seller-list works!</p>
+    <div class="row">
+        <div class="card">
+            <h1 class="card-header" style="text-align: center; background-color: #262d35; color: white;">
+                Sellers 
+                <i class="fas fa-id-card"></i>
+            </h1>
+            <div class="card-body">
+                <table class="container-fluid">
+                    <thead>
+                        <tr style="color: rgb(19, 18, 18)">
+                            <th>#</th>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Register</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let seller of sellers" style="color: white" [routerLink]='["/admin/sellers", seller.id]'>
+
+                            <td style="margin-right: 10%; color: white">{{seller.id}}</td>
+                            <td>
+                                <div class="d-flex align-items-center m-r-10">
+                                    <img class="btn btn-circle d-flex btn-info text-white" style="padding: 1px"
+                                        [src]="seller.image" width="60px" height="60px" 
+                                        class="rounded-circle" alt="seller"/>
+                                </div> 
+                            </td>
+                            <td>{{seller.name}}</td>
+
+                            <td>{{seller.email}}</td>
+
+                            <td>{{seller.phone}}</td>
+
+                            <td>{{seller.regDate | date}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
