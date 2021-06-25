@@ -46,7 +46,7 @@ export class SellerRegisterComponent implements OnInit {
     this._sellerService.registerSeller(this.registerSellerData).subscribe(
       resp => console.log(resp.data)
     )
-    this._router.navigate([`seller/login`])
+    this._router.navigate([`/login`])
   }
 
   get name(){
