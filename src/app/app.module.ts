@@ -46,7 +46,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     CustomerService,
     {provide: HTTP_INTERCEPTORS, useClass:AuthInterceptorService, multi:true},
     { provide: HTTP_INTERCEPTORS, useClass: NetworkInterceptor, multi: true },
-    DatePipe
+    DatePipe,
   ],
   
   bootstrap: [AppComponent]

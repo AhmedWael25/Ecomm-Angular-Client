@@ -17,6 +17,7 @@ import { RecommendedComponent } from './recommended/recommended.component';
 import { LogoutComponent } from './logout/logout.component';
 import { LineChartComponent } from './line-chart/line-chart.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { SellerOrderListComponent } from './seller-order-list/seller-order-list.component';
 
 
 
@@ -25,7 +26,7 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
 @NgModule({
   declarations: [
      MenuComponent
-    ,MaxLengthPipe,AllowCharOnlyDirective, FooterComponent, PageNotFoundComponent, LoginComponent, LoaderSpinnerComponent, ProfileComponent, RecommendedComponent, LogoutComponent, LineChartComponent, PieChartComponent
+    ,MaxLengthPipe,AllowCharOnlyDirective, FooterComponent, PageNotFoundComponent, LoginComponent, LoaderSpinnerComponent, ProfileComponent, RecommendedComponent, LogoutComponent, LineChartComponent, PieChartComponent, SellerOrderListComponent
   ],
   imports: [
   CommonModule,FormsModule,
@@ -34,7 +35,8 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
   ],
   exports:[MenuComponent,MaxLengthPipe,FormsModule,
     ReactiveFormsModule,HttpClientModule,AllowCharOnlyDirective,
-  FooterComponent, LoaderSpinnerComponent,SlickCarouselModule, LineChartComponent, PieChartComponent],
+  FooterComponent, LoaderSpinnerComponent,SlickCarouselModule, LineChartComponent, PieChartComponent,
+  SellerOrderListComponent],
   providers: [ToastrService],
 
 })

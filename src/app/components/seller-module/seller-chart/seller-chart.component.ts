@@ -28,7 +28,6 @@ export class SellerChartComponent implements OnInit {
 
 
 
-
   ngOnInit(): void {
     this.isLoading = true;
     this._sellerService.getSoldItems().subscribe(
@@ -103,7 +102,7 @@ export class SellerChartComponent implements OnInit {
     data.forEach( e => {
 
       let orderId:number = e.orderId;
-      let order:SellerOrder = this.retrieveOrder(orderId);
+      let order:SellerOrder = this._retrieveOrder(orderId);
       //if order is null it wasnot put before
       //if no it was, insert sold item into order item array
       console.log(order);
@@ -138,8 +137,7 @@ export class SellerChartComponent implements OnInit {
     console.log(this.orderlist);
   }
 
-
-  retrieveOrder(id:number){
+  private  _retrieveOrder(id:number){
 
     let i:number = 0;
     for(i = 0 ; i < this.orderlist.length ; i ++){
@@ -150,8 +148,6 @@ export class SellerChartComponent implements OnInit {
     }
     return null;
   }
-
-
 
   orderTotal(order:SellerOrder){
     
