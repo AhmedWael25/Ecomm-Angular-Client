@@ -12,6 +12,10 @@ import { ProductService } from 'src/app/services/product.service';
 import { DatePipe } from '@angular/common';
 import { ProdSoldData } from 'src/app/models/product/ProdSoldData';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { ProductReview } from 'src/app/models/product/ProductReview';
+import { SellerOrder } from 'src/app/models/seller/SellerOrder';
+import { SoldItems } from 'src/app/models/seller/SoldItems';
+import { SellerOrderItem } from 'src/app/models/seller/SellerOrderItem';
 
 
 
@@ -36,6 +40,11 @@ export class EditProductComponent implements OnInit {
   // saleChange:EventEmitter<MatSlideToggleChange>;
   productNameValid: string;
 
+  totalRating: number;
+  reviews: Array<ProductReview>;
+  totalElements: number;
+  ratingPercentages: Array<number> = new Array(5);
+
   slideConfig = {
     "slidesToShow": 1,
     "slidesToScroll": 1,
@@ -47,7 +56,32 @@ export class EditProductComponent implements OnInit {
     "infinite": true
   };
 
-  constructor(private _sellerApi:SellerService , 
+  toggleConfig = {
+    // height: 25,
+    // width: 50,
+    margin: 8,
+    fontSize: 10,
+    color: {
+      checked: "#56C128",
+      unchecked: "#c70202"
+    },
+    switchColor: {
+      checked: "#3366FF",
+      unchecked: "#3366FF"
+    },
+    labels: {
+      unchecked: "Off",
+      checked: "On"
+    },
+    checkedLabel: "",
+    uncheckedLabel: "",
+    fontColor: {
+      checked: "#fafafa",
+      unchecked: "#ffffff"
+    }
+  };
+
+  constructor(private _sellerService:SellerService , 
               private _activatedRoute:ActivatedRoute, 
               private _notificationService: NotificationService,
               private _productService:ProductService,
@@ -61,7 +95,7 @@ export class EditProductComponent implements OnInit {
       this.productId = params.productId;
       console.log(this.productId);
 
-      this._sellerApi.getProductDetail(this.productId).subscribe(response => {
+      this._sellerService.getProductDetail(this.productId).subscribe(response => {
         console.log(response);
         this.productDetails = response.data;
         // this.isOnSale = true;
@@ -77,8 +111,7 @@ export class EditProductComponent implements OnInit {
         this.productNameValid = this.form.getRawValue();
         console.log("################\n  product: " + JSON.stringify(this.productDetails) + " ##################");
       });
-      console.log(this.productDetails.sellerProduct.productQuantity);
-  
+
     });
 
     // =====================================================================
@@ -112,6 +145,9 @@ export class EditProductComponent implements OnInit {
       },
     )
     // =====================================================================
+    this.getReviews(this.productId);
+
+    // =====================================================================
 
   }
 
@@ -129,7 +165,7 @@ export class EditProductComponent implements OnInit {
     sellerProductRequest.id = this.productDetails.sellerProduct.id;
     console.log(sellerProductRequest);
 
-    this._sellerApi.updateProduct(sellerProductRequest).subscribe(response => {
+    this._sellerService.updateProduct(sellerProductRequest).subscribe(response => {
       console.log(response);
       
       if(sellerProductRequest != response.data){
@@ -179,7 +215,7 @@ export class EditProductComponent implements OnInit {
     sellerProductRequest.id = this.productId;
     sellerProductRequest.onSale = this.isOnSale;
 
-    this._sellerApi.updateProductSale(sellerProductRequest).subscribe(
+    this._sellerService.updateProductSale(sellerProductRequest).subscribe(
       resp => {
         console.log(resp);
       },
@@ -190,6 +226,23 @@ export class EditProductComponent implements OnInit {
     );
 
   }
+
+  getReviews(productId: number) {
+    this._productService.getReviews(productId).subscribe(
+      review => {
+        this.reviews = review.data;
+        this.totalElements = review.totalElements;
+
+        for (let index = 0; index < this.ratingPercentages.length; index++) {
+          this.ratingPercentages[index] = Math.round(((this.reviews.filter(function (item) {
+            return item.rating == index + 1;
+          }).length / this.totalElements * 100) + Number.EPSILON) * 10) / 10;
+        }
+      }
+    );
+  }
+
+  
 
 }
 

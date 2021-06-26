@@ -28,4 +28,10 @@ export class AdminService {
   getCustomerDetails(customerId:number):Observable<ApiResponse>{
     return this._apiService.get(URLS.apiUrl + "/customers/" + customerId + "/details");
   }
+
+  getSoldItems(sellerId:number){
+    // let sellerId = this._authService.getUserId();
+   if( sellerId <= 0 ) return;
+   return this._apiService.get(URLS.apiUrl + "/seller/" + sellerId + "/sold-items");
+ }
 }

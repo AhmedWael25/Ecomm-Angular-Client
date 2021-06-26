@@ -38,6 +38,7 @@
     "jquery": "^3.6.0",
     "jwt-decode": "^3.1.2",
     "ng-starrating": "^1.0.20",
+    "ng-toggle-button": "^0.1.7",
     "ngx-pagination": "^5.1.1",
     "ngx-slick-carousel": "^0.5.1",
     "ngx-toastr": "^14.0.0",

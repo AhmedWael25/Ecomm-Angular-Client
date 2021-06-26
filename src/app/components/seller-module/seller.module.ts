@@ -21,6 +21,7 @@ import { RatingModule } from 'ng-starrating';
 import { BooleanTargetPipe } from 'src/app/pipes/boolean-target.pipe';
 import { SellerChartComponent } from './seller-chart/seller-chart.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { NgToggleModule } from 'ng-toggle-button';
 
 const routes: Routes = [
   {

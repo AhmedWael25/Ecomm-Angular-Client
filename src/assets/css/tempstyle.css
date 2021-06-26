@@ -30508,7 +30508,7 @@ only screen and (min-width: 992px) and (max-width: 1199px) {
 
 .reviews-style .reviews-rating-wrapper .reviews-rating-star {
     border: 2px solid #EFEFEF;
-    width: 50%;
+    width: 100%;
     padding: 32px;
 }
 
