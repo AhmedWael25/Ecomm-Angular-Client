@@ -19,6 +19,7 @@ import { LineChartComponent } from './line-chart/line-chart.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { SellerOrderListComponent } from './seller-order-list/seller-order-list.component';
 import { SharedFooterComponent } from './shared-footer/shared-footer.component';
+import { NgToggleModule } from 'ng-toggle-button';
 
 
 
@@ -32,12 +33,14 @@ import { SharedFooterComponent } from './shared-footer/shared-footer.component';
   imports: [
   CommonModule,FormsModule,
     ReactiveFormsModule,RouterModule,HttpClientModule, 
-    ToastrModule.forRoot(),SlickCarouselModule
+    ToastrModule.forRoot(),SlickCarouselModule, NgToggleModule,
+
   ],
   exports:[MenuComponent,MaxLengthPipe,FormsModule,
     ReactiveFormsModule,HttpClientModule,AllowCharOnlyDirective,
   FooterComponent, LoaderSpinnerComponent,SlickCarouselModule, LineChartComponent, PieChartComponent,
-  SellerOrderListComponent, SharedFooterComponent],
+  SellerOrderListComponent, SharedFooterComponent, NgToggleModule,
+],
   providers: [ToastrService],
 
 })

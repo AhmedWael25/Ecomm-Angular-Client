@@ -12,6 +12,7 @@ import { ProductService } from 'src/app/services/product.service';
 import { DatePipe } from '@angular/common';
 import { ProdSoldData } from 'src/app/models/product/ProdSoldData';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { ProductReview } from 'src/app/models/product/ProductReview';
 
 
 
@@ -36,6 +37,11 @@ export class EditProductComponent implements OnInit {
   // saleChange:EventEmitter<MatSlideToggleChange>;
   productNameValid: string;
 
+  totalRating: number;
+  reviews: Array<ProductReview>;
+  totalElements: number;
+  ratingPercentages: Array<number> = new Array(5);
+
   slideConfig = {
     "slidesToShow": 1,
     "slidesToScroll": 1,
@@ -45,6 +51,31 @@ export class EditProductComponent implements OnInit {
     "prevArrow": "<div class='nav-btn prev-slide'></div>",
     // "dots": true,
     "infinite": true
+  };
+
+  toggleConfig = {
+    // height: 25,
+    // width: 50,
+    margin: 8,
+    fontSize: 10,
+    color: {
+      checked: "#56C128",
+      unchecked: "#c70202"
+    },
+    switchColor: {
+      checked: "#3366FF",
+      unchecked: "#3366FF"
+    },
+    labels: {
+      unchecked: "Off",
+      checked: "On"
+    },
+    checkedLabel: "",
+    uncheckedLabel: "",
+    fontColor: {
+      checked: "#fafafa",
+      unchecked: "#ffffff"
+    }
   };
 
   constructor(private _sellerApi:SellerService , 
@@ -77,8 +108,7 @@ export class EditProductComponent implements OnInit {
         this.productNameValid = this.form.getRawValue();
         console.log("################\n  product: " + JSON.stringify(this.productDetails) + " ##################");
       });
-      console.log(this.productDetails.sellerProduct.productQuantity);
-  
+
     });
 
     // =====================================================================
@@ -112,7 +142,7 @@ export class EditProductComponent implements OnInit {
       },
     )
     // =====================================================================
-
+    this.getReviews(this.productId)
   }
 
   isFieldEnabled(){
@@ -189,6 +219,21 @@ export class EditProductComponent implements OnInit {
       () => {},
     );
 
+  }
+
+  getReviews(productId: number) {
+    this._productService.getReviews(productId).subscribe(
+      review => {
+        this.reviews = review.data;
+        this.totalElements = review.totalElements;
+
+        for (let index = 0; index < this.ratingPercentages.length; index++) {
+          this.ratingPercentages[index] = Math.round(((this.reviews.filter(function (item) {
+            return item.rating == index + 1;
+          }).length / this.totalElements * 100) + Number.EPSILON) * 10) / 10;
+        }
+      }
+    );
   }
 
 }
