@@ -4,69 +4,67 @@
     <app-spinner></app-spinner>
   </div>
 
-    <div class="col-lg-8" *ngIf="!isLoading">
-        <div class="row">
+  <div class="col-lg-8" *ngIf="!isLoading">
+    <div class="row">
 
-            <div class="order-product-table table-responsive">
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Price</th>
-                      <th scope="col">Rating</th>
-                      <th scope="col">on Sale</th>
-                      <th scope="col">Actions</th>
-                    </tr>
-                  </thead>
-                    <tbody>
-                      <tr *ngFor="let item of wishlist.products;let i = index">
-                        <td>
-                          <div class="product-cart d-flex" [routerLink]="['/shop',item.id]">
-                              <div class="product-thumb">
-                                  <img style="cursor: pointer;" class="wishlist-img" src="{{item.img}}" alt="Product">
-                              </div>
-                          </div>
-                      </td>
+      <div class="order-product-table table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Price</th>
+              <th scope="col">Rating</th>
+              <th scope="col">on Sale</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of wishlist.products;let i = index">
+              <td>
+                <div class="product-cart d-flex" [routerLink]="['/shop',item.id]">
+                  <div class="product-thumb">
+                    <img style="cursor: pointer;" class="wishlist-img" src="{{item.img}}" alt="Product">
+                  </div>
+                </div>
+              </td>
 
-                      <td>
-                        <div class="product-content media-body">
-                          <h5 class="title"><a [routerLink]="['/shop',item.id]" href="javascript:void(0)">{{item.name}}</a></h5>
-                        </div>
-                      </td>
+              <td>
+                <div class="product-content media-body">
+                  <h5 class="title"><a [routerLink]="['/shop',item.id]" href="javascript:void(0)">{{item.name}}</a></h5>
+                </div>
+              </td>
 
-                      <td>
-                        {{item.price | currency:'USD'}}
-                      </td>
-
-                      
-                      <td >
-                        {{item.rating }}
-                      </td>
-
-                      <td>
-                        {{ item.isOnSale==true ? "YES": "NO" }}
-                      </td>
+              <td>
+                {{item.price | currency:'USD'}}
+              </td>
 
 
-                      <td>
-                        <ul class="action">
-                          <li id="actions-{{i}}" >
-                            <a   class="delete" href="javascript:void(0)" style="padding-right: 10px;" (click)="addToCart(i, $event)">
-                              <i style="color: green;font-size: 30px;"  class="fa fa-cart-plus"></i></a>
+              <td>
+                {{item.rating }}
+              </td>
 
-                              <a class="delete" href="javascript:void(0)"  style="padding-left: 10px;" (click)="deleteItem(i, $event)">
-                                  <i style="color: red;font-size: 30px;"  class="fa fa-trash"></i></a>
-                          </li>
-                        </ul>
-                      </td>
+              <td>
+                {{ item.isOnSale==true ? "YES": "NO" }}
+              </td>
 
-                      </tr>
-                    </tbody>
-                  </table>
-            </div>
-        </div>
+
+              <td>
+                <ul class="action">
+                  <li id="actions-{{i}}">
+                    <a class="delete" href="javascript:void(0)" style="padding-left: 10px;"
+                      (click)="deleteItem(i, $event)">
+                      <i style="color: red;font-size: 30px;" class="fa fa-trash"></i></a>
+                  </li>
+                </ul>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+  </div>
 
 
 </div>

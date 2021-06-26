@@ -11,6 +11,7 @@ export class PieChartComponent implements OnInit {
   @Input('data') chartData:Map<any,any> = new Map();
   @Input('title') title:string="";
   @Input('label') label:string = "";
+   id:number = Math.floor(Math.random() * 50);
 
   chart: any;
 

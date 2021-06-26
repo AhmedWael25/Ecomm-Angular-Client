@@ -1,0 +1,41 @@
+
+
+
+<div class="container" *ngIf="isLoading">
+    <div class="row justify-content-center">
+        <app-spinner></app-spinner>
+    </div>
+</div>
+
+
+<div class="container" *ngIf="!isLoading">
+  <div class="row justify-content-center mt-20 mb-20">
+
+    <div class="col-lg-6">
+
+      <app-pie-chart [label]="'Qty'" [data]="profitPerSellerPieChartData" [title]="'#Qty Sold of each sold product'"></app-pie-chart>
+
+    </div>
+    <div class="col-lg-6">
+
+        <app-line-chart [label]="'Profit $'" [data]="dailyProfitBarChartData" [title]="'Daily Profits'"></app-line-chart>
+
+    </div>
+
+  </div>
+  <div class="row justify-content-center mt-20 mb-20">
+
+    <div class="col-lg-6">
+
+        <app-pie-chart [id] [label]="'Qty'" [data]="soldPerSellerPieChartData" [title]="'#Sold Per Seller'"></app-pie-chart>
+
+    </div>
+    <div class="col-lg-6">
+
+      <h1>Chart</h1>
+
+    </div>
+
+  </div>
+  <hr>
+</div>

@@ -9,29 +9,50 @@ import { CustomerListComponent } from './customer-list/customer-list.component';
 import { SellerDetailsComponent } from './seller-details/seller-details.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 import { AdminAuthGuard } from 'src/app/guards/admin-auth.guard';
+import { AdminChartsComponent } from './admin-charts/admin-charts.component';
 
 
 
 const routes: Routes = [
+  {
+    path:"",
+    component:AdminChartsComponent,
+    canActivate:[AdminAuthGuard],
+    data:{
+      role : "ROLE_ADMIN",
+    },
+  },
   { 
     path:"sellers",
     component:SellerListComponent,
     canActivate:[AdminAuthGuard],
+    data:{
+      role : "ROLE_ADMIN",
+    },
   },
   {
     path:"customers",
     component:CustomerListComponent,
     canActivate:[AdminAuthGuard],
+    data:{
+      role : "ROLE_ADMIN",
+    },
   },
   {
     path: "sellers/:sellerId",
     component:SellerDetailsComponent,
     canActivate:[AdminAuthGuard],
+    data:{
+      role : "ROLE_ADMIN",
+    },
   },
   {
     path: "customers/:customerId",
     component:CustomerDetailsComponent,
     canActivate:[AdminAuthGuard],
+    data:{
+      role : "ROLE_ADMIN",
+    },
   },
 ];
 
@@ -42,6 +63,7 @@ const routes: Routes = [
     CustomerListComponent,
     CustomerDetailsComponent,
     SellerDetailsComponent,
+    AdminChartsComponent,
   ],
   imports: [
     CommonModule,

@@ -3,6 +3,7 @@ import { Wishlist } from 'src/app/models/wishlist/Wishlist';
 import { WishlistItems } from 'src/app/models/wishlist/WishlistItems';
 import { WishlistProdRequest } from 'src/app/models/wishlist/WishlistProdRequest';
 import { CartService } from 'src/app/services/cart.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { WishListService } from 'src/app/services/wishlist.service';
 
 @Component({
@@ -13,7 +14,8 @@ import { WishListService } from 'src/app/services/wishlist.service';
 export class WishlistComponent implements OnInit {
 
   constructor(private _wishlistService:WishListService, 
-              private _cartService:CartService) { }
+              private _cartService:CartService,
+              private _notificationService:NotificationService) { }
 
   wishlist:Wishlist =  new Wishlist();
   isLoading:boolean = false;
@@ -38,12 +40,8 @@ export class WishlistComponent implements OnInit {
   }
 
 
-  addToCart(index, event){
-
-  }
 
   deleteItem(index, event){
-
     
   console.log(index);
 
@@ -60,10 +58,12 @@ export class WishlistComponent implements OnInit {
         
         if(resp.data == true){
           this.wishlist.products.splice(index, 1);
+          this._notificationService.onSuccess(resp.message, 3000,"topRight");
         }
       },
       err =>{
         console.log(err);
+        this._notificationService.onError("Something Wrong happened, Try Again Later", 3000,"topRight");
       }, 
       () =>{
 

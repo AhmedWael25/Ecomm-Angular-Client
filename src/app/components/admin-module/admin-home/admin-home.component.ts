@@ -1,5 +1,7 @@
 import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { AdminService } from 'src/app/services/admin.service';
+import { SoldItems } from 'src/app/models/seller/SoldItems';
 
 @Component({
   selector: 'app-admin-home',
@@ -8,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminHomeComponent implements OnInit {
 
-  constructor(private _authService: AuthService) { }
+  soldItems:SoldItems[] = [];
+  isLoading:boolean = false;
+
+  constructor(private _authService: AuthService,
+              private _adminService:AdminService) { }
 
   ngOnInit(): void {
+
   }
 
   logout(){

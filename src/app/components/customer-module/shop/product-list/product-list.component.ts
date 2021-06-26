@@ -1,10 +1,12 @@
 import { LabelType, Options } from '@angular-slider/ngx-slider';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CartItemRequest } from 'src/app/models/cart/CartItemRequest';
 import { Category } from 'src/app/models/Category';
 import { Product } from 'src/app/models/product/Product';
 import { Wishlist } from 'src/app/models/wishlist/Wishlist';
+import { WishlistProdRequest } from 'src/app/models/wishlist/WishlistProdRequest';
 import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { CategoryService } from 'src/app/services/category.service';
@@ -26,7 +28,8 @@ export class ProductListComponent implements OnInit {
     private _cartService:CartService,
     private _wishlistService:WishListService,
     private _notificationService:NotificationService,
-    private _authService:AuthService) { }
+    private _authService:AuthService,
+    private _router:Router) { }
 
   products: Array<Product>;
   categories: Array<Category>;
@@ -179,6 +182,19 @@ export class ProductListComponent implements OnInit {
     let prodId:number = prod.id;
     console.log(prod, prodId);
 
+    
+    let isCustomer = this._authService.isCustomer();
+    let isAuth = this._authService.isAuthenticated();
+
+    if(!isAuth){
+      this._router.navigateByUrl("/login");
+      return;
+    }
+    if(!isCustomer){
+      this._router.navigateByUrl("/logout");
+      return;
+    }
+
     let request:CartItemRequest = new CartItemRequest();
     request.productId = prodId;
     request.quantity = 1;
@@ -198,18 +214,69 @@ export class ProductListComponent implements OnInit {
   isProductInWishlist(id:number){
     let isExist = this.wishlistIds.includes(id);
     return isExist;
-    // wishlistIds
   }
 
 
   deleteFromWishlist(id:number,event){
-    console.log("delete");
-    console.log(id);
+
+    let isCustomer = this._authService.isCustomer();
+    let isAuth = this._authService.isAuthenticated();
+
+    if(!isAuth){
+      this._router.navigateByUrl("/login");
+    }
+    if(!isCustomer){
+      this._router.navigateByUrl("/logout");
+    }
+
+
+    let req:WishlistProdRequest = new WishlistProdRequest();
+    req.productId = id;
+
+    this._wishlistService.deleteProdFromWishlist(req).subscribe(
+      resp => {
+        const index = this.wishlistIds.indexOf(id);
+        this.wishlistIds.splice(index,1);
+        this._notificationService.onSuccess(resp.message, 3000,"topRight");
+      },
+      err => {
+        let errMessage:string = err.error.message;
+        this._notificationService.onError(errMessage, 3000 , "topRight");
+      },
+    );
+
+
   }
 
   addToWishlist(id:number, event){
-    console.log("add");
-    console.log(id);
+
+    let isCustomer = this._authService.isCustomer();
+    let isAuth = this._authService.isAuthenticated();
+
+    if(!isAuth){
+      this._router.navigateByUrl("/login");
+      return;
+    }
+    if(!isCustomer){
+      this._router.navigateByUrl("/logout");
+      return;
+    }
+
+    let req:WishlistProdRequest = new WishlistProdRequest();
+    req.productId = id;
+
+    this._wishlistService.addProdToWishlist(req).subscribe(
+      resp => {
+        let id:number = resp.data.id;
+        this.wishlistIds.push(id);
+        this._notificationService.onSuccess(resp.message, 3000,"topRight");
+      },
+      err => {
+        let errMessage:string = err.error.message;
+        this._notificationService.onError(errMessage, 3000 , "topRight");
+      },
+    );
+
   }
 
 }

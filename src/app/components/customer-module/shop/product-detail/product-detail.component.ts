@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartItemRequest } from 'src/app/models/cart/CartItemRequest';
 import { Product } from 'src/app/models/product/Product';
+import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -33,7 +34,9 @@ export class ProductDetailComponent implements OnInit {
     private _activatedRoute: ActivatedRoute,
     private _notificationService:NotificationService,
     private _cartService:CartService,
-    private _wishlistService:WishListService) { }
+    private _wishlistService:WishListService,
+    private _authService:AuthService,
+    private _router:Router ) { }
 
     ngOnInit(): void {
       this._activatedRoute.paramMap.subscribe(params => {
@@ -48,6 +51,18 @@ export class ProductDetailComponent implements OnInit {
 
     addToCart( event){
       let prodId:number = this.product.id;
+
+      let isCustomer = this._authService.isCustomer();
+      let isAuth = this._authService.isAuthenticated();
+
+      if(!isAuth){
+        this._router.navigateByUrl("/login");
+        return;
+      }
+      if(!isCustomer){
+        this._router.navigateByUrl("/logout");
+        return;
+      }
   
       let request:CartItemRequest = new CartItemRequest();
       request.productId = prodId;

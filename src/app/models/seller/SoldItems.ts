@@ -5,5 +5,7 @@ export class SoldItems{
     soldQuantity:number;
     price:number;
     orderId:number;
+    sellerId:number;
+    sellerName:string;
     
 }

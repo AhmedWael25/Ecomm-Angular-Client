@@ -29,9 +29,14 @@ export class AdminService {
     return this._apiService.get(URLS.apiUrl + "/customers/" + customerId + "/details");
   }
 
-  getSoldItems(sellerId:number){
+  getSoldItems(sellerId:number):Observable<ApiResponse>{
     // let sellerId = this._authService.getUserId();
    if( sellerId <= 0 ) return;
    return this._apiService.get(URLS.apiUrl + "/seller/" + sellerId + "/sold-items");
  }
+
+ getAllSoldItems():Observable<ApiResponse>{
+   return this._apiService.get(URLS.apiUrl + "/products/sold-items");
+ }
+
 }

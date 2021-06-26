@@ -165,15 +165,21 @@ export class EditProductComponent implements OnInit {
     sellerProductRequest.id = this.productDetails.sellerProduct.id;
     console.log(sellerProductRequest);
 
-    this._sellerService.updateProduct(sellerProductRequest).subscribe(response => {
+    this._sellerService.updateProduct(sellerProductRequest).subscribe(
+      response => {
       console.log(response);
       
       if(sellerProductRequest != response.data){
+        this.productDetails.sellerProduct.productQuantity = sellerProductRequest.productQuantity;
+        this.productDetails.sellerProduct.productPrice = sellerProductRequest.productPrice;
         this.onUpdatedSuccess();
       }
       else{
         this.onUpdatedError();
       }
+    },
+    err => {
+      this.onUpdatedError();
     });
 
     this.isinputEnable = !this.isinputEnable;
@@ -181,11 +187,11 @@ export class EditProductComponent implements OnInit {
   
 
   onUpdatedSuccess(){
-    return this._notificationService.onSuccess('WoOoW .. product is updated', 3000, "topRight");
+    return this._notificationService.onSuccess('product is updated', 3000, "topRight");
   }
 
   onUpdatedError(){
-    return this._notificationService.onError('Sad .. failed to update product!', 3000, "bottomRight");
+    return this._notificationService.onError(' failed to update product!', 3000, "topRight");
   }
 
 
@@ -206,10 +212,6 @@ export class EditProductComponent implements OnInit {
   } 
 
   toggleSale(event){
-
-    this.isOnSale = event.checked;
-    
-    console.log(this.isOnSale);
     
     let sellerProductRequest: SellerProductRequest = new SellerProductRequest;
     sellerProductRequest.id = this.productId;
