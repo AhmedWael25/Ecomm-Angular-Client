@@ -13,6 +13,9 @@ import { DatePipe } from '@angular/common';
 import { ProdSoldData } from 'src/app/models/product/ProdSoldData';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { ProductReview } from 'src/app/models/product/ProductReview';
+import { SellerOrder } from 'src/app/models/seller/SellerOrder';
+import { SoldItems } from 'src/app/models/seller/SoldItems';
+import { SellerOrderItem } from 'src/app/models/seller/SellerOrderItem';
 
 
 
@@ -78,7 +81,7 @@ export class EditProductComponent implements OnInit {
     }
   };
 
-  constructor(private _sellerApi:SellerService , 
+  constructor(private _sellerService:SellerService , 
               private _activatedRoute:ActivatedRoute, 
               private _notificationService: NotificationService,
               private _productService:ProductService,
@@ -92,7 +95,7 @@ export class EditProductComponent implements OnInit {
       this.productId = params.productId;
       console.log(this.productId);
 
-      this._sellerApi.getProductDetail(this.productId).subscribe(response => {
+      this._sellerService.getProductDetail(this.productId).subscribe(response => {
         console.log(response);
         this.productDetails = response.data;
         // this.isOnSale = true;
@@ -142,7 +145,10 @@ export class EditProductComponent implements OnInit {
       },
     )
     // =====================================================================
-    this.getReviews(this.productId)
+    this.getReviews(this.productId);
+
+    // =====================================================================
+
   }
 
   isFieldEnabled(){
@@ -159,7 +165,7 @@ export class EditProductComponent implements OnInit {
     sellerProductRequest.id = this.productDetails.sellerProduct.id;
     console.log(sellerProductRequest);
 
-    this._sellerApi.updateProduct(sellerProductRequest).subscribe(response => {
+    this._sellerService.updateProduct(sellerProductRequest).subscribe(response => {
       console.log(response);
       
       if(sellerProductRequest != response.data){
@@ -209,7 +215,7 @@ export class EditProductComponent implements OnInit {
     sellerProductRequest.id = this.productId;
     sellerProductRequest.onSale = this.isOnSale;
 
-    this._sellerApi.updateProductSale(sellerProductRequest).subscribe(
+    this._sellerService.updateProductSale(sellerProductRequest).subscribe(
       resp => {
         console.log(resp);
       },
@@ -235,6 +241,8 @@ export class EditProductComponent implements OnInit {
       }
     );
   }
+
+  
 
 }
 

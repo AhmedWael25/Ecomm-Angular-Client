@@ -98,9 +98,9 @@
                                                 <img src="assets/images/shopping-cart.png" alt="Card">
                                             </div>
                                             <div class="card-info media-body">
-                                                <h4 _ngcontent-mej-c137="" class="d-flex justify-content-between align-items-center mb-3">
+                                                <h4 class="d-flex justify-content-between align-items-center mb-3">
                                                     <span  class="ui-button-text-icon-secondary">Sold Items</span>
-                                                    <span  class="badge bg-primary-3 rounded-pill">{{sellerDetails.soldItemsCount}}</span>
+                                                    <span  class="badge bg-primary-3 rounded-pill">{{totalProductsBought(orderlist)}}</span>
                                                 </h4>
                                             </div>
                                         </div>
@@ -111,7 +111,7 @@
                                                 <img src="assets/images/inventory.png" alt="Card">
                                             </div>
                                             <div class="card-info media-body">
-                                                <h4 _ngcontent-mej-c137="" class="d-flex justify-content-between align-items-center mb-3">
+                                                <h4 class="d-flex justify-content-between align-items-center mb-3">
                                                     
                                                     <span class="ui-button-text-icon-secondary">Product Inventory</span>
                                                     <span class="badge bg-primary-3 rounded-pill">{{sellerDetails.productsCount}}</span>
@@ -119,6 +119,9 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <app-seller-order-list [data]="orderlist"></app-seller-order-list>
+
                                 </div>
                             </div>
                         </div>

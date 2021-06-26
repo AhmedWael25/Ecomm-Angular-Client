@@ -36,6 +36,7 @@ const routes: Routes = [
     SellerListComponent,
     CustomerListComponent,
     CustomerDetailsComponent,
+    SellerDetailsComponent,
   ],
   imports: [
     CommonModule,
