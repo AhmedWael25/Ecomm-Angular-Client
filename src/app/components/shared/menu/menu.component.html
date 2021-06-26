@@ -45,11 +45,17 @@
 												</select>
                                             </div>
                                         </li> -->
+                                        <li style="cursor: pointer;" [routerLink]="['/seller/register']"  *ngIf="!isAuthenticated">
+                                            <a >
+                                                <i class="fa fa-shopping-bag" aria-hidden="true"></i>Join as Seller
+                                            </a>
+                                        </li>
+
                                         <li style="cursor: pointer;" [routerLink]="['/login']"  *ngIf="!isAuthenticated">
                                             <a >
                                                 <i class="fa fa-user"></i>Login
                                             </a>
-                                            </li>
+                                        </li>
                                     </ul>
                                     <li>
 <!--

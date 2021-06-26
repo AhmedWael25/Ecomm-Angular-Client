@@ -19,8 +19,20 @@ export class OrderDetailComponent implements OnInit, OnDestroy {
   orderDetail:Order = new Order();
   orderTotal:number;
   paramSubscription:Subscription;
+  querySubscription:Subscription;
+  isSuccess:boolean = false;
 
   ngOnInit(): void {
+
+
+    this.querySubscription = this._activatedRoute.queryParams.subscribe( 
+      params =>{
+        let temp = params.success
+        if(temp == ""){
+          this.isSuccess = true;
+        }
+      });
+
 
     this.orderDetail.orderItems = [];   
 
@@ -55,6 +67,7 @@ export class OrderDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     this.paramSubscription.unsubscribe();
+    this.querySubscription.unsubscribe();
   }
 
 
