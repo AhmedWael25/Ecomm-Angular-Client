@@ -39,4 +39,6 @@ export class AdminService {
    return this._apiService.get(URLS.apiUrl + "/products/sold-items");
  }
 
+ 
+
 }

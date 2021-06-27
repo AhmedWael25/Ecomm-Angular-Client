@@ -9,9 +9,9 @@ import { Chart } from 'chart.js';
 export class PieChartComponent implements OnInit {
 
   @Input('data') chartData:Map<any,any> = new Map();
-  @Input('title') title:string="";
+  @Input('title') title:string= "";
   @Input('label') label:string = "";
-   id:number = Math.floor(Math.random() * 50);
+  id:number = Math.floor(Math.random() * 50);
 
   chart: any;
 
@@ -30,6 +30,7 @@ export class PieChartComponent implements OnInit {
         datasets: [{
           label: this.label,
           data: xAxis,
+
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
             'rgba(54, 162, 235, 0.2)',
@@ -45,8 +46,9 @@ export class PieChartComponent implements OnInit {
             'rgba(75, 192, 192, 1)',
             'rgba(153, 102, 255, 1)',
             'rgba(255, 159, 64, 1)'
-          ],
-          borderWidth: 1
+        ],
+        borderWidth: 3,
+        hoverOffset: 10
         }]
       },
       options: {
@@ -66,7 +68,9 @@ export class PieChartComponent implements OnInit {
           },
         }
       }
+
     });
+
 
   }
 

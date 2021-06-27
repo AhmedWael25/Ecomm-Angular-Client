@@ -36,94 +36,109 @@
               <a *ngIf="_areFieldsDisabled" class="profile-link" (click)="allowEdit()">edit</a>
               <a *ngIf="!_areFieldsDisabled" class="profile-link" (click)="submit()">Save</a>
             </div>
-            <form [formGroup]="form" (ngSubmit)="submit()">
+            <form [formGroup]="form">
               <div class="profile-details">
                 <div class="single-details-item d-flex flex-wrap">
-                  <div class="details-title">
+                  <div class="details-title" style="padding-top: 10px;">
                     <h6>
                       <i class="fas fa-user-tie" style="color: darkslategrey;"></i> &nbsp;
                       Name:
                     </h6>
                   </div>
                   <div class="details-content media-body">
-                    <!-- <div class="mb-3" style="width: 330px;">
-                      <input type="text" name="name" formControlName="name" class="form-control" [value]="_userData.name" [readonly]='_areFieldsDisabled'>
-                    </div>
-                    <div *ngIf="name.touched && name.invalid" class="alert alert-danger">Invalid Name</div> -->
-                    <p *ngIf=" _areFieldsDisabled">{{_userData.name}}</p>
-                     <div *ngIf="! _areFieldsDisabled">
-                      <input type="text" name="name" formControlName="name">
-                      <div *ngIf="name.touched && name.invalid" class="alert alert-danger">Invalid Name</div>
+                    <div class="mb-3" style="width: 330px;">
+                      <input type="text" name="name" formControlName="name" class="form-control"
+                        [value]="_userData.name" [readonly]='_areFieldsDisabled'>
+                      <div *ngIf="name.touched && name.invalid" class="aletr alert-danger">
+                        <div style="text-align: center;" *ngIf="name.errors.required">Name is required!</div>
+                        <div style="text-align: center;" *ngIf="name.errors.minlength">
+                          Name should be at least {{name.errors.minlength.requiredLength}} characters !
+                        </div>
+                        <div style="text-align: center;" *ngIf="name.errors.maxlength">
+                          Name should be at most {{name.errors.maxlength.requiredLength}} characters !
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div class="single-details-item d-flex flex-wrap">
-                  <div class="details-title">
+                  <div class="details-title" style="padding-top: 10px;">
                     <h6>
                       <i class="fas fa-envelope" style="color: black;"></i> &nbsp;
                       Email:
                     </h6>
                   </div>
                   <div class="details-content media-body">
-                    <!-- <div class="mb-3" style="width: 330px;">
+                    <div class="mb-3" style="width: 330px;">
                       <input type="email" name="name" class="form-control" [value]="_userData.email" readonly>
-                    </div> -->
-                    <p>{{_userData.email}}</p>
-                    <!-- <input type="email" name="email" [disabled]="true" [(value)]="_userData.email"> -->
+                    </div>
                   </div>
                 </div>
+
                 <div class="single-details-item d-flex flex-wrap">
-                  <div class="details-title">
+                  <div class="details-title" style="padding-top: 10px;">
                     <h6>
                       <i class="fas fa-phone" style="color: blue"></i> &nbsp;
                       Phone:
                     </h6>
                   </div>
                   <div class="details-content media-body">
-                    <!-- <div class="mb-3" style="width: 330px;">
-                      <input type="text" name="phone" formControlName="phone" class="form-control" [value]="_userData.phone" [readonly]='_areFieldsDisabled'>
+                    <div class="mb-3" style="width: 330px;">
+                      <input type="text" name="phone" formControlName="phone" class="form-control"
+                        [value]="_userData.phone" [readonly]='_areFieldsDisabled'>
+                      <div *ngIf="phone.touched && phone.invalid" class="aletr alert-danger">
+                        <div style="text-align: center;" *ngIf="phone.errors.required">Phone is required!</div>
+                        <div style="text-align: center;" *ngIf="phone.errors.minlength">
+                          - Phone should be at least {{phone.errors.minlength.requiredLength}} numbers !
+                        </div>
+                        <div style="text-align: center;" *ngIf="phone.errors.maxlength">
+                          - Phone should be at most {{phone.errors.maxlength.requiredLength}}  numbers !
+                        </div>
+                        <div style="text-align: center;" *ngIf="phone.errors.pattern">
+                          - Only numbers and start with '01' !
+                        </div>
+                      </div>
                     </div>
-                    <div *ngIf="phone.touched && phone.invalid" class="alert alert-danger">Invalid phone Number</div> -->
-
-                    <p *ngIf="_areFieldsDisabled">{{_userData.phone}}</p>
-                    <div *ngIf="! _areFieldsDisabled">
-                      <input type="tel" name="phone" formControlName="phone">
-                      <div *ngIf="phone.touched && phone.invalid" class="alert alert-danger">Invalid phone Number</div>
-                    </div>
-
                   </div>
                 </div>
+
                 <div class="single-details-item d-flex flex-wrap">
-                  <div class="details-title">
+                  <div class="details-title" style="padding-top: 10px;">
                     <h6>
                       <i class="fas fa-map-marker-alt" style="color: red;"></i> &nbsp;
                       Address:
                     </h6>
                   </div>
                   <div class="details-content media-body">
-                    <!-- <div class="mb-3" style="width: 330px;">
-                      <input type="text" name="phone" formControlName="phone" class="form-control" [value]="_userData.address" [readonly]='_areFieldsDisabled'>
-                    </div>
-                    <div *ngIf="address.touched && address.invalid" class="alert alert-danger">Invalid Address</div> -->
-                    <p *ngIf="_areFieldsDisabled">{{_userData.address}}</p>
-                    <div *ngIf="! _areFieldsDisabled">
-                      <input type="text" name="address" formControlName="address">
-                      <div *ngIf="address.touched && address.invalid" class="alert alert-danger">Invalid Address</div>
+                    <div class="mb-3" style="width: 330px;">
+                      <input type="text" name="address" formControlName="address" class="form-control"
+                        [value]="_userData.address" [readonly]='_areFieldsDisabled'>
+                      <div *ngIf="address.touched && address.invalid" class="aletr alert-danger">
+                        <div style="text-align: center;" *ngIf="address.errors.required">Address is required!</div>
+                        <div style="text-align: center;" *ngIf="address.errors.minlength">
+                          Address should be at least {{address.errors.minlength.requiredLength}} characters !
+                        </div>
+                        <div style="text-align: center;" *ngIf="address.errors.maxlength">
+                          Address should be at most {{address.errors.maxlength.requiredLength}} characters !
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
+
                 <div class="single-details-item d-flex flex-wrap">
-                  <div class="details-title">
+                  <div class="details-title" style="padding-top: 10px;">
                     <h6>
                       <i class="fas fa-money-check-alt" style="color: rgb(12, 143, 19);"></i> &nbsp;
                       Balance:
                     </h6>
                   </div>
                   <div class="details-content media-body">
-                    <!-- <div class="mb-3" style="width: 330px;">
-                      <input type="text" name="phone" formControlName="phone" class="form-control" [value]="_userData.balance" readonly>
-                    </div> -->
-                    <p>{{_userData.balance}}</p>
+                    <div class="mb-3" style="width: 330px;">
+                      <input type="text" name="balance" class="form-control"
+                        [value]="_userData.balance" readonly>
+                    </div>
+                    <!-- <p>{{_userData.balance}}</p> -->
                   </div>
                 </div>
               </div>

@@ -41,19 +41,19 @@ export class ProfileComponent implements OnInit {
       this._userData = resp.data;
 
       this.form = new FormGroup({
-        name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-        address: new FormControl('', [
+        name: new FormControl(this._userData.name, [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
+        address: new FormControl(this._userData.address, [
           Validators.required,
           Validators.minLength(3),
           Validators.maxLength(30),
         ]),
-        phone: new FormControl('', [
+        phone: new FormControl(this._userData.phone, [
+          Validators.pattern("01[0-9]+"),
           Validators.required,
           Validators.minLength(11),
           Validators.maxLength(11),
         ]),
       });
-
     });
 
     this.isLoading = true;

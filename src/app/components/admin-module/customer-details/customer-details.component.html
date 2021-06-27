@@ -78,7 +78,7 @@
                                         </h6>
                                     </div>
                                     <div class="details-content media-body">
-                                        <p>{{customerDetails.customerDto.regDate}}</p>
+                                        <p>{{customerDetails.customerDto.regDate | date}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -114,7 +114,7 @@
                                                 <img src="assets/images/order.png" alt="Card">
                                             </div>
                                             <div class="card-info media-body">
-                                                <h4 _ngcontent-mej-c137="" class="d-flex justify-content-between align-items-center mb-3">
+                                                <h4 class="d-flex justify-content-between align-items-center mb-3">
                                                     <span class="ui-button-text-icon-secondary"># Orders</span>
                                                     <span class="badge bg-primary-3 rounded-pill">{{getOrdersSize()}}</span>
                                                 </h4>

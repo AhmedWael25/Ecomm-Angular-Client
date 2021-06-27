@@ -22,8 +22,6 @@ export class ProductService {
     return this._apiService.post(this.baseUrl, request);
   }
 
-
-
   //Get All Products
   getAllProducts(): Observable<ApiResponse> {
     return this._apiService.get(this.baseUrl);
