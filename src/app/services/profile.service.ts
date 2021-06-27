@@ -19,7 +19,7 @@ export class ProfileService {
               private _authService: AuthService,
               private _httpClient:HttpClient) {}
 
-  getCurretCustomerData():Observable<ApiResponse> {
+  getCurrentCustomerData():Observable<ApiResponse> {
     return this._apiService.get(this.baseUrl+"/"+this._authService.getUserId());
   }
   updateCustomerData(customerData:CustomerData):Observable<ApiResponse> {

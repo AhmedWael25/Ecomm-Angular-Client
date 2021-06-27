@@ -1,152 +1,180 @@
-  <!--====== Profile Start ======-->
+<!--====== Profile Start ======-->
 
-  <section class="profile-wrapper pt-100 pb-100">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-9">
-          <div class="profile">
-            <div class="profile-header">
-              <div class="profile-cover-photo bg_cover" style="background-image: url(assets/images/profile-cover.png);">
+<div class="col-lg-8" *ngIf="isLoading">
+  <app-spinner></app-spinner>
+</div>
+
+
+<section class="profile-wrapper pt-100 pb-100" *ngIf="!isLoading">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <div class="profile">
+          <div class="profile-header">
+            <div class="profile-cover-photo bg_cover" style="background-image: url(assets/images/profile-cover.png);">
+            </div>
+            <div class="profile-author d-sm-flex flex-row-reverse justify-content-between align-items-end">
+              <div class="profile-photo">
+                <img [src]="_userData?.image" (click)=changeImage() alt="Profile Photo" width="150px" height="150px">
+                <input style="display:none" type="file" accept="image/png, image/jpeg" (change)="handle($event)"
+                  id="inputImage">
               </div>
-              <div class="profile-author d-sm-flex flex-row-reverse justify-content-between align-items-end">
-                <div class="profile-photo">
-                  <img [src]="_userData?.image" (click)=changeImage() alt="Profile Photo" width="100px" height="100px">
-                  <input style="display:none"
-                    type="file"  accept="image/png, image/jpeg"
-                    (change)="handle($event)" id="inputImage">
-                </div>
-                <div class="profile-name">
-                  <h4 class="name">{{_userData.name}}</h4>
-                  <p class="email">{{_userData.email}}</p>
-                </div>
+              <div class="profile-name">
+                <h4 class="name">
+                  <img src="assets/images/profile.png" alt="Card"> &nbsp;
+                  {{_userData.name}}
+                </h4>
               </div>
             </div>
-            <div class="profile-body">
-              <div class="profile-title">
-                <h5 class="title">Personal Details</h5>
-                <a *ngIf="_areFieldsDisabled" class="profile-link" (click)="allowEdit()">edit</a>
-              </div>
-              <form [formGroup]="form" (ngSubmit)="submit()">
-                <div class="profile-details">
-                  <div class="single-details-item d-flex flex-wrap">
-                    <div class="details-title">
-                      <h6 class="title">User Full Name:</h6>
-                    </div>
-                    <div class="details-content media-body">
-                      <p *ngIf=" _areFieldsDisabled">{{_userData.name}}</p>
-                      <div *ngIf="! _areFieldsDisabled">
-                        <input
-                          type="text" name="name"
-                          formControlName="name">
-                          <div *ngIf="name.touched && name.invalid"
-                          class="alert alert-danger"
-                          >Invalid Name</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="single-details-item d-flex flex-wrap">
-                    <div class="details-title">
-                      <h6 class="title">Email:</h6>
-                    </div>
-                    <div class="details-content media-body">
-                      <p>{{_userData.email}}</p>
-                      <!-- <input type="email" name="email" [disabled]="true" [(value)]="_userData.email"> -->
-                    </div>
-                  </div>
-                  <div class="single-details-item d-flex flex-wrap">
-                    <div class="details-title">
-                      <h6 class="title">Phone:</h6>
-                    </div>
-                    <div class="details-content media-body">
-                      <p *ngIf="_areFieldsDisabled">{{_userData.phone}}</p>
-                      <div *ngIf="! _areFieldsDisabled">
-                        <input type="tel" name="phone"
-                        formControlName="phone">
-                        <div *ngIf="phone.touched && phone.invalid"
-                          class="alert alert-danger"
-                          >Invalid phone Number</div>
-                      </div>
-
-                    </div>
-                  </div>
-                  <div class="single-details-item d-flex flex-wrap">
-                    <div class="details-title">
-                      <h6 class="title">Address:</h6>
-                    </div>
-                    <div class="details-content media-body">
-                      <p *ngIf="_areFieldsDisabled">{{_userData.address}}</p>
-                      <div *ngIf="! _areFieldsDisabled">
-                        <input type="text" name="address"
-                         formControlName="address">
-                         <div *ngIf="address.touched && address.invalid"
-                          class="alert alert-danger"
-                          >Invalid Address</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="single-details-item d-flex flex-wrap">
-                    <div class="details-title">
-                      <h6 class="title">Balance:</h6>
-                    </div>
-                    <div class="details-content media-body">
-                      <p>{{_userData.balance}}</p>
-                    </div>
-                  </div>
-                  <!-- (click)="submit()" -->
-                  <input *ngIf="! _areFieldsDisabled" [disabled]="! form.valid" type="submit"
-                  class="btn btn-success"
-                    value="Submit">
-                </div>
-              </form>
-
-            </div>
-            <!-- <div class="profile-footer mt-45">
-              <div class="profile-title">
-                <h5 class="title">Cards</h5>
-                <a class="profile-link" href="#0">Add Cards</a>
-              </div>
-              <div class="profile-card-info">
-                <div class="row">
-                  <div class="col-md-4 col-sm-6">
-                    <div class="single-card-info d-flex">
-                      <div class="card-icon">
-                        <img src="assets/images/visa.png" alt="Card">
-                      </div>
-                      <div class="card-info media-body">
-                        <h5 class="card-name">Musa Ahmed</h5>
-                        <p class="card-number">.... 4534 <span>02/20</span></p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 col-sm-6">
-                    <div class="single-card-info d-flex">
-                      <div class="card-icon">
-                        <img src="assets/images/american-express.png" alt="Card">
-                      </div>
-                      <div class="card-info media-body">
-                        <h5 class="card-name">Musa Ahmed</h5>
-                        <p class="card-number">.... 4534 <span>02/20</span></p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 col-sm-6">
-                    <div class="single-card-info d-flex">
-                      <div class="card-icon">
-                        <img src="assets/images/mastercard.png" alt="Card">
-                      </div>
-                      <div class="card-info media-body">
-                        <h5 class="card-name">Musa Ahmed</h5>
-                        <p class="card-number">.... 4534 <span>02/20</span></p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
           </div>
+          <div class="profile-body">
+            <div class="profile-title">
+              <h3 class="title" style="color: rgb(19, 19, 182);">
+                Personal Details
+                &nbsp; <i class="fas fa-id-card"></i>
+              </h3>
+              <a *ngIf="_areFieldsDisabled" class="profile-link" (click)="allowEdit()">edit</a>
+              <a *ngIf="!_areFieldsDisabled" class="profile-link" (click)="submit()">Save</a>
+            </div>
+            <form [formGroup]="form" (ngSubmit)="submit()">
+              <div class="profile-details">
+                <div class="single-details-item d-flex flex-wrap">
+                  <div class="details-title">
+                    <h6>
+                      <i class="fas fa-user-tie" style="color: darkslategrey;"></i> &nbsp;
+                      Name:
+                    </h6>
+                  </div>
+                  <div class="details-content media-body">
+                    <!-- <div class="mb-3" style="width: 330px;">
+                      <input type="text" name="name" formControlName="name" class="form-control" [value]="_userData.name" [readonly]='_areFieldsDisabled'>
+                    </div>
+                    <div *ngIf="name.touched && name.invalid" class="alert alert-danger">Invalid Name</div> -->
+                    <p *ngIf=" _areFieldsDisabled">{{_userData.name}}</p>
+                     <div *ngIf="! _areFieldsDisabled">
+                      <input type="text" name="name" formControlName="name">
+                      <div *ngIf="name.touched && name.invalid" class="alert alert-danger">Invalid Name</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="single-details-item d-flex flex-wrap">
+                  <div class="details-title">
+                    <h6>
+                      <i class="fas fa-envelope" style="color: black;"></i> &nbsp;
+                      Email:
+                    </h6>
+                  </div>
+                  <div class="details-content media-body">
+                    <!-- <div class="mb-3" style="width: 330px;">
+                      <input type="email" name="name" class="form-control" [value]="_userData.email" readonly>
+                    </div> -->
+                    <p>{{_userData.email}}</p>
+                    <!-- <input type="email" name="email" [disabled]="true" [(value)]="_userData.email"> -->
+                  </div>
+                </div>
+                <div class="single-details-item d-flex flex-wrap">
+                  <div class="details-title">
+                    <h6>
+                      <i class="fas fa-phone" style="color: blue"></i> &nbsp;
+                      Phone:
+                    </h6>
+                  </div>
+                  <div class="details-content media-body">
+                    <!-- <div class="mb-3" style="width: 330px;">
+                      <input type="text" name="phone" formControlName="phone" class="form-control" [value]="_userData.phone" [readonly]='_areFieldsDisabled'>
+                    </div>
+                    <div *ngIf="phone.touched && phone.invalid" class="alert alert-danger">Invalid phone Number</div> -->
+
+                    <p *ngIf="_areFieldsDisabled">{{_userData.phone}}</p>
+                    <div *ngIf="! _areFieldsDisabled">
+                      <input type="tel" name="phone" formControlName="phone">
+                      <div *ngIf="phone.touched && phone.invalid" class="alert alert-danger">Invalid phone Number</div>
+                    </div>
+
+                  </div>
+                </div>
+                <div class="single-details-item d-flex flex-wrap">
+                  <div class="details-title">
+                    <h6>
+                      <i class="fas fa-map-marker-alt" style="color: red;"></i> &nbsp;
+                      Address:
+                    </h6>
+                  </div>
+                  <div class="details-content media-body">
+                    <!-- <div class="mb-3" style="width: 330px;">
+                      <input type="text" name="phone" formControlName="phone" class="form-control" [value]="_userData.address" [readonly]='_areFieldsDisabled'>
+                    </div>
+                    <div *ngIf="address.touched && address.invalid" class="alert alert-danger">Invalid Address</div> -->
+                    <p *ngIf="_areFieldsDisabled">{{_userData.address}}</p>
+                    <div *ngIf="! _areFieldsDisabled">
+                      <input type="text" name="address" formControlName="address">
+                      <div *ngIf="address.touched && address.invalid" class="alert alert-danger">Invalid Address</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="single-details-item d-flex flex-wrap">
+                  <div class="details-title">
+                    <h6>
+                      <i class="fas fa-money-check-alt" style="color: rgb(12, 143, 19);"></i> &nbsp;
+                      Balance:
+                    </h6>
+                  </div>
+                  <div class="details-content media-body">
+                    <!-- <div class="mb-3" style="width: 330px;">
+                      <input type="text" name="phone" formControlName="phone" class="form-control" [value]="_userData.balance" readonly>
+                    </div> -->
+                    <p>{{_userData.balance}}</p>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+            <!-- Begin wishlist -->
+            <div class="profile-footer mt-45">
+              <div class="profile-title">
+                <h5 class="title" style="color: rgb(19, 19, 182)">
+                  Product Wishlist
+                  &nbsp; <i class="fas fa-heart" style="color: red"></i>
+                </h5>
+              </div>
+              <div>
+                <hr>
+              </div>
+              <div *ngFor="let item of wishlist.products; let i = index">
+                <div class="single-order">
+                  <h4 class="order-id">
+                    <img style="cursor: pointer; width: 60px; height: 60px;" class="wishlist-img" src="{{item.img}}"
+                      alt="Product"> &nbsp; &nbsp;
+                    <b>{{item.name}}</b>
+                  </h4> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                  <b class="badge bg-primary-1 rounded-pill">{{item.price | currency:'USD'}}</b> &nbsp; &nbsp;
+                  <b class="badge bg-primary-2 rounded-pill">
+                    <i class="fas fa-star" style="color: yellow;"></i>
+                    {{item.rating}} / 5
+                  </b> &nbsp; &nbsp;
+                  <b class="badge bg-success rounded-pill" *ngIf='item.isOnSale'>on sale</b>
+                  <b class="badge bg-danger rounded-pill" *ngIf='!item.isOnSale'>no sale</b>
+
+
+                  <ul class="order-meta order-price action">
+                    <li id="actions-{{i}}">
+                      <a class="delete" href="javascript:void(0)" style="padding-left: 10px;"
+                        (click)="deleteItem(i, $event)">
+                        <i style="color: red;font-size: 30px; margin-top: 15px;" class="fa fa-trash"></i></a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <!-- End wishlist -->
+            </div>
+
+          </div>
+
         </div>
       </div>
+
     </div>
-  </section>
+
+  </div>
 
   <!--====== Profile Ends ======-->
