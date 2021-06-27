@@ -1,205 +1,207 @@
-
-
-
-
 <div class="container mt-30 mb-30">
-    <main>
-        <div class="row g-5">
+  <main>
+    <div class="row g-5">
 
 
-            <div class="col-md-5 col-lg-4 order-md-last">
-                <h4 class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="text-primary">Your cart</span>
-                    <span class="badge bg-primary rounded-pill">{{cartItems?.length}}</span>
-                </h4>
-                <ul class="list-group mb-3" id="cartItemsExpadable">
+      <div class="col-md-5 col-lg-4 order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-primary">Your cart</span>
+          <span class="badge bg-primary rounded-pill">{{cartItems?.length}}</span>
+        </h4>
+        <ul class="list-group mb-3" id="cartItemsExpadable">
 
-                        <li class="list-group-item d-flex justify-content-between lh-sm" *ngFor="let item of cartItems;let i = index">
-                            <div type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{i}}" aria-expanded="true" aria-controls="collapse-{{i}}" class="">
-                                <h6>{{item.quantity + " X " + (item.price | currency:'USD' )}}</h6>
-                                <h6 class="my-0">{{item.name}}</h6>
-                                <div id="collapse-{{i}}" class="accordion-collapse collapse " aria-labelledby="heading-{{i}}" data-bs-parent="#cartItemsExpadable" style="border: none">
-                                    <img style="height: 50px;width: 50px;" src="{{item.img}}" alt="PROD.">
-                                    <small class="text-muted"></small>
-                                </div>
-
-                            </div>
-                            <span class="text-muted"> {{ item.quantity * item.price | currency:'USD' }} </span>
-                        </li>
-
-                    <li class="list-group-item d-flex justify-content-between">
-                        <span>Sub Total (USD)</span>
-                        <strong [innerText]='cartTotal | currency:"USD"'></strong>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between">
-                        <span>Shipping (USD)</span>
-                        <strong [innerText]='00.00| currency:"USD"' ></strong>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between">
-                        <span>Tax (USD)</span>
-                        <strong [innerText]='00.00 | currency:"USD"' ></strong>
-                    </li>
-
-
-                    <li class="list-group-item d-flex justify-content-between">
-                        <span>Total (USD)</span>
-                        <strong [innerText]='cartTotal + 00.00 + 00.00 | currency:"USD"' ></strong>
-                    </li>
-                </ul>
-
+          <li class="list-group-item d-flex justify-content-between lh-sm" *ngFor="let item of cartItems;let i = index">
+            <div type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{i}}" aria-expanded="true"
+              aria-controls="collapse-{{i}}" class="">
+              <h6>{{item.quantity + " X " + (item.price | currency:'USD' )}}</h6>
+              <h6 class="my-0">{{item.name}}</h6>
+              <div id="collapse-{{i}}" class="accordion-collapse collapse " aria-labelledby="heading-{{i}}"
+                data-bs-parent="#cartItemsExpadable" style="border: none">
+                <img style="height: 50px;width: 50px;" src="{{item.img}}" alt="PROD.">
+                <small class="text-muted"></small>
+              </div>
 
             </div>
+            <span class="text-muted"> {{ item.quantity * item.price | currency:'USD' }} </span>
+          </li>
 
-            <div class="col-md-7 col-lg-8">
-                <h4 class="mb-3">Billing address</h4>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Sub Total (USD)</span>
+            <strong [innerText]='cartTotal | currency:"USD"'></strong>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Shipping (USD)</span>
+            <strong [innerText]='00.00| currency:"USD"'></strong>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Tax (USD)</span>
+            <strong [innerText]='00.00 | currency:"USD"'></strong>
+          </li>
 
-                <form class="needs-validation" novalidate method="post" action="checkout">
-                    <div class="row g-3">
+
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total (USD)</span>
+            <strong [innerText]='cartTotal + 00.00 + 00.00 | currency:"USD"'></strong>
+          </li>
+        </ul>
 
 
-                        <div class="col-12">
-                            <label for="address" class="form-label">Address</label>
-                            <input type="text" class="form-control" id="address" name="address"
-                                   placeholder="1234 Main St" required>
-                            <div class="invalid-feedback">
-                                Please enter your shipping address.
-                            </div>
-                        </div>
+      </div>
 
-                        <div class="col-md-5">
-                            <label for="country" class="form-label">Country</label>
-                            <input type="text" class="form-control" id="country" name="country" required>
+      <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3">Billing address</h4>
 
-                            <div class="invalid-feedback">
-                                Please select a valid country.
-                            </div>
-                        </div>
+        <form class="needs-validation" novalidate method="post" action="checkout">
+          <div class="row g-3">
 
-                        <div class="col-md-4">
-                            <label for="state" class="form-label">State</label>
-                            <input type="text" class="form-control" id="state" name="state" required>
 
-                            <div class="invalid-feedback">
-                                Please provide a valid state.
-                            </div>
-                        </div>
+            <div class="col-12">
+              <label for="address" class="form-label">Address</label>
+              <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St" required>
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+            </div>
 
-                        <div class="col-md-3">
-                            <label for="zip" class="form-label">Zip</label>
-                            <input type="text" class="form-control" id="zip" name="zipcode" placeholder="" required>
-                            <div class="invalid-feedback">
-                                Zip code required.
-                            </div>
-                        </div>
+            <div class="col-md-5">
+              <label for="country" class="form-label">Country</label>
+              <input type="text" class="form-control" id="country" name="country" required>
+
+              <div class="invalid-feedback">
+                Please select a valid country.
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <label for="state" class="form-label">State</label>
+              <input type="text" class="form-control" id="state" name="state" required>
+
+              <div class="invalid-feedback">
+                Please provide a valid state.
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <label for="zip" class="form-label">Zip</label>
+              <input type="text" class="form-control" id="zip" name="zipcode" placeholder="" required>
+              <div class="invalid-feedback">
+                Zip code required.
+              </div>
+            </div>
+          </div>
+
+          <hr class="my-4">
+
+
+          <h4 class="mb-3">Payment</h4>
+
+          <div class="my-3">
+            <div class="form-check">
+              <input id="credit" name="paymentMethod" type="radio" class="form-check-input" value="creditcard" checked
+                (change)="onChange($event.target.value)">
+              <label class="form-check-label" for="credit"><i class="fa fa-credit-card-alt"
+                  aria-hidden="true"></i>Credit card</label>
+            </div>
+
+            <div class="form-check">
+              <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" value="paypal"
+                (change)="onChange($event.target.value)">
+              <label class="form-check-label" for="paypal"><i class="fa fa-paypal" aria-hidden="true"></i>PayPal</label>
+            </div>
+          </div>
+
+
+          <div class="profile-card-info" *ngIf="method==='creditcard'">
+            <div id="creditCardFormId" class="creditCardForm" style="display: block; margin: 0px auto !important;">
+              <div class="payment">
+                <form [formGroup]="form">
+                  <div class="form-group owner">
+                    <label for="owner">Owner</label>
+                    <input type="text" class="form-control" id="owner" formControlName="name">
+                    <div class="errors" *ngIf="getName().invalid && ( getName().dirty || getName().touched  )">
+                      <small *ngIf="getName().errors?.required" id="emailHelp" class="form-text errMessage">Name is
+                        required</small>
+                        <small *ngIf="getName().errors?.pattern" id="emailHelp" class="form-text errMessage">Name is not Valid</small>
                     </div>
-
-                    <hr class="my-4">
-
-
-                    <h4 class="mb-3">Payment</h4>
-
-                    <div class="my-3">
-                        <div class="form-check">
-                            <input id="credit" name="paymentMethod" type="radio" class="form-check-input" value="creditcard"
-                            checked   (change)="onChange($event.target.value)">
-                            <label class="form-check-label" for="credit"><i class="fa fa-credit-card-alt" aria-hidden="true"></i>Credit card</label>
-                        </div>
-
-                        <div class="form-check">
-                            <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" value="paypal"
-                                   (change)="onChange($event.target.value)">
-                            <label class="form-check-label" for="paypal"><i class="fa fa-paypal" aria-hidden="true"></i>PayPal</label>
-                        </div>
+                  </div>
+                  <div class="form-group CVV">
+                    <label for="cvv">CVV</label>
+                    <input type="text" class="form-control" id="cvv" formControlName="cvv">
+                    <div class="errors" *ngIf="getCVV().invalid && ( getCVV().dirty || getCVV().touched  )">
+                      <small *ngIf="getCVV().errors?.required" id="emailHelp" class="form-text errMessage">CVV is
+                        required</small>
+                        <small *ngIf="getCVV().errors?.pattern" 
+                        id="emailHelp" class="form-text errMessage">CVV Must be 3-4 digits</small>
                     </div>
-
-                    
-                <div class="profile-card-info" *ngIf="method==='creditcard'" >
-
-                    <div id="creditCardFormId" class="creditCardForm" style="display: block; margin: 0px auto !important;">
-
-                        <div class="payment">
-                            <form>
-                                <div class="form-group owner">
-                                    <label for="owner">Owner</label>
-                                    <input type="text" class="form-control" id="owner">
-                                    <div class="alert alert-danger" id="ownerNameError" style="display:none">
-
-                                    </div>
-                                </div>
-                                <div class="form-group CVV">
-                                    <label for="cvv">CVV</label>
-                                    
-                                    <input [(ngModel)]="ccCVV" type="text" class="form-control" id="cvv">
-                                    <div class="alert alert-danger" id="CVVError" style="display:none">
-
-                                    </div>
-                                </div>
-                                <div class="form-group" id="card-number-field">
-                                    <label for="cardNumber">Card Number</label>
-                                    <input [(ngModel)]="ccNumber" type="text" class="form-control" id="cardNumber">
-                            
-                                    <div class="alert alert-danger" id="cardNumberError" style="display:none">
-
-                                    </div>
-                                </div>
-                                <div class="form-group" id="expiration-date">
-                                    <label>Expiration Date</label>
-                                    <select>
-                                        <option value="01">January</option>
-                                        <option value="02">February</option>
-                                        <option value="03">March</option>
-                                        <option value="04">April</option>
-                                        <option value="05">May</option>
-                                        <option value="06">June</option>
-                                        <option value="07">July</option>
-                                        <option value="08">August</option>
-                                        <option value="09">September</option>
-                                        <option value="10">October</option>
-                                        <option value="11">November</option>
-                                        <option value="12">December</option>
-                                    </select>
-                                    <select>
-                                        <option value="21"> 2021</option>
-                                        <option value="22"> 2022</option>
-                                        <option value="23"> 2023</option>
-                                        <option value="24"> 2024</option>
-                                        <option value="25"> 2025</option>
-                                        <option value="26"> 2026</option>
-                                    </select>
-                                </div>
-                                <!-- <div class="form-group" id="credit_cards">
-                                    <img src="assets/imgs/visa.jpg" id="visa">
-                                    <img src="assets/imgs/mastercard.jpg" id="mastercard">
-
-                                </div> -->
-
-
-
-                            </form>
-
-                            
-                            
-                            
-                        </div>
-
+                  </div>
+                  <div class="form-group" id="card-number-field">
+                    <label for="cardNumber">Card Number</label>
+                    <input type="text" class="form-control" id="cardNumber" formControlName="number">
+                    <div class="errors" *ngIf="getNumber().invalid && ( getNumber().dirty || getNumber().touched  )">
+                      <small *ngIf="getNumber().errors?.required" 
+                      id="emailHelp" class="form-text errMessage">CC Number Required</small>
+                      <small *ngIf="getNumber().errors?.pattern" 
+                      id="emailHelp" class="form-text errMessage">CC Number must be digits</small>
                     </div>
-                    
-                    <hr class="my-4">
-
-                    <button (click)="handleCheckout()" class="w-100 btn btn-primary btn-lg" type="submit" [innerText]="btnText"></button>
-                </div>
+                  </div>
+                  <div class="form-group" id="expiration-date">
+                    <label>Expiration Date</label>
+                    <select formControlName="month">
+                      <option selected value="01">January</option>
+                      <option value="02">February</option>
+                      <option value="03">March</option>
+                      <option value="04">April</option>
+                      <option value="05">May</option>
+                      <option value="06">June</option>
+                      <option value="07">July</option>
+                      <option value="08">August</option>
+                      <option value="09">September</option>
+                      <option value="10">October</option>
+                      <option value="11">November</option>
+                      <option value="12">December</option>
+                    </select>
+                    <div class="errors" *ngIf="getMonth().invalid && ( getMonth().dirty || getMonth().touched  )">
+                        <small *ngIf="getMonth().errors?.required" 
+                        id="emailHelp" class="form-text errMessage">Required</small>
+                    </div>
+                    <select formControlName="year">
+                      <option selected value="21"> 2021</option>
+                      <option value="22"> 2022</option>
+                      <option value="23"> 2023</option>
+                      <option value="24"> 2024</option>
+                      <option value="25"> 2025</option>
+                      <option value="26"> 2026</option>
+                    </select>
+                    <div class="errors" *ngIf="getYear().invalid && ( getYear().dirty || getYear().touched  )">
+                        <small *ngIf="getYear().errors?.required" 
+                        id="emailHelp" class="form-text errMessage">Required</small>
+                    </div>
+                  </div>
                 </form>
-
-                <div *ngIf="method==='paypal'" >
-                    <div >
-                        <app-paypal [cartItems]="cartItems"></app-paypal>
-                    </div>
-                    <hr class="my-4">
-                </div>
-
+              </div>
             </div>
+            <hr class="my-4">
 
+            <div *ngIf="isLoading">
+                <app-spinner></app-spinner>
+            </div>
+            <div *ngIf="!isLoading">
+                <button (click)="handleCheckout()" [disabled]="form.invalid" class="w-100 btn btn-primary btn-lg" type="submit"
+                [innerText]="btnText"></button>
+            </div>
+          </div>
+        </form>
+
+        <div *ngIf="method==='paypal'">
+          <div>
+            <app-paypal [cartItems]="cartItems"></app-paypal>
+          </div>
+          <hr class="my-4">
         </div>
-    </main>
+
+      </div>
+
+    </div>
+  </main>
 
 </div>

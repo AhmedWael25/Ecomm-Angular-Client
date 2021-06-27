@@ -26,9 +26,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
 
     this.loginForm = new FormGroup({
-      "email":new FormControl(null,[Validators.required]),
-
-      "password":new FormControl(null, [Validators.required]),
+      email:new FormControl(null,[Validators.required]),
+      password:new FormControl(null, [Validators.required]),
     });
 
   }
@@ -38,8 +37,6 @@ export class LoginComponent implements OnInit {
     this.isError = false;
   
     if( !this.loginForm.valid ){
-      this.isError = true;
-      this.errMessage = "Form Is Invalid";
       return;
     }
     
@@ -88,7 +85,7 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get("email");
   }
   getPassword(){
-    return this.loginForm.get("email");
+    return this.loginForm.get("password");
   }
 
 }

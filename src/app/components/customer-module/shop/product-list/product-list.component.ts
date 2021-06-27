@@ -5,6 +5,7 @@ import { CartItemRequest } from 'src/app/models/cart/CartItemRequest';
 import { Category } from 'src/app/models/Category';
 import { Product } from 'src/app/models/product/Product';
 import { Wishlist } from 'src/app/models/wishlist/Wishlist';
+import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { CategoryService } from 'src/app/services/category.service';
 import { NotificationService } from 'src/app/services/notification.service';
@@ -22,13 +23,16 @@ export class ProductListComponent implements OnInit {
   constructor(private _productService: ProductService,
     private _categoryService: CategoryService,
     private _formBuilder: FormBuilder,
-    private _cartService: CartService,
-    private _wishlistService: WishListService,
-    private _notificationService: NotificationService) { }
+    private _cartService:CartService,
+    private _wishlistService:WishListService,
+    private _notificationService:NotificationService,
+    private _authService:AuthService) { }
 
   products: Array<Product>;
   categories: Array<Category>;
   checkedSubcategories: Map<number, number> = new Map();
+
+  wishlistIds:number[] = [];
 
   public change(value: boolean, subcategoryId: number) {
     if (value) {
@@ -41,7 +45,7 @@ export class ProductListComponent implements OnInit {
   // Pagination parameters.
   isLoading: boolean = false;
   page: number = 1;
-  size: number = 9;
+  size: number = 8;
   minPrice: number = 0;
   maxPrice: number = 1000;
   totalPages: number;
@@ -65,6 +69,22 @@ export class ProductListComponent implements OnInit {
   };
 
   ngOnInit(): void {
+
+    
+    let isAuthenticated = this._authService.isAuthenticated() && this._authService.isCustomer();
+    if (isAuthenticated){
+
+      this._wishlistService.getCustomerWishList().subscribe( 
+        resp => {
+          resp.data.products.forEach(element => {
+            this.wishlistIds.push(element.id);
+          });
+          console.log(this.wishlistIds);
+        },
+        err => {},
+        () => {}
+        );
+    }
 
     this.isLoading = true;
     this.page = 1;
@@ -185,5 +205,22 @@ export class ProductListComponent implements OnInit {
     )
   }
 
+
+  isProductInWishlist(id:number){
+    let isExist = this.wishlistIds.includes(id);
+    return isExist;
+    // wishlistIds
+  }
+
+
+  deleteFromWishlist(id:number,event){
+    console.log("delete");
+    console.log(id);
+  }
+
+  addToWishlist(id:number, event){
+    console.log("add");
+    console.log(id);
+  }
 
 }
