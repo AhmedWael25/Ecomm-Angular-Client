@@ -1,5 +1,6 @@
 import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-logout',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(private _authService: AuthService) { }
+  constructor(private _authService: AuthService, private location: Location) { }
 
   ngOnInit(): void {
   }
@@ -24,5 +25,9 @@ export class LogoutComponent implements OnInit {
   logout(){
     return this._authService.logout();
   }
+
+  goBack() {
+    this.location.back();
+  }  
 
 }
