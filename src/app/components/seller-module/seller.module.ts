@@ -1,3 +1,4 @@
+import { ProductDetailsComponent } from './../shared/product-details/product-details/product-details.component';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 // import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { PageControllerComponent } from './../shared/page-controller/page-controller.component';
@@ -47,7 +48,7 @@ const routes: Routes = [
   },
   {
     path: 'products/:productId',
-    component:EditProductComponent,
+    component:ProductDetailsComponent,
     canActivate:[SellerAuthGuard],
     data:{
       role : "ROLE_SELLER"

@@ -20,6 +20,7 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { SellerOrderListComponent } from './seller-order-list/seller-order-list.component';
 import { SharedFooterComponent } from './shared-footer/shared-footer.component';
 import { NgToggleModule } from 'ng-toggle-button';
+import { ProductDetailsComponent } from './product-details/product-details/product-details.component';
 
 
 
@@ -27,20 +28,30 @@ import { NgToggleModule } from 'ng-toggle-button';
 
 @NgModule({
   declarations: [
-     MenuComponent
-    ,MaxLengthPipe,AllowCharOnlyDirective, FooterComponent, PageNotFoundComponent, LoginComponent, LoaderSpinnerComponent, ProfileComponent, RecommendedComponent, LogoutComponent, LineChartComponent, PieChartComponent, SellerOrderListComponent, SharedFooterComponent
+    MenuComponent
+    , MaxLengthPipe, AllowCharOnlyDirective,
+    FooterComponent, PageNotFoundComponent,
+    LoginComponent, LoaderSpinnerComponent,
+    ProfileComponent, RecommendedComponent,
+    LogoutComponent, LineChartComponent,
+    PieChartComponent, SellerOrderListComponent,
+    SharedFooterComponent, ProductDetailsComponent
   ],
   imports: [
-  CommonModule,FormsModule,
-    ReactiveFormsModule,RouterModule,HttpClientModule, 
-    ToastrModule.forRoot(),SlickCarouselModule, NgToggleModule,
+    CommonModule, FormsModule,
+    ReactiveFormsModule, RouterModule, HttpClientModule,
+    ToastrModule.forRoot(), SlickCarouselModule, NgToggleModule,
 
   ],
-  exports:[MenuComponent,MaxLengthPipe,FormsModule,
-    ReactiveFormsModule,HttpClientModule,AllowCharOnlyDirective,
-  FooterComponent, LoaderSpinnerComponent,SlickCarouselModule, LineChartComponent, PieChartComponent,
-  SellerOrderListComponent, SharedFooterComponent, NgToggleModule,
-],
+  exports: [
+    MenuComponent, MaxLengthPipe, FormsModule,
+    ReactiveFormsModule, HttpClientModule,
+    AllowCharOnlyDirective, FooterComponent,
+    LoaderSpinnerComponent, SlickCarouselModule,
+    LineChartComponent, PieChartComponent,
+    SellerOrderListComponent, SharedFooterComponent,
+    NgToggleModule, ProductDetailsComponent
+  ],
   providers: [ToastrService],
 
 })

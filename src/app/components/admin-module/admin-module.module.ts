@@ -10,6 +10,8 @@ import { SellerDetailsComponent } from './seller-details/seller-details.componen
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 import { AdminAuthGuard } from 'src/app/guards/admin-auth.guard';
 import { AdminChartsComponent } from './admin-charts/admin-charts.component';
+import { ProductDetailsComponent } from '../shared/product-details/product-details/product-details.component';
+import { SellerAuthGuard } from 'src/app/guards/seller-auth.guard';
 
 
 
@@ -52,6 +54,14 @@ const routes: Routes = [
     canActivate:[AdminAuthGuard],
     data:{
       role : "ROLE_ADMIN",
+    },
+  },
+  {
+    path: 'products/:productId',
+    component:ProductDetailsComponent,
+    canActivate:[SellerAuthGuard],
+    data:{
+      role : "ROLE_ADMIN"
     },
   },
 ];
