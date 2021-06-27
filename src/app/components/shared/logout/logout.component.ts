@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LogoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _authService: AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  isCustomer: boolean = this._authService.isCustomer();
+
+  isSeller: boolean = this._authService.isSeller();
+  
+  isAdmin: boolean = this._authService.isAdmin();
+
+  role: string = this.isAdmin ? "Admin" : ( this.isSeller ? "Seller" : "Customer");
+
+  logout(){
+    return this._authService.logout();
   }
 
 }
