@@ -21,7 +21,7 @@
                 <td>
                     <div class="d-flex align-items-center m-r-10">
                         <img class="btn btn-circle d-flex btn-info text-white" style="padding: 1px"
-                            [src]="product.img" width="60px" height="60px" 
+                            [src]="product.img" width="60px" height="60px"
                             class="rounded-circle" alt="product"/>
                     </div>
                 </td>
@@ -59,7 +59,7 @@
     </table>
 </div>
 <div class="container-fluid card-footer">
-  <page-controller [page]="0" [size]="10" (change)="onPageControllerChange($event)"> </page-controller>
+  <page-controller [page]="page" [size]="size" [totalPages]="totalPages" [items]="items"  (change)="onPageControllerChange($event)"> </page-controller>
 </div>
 
 
