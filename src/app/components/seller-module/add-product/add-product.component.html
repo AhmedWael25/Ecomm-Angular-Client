@@ -1,101 +1,119 @@
+<div class="container mt-30 mb-30">
+  <div class="row justify-content-center">
 
+    <div class="col-xl-8 col-lg-10 " *ngIf="isLoading">
+      <app-spinner></app-spinner>
+    </div>
 
+    <div class="col-xl-8 col-lg-10 " *ngIf="!isLoading">
 
-
-<div class="container">
-    <div class="row justify-content-center">
-
-        <div class="col-xl-8 col-lg-10 " *ngIf="isLoading">
-           <app-spinner></app-spinner> 
+      <form [formGroup]="addProductForm">
+        <div class="">
+          <label for="name" class="form-label">Product Name:</label>
+          <input type="text" id="name" class="form-control" placeholder="* Product Name" formControlName="name">
+          <div class="errors" *ngIf="getName().invalid && ( getName().dirty || getName().touched  )">
+            <small *ngIf="getName().errors?.required" id="emailHelp" class="form-text errMessage">Name is
+              required</small>
+            <small *ngIf="getName().errors?.maxlength" id="emailHelp" class="form-text errMessage">Max Lengh is 60
+              Characters</small>
+            <small *ngIf="getName().errors?.minlength" id="emailHelp" class="form-text errMessage">Min Lengh is 5
+              Characters</small>
+          </div>
         </div>
+        <br>
+        <div class="">
+          <label for="description" class="form-label">Product Description:</label>
+          <textarea class="form-control" id="description" rows="3" placeholder="Product Description"
+            formControlName="description"></textarea>
+          <div class="errors"
+            *ngIf="getDescription().invalid && ( getDescription().dirty || getDescription().touched  )">
+            <small *ngIf="getDescription().errors?.required" id="emailHelp" class="form-text errMessage">Name is
+              required</small>
+            <small *ngIf="getDescription().errors?.maxlength" id="emailHelp" class="form-text errMessage">Max Lengh is
+              1000 Characters</small>
+            <small *ngIf="getDescription().errors?.minlength" id="emailHelp" class="form-text errMessage">Min Lengh is
+              10 Characters</small>
+          </div>
+        </div>
+        <br>
+        <div class="form-group category-form-group" formGroupName="categoryGroup" style="padding:10px">
+          <label for="category">Category</label>
+          <select formControlName="category" class="form-control" id="category"
+            (change)="onCategoryChange($event.target.value)">
+            <!-- <option selected value="--select category--">--select category--</option> -->
+            <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+          </select>
+          <div class="errors" *ngIf="getCategory().invalid && ( getCategory().dirty || getCategory().touched  )">
+            <small *ngIf="getCategory().errors?.required" id="emailHelp" class="form-text errMessage">Category is
+              required</small>
+          </div>
 
-        <div class="col-xl-8 col-lg-10 " *ngIf="!isLoading">
-            
-            <form  [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
+          <br>
 
-                <div class="">
-                    <label for="name" class="form-label">Product Name:</label>
-                    <input 
-                    type="text"
-                    id="name" 
-                    class="form-control" 
-                    placeholder="* Product Name"
-                    formControlName="name">
-
-                    <small 
-                    *ngIf="!addProductForm.get('name').valid && addProductForm.get('name').touched "
-                    id="nameHelp" 
-                    class="form-text help-err"
-                    >We'll never share your email with anyone else.</small>
-                </div>
-
-                <br>
-
-                <div class="">
-                    <label for="description" class="form-label">Product Description:</label>
-                    <textarea 
-                    class="form-control" 
-                    id="description" 
-                    rows="3" 
-                    placeholder="Product Description"
-                    formControlName="description"></textarea>
-                </div>
-
-                <br>
-
-                <div class="form-group" formGroupName="categoryGroup">
-                    <label for="category">Category</label>
-                    <select  formControlName="category" class="form-control" id="category"(change)="onCategoryChange($event.target.value)" >
-                        <!-- <option selected value="--select category--">--select category--</option> -->
-                        <option *ngFor ="let category of categories" [value]="category.id">{{category.name}}</option>
-                    </select> 
-
-                    <br>
-
-                    <label for="subcategory">Sub Category</label>
-                    <select formControlName="subcategory" class="form-control" id="subcategory">
-                        <option *ngFor ="let sub of subCategories" [value]="sub.id">{{sub.name}}</option>
-                        <!-- <option selected value="--select subcategory--">--select subcategory--</option>
+          <label for="subcategory">Sub Category</label>
+          <select formControlName="subcategory" class="form-control" id="subcategory">
+            <option *ngFor="let sub of subCategories" [value]="sub.id">{{sub.name}}</option>
+            <!-- <option selected value="--select subcategory--">--select subcategory--</option>
                         <option value="1">Consoles</option>
                         <option value="2">Pcs</option> -->
-                    </select>
+          </select>
+          <div class="errors"
+            *ngIf="getSubCategory().invalid && ( getSubCategory().dirty || getSubCategory().touched  )">
+            <small *ngIf="getSubCategory().errors?.required" id="emailHelp" class="form-text errMessage">SubCategory is
+              required</small>
+          </div>
+        </div>
 
-                  </div>
+        <br>
 
-                <br>
+        <div class="">
+          <label for="quantity" class="form-label">Product Quantity:</label>
+          <input type="text" class="form-control" id="quantity" placeholder="Product Quantity"
+            formControlName="quantity">
+          <div class="errors" *ngIf="getQuantity().invalid && ( getQuantity().dirty || getQuantity().touched  )">
+            <small *ngIf="getQuantity().errors?.required" id="emailHelp" class="form-text errMessage">Quantity is
+              required</small>
+            <small *ngIf="getQuantity().errors?.pattern" id="emailHelp" class="form-text errMessage">Invalid Quantity
+            </small>
+          </div>
+        </div>
 
-                <div class="">
-                    <label for="quantity" class="form-label">Product Quantity:</label>
-                    <input 
-                    type="number"
-                    class="form-control" 
-                    id="quantity" 
-                    placeholder="Product Quantity"
-                    formControlName="quantity">
-                </div>
+        <br>
 
-                <br>
+        <label for="price">Price:</label><br>
+        <input formControlName="price" type="text" class="form-control" id="price">
 
-                <label for="price">Price:</label><br>
-                <input  formControlName="price" type="number"   class="form-control" id="price">
+        <div class="errors" *ngIf="getPrice().invalid && ( getPrice().dirty || getPrice().touched  )">
+          <small *ngIf="getPrice().errors?.required" id="emailHelp" class="form-text errMessage">Price is
+            required</small>
+          <small *ngIf="getPrice().errors?.pattern" id="emailHelp" class="form-text errMessage">Invalid Price
+          </small>
+        </div>
 
-                <br> <br>
-                
-                <div class="form-group" formGroupName="imagesGroup"> 
-                    <label for="mainImage">Main Image:</label><br>
-                    <input (change)="onImagePick($event)"  formControlName="mainImage" type="file"  accept="image/png, image/jpeg" class="form-control-file" id="mainImage">
+        <br> <br>
 
-                    <br> <br>
+        <div class="form-group" formGroupName="imagesGroup" style="padding:10px">
+          <label for="mainImage">Main Image:</label><br>
+          <input (change)="onImagePick($event)" formControlName="mainImage" type="file" accept="image/png, image/jpeg"
+            class="form-control-file" id="mainImage">
 
-                    <label for="catalogImages">Catalog Images:</label><br>
-                    <input (change)="onCatalogPick($event)" multiple formControlName="catalogImages" type="file"  accept="image/png, image/jpeg" class="form-control-file" id="catalogImages">
+          <div class="errors" *ngIf="getMainImg().invalid && ( getMainImg().dirty || getMainImg().touched  )">
+            <small *ngIf="getMainImg().errors?.required" id="emailHelp" class="form-text errMessage">Main Image is
+              required</small>
+          </div>
 
-                    <br> <br>
+          <br> <br>
 
+          <label for="catalogImages">Catalog Images:</label><br>
+          <input (change)="onCatalogPick($event)" multiple formControlName="catalogImages" type="file"
+            accept="image/png, image/jpeg" class="form-control-file" id="catalogImages">
 
+          <div class="errors" *ngIf="getCatalog().invalid && ( getCatalog().dirty || getCatalog().touched  )">
+            <small *ngIf="getCatalog().errors?.required" id="emailHelp" class="form-text errMessage">Catalog Images is
+              required</small>
+          </div>
 
-
-                    <div formArrayName="catalog" >
+          <!-- <div formArrayName="catalog" >
                         <label for="mainI1mage">Category Images: </label><br>
                         <button class="btn btn-primary" type="button" (click)="onAddCategoryImage()">Add Category Image</button>
                         <br> 
@@ -107,28 +125,27 @@
                             <br>
                             <button type="button" class="btn btn-danger" (click)="removeCategoryImage(i)"> remove</button>
                         </div>
-                    </div>
-                  </div>
-               
-                <br>
+                    </div> -->
+        </div>
 
+        <br>
 
-
-                <div class="row justify-content-center">
-                    <small 
-                    *ngIf="!addProductForm.valid && addProductForm.touched "
-                    id="nameHelp" 
-                    class="form-text help-err">You Cannot Submit an Invalid Form</small>
-
-                </div>
-
-                <br>
-                  
-                <button type="submit" class="btn btn-primary">Submit</button>
-
-            </form>
-
+        <div class="row justify-content-center">
+          <div class="col-lg-6">
+            <small *ngIf="!addProductForm.valid && addProductForm.touched " id="nameHelp"
+              class="form-text errMessage">You
+              Cannot Submit an Invalid Form</small>
+          </div>
 
         </div>
+        <br>
+        <div class="row justify-content-center">
+          <div class="col-lg-6">
+            <button [disabled]="addProductForm.invalid" (click)="onSubmit()" type="submit"
+              class="w-100 btn btn-primary btn-lg">Submit</button>
+          </div>
+        </div>
+      </form>
     </div>
+  </div>
 </div>

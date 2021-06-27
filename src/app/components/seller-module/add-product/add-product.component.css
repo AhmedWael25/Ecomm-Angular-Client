@@ -1,3 +1,8 @@
-.help-err {
+.errMessage {
     color: red;
 }
+
+
+.ng-invalid:not(form).ng-dirty {
+    border: 1px solid red; /* red */
+  }

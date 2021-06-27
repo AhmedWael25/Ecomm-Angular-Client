@@ -16,7 +16,7 @@ import { UploadService } from 'src/app/services/upload.service';
 })
 export class AddProductComponent implements OnInit {
 
-   addProductForm:FormGroup;
+   addProductForm:FormGroup = new FormGroup({});
    categories:Array<Category>;
    subCategories:Array<SubCategory>;
 
@@ -51,31 +51,61 @@ export class AddProductComponent implements OnInit {
   
 
     this.addProductForm = new FormGroup({
-      "name": new FormControl(null, [
+    name: new FormControl(null, [
         Validators.required,
+        Validators.maxLength(60),
+        Validators.minLength(5),
       ]),
-
-      "description": new FormControl(null, Validators.required),
-
-      "quantity": new FormControl(null, Validators.required),
-
-      "price": new FormControl(null, Validators.required),
-
-      "categoryGroup" : new FormGroup({
-        "category": new FormControl(null, Validators.required),
-        "subcategory" : new FormControl(null, Validators.required),
+      description: new FormControl(null, [
+        Validators.required,
+        Validators.maxLength(1000),
+        Validators.minLength(10),
+      ]),
+      quantity: new FormControl(null, [
+        Validators.required,
+        Validators.pattern("^[0-9]+$"),
+      ]),
+      price: new FormControl(null, [
+        Validators.required,
+        Validators.pattern("^[0-9]+(\\.\\d{1,2})?$"),    
+    ]),
+    categoryGroup : new FormGroup({
+        category: new FormControl(null, [Validators.required]),
+        subcategory : new FormControl(null, [Validators.required]),
       }),
-
-      "imagesGroup": new FormGroup({
-        "mainImage": new FormControl(null, Validators.required),
-        "catalogImages" : new FormControl(null, Validators.required), 
-        "catalog": new FormArray([]),
+      imagesGroup: new FormGroup({
+        mainImage: new FormControl(null, [Validators.required]),
+        catalogImages : new FormControl(null, [Validators.required]), 
       }),
     });
-
-
-
   }
+  
+
+  getName(){
+    return this.addProductForm.get("name");
+  }
+  getDescription(){
+    return this.addProductForm.get("description");
+  }
+  getQuantity(){
+    return this.addProductForm.get("quantity");
+  }
+  getPrice(){
+    return this.addProductForm.get("price");
+  }
+  getCategory(){
+    return this.addProductForm.get("categoryGroup.category");
+  }
+  getSubCategory(){
+    return this.addProductForm.get("categoryGroup.subcategory");
+  }
+  getMainImg(){
+    return this.addProductForm.get("imagesGroup.mainImage");
+  }
+  getCatalog(){
+    return this.addProductForm.get("imagesGroup.catalogImages");
+  }
+
 
   onImagePick(event) {
 
@@ -105,9 +135,11 @@ export class AddProductComponent implements OnInit {
     this.request.productName = this.addProductForm.value.name;
     this.request.productDescription = this.addProductForm.value.description;
     this.request.productPrice = this.addProductForm.value.price;
-    this.request.productQuantity = this.addProductForm.value.quantity;
+    this.request.productQuantity = +this.addProductForm.value.quantity;
     this.request.subcategoryId = +this.addProductForm.value.categoryGroup.subcategory;
     this.request.sellerId = +this._authService.getUserId();
+
+    console.log( this.request );
 
     const imageFormData = new FormData();
     const catalogFormData = new FormData();
@@ -128,10 +160,8 @@ export class AddProductComponent implements OnInit {
       console.log(this.request)
         //If Success Redirect Into The Product Detail Page OR The
       this.sendProductRequest();
-
     });
 
-     console.log("3");
   }
 
   sendProductRequest(){
@@ -165,5 +195,10 @@ export class AddProductComponent implements OnInit {
       }
     } );
   }
+
+
+
+
+
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Order } from 'src/app/models/order/Order';
 import { OrderItem } from 'src/app/models/order/OrderItem';
@@ -13,7 +13,8 @@ import { OrderService } from 'src/app/services/order.service';
 export class OrderDetailComponent implements OnInit, OnDestroy {
 
   constructor(private _activatedRoute:ActivatedRoute,
-              private _orderService:OrderService) { }
+              private _orderService:OrderService,
+              private _router:Router) { }
 
   orderId:number;
   orderDetail:Order = new Order();
@@ -40,14 +41,20 @@ export class OrderDetailComponent implements OnInit, OnDestroy {
 
      this.orderId =  params.orderId;
 
-     this._orderService.getOrderDetail(this.orderId).subscribe( resp =>{
+     //Check for validity of this order Id
+     if( isNaN(+this.orderId) ){
+      this._router.navigateByUrl("/404");
+      return;
+      }
 
+     this._orderService.getOrderDetail(this.orderId).subscribe( 
+       resp =>{
       this.orderDetail = resp.data;
-      // console.log(this.orderDetail);
       this.orderTotal = this.calculateOrderTotal();
-
+     },
+     err => {
+      this._router.navigateByUrl("/404");
      } );
-
     });
   }
 
