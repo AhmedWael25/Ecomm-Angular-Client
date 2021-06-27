@@ -25,6 +25,9 @@
                         <h2 class="title">{{product.productName}}</h2>
 
 
+                        <div class="product-details-content text-left">
+                            <p class="sub-title">{{product.productDescription}}</p>
+                        </div>
 
                         <div class="product-select-wrapper flex-wrap">
                             <div class="select-item">
@@ -41,7 +44,6 @@
                         <div class="product-price">
                             <h6 class="price-title">Price: </h6>
                             <p class="sale-price">{{product.productPrice | currency:'USD'}}</p>
-                            <p class="regular-price">{{product.productPrice + 50 | currency:'USD'}}</p>
                         </div>
 
                         <div class="product-btn">

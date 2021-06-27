@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductReviewComponent } from './product-review/product-review.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { NgxStarRatingModule } from 'ngx-star-rating';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 // import { SlickCarouselModule } from 'ngx-slick-carousel';
@@ -38,6 +39,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
+    NgxStarRatingModule
   ]
 })
 export class ShopModule { }

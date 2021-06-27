@@ -22,9 +22,9 @@ export class ProductListComponent implements OnInit {
   constructor(private _productService: ProductService,
     private _categoryService: CategoryService,
     private _formBuilder: FormBuilder,
-    private _cartService:CartService,
-    private _wishlistService:WishListService,
-    private _notificationService:NotificationService) { }
+    private _cartService: CartService,
+    private _wishlistService: WishListService,
+    private _notificationService: NotificationService) { }
 
   products: Array<Product>;
   categories: Array<Category>;
@@ -39,20 +39,17 @@ export class ProductListComponent implements OnInit {
   }
 
   // Pagination parameters.
-  isLoading:boolean = false;
+  isLoading: boolean = false;
   page: number = 1;
   size: number = 9;
   minPrice: number = 0;
   maxPrice: number = 1000;
   totalPages: number;
   totalElements: number;
-  minValue: number = 0;
-  maxValue: number = 1000;
   name: string;
-  defaultImage: string = "assets/images/product.jpg";
   options: Options = {
     floor: 0,
-    ceil: 500,
+    ceil: 1000,
     translate: (value: number, label: LabelType): string => {
       switch (label) {
         case LabelType.Low:
@@ -71,21 +68,18 @@ export class ProductListComponent implements OnInit {
 
     this.isLoading = true;
     this.page = 1;
-    this.minValue = 0;
-    this.maxValue = 10000;
     this.minPrice = 0;
-    this.maxPrice = 10000;
 
     this.getProducts();
     this.getCategories();
+
+    this.maxPrice = 10000;
   }
 
-  resetFilter(){
+  resetFilter() {
     this.isLoading = true;
     this.name = "";
     this.page = 1;
-    this.minValue = 0;
-    this.maxValue = 10000;
     this.minPrice = 0;
     this.maxPrice = 10000;
 
@@ -97,24 +91,42 @@ export class ProductListComponent implements OnInit {
   }
 
   getProducts() {
-      let subcategories = Array.from(this.checkedSubcategories.keys());
+    let subcategories = Array.from(this.checkedSubcategories.keys());
 
-      this._productService.getProducts(this.page - 1, this.size, this.minPrice, this.maxPrice, subcategories, this.name).subscribe(
-        data => {
-          this.products = data.data;
+    this._productService.getProducts(this.page - 1, this.size, this.minPrice, this.maxPrice, subcategories, this.name).subscribe(
+      data => {
+        this.products = data.data;
 
-          console.log(this.products);
-          this.totalPages = data.totalPages;
-          this.totalElements = data.totalElements;
+        this.totalPages = data.totalPages;
+        this.totalElements = data.totalElements;
+        this.updatePriceSlider(data);
+      }
+    );
+  }
+  updatePriceSlider(data: any) {
+    this.options = {
+      floor: 0,
+      ceil: data.maxPrice,
+      translate: (value: number, label: LabelType): string => {
+        switch (label) {
+          case LabelType.Low:
+            this.minPrice = value;
+            return "<b>Min :</b> $" + value;
+          case LabelType.High:
+            this.maxPrice = value;
+            return "<b>Max :</b> $" + value;
+          default:
+            return "$" + value;
         }
-      );
+      }
+    };
   }
 
-  show(id){
-     let element = document.getElementById(id);
-     element.classList.toggle("show");
+  show(id) {
+    let element = document.getElementById(id);
+    element.classList.toggle("show");
   }
-  
+
   checkoutForm = this._formBuilder.group({
     name: '',
   });
@@ -142,7 +154,7 @@ export class ProductListComponent implements OnInit {
       data => {
         this.categories = data.data;
       }
-      ,err =>{
+      , err => {
 
       },
       () => {
@@ -153,22 +165,22 @@ export class ProductListComponent implements OnInit {
 
 
 
-  addToCart(index, event){
-    let prod:Product =  this.products[index];
-    let prodId:number = prod.id;
+  addToCart(index, event) {
+    let prod: Product = this.products[index];
+    let prodId: number = prod.id;
     console.log(prod, prodId);
 
-    let request:CartItemRequest = new CartItemRequest();
+    let request: CartItemRequest = new CartItemRequest();
     request.productId = prodId;
     request.quantity = 1;
 
     this._cartService.addCartItem(request).subscribe(
       resp => {
-        this._notificationService.onSuccess(resp.message, 3000,"topRight");
+        this._notificationService.onSuccess(resp.message, 3000, "topRight");
       },
       err => {
         let errMsg = err.error.message;
-        this._notificationService.onError(errMsg, 3000,"topRight");
+        this._notificationService.onError(errMsg, 3000, "topRight");
       },
     )
   }
