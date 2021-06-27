@@ -4,6 +4,7 @@ import { CustomerService } from 'src/app/services/customer.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms'; 
 import { Router } from '@angular/router';
+import { NotificationService } from 'src/app/services/notification.service';
 
 
 @Component({
@@ -19,7 +20,9 @@ export class RegisterComponent implements OnInit {
   form: FormGroup;
 
   constructor(private _customerService:CustomerService,
-    private _router: Router, private _loader: LoadingService) { }
+              private _router: Router,
+              private _loader: LoadingService,
+              private _notificationService: NotificationService) { }
 
   ngOnInit(): void {
 
@@ -42,10 +45,16 @@ export class RegisterComponent implements OnInit {
     console.log(this.registerCustomerData);
 
     this._customerService.registerCustomer(this.registerCustomerData).subscribe(
-      resp => console.log(resp.data)
+      resp => {
+        console.log(resp.data)
+        this._notificationService.onSuccess(resp.message, 3000, "topRight");
+        this._router.navigate([`login`]);
+      },
+      err => {
+        this._notificationService.onError(err.error.message, 3000, "topRight");
+      }
     )
-    this._router.navigate([`login`])
-
+    
   }
 
   get name(){

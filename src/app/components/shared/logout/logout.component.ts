@@ -21,7 +21,7 @@ export class LogoutComponent implements OnInit {
   isAdmin: boolean = this._authService.isAdmin();
 
   role: string = this.isAdmin ? "Admin" : ( this.isSeller ? "Seller" : "Customer");
-
+  
   logout(){
     return this._authService.logout();
   }
