@@ -70,14 +70,6 @@ const routes: Routes = [
     }
   },
   {
-    path:"wishlist",
-    component:WishlistComponent,
-    canActivate:[CustomerAuthGuard],
-    data:{
-      role : "ROLE_CUSTOMER",
-    }
-  },
-  {
     path:"orders",
     component:OrderHomeComponent,
     loadChildren: () => import('../customer-module/orders/orders.module').then(m => m.OrdersModule),

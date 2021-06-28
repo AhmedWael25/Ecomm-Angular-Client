@@ -98,7 +98,7 @@
 
             <div class="row " *ngIf="totalElements != 0; else elseBlock">
 
-              <div class="col-lg-3 col-sm-6 " *ngFor="let product of products 
+              <div class="col-lg-4 col-md-6" *ngFor="let product of products 
                 | paginate 
                 : {itemsPerPage: size,
                 currentPage: page,
