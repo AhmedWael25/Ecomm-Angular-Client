@@ -8,6 +8,8 @@ import { CartService } from 'src/app/services/cart.service';
 import { CheckoutService } from 'src/app/services/checkout.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import {MatDialog} from '@angular/material/dialog';
+
 
 declare var paypal;
 
@@ -23,7 +25,8 @@ export class CheckoutComponent implements OnInit {
               private _checkoutService:CheckoutService,
               private _router:Router,
               private _changeDetector:ChangeDetectorRef,
-              private _notificationService:NotificationService) {   }
+              private _notificationService:NotificationService,
+              private _dialog: MatDialog) {   }
 
   form:FormGroup;
   cartItems:CartItem[];
@@ -88,6 +91,8 @@ export class CheckoutComponent implements OnInit {
     }
     this.isLoading = true;
 
+    // this._dialog.open(DialogElementsExample);
+
     let cc:CCInfo = new CCInfo();
     const req = {
       paymentMethod:"CREDIT_CARD",
@@ -131,4 +136,14 @@ export class CheckoutComponent implements OnInit {
   getYear(){
     return this.form.get("year");
   }
+}
+
+
+@Component({
+  selector: 'dialog-elements-example',
+  templateUrl: './dialog-elements-example.html',
+})
+export class DialogElementsExample {
+  constructor() {}
+
 }

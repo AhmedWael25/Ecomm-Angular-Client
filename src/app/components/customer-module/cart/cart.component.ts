@@ -16,59 +16,61 @@ import { CheckoutComponent } from '../checkout/checkout.component';
 export class CartComponent implements OnInit {
 
 
-  cart:Cart = new Cart();
-  cartItems:CartItem[];
-  cartTotal:number;
-  isCartError:boolean = false;
-  idLoading:boolean = false;
-  cartErrData:CartItem[] = [];
+  cart: Cart = new Cart();
+  cartItems: CartItem[] = [];
+  cartTotal: number;
+  isCartError: boolean = false;
+  isLoading: boolean = false;
+  cartErrData: CartItem[] = [];
 
-  constructor(private _cartService:CartService,
-              private _checkoutService:CheckoutService,
-              private _router:Router,
-              private _notificationService:NotificationService,
-              private _activatedRoute:ActivatedRoute) { }
+  constructor(private _cartService: CartService,
+    private _checkoutService: CheckoutService,
+    private _router: Router,
+    private _notificationService: NotificationService,
+    private _activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this._cartService.getCartItems().subscribe(resp => {
-      console.log( resp );
+      console.log(resp);
       this.cart = resp.data;
       this.cartItems = this.cart.items;
       console.log(this.cartItems);
       this.calculateTotal();
+      this.isLoading = false;
     },
-    err =>{
-      
+    err => {
+      console.log("Error");
     });
 
-    this._activatedRoute.queryParams.subscribe( 
-      params =>{
+    this._activatedRoute.queryParams.subscribe(
+      params => {
         console.log(params)
-          let temp = params.error
-          console.log(temp);
-          if(temp == ""){
-            console.log("D5LT");
-            this.checkout();
-          }
+        let temp = params.error
+        console.log(temp);
+        if (temp == "") {
+          console.log("D5LT");
+          this.checkout();
+        }
       });
   }
 
-  calculateTotal(){
-    let sum  = 0;
-    this.cartItems.forEach( item => {
-      sum  += (+item.price * +item.quantity);
+  calculateTotal() {
+    let sum = 0;
+    this.cartItems.forEach(item => {
+      sum += (+item.price * +item.quantity);
     });
     this.cartTotal = sum;
   }
 
 
-  incrementItem(index:number, event){
+  incrementItem(index: number, event) {
     console.log(index);
     console.log(event);
 
     let cartItem = this.cartItems[index];
-    if(cartItem.quantity == 15) return;
-    if(cartItem.quantity > 15) cartItem.quantity = 15; 
+    if (cartItem.quantity == 15) return;
+    if (cartItem.quantity > 15) cartItem.quantity = 15;
 
     event.target.disabled = true;
 
@@ -79,27 +81,27 @@ export class CartComponent implements OnInit {
     updatedItem.productId = cartItem.productId;
     //TODO REMOVE
     updatedItem.customerId = 2;
-    this._cartService.updateCartItem(updatedItem).subscribe( 
-      resp =>{
+    this._cartService.updateCartItem(updatedItem).subscribe(
+      resp => {
         cartItem.quantity = resp.data.quantity;
         this._notificationService.onSuccess(resp.message, 1000, "topRight");
       },
-      err =>{
+      err => {
         cartItem.quantity--;
         this._notificationService.onError(err.error.message, 2000, "topRight");
-      },() =>{
+      }, () => {
         event.target.disabled = false;
         this.calculateTotal();
-      } );
+      });
   }
 
-  decrementItem(index:number,event){
+  decrementItem(index: number, event) {
     console.log(index);
     console.log(event);
 
     let cartItem = this.cartItems[index];
-    if(cartItem.quantity == 1) return;
-    if(cartItem.quantity < 1) cartItem.quantity = 1; 
+    if (cartItem.quantity == 1) return;
+    if (cartItem.quantity < 1) cartItem.quantity = 1;
 
     event.target.disabled = true;
 
@@ -110,21 +112,21 @@ export class CartComponent implements OnInit {
     updatedItem.productId = cartItem.productId;
     //TODO REMOVE
     updatedItem.customerId = 2;
-    this._cartService.updateCartItem(updatedItem).subscribe( 
-      resp =>{
+    this._cartService.updateCartItem(updatedItem).subscribe(
+      resp => {
         cartItem.quantity = resp.data.quantity;
         this._notificationService.onSuccess(resp.message, 1000, "topRight");
       },
-      err =>{
+      err => {
         cartItem.quantity++;
         this._notificationService.onError(err.error.message, 2000, "topRight");
-      },() =>{
+      }, () => {
         event.target.disabled = false;
         this.calculateTotal();
-      } );
+      });
   }
 
-  deleteItem(index:number,event){
+  deleteItem(index: number, event) {
     console.log(index);
     console.log(event);
 
@@ -136,24 +138,24 @@ export class CartComponent implements OnInit {
     updatedItem.productId = cartItem.productId;
     //TODO REMOVE
     updatedItem.customerId = 2;
-    this._cartService.deleteCartItem(updatedItem).subscribe( 
-      resp =>{
+    this._cartService.deleteCartItem(updatedItem).subscribe(
+      resp => {
         this.cartItems.splice(index, 1);
         this._notificationService.onSuccess(resp.message, 1000, "topRight");
       },
-      err =>{
+      err => {
         this._notificationService.onError(err.error.message, 1000, "topRight");
-      },() =>{
+      }, () => {
         event.target.disabled = false;
         this.calculateTotal();
-      } );
-    
+      });
+
   }
 
-  checkout(){
+  checkout() {
     //Check Validity of Cart If All Good
     //Redirect to Checkout Page:
-    //IF not Display Err To User.
+    //IF not Display Err To User
     this.isCartError = false;
     this.cartErrData = [];
     this._checkoutService.validateCheckout().subscribe(
@@ -162,17 +164,17 @@ export class CartComponent implements OnInit {
 
         let state = resp.data.state;
 
-        if(state === true){
+        if (state === true) {
           this._router.navigateByUrl("checkout");
-        }else{
+        } else {
           //Logic to Check Which one caused the problem. 
           this.isCartError = true;
-          let items:CartItem[] = resp.data.cartDto.items;
+          let items: CartItem[] = resp.data.cartDto.items;
           items.forEach(el => {
             let itemInCart = this._getCartItemById(el.productId);
-            if( itemInCart.quantity > el.quantity ){
+            if (itemInCart.quantity > el.quantity) {
               console.log("item" + itemInCart);
-              this.cartErrData.push(el);  
+              this.cartErrData.push(el);
             }
           });
         }
@@ -188,9 +190,9 @@ export class CartComponent implements OnInit {
   }
 
 
-  private _getCartItemById(id:number){
-    for(let i = 0 ; i < this.cartItems.length ; i++){
-      if(this.cartItems[i].productId == id){
+  private _getCartItemById(id: number) {
+    for (let i = 0; i < this.cartItems.length; i++) {
+      if (this.cartItems[i].productId == id) {
         return this.cartItems[i];
       }
     }

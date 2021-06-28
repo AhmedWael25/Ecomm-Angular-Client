@@ -22,6 +22,8 @@ import { BooleanTargetPipe } from './pipes/boolean-target.pipe';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { DatePipe } from '@angular/common';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -40,6 +42,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     SlickCarouselModule,
     NgbModule,
     MatSlideToggleModule,
+    MatDialogModule,
   ],
   providers: [
     CustomerService,
