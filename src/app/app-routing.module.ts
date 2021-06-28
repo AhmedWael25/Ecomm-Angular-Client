@@ -1,3 +1,4 @@
+import { AboutUsComponent } from './components/shared/about-us/about-us.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminHomeComponent } from './components/admin-module/admin-home/admin-home.component';
@@ -10,6 +11,7 @@ import { SellerHomeComponent } from './components/seller-module/seller-home/sell
 import { LogoutComponent } from './components/shared/logout/logout.component';
 import { PageNotFoundComponent } from './components/shared/page-not-found/page-not-found.component';
 import { SellerAuthGuard } from './guards/seller-auth.guard';
+import { ContactUsComponent } from './components/shared/contact-us/contact-us.component';
 
 //Main Routes in Application
 const routes: Routes = [
@@ -40,6 +42,14 @@ const routes: Routes = [
     path:"404",
     component:PageNotFoundComponent,
     data:{messgae:"404 - Page Not Found"}
+  },
+  {
+    path:"about",
+    component:AboutUsComponent,
+  },
+  {
+    path:"contact",
+    component:ContactUsComponent,
   },
   {
     path:"**",

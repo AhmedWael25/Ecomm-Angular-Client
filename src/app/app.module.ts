@@ -16,7 +16,6 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-// import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BooleanTargetPipe } from './pipes/boolean-target.pipe';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
@@ -38,7 +37,6 @@ import {MatDialogModule} from '@angular/material/dialog';
     NgxSliderModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
-    // SlickCarouselModule,
     SlickCarouselModule,
     NgbModule,
     MatSlideToggleModule,

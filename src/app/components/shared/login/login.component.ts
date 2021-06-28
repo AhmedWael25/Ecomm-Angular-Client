@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
     await this._authService.attemptLogin(this.loginData)
    .then((resp) =>{
      LoggedIn = resp;
+     console.log(LoggedIn);
    });
 
    await new Promise(f => setTimeout(f, 200));
@@ -72,8 +73,6 @@ export class LoginComponent implements OnInit {
     }
 
    
-
-    
     //===========================
 
     this.loginForm.reset();

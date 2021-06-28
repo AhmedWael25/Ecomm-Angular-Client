@@ -54,6 +54,8 @@ export class AuthService {
     //    await  this._apiService.post(this.baseUrl, loginRequest).toPromise();
         await this._apiService.post(this.baseUrl, loginRequest).toPromise().then(
             resp => {
+
+                console.log(resp);
                 loggedIn= true;
                 this.loggedIn = true;
                 let authResp:AuthResponse = resp.data;
@@ -61,6 +63,7 @@ export class AuthService {
             })
             .catch( err => {
                 // console.log("err"+err);
+                console.log(err);
                 loggedIn = false;
                 this.loggedIn = false;
             })
