@@ -27,8 +27,8 @@
           <b style="color: black;">Seller: </b><b
           class="badge bg-primary-1 rounded-pill">{{product.sellerName}}</b> &nbsp; &nbsp;
 
-        <b class="badge bg-success rounded-pill" *ngIf='product.isOnSale'>on sale</b>
-        <b class="badge bg-danger rounded-pill" *ngIf='!product.isOnSale'>no sale</b>
+        <b class="badge bg-success rounded-pill" *ngIf='product.onSale'>on sale</b>
+        <b class="badge bg-danger rounded-pill" *ngIf='!product.onSale'>no sale</b>
 
       </div>
       <div>
