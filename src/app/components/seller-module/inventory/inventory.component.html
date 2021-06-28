@@ -1,5 +1,8 @@
 <h1 class="card-header" style="text-align: center; background-color: #262d35; color: white;">
-    Inventory <i class="fas fa-shopping-cart"></i>
+    <div class="card-icon">
+        Inventory
+        <img src="assets/images/inventory.png" alt="Card">
+    </div>
 </h1>
 <div class="table-responsive">
     <table class="table v-middle table-striped table-hover" id="myTable">
@@ -12,7 +15,7 @@
             <th class="border-top-0" style="color: white">Quantity</th>
             <th class="border-top-0" style="color: white">Subcategory</th>
             <th class="border-top-0" style="color: white">Sale</th>
-            <th class="border-top-0" style="color: white" colspan="2">&nbsp;&nbsp;Action</th>
+            <th class="border-top-0" style="color: white" colspan="2">&nbsp; &nbsp; Action</th>
             </tr>
         </thead>
         <tbody>
@@ -49,7 +52,7 @@
                 <td>
                      <button type="button" class="btn" [routerLink]='["/seller/products", product.id]'>
                         <i class="fas fa-edit" style="color: green;"></i>
-                    </button> &nbsp; &nbsp; 
+                    </button> 
 
                     <button type="button" class=" btn">
                         <i class="fas fa-trash-alt" style="color: red;"></i>

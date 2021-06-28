@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // console.log(this.form);
+
     this._profileService.getCurrentCustomerData().subscribe((resp) => {
       console.log(resp);
       this._userData = resp.data;
@@ -76,7 +76,6 @@ export class ProfileComponent implements OnInit {
   }
 
   submit() {
-    console.log('submitttttttttttttttttttt');
     this._areFieldsDisabled = true;
     console.log(this.form.value.name);
     console.log(this.form);
@@ -171,11 +170,11 @@ export class ProfileComponent implements OnInit {
   }
 
   onUpdatedSuccess() {
-    return this._notificationService.onSuccess('profile is updated', 3000, "topRight");
+    return this._notificationService.onSuccess('Profile is updated', 3000, "topRight");
   }
 
   onUpdatedError() {
-    return this._notificationService.onError(' failed to update profile!', 3000, "topRight");
+    return this._notificationService.onError('Failed to update profile!', 3000, "topRight");
   }
 }
 

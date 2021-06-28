@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { SellerOrder } from 'src/app/models/seller/SellerOrder';
 import { SoldItems } from 'src/app/models/seller/SoldItems';
 import { AdminService } from 'src/app/services/admin.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -25,22 +26,27 @@ export class AdminChartsComponent implements OnInit {
   soldPerSellerPieChartData:Map<string, number> = new Map();
   profitPerSellerPieChartData:Map<string, number> = new Map();
 
-  noOfCustomers: number;
-  noOfSellers: number;
-  noOfProducts: number;
-  noOfOrders: number;
+  totalCustomers: number;
+  totalOrders: number;
+  totalSellers: number;
+  totalProducts: number;
+  // totalProfits: number;
+  // totalSoldItems: number;
 
   constructor(private _authService: AuthService,
     private _adminService: AdminService,
     private _datePipe: DatePipe,
     private _productService: ProductService,
     private _orderService: OrderService) { }
+    
   ngOnInit(): void {
 
     this.countCustomers();
     this.countSellers();
     this.countProducts();
-    this.countOrders();
+    this.getTotalOrders();
+    // this.getTotalSoldItems(this.soldItems);
+    // this.getTotalProfit(this.soldItems);
 
     this.isLoading  = true;
     this._adminService.getAllSoldItems().subscribe(
@@ -131,33 +137,70 @@ export class AdminChartsComponent implements OnInit {
   countCustomers(){
 
     this._adminService.getAllCustomers().subscribe(response => {
-      this.noOfCustomers = response.data.length;
+      this.totalCustomers = response.data.length;
     });
   }
 
   countSellers(){
 
     this._adminService.getAllSellers().subscribe(response => {
-      this.noOfSellers = response.data.length;
+      this.totalSellers = response.data.length;
     });
 
   }
 
   countProducts(){
-    console.log("no of hhhhh");
 
     this._productService.getAllProducts().subscribe(response => {
       console.log("no of product is " + response.data.length);
-      this.noOfProducts = response.data.length;
+      this.totalProducts = response.data.length;
     });
+
   }
 
-  countOrders(){
+  getTotalOrders(){
 
     this._orderService.getAllOrders().subscribe(response => {
-      this.noOfOrders = response.data.length;
+      this.totalOrders = response.data.length;
     });
 
   }
+
+  // getTotalSoldItems(item:SoldItems[]){
+    
+  //     item.forEach( item => {
+  //       this.totalSoldItems += item.soldQuantity;
+  //     });
+
+  // }
+
+  totalSoldItems(item:SoldItems[]){
+    
+    let total:number = 0;
+    item.forEach(order =>{
+      item.forEach( item => {
+        total += item.soldQuantity;
+      })
+    });
+    return total;
+  }
+
+  totalProfits(item:SoldItems[]){
+    
+    let total:number = 0;
+    item.forEach(order =>{
+      item.forEach( item => {
+        total += item.soldQuantity * item.price;
+      })
+    });
+    return total;
+  }
+
+  // getTotalProfit(item:SoldItems[]){
+    
+  //     item.forEach( item => {
+  //       this.totalProfits += item.soldQuantity * item.price;
+  //     });
+  // }
 
 }

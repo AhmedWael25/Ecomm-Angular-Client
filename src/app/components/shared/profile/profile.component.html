@@ -49,7 +49,7 @@
                     <div class="mb-3" style="width: 330px;">
                       <input type="text" name="name" formControlName="name" class="form-control"
                         [value]="_userData.name" [readonly]='_areFieldsDisabled'>
-                      <div *ngIf="name.touched && name.invalid" class="aletr alert-danger">
+                      <div *ngIf="name.invalid && ( name.dirty || name.touched  )" class="aletr alert-danger">
                         <div style="text-align: center;" *ngIf="name.errors.required">Name is required!</div>
                         <div style="text-align: center;" *ngIf="name.errors.minlength">
                           Name should be at least {{name.errors.minlength.requiredLength}} characters !
@@ -86,7 +86,7 @@
                     <div class="mb-3" style="width: 330px;">
                       <input type="text" name="phone" formControlName="phone" class="form-control"
                         [value]="_userData.phone" [readonly]='_areFieldsDisabled'>
-                      <div *ngIf="phone.touched && phone.invalid" class="aletr alert-danger">
+                      <div *ngIf="phone.invalid && ( phone.dirty || phone.touched  )" class="aletr alert-danger">
                         <div style="text-align: center;" *ngIf="phone.errors.required">Phone is required!</div>
                         <div style="text-align: center;" *ngIf="phone.errors.minlength">
                           - Phone should be at least {{phone.errors.minlength.requiredLength}} numbers !
@@ -113,7 +113,7 @@
                     <div class="mb-3" style="width: 330px;">
                       <input type="text" name="address" formControlName="address" class="form-control"
                         [value]="_userData.address" [readonly]='_areFieldsDisabled'>
-                      <div *ngIf="address.touched && address.invalid" class="aletr alert-danger">
+                      <div *ngIf="address.invalid && ( address.dirty || address.touched  )" class="aletr alert-danger">
                         <div style="text-align: center;" *ngIf="address.errors.required">Address is required!</div>
                         <div style="text-align: center;" *ngIf="address.errors.minlength">
                           Address should be at least {{address.errors.minlength.requiredLength}} characters !

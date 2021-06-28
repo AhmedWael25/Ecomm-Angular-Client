@@ -1,5 +1,7 @@
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+.errMessage{
+  color:red;
+}
+
+.ng-invalid:not(form).ng-touched {
+  border: 1px solid red !important; 
 }

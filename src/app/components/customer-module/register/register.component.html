@@ -6,20 +6,22 @@
 
         <div class="login-registration-style-1 registration text-center mt-50">
           <div class="card-icon">
-            <img src="assets/images/shop.png" alt="Card">
-            <img src="assets/images/order.png" alt="Card">
+            <img src="assets/images/register.png" alt="Card">
           </div>
           <hr>
           <!-- ================== Spinner =============== -->
           <mat-progress-spinner *ngIf="isLoading | async" [mode]="'indeterminate'"></mat-progress-spinner>
           <!-- ================== Spinner =============== -->
-          <h1 class="heading-4 font-weight-500 title" style="color: #542DED;">Create a customer account</h1>
+          <div class="card-icon heading-4 font-weight-500 title">
+            <b style="color: #542DED;">Create a Customer account</b> &nbsp;
+            <img src="assets/images/follow.png" alt="Card">
+          </div>
           <div class="login-registration-form pt-10">
             <form [formGroup]="form">
               <div class="form-group">
                 <div class="single-form form-default form-border text-left">
                   <b class="inputsLabel">
-                    <i class="fas fa-user-tie" style="color: blue;"></i>
+                    <i class="fas fa-user-tie" style="color: black;"></i> &nbsp;
                     Name
                   </b>
                   <div class="row">
@@ -42,7 +44,7 @@
               <div class="">
                 <div class="single-form form-default form-border text-left">
                   <b class="inputsLabel">
-                    <i class="fas fa-envelope" style="color: blue;"></i>
+                    <i class="fas fa-envelope" style="color: rgb(75, 43, 43);"></i> &nbsp;
                     Email
                   </b>
                   <div class="form-input">
@@ -63,7 +65,7 @@
               <div class="form-group">
                 <div class="single-form form-default form-border text-left">
                   <b class="inputsLabel">
-                    <i class="fas fa-map-marker-alt" style="color: blue;"></i>
+                    <i class="fas fa-map-marker-alt" style="color: red;"></i> &nbsp;
                     Address
                   </b>
                   <div class="form-input">
@@ -86,7 +88,7 @@
               <div class="form-group">
                 <div class="single-form form-default form-border text-left">
                   <b class="inputsLabel">
-                    <i class="fas fa-phone" style="color: blue;"></i>
+                    <i class="fas fa-phone" style="color: blue"></i> &nbsp;
                     Phone
                   </b>
                   <div class="form-input">
@@ -112,7 +114,7 @@
               <div class="form-group">
                 <div class="single-form form-default form-border text-left">
                   <b class="inputsLabel">
-                    <i class="fas fa-lock"></i>
+                    <i class="fas fa-lock" style="color: black;"></i> &nbsp;
                     Password
                   </b>
                   <div class="form-input">
@@ -137,8 +139,7 @@
               </div>
 
               <div class="single-form">
-                <button (click)="registerCustomer()" type="button"
-                  class="main-btn primary-btn">Register</button>
+                <button (click)="registerCustomer()" type="button" class="main-btn primary-btn">Register</button>
               </div>
             </form>
           </div>
