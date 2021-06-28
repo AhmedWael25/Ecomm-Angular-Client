@@ -1,41 +1,164 @@
-
-
-
 <div class="container" *ngIf="isLoading">
-    <div class="row justify-content-center">
-        <app-spinner></app-spinner>
-    </div>
+  <div class="row justify-content-center">
+    <app-spinner></app-spinner>
+  </div>
 </div>
 
 
 <div class="container" *ngIf="!isLoading">
   <div class="row justify-content-center mt-20 mb-20">
+    <div class="profile-body">
+      <div class="profile-footer mt-45">
+        <div class="card-header" style="background-color: black;">
+          <h2 class="title" style="color: white; text-align: center;">
+            <div class="card-icon">
+              Dashboard 
+              <img src="assets/images/dashboard.png" alt="Card">
+            </div>
+          </h2>
+        </div>
+        <hr>
+        <div class="profile-card-info">
+          <div class="row">
+            <div class="col-md-6 col-sm-6">
+              <div class="single-card-info d-flex">
+                <div class="card-icon">
+                  <img src="assets/images/client.png" alt="Card">
+                </div> &nbsp; &nbsp;
+                <div class="card-info media-body">
+                  <h4 class="d-flex justify-content-between align-items-center mb-3" style="padding-top: 15px;">
+                    <span class="ui-button-text-icon-secondary">Total Customers</span>
+                    <span class="badge bg-primary-3 rounded-pill">{{totalCustomers}}</span>
+                  </h4>
+                </div>
+              </div>
+              <hr>
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <div class="single-card-info d-flex">
+                <div class="card-icon">
+                  <img src="assets/images/order.png" alt="Card">
+                </div> &nbsp; &nbsp;
+                <div class="card-info media-body">
+                  <h4 class="d-flex justify-content-between align-items-center mb-3" style="padding-top: 15px;">
+                    <span class="ui-button-text-icon-secondary">Total Orders</span>
+                    <span class="badge bg-primary-3 rounded-pill">{{totalOrders}}</span>
+                  </h4>
+                </div>
+              </div>
+              <hr>
+            </div>
 
-    <div class="col-lg-6">
-
-      <app-pie-chart [label]="'Qty'" [data]="profitPerSellerPieChartData" [title]="'#Qty Sold of each sold product'"></app-pie-chart>
+            <div class="col-md-6 col-sm-6">
+              <div class="single-card-info d-flex">
+                <div class="card-icon">
+                  <img src="assets/images/sales-agent.png" alt="Card">
+                </div> &nbsp; &nbsp;
+                <div class="card-info media-body">
+                  <h4 class="d-flex justify-content-between align-items-center mb-3" style="padding-top: 15px;">
+                    <span class="ui-button-text-icon-secondary">Total Sellers</span>
+                    <span class="badge bg-primary-3 rounded-pill">{{totalSellers}}</span>
+                  </h4>
+                </div>
+              </div>
+              <hr>
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <div class="single-card-info d-flex">
+                <div class="card-icon">
+                  <img src="assets/images/inventory.png" alt="Card">
+                </div> &nbsp; &nbsp;
+                <div class="card-info media-body">
+                  <h4 class="d-flex justify-content-between align-items-center mb-3" style="padding-top: 15px;">
+                    <span class="ui-button-text-icon-secondary">Total Products</span>
+                    <span class="badge bg-primary-3 rounded-pill">{{totalProducts}}</span>
+                  </h4>
+                </div>
+              </div>
+              <hr>
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <div class="single-card-info d-flex">
+                <div class="card-icon">
+                  <img src="assets/images/money.png" alt="Card">
+                </div> &nbsp; &nbsp;
+                <div class="card-info media-body">
+                  <h4 class="d-flex justify-content-between align-items-center mb-3" style="padding-top: 15px;">
+                    <span class="ui-button-text-icon-secondary">Total Profits</span>
+                    <span class="badge bg-primary-3 rounded-pill">{{totalProfits(soldItems) | currency:'USD'}}</span>
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <div class="single-card-info d-flex">
+                <div class="card-icon">
+                  <img src="assets/images/sold-out.png" alt="Card">
+                </div> &nbsp; &nbsp;
+                <div class="card-info media-body">
+                  <h4 class="d-flex justify-content-between align-items-center mb-3" style="padding-top: 15px;">
+                    <span class="ui-button-text-icon-secondary">Sold items</span>
+                    <span class="badge bg-primary-3 rounded-pill">{{totalSoldItems(soldItems)}}</span>
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <hr>
+        </div>
+      </div>
 
     </div>
-    <div class="col-lg-6">
 
-        <app-line-chart [label]="'Profit $'" [data]="dailyProfitBarChartData" [title]="'Daily Profits'"></app-line-chart>
+    <div class="row justify-content-center mt-20 mb-20">
+
+      <div class="card-header" style="background-color: black;">
+        <h2 class="title" style="color: white; text-align: center;">
+          <div class="card-icon">
+            Products Charts 
+            <img src="assets/images/analytic.png" alt="Card">
+          </div>
+        </h2>
+      </div>
+
+
+      <div class="col-lg-6" style="margin: auto;">
+        <app-line-chart [label]="'Profit $'" [data]="dailyProfitBarChartData" [title]="'Daily Profits'">
+        </app-line-chart>
+      </div>
+
+
+      <div class="col-lg-6">
+        <app-pie-chart [id] [label]="'Qty'" [data]="quantityPerItemPieChartData" [title]="'#Qty Sold Per Item'">
+        </app-pie-chart>
+      </div>
+
+
+      <hr>
+      <div class="card-header" style="background-color: black;">
+        <h2 class="title" style="color: white; text-align: center;">
+          <div class="card-icon">
+            Profits Charts
+            <img src="assets/images/investment.png" alt="Card">
+          </div>
+        </h2>
+      </div>
+
+      <div class="col-lg-6">
+        <app-pie-chart [label]="'Qantity'" [data]="profitPerSellerPieChartData" [title]="'#Profit $ Per Seller'">
+        </app-pie-chart>
+      </div>
+
+
+      <div class="col-lg-6">
+        <app-pie-chart [id] [label]="'Qty'" [data]="soldPerSellerPieChartData" [title]="'#Sold Per Seller'">
+        </app-pie-chart>
+      </div>
 
     </div>
-
   </div>
-  <div class="row justify-content-center mt-20 mb-20">
 
-    <div class="col-lg-6">
-
-        <app-pie-chart [id] [label]="'Qty'" [data]="soldPerSellerPieChartData" [title]="'#Sold Per Seller'"></app-pie-chart>
-
-    </div>
-    <div class="col-lg-6">
-
-      <h1>Chart</h1>
-
-    </div>
-
-  </div>
   <hr>
 </div>

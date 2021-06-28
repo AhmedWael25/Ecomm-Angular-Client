@@ -1,45 +1,58 @@
-    <!--====== Order History Part Start ======-->
+<!--====== Order History Part Start ======-->
 
-    <section class="order-history-wrapper pt-90 pb-100">
-        <div class="container">
-            <div class="row justify-content-center">
+<section class="order-history-wrapper pt-90 pb-100">
+    <div class="container">
+        <div class="row justify-content-center">
 
-                <div class="col-lg-9" *ngIf="isLoading">
-                    <app-spinner></app-spinner>
-                </div>
+            <div class="col-lg-9" *ngIf="isLoading">
+                <app-spinner></app-spinner>
+            </div>
 
-                <div class="col-lg-9" *ngIf="!isLoading">
-                    <div class="history-title">
+            <div class="col-lg-9" *ngIf="!isLoading">
+                <!-- <div class="history-title">
                         <h4 class="heading-4 font-weight-500 title">Order History</h4>
                         <p class="paragraph-small">Your all the orders</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-9">
-                    
-                    <div class="single-order" *ngFor="let order of orders"  [routerLink]=[order.id]>
-                        <h4 class="order-id">Order ID: {{order.id}}</h4>
-                        <ul class="order-meta">
-                            <li><a class="product" href="#0">{{ order.orderItems.length }} Product</a></li>
-                            <li><a class="date" href="#0"> {{order.data}} </a></li>
-                        </ul>
-                        <div class="single-progress-bar-horizontal shipped">
-                            <div class="progress-text">
-                                <p>Shipped</p>
-                            </div>
-                            <div class="progress-bar-inner">
-                                <div class="bar-inner">
-                                    <div class="progress-horizontal"></div>
-                                </div>
-                            </div>
+                    </div> -->
+                <div class="card-header" style="background-color: black;">
+                    <h2 class="title" style="color: white; text-align: center;">
+                        <div class="card-icon">
+                            Order History
+                            <img src="assets/images/clock.png" alt="Card">
                         </div>
-                        <span class="order-price">{{ calculateOrderTotal(order) | currency:'USD' }}</span>
-                    </div>
-
+                    </h2>
                 </div>
             </div>
         </div>
-    </section>
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
 
-    <!--====== Order History Part Ends ======-->
+                <div class="single-order" *ngFor="let order of orders" [routerLink]=[order.id]>
+                    <h4 class="order-id">Order ID: {{order.id}}</h4>
+                    <ul class="order-meta">
+                        <li><a class="product badge bg-primary-3 rounded-pill" style="color: white;">{{ order.orderItems.length }} Products</a></li>
+                        <li>
+                            <a class="date">
+                                {{order.date | date}}
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="single-progress-bar-horizontal delivered">
+                        <div class="progress-text">
+                            <p>Delivered</p>
+                        </div>
+                        <div class="progress-bar-inner">
+                            <div class="bar-inner">
+                                <div class="progress-horizontal"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <span class="order-price badge bg-primary-3 rounded-pill" style="color: white; margin-top: 15px;">{{ calculateOrderTotal(order) |
+                        currency:'USD' }}</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--====== Order History Part Ends ======-->

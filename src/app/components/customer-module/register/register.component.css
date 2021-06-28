@@ -1,0 +1,7 @@
+.errMessage{
+    color:red;
+}
+
+.ng-invalid:not(form).ng-touched {
+    border: 1px solid red !important; 
+}

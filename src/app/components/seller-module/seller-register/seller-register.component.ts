@@ -5,6 +5,7 @@ import { SellerService } from 'src/app/services/seller.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms'; 
 import { SellerRequest } from './../../../models/seller/SellerRequest';
 import { LoadingService } from 'src/app/loader/loadingService/loading.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 
 @Component({
@@ -17,36 +18,64 @@ export class SellerRegisterComponent implements OnInit {
   isLoading = this._loader.loading$;
   registerSellerData: SellerRequest = new SellerRequest();
 
-  form: FormGroup;
+  form:FormGroup = new FormGroup({});
 
   constructor(private _sellerService: SellerService,
-    private _router: Router, private _loader: LoadingService) { }
+              private _router: Router,
+              private _loader: LoadingService,
+              private _notificationService: NotificationService) { }
 
   isSellerLoggedIn: boolean;
 
   ngOnInit(): void {
 
     this.form = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      address: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]),
-      phone: new FormControl('', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
-  
+      name: new FormControl('', [,
+        Validators.required, Validators.minLength(3)
+      ]),
+      email: new FormControl("", [
+        Validators.required,
+        // Validators.email,
+        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
+      ]),
+      address: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(30)
+      ]),
+      phone: new FormControl('', [
+        Validators.pattern("^01[0-9]+$"),
+        Validators.required,
+        Validators.minLength(11),
+        Validators.maxLength(11),
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8)
+      ]),
     })
 
   }
 
   registerSeller(){
-    console.log(this.form.value);
+
+    if(this.form.invalid) {
+      this._notificationService.onError("Fill In The Form with valid data", 3000, "topRight");
+      return;
+    };
+
     this.registerSellerData = this.form.value;
  
-    console.log(this.registerSellerData);
-
     this._sellerService.registerSeller(this.registerSellerData).subscribe(
-      resp => console.log(resp.data)
-    )
-    this._router.navigate([`/login`])
+      resp => {
+        console.log(resp);
+        this._notificationService.onSuccess(resp.message, 3000, "topRight");
+        this._router.navigate([`login`]);
+      },
+      err => {
+        console.log(err);
+        this._notificationService.onError(err.error.message, 3000, "topRight");
+      });
   }
 
   get name(){

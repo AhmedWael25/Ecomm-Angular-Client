@@ -16,9 +16,12 @@ export class OrderService{
 
     }
 
-    
     getOrderDetail(orderId:number):Observable<ApiResponse>{
         return this._apiService.get(this.baseUrl + "/" + orderId);
+    }
+
+    getAllOrders():Observable<ApiResponse>{
+        return this._apiService.get(this.baseUrl);
     }
 
 }

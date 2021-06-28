@@ -28,11 +28,11 @@ export class SellerOrderListComponent implements OnInit {
   }
 
   isSeller(){
-    this._authService.isSeller();
+    return this._authService.isSeller();
   }
 
   isAdmin(){
-    this._authService.isAdmin();
+    return this._authService.isAdmin();
   }
 
 

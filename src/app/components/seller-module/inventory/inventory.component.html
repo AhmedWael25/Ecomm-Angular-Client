@@ -1,7 +1,47 @@
 <h1 class="card-header" style="text-align: center; background-color: #262d35; color: white;">
-    Inventory <i class="fas fa-shopping-cart"></i>
+    <div class="card-icon">
+        Inventory
+        <img src="assets/images/inventory.png" alt="Card">
+    </div>
 </h1>
-<div class="table-responsive">
+<!-- Begin inventory -->
+<div class="profile-footer mt-45">
+    <div class="row">
+        <div class="col-lg-6" *ngFor="let product of products; let i = index">
+            <div class="single-order">
+              <h4 class="order-id">
+                <img style="cursor: pointer; width: 60px; height: 60px;" class="wishlist-img" [src]="product.img"
+                  alt="Product"> &nbsp; &nbsp;
+                <b>{{product.name}}</b>
+              </h4> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              <b style="color: black;">Price: </b><b class="badge bg-primary-1 rounded-pill">{{product.price | currency:'USD'}}</b> &nbsp; &nbsp;
+              <b style="color: black;">Quantity: </b><b class="badge bg-primary-1 rounded-pill">{{product.quantity}}</b> &nbsp; &nbsp;
+              <b style="color: black;">Subcategory: </b><b class="badge bg-primary-1 rounded-pill">{{product.subcategoryName}}</b> &nbsp; &nbsp;
+      
+              <b class="badge bg-success rounded-pill" *ngIf='product.onSale'>on sale</b>
+              <b class="badge bg-danger rounded-pill" *ngIf='!product.onSale'>no sale</b>
+      
+              <ul class="order-meta order-price action">
+                  <button type="button" class="btn" [routerLink]='["/seller/products", product.id]'>
+                      <i class="fas fa-edit" style="color: rgb(0, 0, 0); font-size: 25px; margin-top: 13px;"></i>
+                  </button> 
+              </ul>
+            </div>
+            <div>
+                <h1><hr></h1>
+            </div>
+          </div>
+          
+    </div>
+    
+
+    <div class="container-fluid card-footer">
+        <page-controller [page]="0" [size]="10" (change)="onPageControllerChange($event)"> </page-controller>
+    </div> -->
+    <!-- End inventory -->
+
+  
+<!-- <div class="table-responsive">
     <table class="table v-middle table-striped table-hover" id="myTable">
         <thead class="table-dark text-light">
             <tr class="bg-dark">
@@ -12,7 +52,7 @@
             <th class="border-top-0" style="color: white">Quantity</th>
             <th class="border-top-0" style="color: white">Subcategory</th>
             <th class="border-top-0" style="color: white">Sale</th>
-            <th class="border-top-0" style="color: white" colspan="2">&nbsp;&nbsp;Action</th>
+            <th class="border-top-0" style="color: white" colspan="2">&nbsp; &nbsp; Action</th>
             </tr>
         </thead>
         <tbody>
@@ -47,10 +87,11 @@
                     {{product.onSale  | booleanTarget}}
                 </td>
                 <td>
-                    <button [routerLink]='["/seller/products", product.id]'>
-                        <i class="fas fa-edit"></i>
-                    </button> &nbsp; &nbsp;
-                    <button>
+                     <button type="button" class="btn" [routerLink]='["/seller/products", product.id]'>
+                        <i class="fas fa-edit" style="color: green;"></i>
+                    </button> 
+
+                    <button type="button" class=" btn">
                         <i class="fas fa-trash-alt" style="color: red;"></i>
                     </button>
                 </td>
@@ -60,6 +101,4 @@
 </div>
 <div class="container-fluid card-footer">
   <page-controller [page]="0" [size]="10" (change)="onPageControllerChange($event)"> </page-controller>
-</div>
-
-
+</div> -->

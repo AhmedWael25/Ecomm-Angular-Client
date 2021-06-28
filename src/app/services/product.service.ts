@@ -22,8 +22,6 @@ export class ProductService {
     return this._apiService.post(this.baseUrl, request);
   }
 
-
-
   //Get All Products
   getAllProducts(): Observable<ApiResponse> {
     return this._apiService.get(this.baseUrl);
@@ -73,5 +71,9 @@ export class ProductService {
 
   addReview(productId: number, review: ProductReview): Observable<ApiResponse> {
     return this._apiService.post(this.baseUrl + "/" + productId + "/reviews", review);
+  }
+
+  getProductsCount(){
+    return this._apiService.get(this.baseUrl + "/count" );
   }
 }
