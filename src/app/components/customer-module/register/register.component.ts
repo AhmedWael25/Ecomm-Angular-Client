@@ -19,32 +19,6 @@ export class RegisterComponent implements OnInit {
   
   form:FormGroup = new FormGroup({});
 
-  // form: FormGroup = new FormGroup({
-  //   name: new FormControl('', [,
-  //     Validators.required, Validators.minLength(3)
-  //   ]),
-  //   email: new FormControl("", [
-  //     Validators.required,
-  //     Validators.email,
-  //     // Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
-  //   ]),
-  //   address: new FormControl('', [
-  //     Validators.required,
-  //     Validators.minLength(3),
-  //     Validators.maxLength(30)
-  //   ]),
-  //   phone: new FormControl('', [
-  //     // Validators.pattern("^01[0-9]+$"),
-  //     Validators.required,
-  //     Validators.minLength(11),
-  //     Validators.maxLength(11),
-  //   ]),
-  //   password: new FormControl('', [
-  //     Validators.required,
-  //     Validators.minLength(8)
-  //   ]),
-  // })
-
   constructor(private _customerService: CustomerService,
     private _router: Router,
     private _loader: LoadingService,
@@ -76,7 +50,7 @@ export class RegisterComponent implements OnInit {
         Validators.required,
         Validators.minLength(8)
       ]),
-    })
+    });
 
   }
 
@@ -84,7 +58,7 @@ export class RegisterComponent implements OnInit {
 
     if(this.form.invalid) {
       this._notificationService.onError("Fill In The Form with valid data", 3000, "topRight");
-      return
+      return;
     };
 
     console.log(this.form.value);
@@ -102,7 +76,7 @@ export class RegisterComponent implements OnInit {
       err => {
         this._notificationService.onError(err.error.message, 3000, "topRight");
       }
-    )
+    );
 
   }
 

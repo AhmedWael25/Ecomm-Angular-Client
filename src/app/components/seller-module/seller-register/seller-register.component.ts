@@ -18,7 +18,7 @@ export class SellerRegisterComponent implements OnInit {
   isLoading = this._loader.loading$;
   registerSellerData: SellerRequest = new SellerRequest();
 
-  form: FormGroup;
+  form:FormGroup = new FormGroup({});
 
   constructor(private _sellerService: SellerService,
               private _router: Router,
@@ -30,16 +30,40 @@ export class SellerRegisterComponent implements OnInit {
   ngOnInit(): void {
 
     this.form = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-      email: new FormControl('', [Validators.required, Validators.email]),
-      address: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(30)]),
-      phone: new FormControl('', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]),
-      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      name: new FormControl('', [,
+        Validators.required, Validators.minLength(3)
+      ]),
+      email: new FormControl("", [
+        Validators.required,
+        // Validators.email,
+        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
+      ]),
+      address: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(30)
+      ]),
+      phone: new FormControl('', [
+        Validators.pattern("^01[0-9]+$"),
+        Validators.required,
+        Validators.minLength(11),
+        Validators.maxLength(11),
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8)
+      ]),
     })
 
   }
 
   registerSeller(){
+
+    if(this.form.invalid) {
+      this._notificationService.onError("Fill In The Form with valid data", 3000, "topRight");
+      return;
+    };
+
     console.log(this.form.value);
     this.registerSellerData = this.form.value;
  
@@ -52,8 +76,9 @@ export class SellerRegisterComponent implements OnInit {
         this._router.navigate([`login`]);
       },
       err => {
-        this._notificationService.onError(err.error.message, 3000, "topRight");
-      }    )
+        console.log(err.data)
+        this._notificationService.onError("Seller Already exists", 3000, "topRight");
+      });
   }
 
   get name(){
