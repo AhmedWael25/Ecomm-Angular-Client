@@ -3,107 +3,48 @@
         Inventory
         <img src="assets/images/inventory.png" alt="Card">
     </div>
+    <input placeholder="&#xF002; Search" style="font-family:Arial, FontAwesome; margin-top: 10px;" class="form-control" [(ngModel)]="searchName">
 </h1>
-<!-- Begin inventory -->
+<h1>
+    <hr>
+</h1>
 <div class="profile-footer mt-45">
     <div class="row">
-        <div class="col-lg-6" *ngFor="let product of products; let i = index">
+        
+        <div class="col-lg-6" *ngFor="let product of products | filter:searchName">
             <div class="single-order">
-              <h4 class="order-id">
-                <img style="cursor: pointer; width: 60px; height: 60px;" class="wishlist-img" [src]="product.img"
-                  alt="Product"> &nbsp; &nbsp;
-                <b>{{product.name}}</b>
-              </h4> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-              <b style="color: black;">Price: </b><b class="badge bg-primary-1 rounded-pill">{{product.price | currency:'USD'}}</b> &nbsp; &nbsp;
-              <b style="color: black;">Quantity: </b><b class="badge bg-primary-1 rounded-pill">{{product.quantity}}</b> &nbsp; &nbsp;
-              <b style="color: black;">Subcategory: </b><b class="badge bg-primary-1 rounded-pill">{{product.subcategoryName}}</b> &nbsp; &nbsp;
-      
-              <b class="badge bg-success rounded-pill" *ngIf='product.onSale'>on sale</b>
-              <b class="badge bg-danger rounded-pill" *ngIf='!product.onSale'>no sale</b>
-      
-              <ul class="order-meta order-price action">
-                  <button type="button" class="btn" [routerLink]='["/seller/products", product.id]'>
-                      <i class="fas fa-edit" style="color: rgb(0, 0, 0); font-size: 25px; margin-top: 13px;"></i>
-                  </button> 
-              </ul>
+                <h4 class="order-id">
+                    <img style="cursor: pointer; width: 60px; height: 60px;" class="wishlist-img" [src]="product.img"
+                        alt="Product"> &nbsp; &nbsp;
+                    <b>{{product.name}}</b>
+                </h4> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <b style="color: black;">Price: </b><b class="badge bg-primary-1 rounded-pill">{{product.price |
+                    currency:'USD'}}</b> &nbsp; &nbsp;
+                <b style="color: black;">Quantity: </b><b
+                    class="badge bg-primary-1 rounded-pill">{{product.quantity}}</b> &nbsp; &nbsp;
+                <b style="color: black;">Subcategory: </b><b
+                    class="badge bg-primary-1 rounded-pill">{{product.subcategoryName}}</b> &nbsp; &nbsp;
+
+                <b class="badge bg-success rounded-pill" *ngIf='product.onSale'>on sale</b>
+                <b class="badge bg-danger rounded-pill" *ngIf='!product.onSale'>no sale</b>
+
+                <ul class="order-meta order-price action">
+                    <button type="button" class="btn" [routerLink]='["/seller/products", product.id]'>
+                        <i class="fas fa-edit" style="color: rgb(0, 0, 0); font-size: 25px; margin-top: 13px;"></i>
+                    </button>
+                </ul>
             </div>
             <div>
-                <h1><hr></h1>
+                <h1>
+                    <hr>
+                </h1>
             </div>
-          </div>
-          
+        </div>
+
     </div>
-    
 
     <div class="container-fluid card-footer">
-        <page-controller [page]="page" [size]="size" [totalPages]="totalPages" [items]="items"  (change)="onPageControllerChange($event)"> </page-controller>
-    </div> -->
+        <page-controller [page]="page" [size]="size" [totalPages]="totalPages" [items]="items"
+            (change)="onPageControllerChange($event)"> </page-controller>
+    </div>
     <!-- End inventory -->
-
-  
-<!-- <div class="table-responsive">
-    <table class="table v-middle table-striped table-hover" id="myTable">
-        <thead class="table-dark text-light">
-            <tr class="bg-dark">
-            <th class="border-top-0" style="color: rgb(187, 151, 93)">#</th>
-            <th class="border-top-0" style="color: white">Image</th>
-            <th class="border-top-0" style="color: white">Name</th>
-            <th class="border-top-0" style="color: white">&nbsp; Price</th>
-            <th class="border-top-0" style="color: white">Quantity</th>
-            <th class="border-top-0" style="color: white">Subcategory</th>
-            <th class="border-top-0" style="color: white">Sale</th>
-            <th class="border-top-0" style="color: white" colspan="2">&nbsp; &nbsp; Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let product of products">
-                <td>{{ product.id }}</td>
-                <td>
-                    <div class="d-flex align-items-center m-r-10">
-                        <img class="btn btn-circle d-flex btn-info text-white" style="padding: 1px"
-                            [src]="product.img" width="60px" height="60px"
-                            class="rounded-circle" alt="product"/>
-                    </div>
-                </td>
-                <td>
-                    <div class="d-flex align-items-center">
-                        <div class="">
-                            <h4 class="m-b-0 font-16">
-                                {{ product.name }}
-                            </h4>
-                        </div>
-                    </div>
-                </td>
-                <td class="justify-content-center">
-                    {{product.price | currency:'USD'}}
-                </td>
-                <td>
-                    {{product.quantity}}
-                </td>
-                <td>
-                    {{product.subcategoryName}}
-                </td>
-                <td>
-                    {{product.onSale  | booleanTarget}}
-                </td>
-                <td>
-                     <button type="button" class="btn" [routerLink]='["/seller/products", product.id]'>
-                        <i class="fas fa-edit" style="color: green;"></i>
-                    </button> 
-
-                    <button type="button" class=" btn">
-                        <i class="fas fa-trash-alt" style="color: red;"></i>
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-<div class="container-fluid card-footer">
-
-  
-  <page-controller [page]="page" [size]="size" [totalPages]="totalPages" [items]="items"  (change)="onPageControllerChange($event)"> </page-controller>
-</div> -->
-
-
-

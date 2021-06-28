@@ -23,6 +23,7 @@ import { NgToggleModule } from 'ng-toggle-button';
 import { ProductDetailsComponent } from './product-details/product-details/product-details.component';
 import { PageControllerComponent } from './page-controller/page-controller.component';
 import { PaginationControlsComponent } from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 
@@ -44,7 +45,7 @@ import { PaginationControlsComponent } from 'ngx-pagination';
   imports: [
     CommonModule, FormsModule,
     ReactiveFormsModule, RouterModule, HttpClientModule,
-    ToastrModule.forRoot(), SlickCarouselModule, NgToggleModule,
+    ToastrModule.forRoot(), SlickCarouselModule, NgToggleModule, Ng2SearchPipeModule,
   ],
   exports: [
     MenuComponent, MaxLengthPipe, FormsModule,
@@ -54,7 +55,7 @@ import { PaginationControlsComponent } from 'ngx-pagination';
     LineChartComponent, PieChartComponent,
     SellerOrderListComponent, SharedFooterComponent,
     NgToggleModule, ProductDetailsComponent,
-    PageControllerComponent,
+    PageControllerComponent, Ng2SearchPipeModule,
     
   ],
   providers: [ToastrService],

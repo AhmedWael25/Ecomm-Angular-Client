@@ -6,6 +6,7 @@ import { SellerService } from './../../../services/seller.service';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -28,11 +29,14 @@ export class InventoryComponent implements OnInit {
   products : SellerProduct[];
   subscription : Subscription ;
 
-
   productId: number;
 
-  constructor(private _sellerApi:SellerService , private _activatedRoute:ActivatedRoute,
-    private _authService:AuthService) {
+  searchName: string;
+
+  constructor(private _sellerApi:SellerService,
+              private _activatedRoute:ActivatedRoute,
+              private _authService:AuthService,
+              ) {
   }
 
   ngOnInit(): void {
@@ -64,7 +68,6 @@ export class InventoryComponent implements OnInit {
         for(let i=1; i<= this.totalPages; i++){
           this.items.push(i);
         }
-
 
      }else {
 
