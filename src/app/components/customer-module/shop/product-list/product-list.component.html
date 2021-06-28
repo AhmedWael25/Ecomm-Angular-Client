@@ -42,17 +42,6 @@
           </div>
         </div>
 
-                <div class="filter-style-2">
-                    <div class="filter-title">
-                        <a class="title" data-bs-toggle="collapse" href="#pricingOne" role="button"
-                            aria-expanded="false">Pricing Range</a>
-                    </div>
-                    <div id="pricingOne" class="filter-btn">
-                        <ngx-slider [(value)]="minPrice" [(highValue)]="maxPrice" [options]="options"></ngx-slider>
-                    </div>
-                </div>
-
-
         <div class="filter-style-8">
           <div class="filter-title">
             <a class="title" data-bs-toggle="collapse" href="#category" role="button"
@@ -115,16 +104,19 @@
                 currentPage: page,
                 totalItems: totalElements} ; let i = index">
                 <div class="product-style-4 mt-30 prod-container">
-                  <div class="product-image prod-img"  style='background-image: url("{{product.productImg}}");cursor: pointer;'>
+                  <div class="product-image prod-img"
+                    style='background-image: url("{{product.productImg}}");cursor: pointer;'>
                     <div class="product-item active">
 
                     </div>
-                    <a class="add-wishlist" href="javascript:void(0)" *ngIf="!isProductInWishlist(product?.id)" (click)="addToWishlist(product.id)">
-                        <i  class="fa fa-heart" style="color: grey;"></i>
+                    <a class="add-wishlist" href="javascript:void(0)" *ngIf="!isProductInWishlist(product?.id)"
+                      (click)="addToWishlist(product.id)">
+                      <i class="fa fa-heart" style="color: grey;"></i>
                     </a>
-                    <a class="add-wishlist" href="javascript:void(0)" *ngIf="isProductInWishlist(product?.id)" (click)="deleteFromWishlist(product.id)">
-                      <i  class="fa fa-heart" style="color: red;"></i>
-                  </a>
+                    <a class="add-wishlist" href="javascript:void(0)" *ngIf="isProductInWishlist(product?.id)"
+                      (click)="deleteFromWishlist(product.id)">
+                      <i class="fa fa-heart" style="color: red;"></i>
+                    </a>
                   </div>
                   <div class="product-content mt-10">
                     <h4 class="title"><a [routerLink]="['/shop', product.id]">{{product.productName}}</a></h4>
@@ -133,7 +125,7 @@
                       <span class="price">{{product.productPrice | currency:'USD'}}</span>
 
                       <a href="javascript:void(0)" (click)="addToCart(i, $event)" class="main-btn secondary-1-btn"> <img
-                        src="assets/images/icon-svg/cart-4.svg" alt=""> Add to Cart</a>
+                          src="assets/images/icon-svg/cart-4.svg" alt=""> Add to Cart</a>
                     </div>
 
                   </div>
@@ -143,7 +135,7 @@
             </div>
           </div>
           <!--Including the pagination control.-->
-          <div  class="text-center mt-20" *ngIf="totalElements != 0;">
+          <div class="text-center mt-20" *ngIf="totalElements != 0;">
             <pagination-controls class="pagi" (pageChange)="setPage((page = $event))">
             </pagination-controls>
           </div>

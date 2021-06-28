@@ -18,6 +18,8 @@ import { ProductHomeComponent } from './shop/product-home/product-home.component
 import { CheckoutComponent } from './checkout/checkout.component';
 import { PaypalComponent } from './paypal/paypal.component';
 import { CheckoutProtectionGuard } from 'src/app/guards/checkout-protection.guard';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 
 const routes: Routes = [
@@ -84,6 +86,10 @@ const routes: Routes = [
       role : "ROLE_CUSTOMER",
     }
   },
+  {
+    path:"contact",
+    component:ContactUsComponent
+  }
 ];
 
 @NgModule({
@@ -95,6 +101,7 @@ const routes: Routes = [
     WishlistComponent,
     CheckoutComponent,
     PaypalComponent,
+    ContactUsComponent
   ],
   imports: [
     CommonModule,
