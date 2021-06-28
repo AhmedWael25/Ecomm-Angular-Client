@@ -90,13 +90,14 @@ export class ProductListComponent implements OnInit {
     }
 
     this.isLoading = true;
+    this.name = "";
     this.page = 1;
     this.minPrice = 0;
+    this.maxPrice = 10000;
 
+    this.checkedSubcategories.clear();
     this.getProducts();
     this.getCategories();
-
-    this.maxPrice = 10000;
   }
 
   resetFilter() {
@@ -123,10 +124,13 @@ export class ProductListComponent implements OnInit {
         this.totalPages = data.totalPages;
         this.totalElements = data.totalElements;
         this.updatePriceSlider(data);
+        this.isLoading = false;
       }
+
     );
   }
   updatePriceSlider(data: any) {
+    this.maxPrice = data.maxPrice;
     this.options = {
       floor: 0,
       ceil: data.maxPrice,
@@ -161,9 +165,11 @@ export class ProductListComponent implements OnInit {
   }
 
   setPage(page: number) {
+    this.isLoading = true;
     this.page = page;
 
     this.getProducts();
+
   }
 
   doFilter() {
