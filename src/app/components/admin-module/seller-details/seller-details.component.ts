@@ -125,4 +125,21 @@ export class SellerDetailsComponent implements OnInit {
     return total;
   }
 
+  orderTotal(order:SellerOrder){
+    
+    let sum:number = 0;
+    order.items.forEach(e => {
+      sum += e.price * e.quantity;
+    })
+    return sum;
+  }
+
+
+  totalProfit(orders:SellerOrder[]){
+    let sum:number = 0;
+    orders.forEach(order => {
+      sum +=  this.orderTotal(order);
+    });
+    return sum;
+  }
 }

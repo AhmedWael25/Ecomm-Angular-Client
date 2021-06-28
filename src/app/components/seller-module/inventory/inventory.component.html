@@ -47,10 +47,11 @@
                     {{product.onSale  | booleanTarget}}
                 </td>
                 <td>
-                    <button [routerLink]='["/seller/products", product.id]'>
-                        <i class="fas fa-edit"></i>
-                    </button> &nbsp; &nbsp;
-                    <button>
+                     <button type="button" class="btn" [routerLink]='["/seller/products", product.id]'>
+                        <i class="fas fa-edit" style="color: green;"></i>
+                    </button> &nbsp; &nbsp; 
+
+                    <button type="button" class=" btn">
                         <i class="fas fa-trash-alt" style="color: red;"></i>
                     </button>
                 </td>

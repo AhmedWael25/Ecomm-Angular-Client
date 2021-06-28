@@ -46,7 +46,7 @@
               </div>
               <hr>
             </div>
-            
+
             <div class="col-md-6 col-sm-6">
               <div class="single-card-info d-flex">
                 <div class="card-icon">
@@ -82,36 +82,53 @@
 
     </div>
 
-    <div class="card-header" style="background-color: black;">
-      <h3 class="title" style="color: white; text-align: center;">
-        Charts
-        <i class="fas fa-chart-bar"></i>
-      </h3>
+
+
+
+    <div class="row justify-content-center mt-20 mb-20">
+
+      <div class="card-header" style="background-color: black;">
+        <h3 class="title" style="color: white; text-align: center;">
+          Products Charts
+          <i class="fas fa-chart-bar"></i>
+        </h3>
+      </div>
+
+
+      <div class="col-lg-6" style="margin: auto;">
+        <app-line-chart [label]="'Profit $'" [data]="dailyProfitBarChartData" [title]="'Daily Profits'">
+        </app-line-chart>
+      </div>
+     
+      
+      <div class="col-lg-6">
+        <app-pie-chart [id] [label]="'Qty'" [data]="quantityPerItemPieChartData" [title]="'#Qty Sold Per Item'">
+        </app-pie-chart>
+      </div>
+     
+
+      <hr>
+      <div class="card-header" style="background-color: black;">
+        <h3 class="title" style="color: white; text-align: center;">
+          Profits Charts
+          <i class="fas fa-chart-bar"></i>
+        </h3>
+      </div>
+
+
+      <div class="col-lg-6">
+        <app-pie-chart [label]="'Qantity'" [data]="profitPerSellerPieChartData" [title]="'#Profit $ Per Seller'">
+        </app-pie-chart>
+      </div>
+
+      
+      <div class="col-lg-6">
+        <app-pie-chart [id] [label]="'Qty'" [data]="soldPerSellerPieChartData" [title]="'#Sold Per Seller'">
+        </app-pie-chart>
+      </div>
+
     </div>
-    <hr>
-
-    <div class="col-lg-6">
-
-      <app-pie-chart [label]="'Qantity'" [data]="profitPerSellerPieChartData"
-        [title]="'#Qantity Sold of each sold product'"></app-pie-chart>
-
-    </div>
-    <div class="col-lg-6" style="margin: auto;">
-
-      <app-line-chart [label]="'Profit $'" [data]="dailyProfitBarChartData" [title]="'Daily Profits'"></app-line-chart>
-
-    </div>
-
   </div>
-  <div class="row justify-content-center mt-20 mb-20">
 
-    <div class="col-lg-6">
-
-      <app-pie-chart [id] [label]="'Qty'" [data]="soldPerSellerPieChartData" [title]="'#Sold Per Seller'">
-      </app-pie-chart>
-
-    </div>
-    
-  </div>
   <hr>
 </div>

@@ -17,6 +17,9 @@ export class AdminChartsComponent implements OnInit {
   isLoading:boolean = false;
 
   isError: boolean = false;
+
+  chartData:Array<Map<any,any>> = [];
+
   dailyProfitBarChartData: Map<string, number> = new Map();
   quantityPerItemPieChartData: Map<string, number> = new Map();
   soldPerSellerPieChartData:Map<string, number> = new Map();
