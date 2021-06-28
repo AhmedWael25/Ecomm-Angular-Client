@@ -4,7 +4,44 @@
         <img src="assets/images/inventory.png" alt="Card">
     </div>
 </h1>
-<div class="table-responsive">
+<!-- Begin inventory -->
+<div class="profile-footer mt-45">
+    <div class="row">
+        <div class="col-lg-6" *ngFor="let product of products; let i = index">
+            <div class="single-order">
+              <h4 class="order-id">
+                <img style="cursor: pointer; width: 60px; height: 60px;" class="wishlist-img" [src]="product.img"
+                  alt="Product"> &nbsp; &nbsp;
+                <b>{{product.name}}</b>
+              </h4> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              <b style="color: black;">Price: </b><b class="badge bg-primary-1 rounded-pill">{{product.price | currency:'USD'}}</b> &nbsp; &nbsp;
+              <b style="color: black;">Quantity: </b><b class="badge bg-primary-1 rounded-pill">{{product.quantity}}</b> &nbsp; &nbsp;
+              <b style="color: black;">Subcategory: </b><b class="badge bg-primary-1 rounded-pill">{{product.subcategoryName}}</b> &nbsp; &nbsp;
+      
+              <b class="badge bg-success rounded-pill" *ngIf='product.onSale'>on sale</b>
+              <b class="badge bg-danger rounded-pill" *ngIf='!product.onSale'>no sale</b>
+      
+              <ul class="order-meta order-price action">
+                  <button type="button" class="btn" [routerLink]='["/seller/products", product.id]'>
+                      <i class="fas fa-edit" style="color: rgb(0, 0, 0); font-size: 25px; margin-top: 13px;"></i>
+                  </button> 
+              </ul>
+            </div>
+            <div>
+                <h1><hr></h1>
+            </div>
+          </div>
+          
+    </div>
+    
+
+    <div class="container-fluid card-footer">
+        <page-controller [page]="0" [size]="10" (change)="onPageControllerChange($event)"> </page-controller>
+    </div> -->
+    <!-- End inventory -->
+
+  
+<!-- <div class="table-responsive">
     <table class="table v-middle table-striped table-hover" id="myTable">
         <thead class="table-dark text-light">
             <tr class="bg-dark">
@@ -64,6 +101,4 @@
 </div>
 <div class="container-fluid card-footer">
   <page-controller [page]="0" [size]="10" (change)="onPageControllerChange($event)"> </page-controller>
-</div>
-
-
+</div> -->
