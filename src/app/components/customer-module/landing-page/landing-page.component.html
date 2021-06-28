@@ -54,7 +54,7 @@
             >
               <div class="header-item-content">
                 <h3 class="title">XBOX Series X</h3>
-                <a href="shop/prod-detail?prodId=16" class="link" >Check it out NOW!</a
+                <a routerLink="/shop" class="link" >Check it out NOW!</a
                 >
               </div>
             </div>
@@ -67,7 +67,7 @@
                   The New Dystopian Future CYBERPUNK 2077, is here make sure to
                   grab it
                 </h3>
-                <a href="shop?cat=2" class="link">check our latest games</a>
+                <a  routerLink="/shop" class="link">check our latest games</a>
               </div>
             </div>
             <div
@@ -79,7 +79,7 @@
             >
               <div class="header-item-content">
                 <h3 class="title">the powerful PS5 is here ,grab it !</h3>
-                <a href="shop/prod-detail?prodId=15" class="link"
+                <a  routerLink="/shop" class="link"
                   >Very limited supply
                 </a>
               </div>
@@ -93,7 +93,7 @@
             >
               <div class="header-item-content">
                 <h3 class="title">XBOX Series X</h3>
-                <a href="shop/prod-detail?prodId=16" class="link"
+                <a  routerLink="/shop" class="link"
                   >Check it out NOW!</a
                 >
               </div>
@@ -109,7 +109,7 @@
                   The New Dystopian Future CYBERPUNK 2077, is here make sure to
                   grab it
                 </h3>
-                <a href="shop?cat=2" class="link">check our latest games</a>
+                <a  routerLink="/shop" class="link">check our latest games</a>
               </div>
             </div>
           </div>
@@ -167,13 +167,13 @@
           </div>
           <div class="content-card-content">
             <h4 class="title">
-              <a [routerLink]="['/shop', 2]">Replacement Controller</a>
+              <a routerLink="/shop">Replacement Controller</a>
             </h4>
             <p>
               A replacement for the Oculus Go controller. Only one controller
               can be synced.
             </p>
-            <a [routerLink]="['/shop', 2]" class="main-btn primary-btn"
+            <a routerLink="/shop" class="main-btn primary-btn"
               ><img src="assets/images/icon-svg/cart-4.svg" alt="" /> BUY</a
             >
           </div>
@@ -186,13 +186,13 @@
           </div>
           <div class="content-card-content">
             <h4 class="title">
-              <a [routerLink]="['/shop', 2]">Fitted Interface</a>
+              <a routerLink="/shop">Fitted Interface</a>
             </h4>
             <p>
               A replacement for the Oculus Go controller. Only one controller
               can be synced.
             </p>
-            <a [routerLink]="['/shop', 2]" class="main-btn primary-btn"
+            <a routerLink="/shop" class="main-btn primary-btn"
               ><img src="assets/images/icon-svg/cart-4.svg" alt="" /> BUY</a
             >
           </div>
@@ -205,14 +205,14 @@
           </div>
           <div class="content-card-content">
             <h4 class="title">
-              <a [routerLink]="['/shop', 2]">Oculus Go Case</a>
+              <a routerLink="/shop">Oculus Go Case</a>
             </h4>
             <p>
               A replacement for the Oculus Go controller. Only one controller
               can be synced.
             </p>
 
-            <a [routerLink]="['/shop', 2]" class="main-btn primary-btn"
+            <a routerLink="/shop" class="main-btn primary-btn"
               ><img src="assets/images/icon-svg/cart-4.svg" alt="" /> BUY</a
             >
           </div>
@@ -262,9 +262,9 @@
               <img src="assets/images/express-delivery.png" alt="Card" />
             </div>
             <br />
-            <h4 class="title"><a href="aboutus">Two-hour delivery</a></h4>
+            <h4 class="title"><a routerLink="/contact">Two-hour delivery</a></h4>
             <p>Available in most metros on selected in-stock products</p>
-            <a href="aboutus" class="more">learn more</a>
+            <a routerLink="/contact" class="more">learn more</a>
           </div>
         </div>
       </div>
@@ -278,12 +278,12 @@
               <img src="assets/images/chat.png" alt="Card" />
             </div>
             <br />
-            <h4 class="title"><a href="contactus">Get help buying</a></h4>
+            <h4 class="title"><a routerLink ="/contact">Get help buying</a></h4>
             <p>Have a question? Call a Specialist or chat online for help</p>
-            <a href="contactus" class="more">Contact us</a>
+            <a routerLink="/contact" class="more">Contact us</a>
           </div>
         </div>
-      </div>
+      </div> 
       <div class="col-lg-4 col-md-7 col-sm-8">
         <div class="single-content mt-15 text-center">
           <div class="content-icon">
@@ -294,9 +294,9 @@
               <img src="assets/images/offer.png" alt="Card" />
             </div>
             <br />
-            <h4 class="title"><a href="aboutus">Find the card for you</a></h4>
+            <h4 class="title"><a routerLink="/contact">Find the card for you</a></h4>
             <p>Get 3% Daily Cash with special financing offers from us</p>
-            <a href="aboutus" class="more">learn more</a>
+            <a routerLink="/contact" class="more">learn more</a>
           </div>
         </div>
       </div>
@@ -332,7 +332,7 @@
               </li>
             </ul>
             <h4 class="title">
-              <a [routerLink]="['/shop', 1]">{{
+              <a [routerLink]="['/shop', featuredProduct1.id ]">{{
                 featuredProduct1.productName
               }}</a>
             </h4>
@@ -537,7 +537,7 @@
 
               <div class="product-btn">
                 <a
-                  [routerLink]="['/shop', oculus.id]"
+                  routerLink="/shop"
                   class="main-btn secondary-1-btn"
                   ><img src="assets/images/icon-svg/cart-8.svg" alt="" /> Buy
                   Now</a

@@ -19,6 +19,8 @@ import { LineChartComponent } from './line-chart/line-chart.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
 import { SellerOrderListComponent } from './seller-order-list/seller-order-list.component';
 import { SharedFooterComponent } from './shared-footer/shared-footer.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 
 
@@ -27,7 +29,7 @@ import { SharedFooterComponent } from './shared-footer/shared-footer.component';
 @NgModule({
   declarations: [
      MenuComponent
-    ,MaxLengthPipe,AllowCharOnlyDirective, FooterComponent, PageNotFoundComponent, LoginComponent, LoaderSpinnerComponent, ProfileComponent, RecommendedComponent, LogoutComponent, LineChartComponent, PieChartComponent, SellerOrderListComponent, SharedFooterComponent
+    ,MaxLengthPipe,AllowCharOnlyDirective, FooterComponent, PageNotFoundComponent, LoginComponent, LoaderSpinnerComponent, ProfileComponent, RecommendedComponent, LogoutComponent, LineChartComponent, PieChartComponent, SellerOrderListComponent, SharedFooterComponent, AboutUsComponent, ContactUsComponent
   ],
   imports: [
   CommonModule,FormsModule,
