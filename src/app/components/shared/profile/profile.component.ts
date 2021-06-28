@@ -48,7 +48,7 @@ export class ProfileComponent implements OnInit {
           Validators.maxLength(30),
         ]),
         phone: new FormControl(this._userData.phone, [
-          Validators.pattern("01[0-9]+"),
+          Validators.pattern("^01[0-9]+$"),
           Validators.required,
           Validators.minLength(11),
           Validators.maxLength(11),
@@ -60,6 +60,7 @@ export class ProfileComponent implements OnInit {
     this._wishlistService.getCustomerWishList().subscribe(
       resp => {
         this.wishlist = resp.data;
+        console.log(this.wishlist);
       },
       err => {
         console.log(err);

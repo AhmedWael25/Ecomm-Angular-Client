@@ -167,8 +167,8 @@
                     <i class="fas fa-star" style="color: yellow;"></i>
                     {{item.rating}} / 5
                   </b> &nbsp; &nbsp;
-                  <b class="badge bg-success rounded-pill" *ngIf='item.isOnSale'>on sale</b>
-                  <b class="badge bg-danger rounded-pill" *ngIf='!item.isOnSale'>no sale</b>
+                  <b class="badge bg-success rounded-pill" *ngIf='item.onSale'>on sale</b>
+                  <b class="badge bg-danger rounded-pill" *ngIf='!item.onSale'>no sale</b>
 
                   <ul class="order-meta order-price action">
                     <li id="actions-{{i}}">
