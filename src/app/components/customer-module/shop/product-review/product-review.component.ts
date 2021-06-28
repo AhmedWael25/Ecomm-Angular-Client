@@ -22,15 +22,6 @@ export class ProductReviewComponent implements OnInit {
   totalRating: number = 0;
   public form: FormGroup;
 
-  onSubmit() {
-    console.log(this.form.value);  // { first: '', last: '' }
-    console.log(this.form.valid);  // false
-    console.log(this.form.value.review);
-    this.form.controls['review'].setValue('');
-    this.form.controls['rating'].setValue('');
-
-  }
-
   public maxSize: number = 7;
   public directionLinks: boolean = true;
   public autoHide: boolean = false;
@@ -81,7 +72,8 @@ export class ProductReviewComponent implements OnInit {
             this.ratingPercentages[index] = 0;
           }
         }
-        this.totalRating = (Math.round((this.totalStars / (this.reviews.length * 5) + Number.EPSILON) * 10) / 10) * 5;
+        this.totalRating = this.totalStars == 0 ? 0 :
+          (Math.round((this.totalStars / (this.reviews.length * 5) + Number.EPSILON) * 10) / 10) * 5;
       }
     );
   }
