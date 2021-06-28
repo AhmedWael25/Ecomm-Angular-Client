@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ProductReview } from 'src/app/models/product/ProductReview';
 import { AuthService } from 'src/app/services/auth.service';
 import { CustomerService } from 'src/app/services/customer.service';
@@ -38,7 +39,8 @@ export class ProductReviewComponent implements OnInit {
     private _authService: AuthService,
     private _notificationService: NotificationService,
     private _customerService: CustomerService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private _router:Router) {
     this.form = this.fb.group({
       rating: ['', Validators.required],
       review: ['', Validators.required],
@@ -83,6 +85,21 @@ export class ProductReviewComponent implements OnInit {
   }
 
   addReview() {
+
+
+    let isCustomer = this._authService.isCustomer();
+    let isAuth = this._authService.isAuthenticated();
+
+    if(!isAuth){
+      this._router.navigateByUrl("/login");
+      return;
+    }
+    if(!isCustomer){
+      this._router.navigateByUrl("/logout");
+      return;
+    }
+
+
     let productReview: ProductReview = new ProductReview();
 
     if (this.form.valid) {
