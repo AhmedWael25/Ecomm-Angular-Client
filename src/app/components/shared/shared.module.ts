@@ -21,6 +21,8 @@ import { SellerOrderListComponent } from './seller-order-list/seller-order-list.
 import { SharedFooterComponent } from './shared-footer/shared-footer.component';
 import { NgToggleModule } from 'ng-toggle-button';
 import { ProductDetailsComponent } from './product-details/product-details/product-details.component';
+import { PageControllerComponent } from './page-controller/page-controller.component';
+import { PaginationControlsComponent } from 'ngx-pagination';
 
 
 
@@ -37,12 +39,12 @@ import { ProductDetailsComponent } from './product-details/product-details/produ
     LogoutComponent, LineChartComponent,
     PieChartComponent, SellerOrderListComponent,
     SharedFooterComponent, ProductDetailsComponent,
+    PageControllerComponent,
   ],
   imports: [
     CommonModule, FormsModule,
     ReactiveFormsModule, RouterModule, HttpClientModule,
     ToastrModule.forRoot(), SlickCarouselModule, NgToggleModule,
-
   ],
   exports: [
     MenuComponent, MaxLengthPipe, FormsModule,
@@ -52,6 +54,8 @@ import { ProductDetailsComponent } from './product-details/product-details/produ
     LineChartComponent, PieChartComponent,
     SellerOrderListComponent, SharedFooterComponent,
     NgToggleModule, ProductDetailsComponent,
+    PageControllerComponent,
+    
   ],
   providers: [ToastrService],
 

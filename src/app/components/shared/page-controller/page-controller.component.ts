@@ -1,19 +1,16 @@
 import { Component, Input, OnInit ,Output,EventEmitter} from '@angular/core';
 
 
-export interface PageControllerChangeArgs{
 
-  page : number ;
-  size : number ;
-
-}
 
 export interface PageControllerChangeArgs{
 
   page : number ;
   size : number ;
+  totalPages : number ;
 
 }
+
 
 @Component({
   selector: 'page-controller',
@@ -22,9 +19,12 @@ export interface PageControllerChangeArgs{
 })
 export class PageControllerComponent implements OnInit {
 
+  // items: number[];
 
   @Input("page") page:number;
   @Input("size") size:number;
+  @Input("items") items:number[];
+  @Input("totalPages")  totalPages: number;
   @Output("change")  change = new EventEmitter();
 
 
@@ -32,9 +32,11 @@ export class PageControllerComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-  }
 
-  increasePage():void{
+
+}
+
+  /* increasePage():void{
 
     ++this.page;
     this.change.emit(
@@ -60,7 +62,7 @@ export class PageControllerComponent implements OnInit {
       }
     );
 
-  }
+  } */
 
 
 
@@ -69,12 +71,24 @@ export class PageControllerComponent implements OnInit {
       this.size = val ;
       console.log(val);
 
-      this.change.emit(
-        {
-          page : this.page ,
-          size : this.size
-        }
-      );
+      this.change.emit({
+        page : 0 ,
+        size : this.size,
+        totalPages : this.totalPages
+      });
+
+  }
+
+  setPage(page:number) : void {
+
+    this.page = page;
+
+
+    this.change.emit( {
+        page : this.page ,
+        size : this.size ,
+        totalPages : this.totalPages
+      } );
   }
 
 }

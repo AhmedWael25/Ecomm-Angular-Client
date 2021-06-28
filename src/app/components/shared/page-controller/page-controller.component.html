@@ -1,8 +1,44 @@
 
 <div class="container-fluid ">
   <div class="row d-flex justify-content-center">
-    <div class="col-md-6 col-lg-3">
-      <span>
+
+    <div class="col-5 row-md-3 col-md-6 col-sm-6 col-lg-6  d-flex justify-content-right">
+      <ul *ngIf="items && items.length" class="pagination">
+         <li [ngClass]="{disabled: page === 0}" class="page-item first-item">
+             <a (click)="setPage(0)" class="page-link">First</a>
+         </li>
+         <li [ngClass]="{disabled: page === 0}" class="page-item previous-item">
+             <a (click)="setPage(page - 1)" class="page-link">Previous</a>
+         </li>
+         <li *ngFor="let item of items" [ngClass]="{active:page === item-1}" class="page-item number-item">
+             <a (click)="setPage(item-1)" class="page-link">{{item}}</a>
+         </li>
+         <li [ngClass]="{disabled: page === totalPages-1}" class="page-item next-item">
+             <a (click)="setPage(page + 1)" class="page-link">Next</a>
+         </li>
+         <li [ngClass]="{disabled: page === totalPages-1}" class="page-item last-item">
+             <a (click)="setPage(totalPages-1)" class="page-link">Last</a>
+         </li>
+       </ul>
+      </div>
+      <div class="d-flex justiy-content-center col-md-6 col-sm-6 col-lg-6">
+
+        <label class="row-md-3 col-lg-3 col-lg-3">
+         Page Size:
+        </label>
+
+        <select class="form-select form-select-sm row-md-2 col-lg-2 page-item number-item" (change)="updateSize(pageSize.value)" #pageSize>
+          <option selected value="10" >10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+        </select>
+
+      </div>
+
+
+
+    <!-- <div class="col-md-6 col-lg-3">
+      <span class="page-item number-item">
         Page:
         <button (click)="decreasePage()" class="btn btn-defualt btn-sm" > << </button>
         {{page+1}}
@@ -16,14 +52,14 @@
          Page Size:
         </label>
 
-        <select class="form-select form-select-sm row-md-3 col-lg-3" (change)="updateSize(pageSize.value)" #pageSize>
+        <select class="form-select form-select-sm row-md-3 col-lg-3 page-item number-item" (change)="updateSize(pageSize.value)" #pageSize>
           <option selected value="10" >10</option>
           <option value="15">15</option>
           <option value="20">20</option>
         </select>
 
       </div>
-    </div>
+    </div> -->
   </div>
 
 </div>

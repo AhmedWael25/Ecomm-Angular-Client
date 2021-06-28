@@ -82,7 +82,6 @@ const routes: Routes = [
     InventoryComponent,
     SellerRegisterComponent,
     SellerRegisterComponent,
-    PageControllerComponent,
     BooleanTargetPipe,
     SellerChartComponent,
   ],

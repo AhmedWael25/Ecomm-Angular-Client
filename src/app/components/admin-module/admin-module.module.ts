@@ -13,6 +13,7 @@ import { AdminChartsComponent } from './admin-charts/admin-charts.component';
 import { ProductDetailsComponent } from '../shared/product-details/product-details/product-details.component';
 import { SellerAuthGuard } from 'src/app/guards/seller-auth.guard';
 import { ProductListComponent } from './product-list/product-list/product-list.component';
+import { PageControllerComponent } from '../shared/page-controller/page-controller.component';
 
 
 

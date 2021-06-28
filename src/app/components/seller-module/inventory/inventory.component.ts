@@ -14,8 +14,12 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./inventory.component.css']
 })
 export class InventoryComponent implements OnInit {
+
   PAGE:number = 0 ;
   SIZE:number = 10 ;
+  totalPages : number = 0;
+  totalElements : number = 0;
+  items:number[] = [] ;
 
   page : number = this.PAGE ;
   size : number = this.SIZE ;
@@ -52,6 +56,15 @@ export class InventoryComponent implements OnInit {
      if(response.httpCode==200){
 
        this.products = response.data;
+
+       this.totalElements = response.totalElements;
+       this.totalPages = response.totalPages;
+
+        this.items.splice(0);
+        for(let i=1; i<= this.totalPages; i++){
+          this.items.push(i);
+        }
+
 
      }else {
 
