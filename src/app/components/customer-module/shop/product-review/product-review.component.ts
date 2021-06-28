@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ProductReview } from 'src/app/models/product/ProductReview';
 import { AuthService } from 'src/app/services/auth.service';
+import { CustomerService } from 'src/app/services/customer.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -21,6 +22,15 @@ export class ProductReviewComponent implements OnInit {
   totalRating: number = 0;
   public form: FormGroup;
 
+  onSubmit() {
+    console.log(this.form.value);  // { first: '', last: '' }
+    console.log(this.form.valid);  // false
+    console.log(this.form.value.review);
+    this.form.controls['review'].setValue('');
+    this.form.controls['rating'].setValue('');
+
+  }
+
   public maxSize: number = 7;
   public directionLinks: boolean = true;
   public autoHide: boolean = false;
@@ -35,10 +45,12 @@ export class ProductReviewComponent implements OnInit {
 
   constructor(private _productService: ProductService,
     private _authService: AuthService,
-    private _notificationService:NotificationService,
+    private _notificationService: NotificationService,
+    private _customerService: CustomerService,
     private fb: FormBuilder) {
     this.form = this.fb.group({
       rating: ['', Validators.required],
+      review: ['', Validators.required],
     })
   }
 
@@ -53,6 +65,7 @@ export class ProductReviewComponent implements OnInit {
       data => {
         this.reviews = data.data;
         this.totalElements = data.totalElements;
+        this.totalStars = 0;
 
         for (let index = 0; index < this.ratingPercentages.length; index++) {
           let count = this.reviews.filter(function (item) {
@@ -61,29 +74,27 @@ export class ProductReviewComponent implements OnInit {
 
           this.totalStars += count * (index + 1);
 
-          if(count > 0) {
+          if (count > 0) {
             let percentage = Math.round(((count / this.totalElements * 100) + Number.EPSILON) * 10) / 10;
             this.ratingPercentages[index] = percentage;
           } else {
             this.ratingPercentages[index] = 0;
           }
         }
-        this.totalRating = Math.round((this.totalStars / (this.reviews.length * 5) + Number.EPSILON) * 10) / 10;
-
-        console.log(this.totalRating);
+        this.totalRating = (Math.round((this.totalStars / (this.reviews.length * 5) + Number.EPSILON) * 10) / 10) * 5;
       }
     );
   }
-  
+
   onPageChange(event) {
     this.p = event;
   }
 
-  addReview(text: string) {
+  addReview() {
     let productReview: ProductReview = new ProductReview();
 
     productReview.productId = this.id;
-    productReview.reviewText = text;
+    productReview.reviewText = this.form.value.review;
     productReview.createdDate = new Date();
     productReview.userId = this._authService.getUserId();
     productReview.rating = this.form.valid ? this.form.value.rating : 0;
@@ -91,13 +102,14 @@ export class ProductReviewComponent implements OnInit {
 
     this._productService.addReview(this.id, productReview).subscribe(
       resp => {
-        this._notificationService.onSuccess(resp.message, 3000,"topRight");
+        this._notificationService.onSuccess(resp.message, 3000, "topRight");
         this.getReviews(this.id);
-        this.form.value.rating = 0;
+        this.form.controls['review'].setValue('');
+        this.form.controls['rating'].setValue('');
       },
       err => {
         let errMsg = err.error.message;
-        this._notificationService.onError(errMsg, 3000,"topRight");
+        this._notificationService.onError(errMsg, 3000, "topRight");
       },
     )
   }
