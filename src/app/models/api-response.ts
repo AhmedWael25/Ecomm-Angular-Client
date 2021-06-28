@@ -5,4 +5,5 @@ export class ApiResponse{
     message:string;
     totalPages?:number;
     totalElements?:number;
+    maxPrice?:number;
 }

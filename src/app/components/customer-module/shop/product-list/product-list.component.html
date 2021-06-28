@@ -37,11 +37,20 @@
               Range</a>
           </div>
           <div id="pricingOne" class="filter-btn">
-            <ngx-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"></ngx-slider>
+            <ngx-slider [(value)]="minPrice" [(highValue)]="maxPrice" [options]="options"></ngx-slider>
 
           </div>
         </div>
 
+                <div class="filter-style-2">
+                    <div class="filter-title">
+                        <a class="title" data-bs-toggle="collapse" href="#pricingOne" role="button"
+                            aria-expanded="false">Pricing Range</a>
+                    </div>
+                    <div id="pricingOne" class="filter-btn">
+                        <ngx-slider [(value)]="minPrice" [(highValue)]="maxPrice" [options]="options"></ngx-slider>
+                    </div>
+                </div>
 
 
         <div class="filter-style-8">

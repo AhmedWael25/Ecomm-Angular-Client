@@ -41,6 +41,7 @@
     "ng-toggle-button": "^0.1.7",
     "ngx-pagination": "^5.1.1",
     "ngx-slick-carousel": "^0.5.1",
+    "ngx-star-rating": "^2.0.2",
     "ngx-toastr": "^14.0.0",
     "rxjs": "~6.6.0",
     "slick-carousel": "^1.8.1",

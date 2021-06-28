@@ -16,7 +16,9 @@ import { WishListService } from 'src/app/services/wishlist.service';
 export class ProductDetailComponent implements OnInit {
 
   pageTitle: string = 'Product Detail';
-  product:Product;
+  product: Product;
+  isLoading:boolean = false;
+
 
   slideConfig = {
     "slidesToShow": 1,
@@ -38,13 +40,29 @@ export class ProductDetailComponent implements OnInit {
     private _authService:AuthService,
     private _router:Router ) { }
 
-    ngOnInit(): void {
-      this._activatedRoute.paramMap.subscribe(params => {
-        let id :number = +params.get('id');
-  
-        this._productService.getProductById(id).subscribe(response => {
+
+  ngOnInit(): void {
+    this._activatedRoute.paramMap.subscribe(params => {
+      let id: number = +params.get('id');
+
+      if( isNaN(+params.get('id')) ){
+        this._router.navigateByUrl("/404");
+        return;
+        }
+
+      this.isLoading = true;
+      this._productService.getProductById(id).subscribe(
+        response => {
           this.product = response.data;
           this.product.prodImages.push(this.product.productImg);
+        },
+        err => {
+          let errMsg = err.error.message;
+          this._router.navigate(['404']);
+          this._notificationService.onError(errMsg, 3000, "topRight");
+        },
+        () => {
+          this.isLoading = false;
         });
       });
     }
@@ -72,15 +90,11 @@ export class ProductDetailComponent implements OnInit {
         resp => {
           this._notificationService.onSuccess(resp.message, 3000,"topRight");
         },
-        err => {
+        err =>{
           let errMsg = err.error.message;
-          this._notificationService.onError(errMsg, 3000,"topRight");
-        },
-      )
-    }
-
-    addToWishlist(event){
-
-    }
+          this._notificationService.onError(errMsg, 3000, "topRight");
+        }
+      );
+  }
 
 }

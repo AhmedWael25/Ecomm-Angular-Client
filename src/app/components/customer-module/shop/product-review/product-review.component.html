@@ -1,117 +1,107 @@
 <!--====== Reviews Part Start ======-->
 
-<section class="reviews-wrapper pt-200 pb-200 ">
-    <div class="container">
-        <div class="reviews-style">
-            <div class="reviews-menu">
-                <ul class="nav">
-                    <li><a href="#0">Details</a></li>
-                    <li><a class="active" href="#0">Reviews</a></li>
-                </ul>
-            </div>
+<section class="reviews-wrapper pt-100 pb-200 ">
+  <div class="container">
+    <div class="reviews-style">
+      <div class="reviews-title">
+        <h4 class="title">Customer Reviews ({{totalElements}})</h4>
+      </div>
 
-            <div class="reviews-title">
-                <h4 class="title">Customer Reviews ({{totalElements}})</h4>
-            </div>
+      <div class="reviews-rating-wrapper row justify-content-center">
 
-            <div class="reviews-rating-wrapper flex-wrap">
-                <div class="reviews-rating-star">
-                    <p class="rating-review"><i class="mdi mdi-star"></i> <span>4.5</span> of 5</p>
+        <div class="col-lg-6">
 
-                    <div class="reviews-rating-bar" *ngFor="let rate of ratingPercentages; let i=index">
-                        <div class="single-reviews-rating-bar">
-                            <p class="value">{{i + 1}} Starts</p>
-                            <div class="rating-bar-inner">
-                                <div class="bar-inner" [style.width]="rate + '%'"></div>
-                            </div>
-                            <p class="percent">{{rate}}%</p>
-                        </div>
-                    </div>
+          <div class="reviews-rating-star">
+            <p class="rating-review"><i class="mdi mdi-star"></i> <span>{{totalRating}}</span> of 5</p>
+
+            <div class="reviews-rating-bar" *ngFor="let rate of ratingPercentages; let i=index">
+              <div class="single-reviews-rating-bar">
+                <p class="value">{{i + 1}} Starts</p>
+                <div class="rating-bar-inner">
+                  <div class="bar-inner" [style.width]="rate == NaN ? 0 : rate + '%'"></div>
                 </div>
-
-                <div class="reviews-rating-form">
-                    <div class="rating-star">
-                        <p>Click on star to review</p>
-                        <ul id="stars" class="stars">
-                            <li class="star" data-value='1'><i class="mdi mdi-star"></i></li>
-                            <li class="star" data-value='2'><i class="mdi mdi-star"></i></li>
-                            <li class="star" data-value='3'><i class="mdi mdi-star"></i></li>
-                            <li class="star" data-value='4'><i class="mdi mdi-star"></i></li>
-                            <li class="star" data-value='5'><i class="mdi mdi-star"></i></li>
-                        </ul>
-                    </div>
-                    <div class="rating-form">
-                        <form action="#">
-                            <div class="single-form form-default">
-                                <label>Write your Review</label>
-                                <div class="form-input">
-                                    <textarea placeholder="Your review here" #reviewText></textarea>
-                                    <i class="mdi mdi-message-text-outline"></i>
-                                </div>
-                            </div>
-                            <div class="single-rating-form flex-wrap">
-                                <div class="rating-form-file">
-                                    <div class="file">
-                                        <input type="file" id="file-1">
-                                        <label for="file-1"><i class="mdi mdi-camera"></i></label>
-                                    </div>
-                                    <div class="file">
-                                        <input type="file" id="file-1">
-                                        <label for="file-1"><i class="mdi mdi-attachment"></i></label>
-                                    </div>
-                                </div>
-                                <div class="rating-form-btn">
-                                    <button class="main-btn primary-btn" (click)="addReview(reviewText.value)">write a Review</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                <p class="percent">{{rate == NaN ? 0 : rate}}%</p>
+              </div>
             </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
 
-            <div class="reviews-comment">
-                <ul class="comment-items">
-                    <li>
-                        <div class="single-review-comment" *ngFor="let review of reviews | paginate: {itemsPerPage: 2,
+          <div class="reviews-rating-form" style="width: 100%;">
+            <form #f="ngForm" (ngSubmit)="addReview()" novalidate [formGroup]="form">
+              <ngx-star-rating formControlName="rating" [id]="'rating'"></ngx-star-rating>
+              <p></p>
+              <p></p>
+              <p>Rating: {{form.value.rating}}</p>
+
+              <div class="single-form form-default">
+                <div class="form-input">
+                  <textarea placeholder="Your review here" formControlName="review" [id]="'review'" ngModel
+                    maxlength="250" minlength="5"></textarea>
+                </div>
+              </div>
+              <div class="single-rating-form flex-wrap">
+                <div class="rating-form-btn">
+                  <button class="main-btn primary-btn">write a Review</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+        </div>
+
+
+
+      </div>
+
+      <div class="reviews-comment" *ngIf="reviews?.length > 0">
+        <ul class="comment-items">
+          <li>
+            <div class="single-review-comment" *ngFor="let review of reviews | paginate: {itemsPerPage: pageSize,
                             currentPage: p,
                             totalItems: this.totalElements}">
-                            <div class="comment-user-info">
-                                <div class="comment-author">
-                                    <img src="assets/images/review/author-1.jpg" alt="">
-                                </div>
-                                <div class="comment-content">
-                                    <h6 class="name">{{review.userName}}</h6>
+              <div class="comment-user-info">
+                <div class="comment-author">
+                  <img src="{{review.userImage}}" alt="" class="avatar">
+                </div>
+                <div class="comment-content">
+                  <h6 class="name">{{review.userName}}</h6>
 
-                                    <p>
-                                        <i class="mdi mdi-star"></i>
-                                        <span class="rating"><strong
-                                                *ngFor="let item of [].constructor(review.rating); let i = index">
-                                                <i class="fa fa-star" aria-hidden="true" ></i></strong> of 5
-                                        </span>
-                                        <span class="date">{{review.createdDate | date:'medium'}}</span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="comment-user-text">
-                                <p>{{review.reviewText}}</p>
-                                <ul class="comment-meta">
-                                </ul>
-                            </div>
-                        </div>
-                    </li>
-                    <pagination-controls 
-                         [maxSize]="maxSize"
-                         [directionLinks]="directionLinks"
-                         [autoHide]="autoHide"
-                         [responsive]="responsive"
-                         [previousLabel]="labels.previousLabel"
-                         [nextLabel]="labels.nextLabel"
-                         [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
-                         [screenReaderPageLabel]="labels.screenReaderPageLabel"
-                         [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
-                         (pageChange)="onPageChange($event)"></pagination-controls>
+                  <p>
+                    <i class="mdi mdi-star"></i>
+                    <span class="rating"><strong *ngFor="let item of [].constructor(review.rating); let i = index">
+                        <i class="fa fa-star" aria-hidden="true"></i></strong> of 5
+                    </span>
+                    <span class="date">{{review.createdDate | date:'medium'}}</span>
+                  </p>
+                </div>
+              </div>
+              <div class="comment-user-text">
+                <p>{{review.reviewText}}</p>
+                <ul class="comment-meta">
                 </ul>
+              </div>
             </div>
+          </li>
+          <pagination-controls [maxSize]="maxSize" [directionLinks]="directionLinks" [autoHide]="autoHide"
+            [responsive]="responsive" [previousLabel]="labels.previousLabel" [nextLabel]="labels.nextLabel"
+            [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+            [screenReaderPageLabel]="labels.screenReaderPageLabel"
+            [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel" (pageChange)="onPageChange($event)">
+          </pagination-controls>
+        </ul>
+      </div>
+
+
+
+      <div class="reviews-comment" *ngIf="reviews?.length <= 0">
+        <div class="row justify-content-center">
+          <div class="col-lg-6 text-center">
+            <h5>No reviews found</h5>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </section>

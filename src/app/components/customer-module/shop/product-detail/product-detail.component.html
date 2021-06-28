@@ -1,7 +1,9 @@
 <!--====== Product Details Style 1 Part Start ======-->
-
 <section class="product-details-wrapper pt-50 pb-100">
-    <div class="container">
+    <div class="col-lg-9" *ngIf="isLoading">
+        <app-spinner></app-spinner>
+    </div>
+    <div class="container" *ngIf="!isLoading">
         <div class="product-details-style-1">
             <div class="row flex-lg-row-reverse align-items-center">
                 <div class="col-lg-6">
@@ -12,7 +14,9 @@
                                 <ngx-slick-carousel class="carousel" #slickModal="slick-carousel"
                                     [config]="slideConfig">
                                     <div ngxSlickItem *ngFor="let image of product.prodImages" class="slide">
-                                        <div style="background-image: url('{{image}}');height: 500px; width: 100%; background-size: contain; background-repeat: no-repeat; background-position: center; " ></div>
+                                        <div
+                                            style="background-image: url('{{image}}');height: 500px; width: 100%; background-size: contain; background-repeat: no-repeat; background-position: center; ">
+                                        </div>
                                     </div>
                                 </ngx-slick-carousel>
                             </div>
@@ -23,37 +27,27 @@
                 <div class="col-lg-6">
                     <div class="product-details-content mt-45">
                         <h2 class="title">{{product.productName}}</h2>
+                        
 
-
-
-                        <div class="product-select-wrapper flex-wrap">
-                            <div class="select-item">
-                                <h6 class="select-title">Select Quantity: </h6>
-
-                                <div class="select-quantity">
-                                    <button type="button" id="sub" class="sub"><i class="mdi mdi-minus"></i></button>
-                                    <input type="text" value="1" />
-                                    <button type="button" id="add" class="add"><i class="mdi mdi-plus"></i></button>
-                                </div>
-                            </div>
+                        <div class="product-details-content text-left">
+                            <p class="sub-title">{{product.productDescription}}</p>
                         </div>
+
+                        <hr>
 
                         <div class="product-price">
                             <h6 class="price-title">Price: </h6>
                             <p class="sale-price">{{product.productPrice | currency:'USD'}}</p>
-                            <p class="regular-price">{{product.productPrice + 50 | currency:'USD'}}</p>
                         </div>
 
                         <div class="product-btn">
-                            <a href="javascript:void(0)" (click)="addToCart($event)" class="main-btn primary-btn"><img src="assets/images/icon-svg/cart-4.svg"
-                                    alt=""> Add to cart</a>
-                            <a href="javascript:void(0)" (click)="addToWishlist($event)" class="main-btn secondary-1-btn"><img src="assets/images/icon-svg/cart-8.svg"
-                                    alt=""> Add To Wishlist</a>
+                            <a href="javascript:void(0)" (click)="addToCart($event)" class="main-btn primary-btn"><img
+                                    src="assets/images/icon-svg/cart-4.svg" alt=""> Add to cart</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <app-product-review [id]="product.id"></app-product-review>
     </div>
-    <app-product-review [id]="product.id"></app-product-review>
 </section>
