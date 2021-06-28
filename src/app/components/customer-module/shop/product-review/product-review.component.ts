@@ -85,6 +85,7 @@ export class ProductReviewComponent implements OnInit {
   addReview() {
     let productReview: ProductReview = new ProductReview();
 
+    if (this.form.valid) {
     productReview.productId = this.id;
     productReview.reviewText = this.form.value.review;
     productReview.createdDate = new Date();
@@ -104,5 +105,8 @@ export class ProductReviewComponent implements OnInit {
         this._notificationService.onError(errMsg, 3000, "topRight");
       },
     )
+    } else {
+      this._notificationService.onError("No enough data", 3000, "topRight");
+    }
   }
 }

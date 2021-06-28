@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartItemRequest } from 'src/app/models/cart/CartItemRequest';
 import { Product } from 'src/app/models/product/Product';
 import { CartService } from 'src/app/services/cart.service';
@@ -35,7 +35,8 @@ export class ProductDetailComponent implements OnInit {
     private _activatedRoute: ActivatedRoute,
     private _notificationService: NotificationService,
     private _cartService: CartService,
-    private _wishlistService: WishListService,) { }
+    private _wishlistService: WishListService,
+    private _router:Router,) { }
 
   ngOnInit(): void {
     this._activatedRoute.paramMap.subscribe(params => {
@@ -49,6 +50,7 @@ export class ProductDetailComponent implements OnInit {
         },
         err => {
           let errMsg = err.error.message;
+          this._router.navigate(['404']);
           this._notificationService.onError(errMsg, 3000, "topRight");
         },
         () => {
