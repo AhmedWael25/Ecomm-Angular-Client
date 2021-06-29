@@ -139,14 +139,14 @@
                 <ul class="main-menu menu-vertical-4 collapse" id="menuVertical4-1">
 
 
-                    <li><a href="javascript:void(0)" [routerLink]="['/shop']">Shop </a></li>
+                  <li><a href="javascript:void(0)" [routerLink]="['/shop']">Shop </a></li>
 
-                    
+
                   <li class="menu-item-has-children">
                     <a href="javascript:void(0)" class="collapsed" data-bs-toggle="collapse"
                       data-bs-target="#menuVertical4-2" aria-controls="menuVertical4-2" aria-expanded="false"
-                      aria-label="Toggle navigation">Categories<i  class="fa fa-chevron-right"
-                      aria-hidden="true"></i></a>
+                      aria-label="Toggle navigation">Categories<i class="fa fa-chevron-right"
+                        aria-hidden="true"></i></a>
 
                     <!-- sub mega dropdown Start -->
                     <ul class="sub-mega-dropdown collapse" id="menuVertical4-2">
@@ -162,9 +162,9 @@
                                 <i class="fa fa-chevron-right" aria-hidden="true"></i>
                               </h6>
                               <ul class="collapse" id="menuVertical4-3">
-                                <li><a href="javascript:void(0)">Dressess</a></li>
-                                <li><a href="javascript:void(0)">Jackets</a></li>
-                                <li><a href="javascript:void(0)">Sweatshirts</a></li>
+                                <li><a [routerLink]="['/shop']" href="javascript:void(0)">Dressess</a></li>
+                                <li><a [routerLink]="['/shop']" href="javascript:void(0)">Jackets</a></li>
+                                <li><a [routerLink]="['/shop']" href="javascript:void(0)">Sweatshirts</a></li>
                               </ul>
                             </li>
 
@@ -176,9 +176,9 @@
                                 <i class="fa fa-chevron-right" aria-hidden="true"></i>
                               </h6>
                               <ul class="collapse" id="menuVertical4-4">
-                                <li><a href="javascript:void(0)">Laptops</a></li>
-                                <li><a href="javascript:void(0)">Playstation 5</a></li>
-                                <li><a href="javascript:void(0)">XBOX Scoprpion</a></li>
+                                <li><a [routerLink]="['/shop']" href="javascript:void(0)">Laptops</a></li>
+                                <li><a [routerLink]="['/shop']" href="javascript:void(0)">Playstation 5</a></li>
+                                <li><a [routerLink]="['/shop']" href="javascript:void(0)">XBOX Scoprpion</a></li>
                               </ul>
                             </li>
 
@@ -227,14 +227,14 @@
                   </li>
 
 
-                  <li *ngIf="isAuthenticated && isCustomer()"  [routerLink]="['/profile']">
+                  <li *ngIf="isAuthenticated && isCustomer()" [routerLink]="['/profile']">
                     <a href="javascript:void(0)">
                       My Profile <i class="fa fa-user-circle" aria-hidden="true"></i>
 
                     </a>
                   </li>
 
-                  <li *ngIf="isAuthenticated && isCustomer()"  [routerLink]="['/orders']">
+                  <li *ngIf="isAuthenticated && isCustomer()" [routerLink]="['/orders']">
                     <a href="javascript:void(0)">
                       Order History <i class="fa fa-user-circle" aria-hidden="true"></i>
 
@@ -275,9 +275,9 @@
                               data-bs-target="#menuVertical4-9" aria-controls="menuVertical4-9" aria-expanded="false"
                               aria-label="Toggle navigation">Clothes</h6>
                             <ul class="collapse" id="menuVertical4-9">
-                              <li><a href="javascript:void(0)">Dressess</a></li>
-                              <li><a href="javascript:void(0)">Jackets</a></li>
-                              <li><a href="javascript:void(0)">Hoodies</a></li>
+                              <li><a [routerLink]="['/shop']" href="javascript:void(0)">Dressess</a></li>
+                              <li><a [routerLink]="['/shop']" href="javascript:void(0)">Jackets</a></li>
+                              <li><a [routerLink]="['/shop']" href="javascript:void(0)">Hoodies</a></li>
 
                             </ul>
                           </li>
@@ -288,9 +288,9 @@
                               data-bs-target="#menuVertical4-10" aria-controls="menuVertical4-10" aria-expanded="false"
                               aria-label="Toggle navigation">Electronics</h6>
                             <ul class="collapse" id="menuVertical4-10">
-                              <li><a href="javascript:void(0)">Laptops</a></li>
-                              <li><a href="javascript:void(0)">Playstation 5</a></li>
-                              <li><a href="javascript:void(0)">XBOX Scoprpion</a></li>
+                              <li><a [routerLink]="['/shop']" href="javascript:void(0)">Laptops</a></li>
+                              <li><a [routerLink]="['/shop']" href="javascript:void(0)">Playstation 5</a></li>
+                              <li><a [routerLink]="['/shop']" href="javascript:void(0)">XBOX Scoprpion</a></li>
 
                             </ul>
                           </li>
@@ -302,7 +302,7 @@
                             <img src="assets/images/menu-slider-1.png" alt="">
                           </li>
 
-                          
+
                         </ul>
                       </div>
                     </li>
@@ -325,7 +325,8 @@
                     <ul class="dropdown-menu" id="dropdown11">
                       <li><a *ngIf="isCustomer()" [routerLink]="['/profile']"><i class="fa fa-user"></i> My Profile</a>
                       </li>
-                      <li><a *ngIf="isCustomer()" [routerLink]="['/orders']"><i class="fa fa-history"></i>Order History</a>
+                      <li><a *ngIf="isCustomer()" [routerLink]="['/orders']"><i class="fa fa-history"></i>Order
+                          History</a>
                       </li>
                       <li><a *ngIf="isSeller()" [routerLink]="['/seller']"><i class="fa fa-user"></i>Dashboard</a></li>
                       <li><a *ngIf="isAdmin()" [routerLink]="['/admin']"><i class="fa fa-user"></i>Dashboard</a></li>

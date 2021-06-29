@@ -1,7 +1,7 @@
 import { LabelType, Options } from '@angular-slider/ngx-slider';
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CartItemRequest } from 'src/app/models/cart/CartItemRequest';
 import { Category } from 'src/app/models/Category';
 import { Product } from 'src/app/models/product/Product';
@@ -29,13 +29,17 @@ export class ProductListComponent implements OnInit {
     private _wishlistService: WishListService,
     private _notificationService: NotificationService,
     private _authService: AuthService,
-    private _router: Router) { }
+    private _router: Router,
+    private _activatedRoute:ActivatedRoute) { }
 
   products: Array<Product>;
   categories: Array<Category>;
   checkedSubcategories: Map<number, number> = new Map();
 
   wishlistIds: number[] = [];
+
+
+  catParam:number;
 
   public change(value: boolean, subcategoryId: number) {
     if (value) {
@@ -74,6 +78,7 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.isLoading = true;
 
     let isAuthenticated = this._authService.isAuthenticated() && this._authService.isCustomer();
     if (isAuthenticated) {
@@ -101,8 +106,6 @@ export class ProductListComponent implements OnInit {
     // this.maxPrice = 10000;
     this.filterFlag = false;
 
-    this.checkedSubcategories.clear();
-
     this.getProducts();
     this.getCategories();
 
@@ -118,9 +121,12 @@ export class ProductListComponent implements OnInit {
         this.totalPages = data.totalPages;
         this.totalElements = data.totalElements;
         this.updatePriceSlider(data);
+
+      },
+      err =>{
+      },() => {
         this.isLoading = false;
       }
-
     );
   }
   updatePriceSlider(data: any) {
@@ -229,7 +235,6 @@ export class ProductListComponent implements OnInit {
     return isExist;
   }
 
-
   deleteFromWishlist(id: number, event) {
 
     let isCustomer = this._authService.isCustomer();
@@ -290,6 +295,16 @@ export class ProductListComponent implements OnInit {
       },
     );
 
+  }
+
+  getSubCategory(id:number){
+    this.categories.forEach(categ => {
+      categ.subCategories.forEach( sub => {
+        if( sub.id === id )
+        return sub;
+      });
+    })
+    return null;
   }
 
 }
