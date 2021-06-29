@@ -4,68 +4,78 @@
     </div>
 
     <div class="row justify-content-center" *ngIf="!isLoading">
+
         <div class="col-lg-6">
-            <app-pie-chart [label]="'Qty Sold:'" [data]="pieChartData" [title]="'Amount Of Products Sold'" ></app-pie-chart>
+            <div class="card-header" style="background-color: black;">
+                <h2 class="title" style="color: white; text-align: center;">
+                    <div class="card-icon">
+                        Sold Products
+                        <img src="assets/images/investment.png" alt="Card">
+                    </div>
+                </h2>
+            </div>
+            <hr>
+            <div class="single-card-info d-flex">
+                <div class="card-icon">
+                    <img src="assets/images/sold-out.png" alt="Card"> &nbsp;
+                </div>
+                <div class="card-info media-body">
+                    <h4 _ngcontent-mej-c137="" class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="ui-button-text-icon-secondary" style="margin-top: 15px;">Total Product Sold</span>
+                        <span class="badge bg-primary-3 rounded-pill" style="margin-top: 15px;">{{totalProductsBought(orderlist)}}</span>
+                    </h4>
+                </div>
+            </div>
+            <hr>
+
+            <app-pie-chart [label]="'Qty Sold:'" [data]="pieChartData" [title]="'Amount Of Products Sold'">
+            </app-pie-chart>
         </div>
         <div class="col-lg-6">
+            <div class="card-header" style="background-color: black;">
+                <h2 class="title" style="color: white; text-align: center;">
+                    <div class="card-icon">
+                        Profits Vs Time
+                        <img src="assets/images/analytic.png" alt="Card">
+                    </div>
+                </h2>
+            </div>
+            <hr>
+            <div class="single-card-info d-flex">
+                <div class="card-icon">
+                    <img src="assets/images/money.png" alt="Card"> &nbsp;
+                </div>
+                <div class="card-info media-body">
+                    <h4 _ngcontent-mej-c137="" class="d-flex justify-content-between align-items-center mb-3" style="margin-top: 7px;">
+                        <span class="ui-button-text-icon-secondary" style="margin-top: 9px;">Total Profit</span>
+                        <span class="badge bg-primary-3 rounded-pill" style="margin-top: 7px;">{{ totalProfit(orderlist) |
+                            currency:"USD" }}</span>
+                    </h4>
+                </div>
+            </div>
+            <br><br><br><br>
             <app-line-chart [label]="'Profit $'" [data]="lineChartData" [title]="'Profits Vs Time'"></app-line-chart>
         </div>
     </div>
-</div> 
-
-<hr>
+</div>
 
 <div class="container">
+    <hr>
 
     <div class="row justify-content-center" *ngIf="isLoading">
         <app-spinner></app-spinner>
     </div>
 
     <div class="row justify-content-center" *ngIf="!isLoading" style="text-align: center;">
-       
 
-        <h3>My Orders</h3>
-        
+        <div class="card-header" style="background-color: black;">
+            <h2 class="title card-icon" style="color: white; text-align: center;">
+                Order History
+                <img src="assets/images/analytic.png" alt="Card">
+            </h2>
+        </div>
         <div class="profile-footer mt-45">
-            <!-- <div class="profile-title">
-                <h5 class="title" style="color: rgb(19, 19, 182)">
-                    History
-                    <i class="fas fa-chart-bar"></i>
-                </h5>
-            </div> -->
-            <div class="profile-card-info">
-                <div class="row">
-                    <div class="col-md-6 col-sm-6">
-                        <div class="single-card-info d-flex">
-                            <div class="card-icon">
-                                <img src="assets/images/cart.png" alt="Card"> &nbsp;
-                            </div>
-                            <div class="card-info media-body">
-                                <h4 _ngcontent-mej-c137="" class="d-flex justify-content-between align-items-center mb-3">
-                                    <span  class="ui-button-text-icon-secondary">Product bought</span> 
-                                    <span  class="badge bg-primary-3 rounded-pill">{{totalProductsBought(orderlist)}}</span>
-                                </h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6">
-                        <div class="single-card-info d-flex">
-                            <div class="card-icon">
-                                <img src="assets/images/profit.png" alt="Card"> &nbsp;
-                            </div>
-                            <div class="card-info media-body">
-                                <h4 _ngcontent-mej-c137="" class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="ui-button-text-icon-secondary">Profit</span>
-                                    <span class="badge bg-primary-3 rounded-pill">{{ totalProfit(orderlist) | currency:"USD"  }}</span>
-                                </h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br>
             <app-seller-order-list [data]="orderlist"></app-seller-order-list>
-            
         </div>
     </div>
 </div>

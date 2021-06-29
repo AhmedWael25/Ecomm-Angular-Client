@@ -1,16 +1,17 @@
 <h1 class="card-header" style="text-align: center; background-color: #262d35; color: white;">
-  <div class="card-icon">
-    All Products &nbsp;
-    <img src="assets/images/inventory.png" alt="Card">
-  </div>
+    <div class="card-icon">
+        All Products &nbsp;
+        <img src="assets/images/inventory.png" alt="Card">
+    </div>
+    <input placeholder="&#xF002; Search" style="font-family:Arial, FontAwesome; margin-top: 10px;" class="form-control" [(ngModel)]="searchName">
+</h1>
+<h1>
+    <hr>
 </h1>
 <!-- Begin inventory -->
 <div class="profile-footer mt-45">
   <div class="row">
-
-
-
-    <div class="col-lg-6" *ngFor="let product of products; let i = index">
+    <div class="col-lg-6" *ngFor="let product of products | filter:searchName ">
       <div class="single-order" [routerLink]="['/admin/products',product.id]">
         <h4 class="order-id">
           <img style="cursor: pointer; width: 60px; height: 60px;" class="wishlist-img" [src]="product.productImg"

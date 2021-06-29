@@ -21,6 +21,8 @@ export class ProductListComponent implements OnInit {
 
   page: number = this.PAGE;
   size: number = this.SIZE;
+  
+  searchName: string;
 
   constructor(private _productService: ProductService) { }
 

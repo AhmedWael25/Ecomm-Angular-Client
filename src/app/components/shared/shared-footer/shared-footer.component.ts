@@ -13,13 +13,10 @@ export class SharedFooterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  isCustomer: boolean = this._authService.isCustomer();
 
-  isSeller(){
-    this._authService.isCustomer();
-  }
-
-  isAdmin(){
-    this._authService.isAdmin();
-  }
+  isSeller: boolean = this._authService.isSeller();
+  
+  isAdmin: boolean = this._authService.isAdmin();
 
 }
