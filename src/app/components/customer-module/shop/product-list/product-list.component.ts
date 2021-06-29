@@ -25,17 +25,17 @@ export class ProductListComponent implements OnInit {
   constructor(private _productService: ProductService,
     private _categoryService: CategoryService,
     private _formBuilder: FormBuilder,
-    private _cartService:CartService,
-    private _wishlistService:WishListService,
-    private _notificationService:NotificationService,
-    private _authService:AuthService,
-    private _router:Router) { }
+    private _cartService: CartService,
+    private _wishlistService: WishListService,
+    private _notificationService: NotificationService,
+    private _authService: AuthService,
+    private _router: Router) { }
 
   products: Array<Product>;
   categories: Array<Category>;
   checkedSubcategories: Map<number, number> = new Map();
 
-  wishlistIds:number[] = [];
+  wishlistIds: number[] = [];
 
   public change(value: boolean, subcategoryId: number) {
     if (value) {
@@ -51,6 +51,7 @@ export class ProductListComponent implements OnInit {
   size: number = 8;
   minPrice: number = 0;
   maxPrice: number = 1000;
+  filterFlag: boolean = false;
   totalPages: number;
   totalElements: number;
   name: string;
@@ -73,31 +74,23 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
 
-    
-    let isAuthenticated = this._authService.isAuthenticated() && this._authService.isCustomer();
-    if (isAuthenticated){
 
-      this._wishlistService.getCustomerWishList().subscribe( 
+    let isAuthenticated = this._authService.isAuthenticated() && this._authService.isCustomer();
+    if (isAuthenticated) {
+
+      this._wishlistService.getCustomerWishList().subscribe(
         resp => {
           resp.data.products.forEach(element => {
             this.wishlistIds.push(element.id);
           });
           console.log(this.wishlistIds);
         },
-        err => {},
-        () => {}
-        );
+        err => { },
+        () => { }
+      );
     }
 
-    this.isLoading = true;
-    this.name = "";
-    this.page = 1;
-    this.minPrice = 0;
-    this.maxPrice = 10000;
-
-    this.checkedSubcategories.clear();
-    this.getProducts();
-    this.getCategories();
+    this.resetFilter();
   }
 
   resetFilter() {
@@ -105,7 +98,8 @@ export class ProductListComponent implements OnInit {
     this.name = "";
     this.page = 1;
     this.minPrice = 0;
-    this.maxPrice = 10000;
+    // this.maxPrice = 10000;
+    this.filterFlag = false;
 
     this.checkedSubcategories.clear();
 
@@ -130,7 +124,9 @@ export class ProductListComponent implements OnInit {
     );
   }
   updatePriceSlider(data: any) {
-    this.maxPrice = data.maxPrice;
+    if (!this.filterFlag) {
+      this.maxPrice = data.maxPrice;
+    }
     this.options = {
       floor: 0,
       ceil: data.maxPrice,
@@ -174,7 +170,7 @@ export class ProductListComponent implements OnInit {
 
   doFilter() {
     this.page = 1;
-
+    this.filterFlag = true;
     this.getProducts();
   }
 
@@ -199,20 +195,20 @@ export class ProductListComponent implements OnInit {
     let prodId: number = prod.id;
     console.log(prod, prodId);
 
-    
+
     let isCustomer = this._authService.isCustomer();
     let isAuth = this._authService.isAuthenticated();
 
-    if(!isAuth){
+    if (!isAuth) {
       this._router.navigateByUrl("/login");
       return;
     }
-    if(!isCustomer){
+    if (!isCustomer) {
       this._router.navigateByUrl("/logout");
       return;
     }
 
-    let request:CartItemRequest = new CartItemRequest();
+    let request: CartItemRequest = new CartItemRequest();
     request.productId = prodId;
     request.quantity = 1;
 
@@ -228,69 +224,69 @@ export class ProductListComponent implements OnInit {
   }
 
 
-  isProductInWishlist(id:number){
+  isProductInWishlist(id: number) {
     let isExist = this.wishlistIds.includes(id);
     return isExist;
   }
 
 
-  deleteFromWishlist(id:number,event){
+  deleteFromWishlist(id: number, event) {
 
     let isCustomer = this._authService.isCustomer();
     let isAuth = this._authService.isAuthenticated();
 
-    if(!isAuth){
+    if (!isAuth) {
       this._router.navigateByUrl("/login");
     }
-    if(!isCustomer){
+    if (!isCustomer) {
       this._router.navigateByUrl("/logout");
     }
 
 
-    let req:WishlistProdRequest = new WishlistProdRequest();
+    let req: WishlistProdRequest = new WishlistProdRequest();
     req.productId = id;
 
     this._wishlistService.deleteProdFromWishlist(req).subscribe(
       resp => {
         const index = this.wishlistIds.indexOf(id);
-        this.wishlistIds.splice(index,1);
-        this._notificationService.onSuccess(resp.message, 3000,"topRight");
+        this.wishlistIds.splice(index, 1);
+        this._notificationService.onSuccess(resp.message, 3000, "topRight");
       },
       err => {
-        let errMessage:string = err.error.message;
-        this._notificationService.onError(errMessage, 3000 , "topRight");
+        let errMessage: string = err.error.message;
+        this._notificationService.onError(errMessage, 3000, "topRight");
       },
     );
 
 
   }
 
-  addToWishlist(id:number, event){
+  addToWishlist(id: number, event) {
 
     let isCustomer = this._authService.isCustomer();
     let isAuth = this._authService.isAuthenticated();
 
-    if(!isAuth){
+    if (!isAuth) {
       this._router.navigateByUrl("/login");
       return;
     }
-    if(!isCustomer){
+    if (!isCustomer) {
       this._router.navigateByUrl("/logout");
       return;
     }
 
-    let req:WishlistProdRequest = new WishlistProdRequest();
+    let req: WishlistProdRequest = new WishlistProdRequest();
     req.productId = id;
 
     this._wishlistService.addProdToWishlist(req).subscribe(
       resp => {
-        let id:number = resp.data.id;
+        let id: number = resp.data.id;
         this.wishlistIds.push(id);
-        this._notificationService.onSuccess(resp.message, 3000,"topRight");
+        this._notificationService.onSuccess(resp.message, 3000, "topRight");
       },
       err => {
-        let errMessage:string = err.error.message;
-        this._notificationService.onError(errMessage, 3000 , "topRight");
+        let errMessage: string = err.error.message;
+        this._notificationService.onError(errMessage, 3000, "topRight");
       },
     );
 

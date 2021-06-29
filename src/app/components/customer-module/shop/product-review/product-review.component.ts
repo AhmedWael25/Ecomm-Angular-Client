@@ -40,9 +40,9 @@ export class ProductReviewComponent implements OnInit {
     private _notificationService: NotificationService,
     private _customerService: CustomerService,
     private fb: FormBuilder,
-    private _router:Router) {
+    private _router: Router) {
     this.form = this.fb.group({
-      rating: ['', Validators.required],
+      rating: ['1', Validators.required],
       review: ['', Validators.required],
     })
   }
@@ -90,11 +90,11 @@ export class ProductReviewComponent implements OnInit {
     let isCustomer = this._authService.isCustomer();
     let isAuth = this._authService.isAuthenticated();
 
-    if(!isAuth){
+    if (!isAuth) {
       this._router.navigateByUrl("/login");
       return;
     }
-    if(!isCustomer){
+    if (!isCustomer) {
       this._router.navigateByUrl("/logout");
       return;
     }
@@ -102,28 +102,26 @@ export class ProductReviewComponent implements OnInit {
 
     let productReview: ProductReview = new ProductReview();
 
-    if (this.form.valid) {
-    productReview.productId = this.id;
-    productReview.reviewText = this.form.value.review;
-    productReview.createdDate = new Date();
-    productReview.userId = this._authService.getUserId();
-    productReview.rating = this.form.valid ? this.form.value.rating : 0;
-    productReview.rating = this.form.value.rating;
+    if(this.form.value.review == "" || this.form.value.review == null) return;
 
-    this._productService.addReview(this.id, productReview).subscribe(
-      resp => {
-        this._notificationService.onSuccess(resp.message, 3000, "topRight");
-        this.getReviews(this.id);
-        this.form.controls['review'].setValue('');
-        this.form.controls['rating'].setValue('');
-      },
-      err => {
-        let errMsg = err.error.message;
-        this._notificationService.onError(errMsg, 3000, "topRight");
-      },
-    )
-    } else {
-      this._notificationService.onError("No enough data", 3000, "topRight");
-    }
+      productReview.productId = this.id;
+      productReview.reviewText = this.form.value.review;
+      productReview.createdDate = new Date();
+      productReview.userId = this._authService.getUserId();
+      productReview.rating = this.form.valid ? this.form.value.rating : 0;
+      productReview.rating = this.form.value.rating;
+
+      this._productService.addReview(this.id, productReview).subscribe(
+        resp => {
+          this._notificationService.onSuccess(resp.message, 3000, "topRight");
+          this.getReviews(this.id);
+          this.form.controls['review'].setValue('');
+          this.form.controls['rating'].setValue('');
+        },
+        err => {
+          let errMsg = err.error.message;
+          this._notificationService.onError(errMsg, 3000, "topRight");
+        },
+      )
   }
 }

@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Chart } from 'chart.js';
+import { ExportExcelService } from 'src/app/services/export-excel.service';
 
 @Component({
   selector: 'app-pie-chart',
@@ -17,7 +18,7 @@ export class PieChartComponent implements OnInit , AfterViewInit{
 
   chart: any;
 
-  constructor() { }
+  constructor(private _excel:ExportExcelService) { }
 
   ngAfterViewInit(): void {
     this.chart = this.chartElRefs.map((chartElementRef, index) => {
@@ -84,6 +85,10 @@ export class PieChartComponent implements OnInit , AfterViewInit{
 
     let xAxis = Array.from(this.chartData.values());
     let yAxis = Array.from(this.chartData.keys());
+  }
+
+  generate(){
+    this._excel.exportAsExcel(this.chartData,"Report");
   }
 
 }

@@ -34,6 +34,7 @@
     "bootstrap": "^4.6.0",
     "chart.js": "^3.3.2",
     "creditcardpayments": "^1.0.3",
+    "file-saver": "^2.0.5",
     "font-awesome": "^4.7.0",
     "jquery": "^3.6.0",
     "jwt-decode": "^3.1.2",
@@ -48,6 +49,7 @@
     "sockjs-client": "^1.5.1",
     "stompjs": "^2.3.3",
     "tslib": "^2.0.0",
+    "xlsx": "^0.17.0",
     "zone.js": "~0.11.3"
   },
   "devDependencies": {

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
+import { ExportExcelService } from 'src/app/services/export-excel.service';
 
 Chart.register(...registerables);
 
@@ -16,7 +17,7 @@ export class LineChartComponent implements OnInit {
 
   chart: any;
 
-  constructor() { }
+  constructor(private _excel:ExportExcelService) { }
 
   ngOnInit(): void {
 
@@ -69,6 +70,10 @@ export class LineChartComponent implements OnInit {
       }
     });
 
+  }
+
+  generate(){
+    this._excel.exportAsExcel(this.chartData,"Report");
   }
 
 }
