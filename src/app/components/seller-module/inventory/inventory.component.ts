@@ -33,6 +33,8 @@ export class InventoryComponent implements OnInit {
 
   searchName: string;
 
+  isLoading:boolean = false;
+
   constructor(private _sellerApi:SellerService,
               private _activatedRoute:ActivatedRoute,
               private _authService:AuthService,
@@ -44,6 +46,7 @@ export class InventoryComponent implements OnInit {
 
       console.log(this.sellerId);
 
+
       this.subscription = this._activatedRoute.params.subscribe(params => {
 
         this.sellerId = this._authService.getUserId();
@@ -54,7 +57,7 @@ export class InventoryComponent implements OnInit {
   }
 
   loadData(sellerId:number,page:number,size:number):void{
-
+    this.isLoading = true;
     this._sellerApi.getInventory(sellerId, page , size ).subscribe(response => {
 
      if(response.httpCode==200){
@@ -74,6 +77,7 @@ export class InventoryComponent implements OnInit {
        throw new Error(response.message);
 
      }
+     this.isLoading = false;
 
     });
   }

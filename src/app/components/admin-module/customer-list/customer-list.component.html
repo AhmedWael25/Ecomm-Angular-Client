@@ -1,43 +1,56 @@
-    <div class="row">
-        <div class="card">
-            <h1 class="card-header" style="text-align: center; background-color: #262d35; color: white;">
-                Customers 
-                <i class="fas fa-id-card"></i>
-            </h1>
-            <div class="card-body">
-                <table class="container-fluid">
-                    <thead>
-                        <tr style="color: rgb(19, 18, 18)">
-                            <th>#</th>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Register</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                            <tr *ngFor="let customer of customers" style="color: white" [routerLink]='["/admin/customers", customer.id]'>
-                                <td style="margin-right: 10%; color: white">{{customer.id}}</td>
-    
-                                <td>
-                                    <div class="d-flex align-items-center m-r-10">
-                                        <img class="btn btn-circle d-flex btn-info text-white" style="padding: 1px"
-                                            [src]="customer.image" width="60px" height="60px" 
-                                            class="rounded-circle" alt="seller"/>
-                                    </div> 
-                                </td>
-    
-                                <td>{{customer.name}}</td>
-    
-                                <td>{{customer.email}}</td>
-    
-                                <td>{{customer.phone}}</td>
-    
-                                <td>{{customer.regDate | date}}</td>
-                            </tr>                       
-                    </tbody>
-                </table>
-            </div>
+
+
+
+<div class="row">
+  <div class="card">
+    <!-- <h1 class="card-header" style="text-align: center; background-color: #262d35; color: white;">
+      Customers
+      <i class="fas fa-id-card"></i>
+    </h1> -->
+    <h1 class="card-header" style="text-align: center; background-color: #262d35; color: white;">
+        <div class="card-icon">
+          All Customers &nbsp;
+          <img src="assets/images/client.png" alt="Card">
         </div>
+        <input placeholder="&#xF002; Search" style="font-family:Arial, FontAwesome; margin-top: 10px;" class="form-control"
+          [(ngModel)]="searchName">
+      </h1>
+      <h1>
+        <hr>
+      </h1>
+    <div class="card-body">
+      <table class="container-fluid">
+        <thead>
+          <tr style="color: rgb(19, 18, 18)">
+            <th>#</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Register</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let customer of customers | filter:searchName " style="color: white" [routerLink]='["/admin/customers", customer.id]'>
+            <td style="margin-right: 10%; color: white">{{customer.id}}</td>
+
+            <td>
+              <div class="d-flex align-items-center m-r-10">
+                <img class="btn btn-circle d-flex btn-info text-white" style="padding: 1px" [src]="customer.image"
+                  width="60px" height="60px" class="rounded-circle" alt="seller" />
+              </div>
+            </td>
+
+            <td>{{customer.name}}</td>
+
+            <td>{{customer.email}}</td>
+
+            <td>{{customer.phone}}</td>
+
+            <td>{{customer.regDate | date}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
+</div>

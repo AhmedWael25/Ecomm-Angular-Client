@@ -1,9 +1,16 @@
     <div class="row">
         <div class="card">
             <h1 class="card-header" style="text-align: center; background-color: #262d35; color: white;">
-                Sellers 
-                <i class="fas fa-id-card"></i>
-            </h1>
+                <div class="card-icon">
+                  All Sellers &nbsp;
+                  <img src="assets/images/sales-agent.png" alt="Card">
+                </div>
+                <input placeholder="&#xF002; Search" style="font-family:Arial, FontAwesome; margin-top: 10px;" class="form-control"
+                  [(ngModel)]="searchName">
+              </h1>
+              <h1>
+                <hr>
+              </h1>
             <div class="card-body">
                 <table class="container-fluid">
                     <thead>
@@ -17,7 +24,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let seller of sellers" style="color: white" [routerLink]='["/admin/sellers", seller.id]'>
+                        <tr *ngFor="let seller of sellers | filter:searchName " style="color: white" [routerLink]='["/admin/sellers", seller.id]'>
 
                             <td style="margin-right: 10%; color: white">{{seller.id}}</td>
                             <td>

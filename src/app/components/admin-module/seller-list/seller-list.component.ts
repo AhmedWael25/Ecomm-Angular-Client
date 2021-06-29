@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 export class SellerListComponent implements OnInit {
 
   sellers : SellerData[];
+  searchName:string = "";
 
   constructor(private _adminService:AdminService) { }
 

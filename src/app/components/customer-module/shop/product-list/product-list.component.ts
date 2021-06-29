@@ -96,6 +96,7 @@ export class ProductListComponent implements OnInit {
     }
 
     this.resetFilter();
+    this.resetFilter();
   }
 
   resetFilter() {

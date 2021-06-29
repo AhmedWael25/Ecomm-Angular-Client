@@ -9,7 +9,15 @@
     <hr>
 </h1>
 <div class="profile-footer mt-45">
-    <div class="row">
+
+
+    <div class="row justify-content-center" *ngIf="isLoading">
+        <div class="col-lg-6">
+            <app-spinner></app-spinner>
+        </div>
+    </div>
+
+    <div class="row  justify-content-center"  *ngIf="!isLoading">
         
         <div class="col-lg-6" *ngFor="let product of products | filter:searchName">
             <div class="single-order">

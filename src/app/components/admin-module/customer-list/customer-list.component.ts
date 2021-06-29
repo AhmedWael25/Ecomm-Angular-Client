@@ -10,6 +10,7 @@ import { AdminService } from 'src/app/services/admin.service';
 export class CustomerListComponent implements OnInit {
 
   customers : CustomerData[];
+  searchName:string = "";
 
   constructor(private _adminService:AdminService) { }
 
